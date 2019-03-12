@@ -65,7 +65,7 @@
     <Compile Include="Assets\_scripts\GameManagerCalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\Interaction\MouseDrag.cs" />
     <Compile Include="Assets\_scripts\Interaction\MouseMover.cs" />
-    <Compile Include="Assets\_scripts\OpenCVScripts\SimpleMat.cs" />
+    <Compile Include="Assets\_scripts\OpenCVScripts\RenderTextureManager.cs" />
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\UI_manager.cs" />
     <Compile Include="Assets\OpenCVForUnity\Examples\Advanced\AlphaBlendingExample\AlphaBlendingExample.cs" />
