@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/OpenCVForUnity/Examples/Basic/Texture2DToMatExample/Texture2DToMatExample.unity
+- path: Assets/_scenes/Main.unity
   isLoaded: 1
   isActive: 1
