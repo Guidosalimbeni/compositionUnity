@@ -8,11 +8,20 @@ using System.IO;
 public class OpenCVManager : MonoBehaviour
 {
     public static OpenCVManager instanceCV2 { get; private set; }
+
     public Mat imgMat { get; private set; }
+    public Mat imgMaskMat { get; private set; }
 
     public RenderTexture camRenderTexture;
+    public RenderTexture camMaskTexture;
+
     public GameObject plane;
     public static Texture2D texture;
+
+    public bool calcAreaBalanceOpenCV = true;
+
+    [SerializeField]
+    private CalculateAreaTot calculateAreaTotal;
 
     private void Awake()
     {
@@ -33,23 +42,28 @@ public class OpenCVManager : MonoBehaviour
             Utils.setDebugMode(true);
 
             Texture2D imgTexture = toTexture2D(camRenderTexture);
+            Texture2D imgMaskTexture = toTexture2D(camMaskTexture);
         
             imgMat = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC4);
 
             Utils.texture2DToMat(imgTexture, imgMat);
-            //Debug.Log("imgMat.ToString() " + imgMat.ToString());
 
+            // for debugging TODO delete
             texture = new Texture2D(imgMat.cols(), imgMat.rows(), TextureFormat.RGBA32, false);
-
             Utils.matToTexture2D(imgMat, texture);
-
             plane.GetComponent<Renderer>().material.mainTexture = texture;
-        
+            //
+
+            if (calcAreaBalanceOpenCV == true)
+            {
+                calculateAreaTotal.CalculateAreaBalanceUsingOpenCV(imgMaskTexture);
+            }
+
             Utils.setDebugMode(false);
 
         }
 
-    Texture2D toTexture2D(RenderTexture rTex)
+    private Texture2D toTexture2D(RenderTexture rTex)
     {
         Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGB24, false);
         RenderTexture.active = rTex;
@@ -63,7 +77,7 @@ public class OpenCVManager : MonoBehaviour
         SaveTexturePNG(texture);
     }
 
-    void SaveTexturePNG(Texture2D tex)
+    private void SaveTexturePNG(Texture2D tex)
     {
         // Encode texture into PNG
         byte[] bytes = tex.EncodeToPNG();
