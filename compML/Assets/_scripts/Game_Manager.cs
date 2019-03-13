@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Game_Manager : MonoBehaviour
 {
     public AreasObjects areasObjects { get; private set; }
     public static Game_Manager Instance { get; private set; }
+    public List<GameObject> elementsOfComposition { get; private set; }
 
     private GameManagerCalculateBalanceAreaBounds calculateBalanceAreaBounds;
-
+    
     private void Awake()
     {
         if (Instance != null)
@@ -19,6 +21,8 @@ public class Game_Manager : MonoBehaviour
         {
             Instance = this;
             calculateBalanceAreaBounds = GetComponent<GameManagerCalculateBalanceAreaBounds>();
+            PopulateListOfItemInComposition();
+            SetLayerToForeground();
 
             DontDestroyOnLoad(gameObject);
         }
@@ -27,5 +31,23 @@ public class Game_Manager : MonoBehaviour
     private void Update()
     {
         areasObjects = calculateBalanceAreaBounds.CalculateBondsAreas();
+    }
+
+    private void PopulateListOfItemInComposition()
+    {
+        elementsOfComposition = new List<GameObject>();
+        var ss = FindObjectsOfType<MonoBehaviour>().OfType<IElementOfComposition>();
+        foreach (IElementOfComposition s in ss)
+        {
+            elementsOfComposition.Add(s.TagMe());
+        }
+    }
+
+    private void SetLayerToForeground()
+    {
+        foreach (var item in elementsOfComposition)
+        {
+            item.layer = 9; // set layer to Foreground
+        }
     }
 }
