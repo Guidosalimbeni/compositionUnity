@@ -4,86 +4,109 @@ using UnityEngine;
 using OpenCVForUnity.CoreModule;
 using OpenCVForUnity.UnityUtils;
 using System.IO;
+using OpenCVForUnity.ImgprocModule;
 
 public class OpenCVManager : MonoBehaviour
 {
-    public static OpenCVManager instanceCV2 { get; private set; }
 
-    public Mat imgMat { get; private set; }
-    public Mat imgMaskMat { get; private set; }
-
+    public Mat ImageMatrixOpenCV;
     public RenderTexture camRenderTexture;
-    public RenderTexture camMaskTexture;
-
-    public GameObject plane;
-    public static Texture2D texture;
-
+    public GameObject VisualisationSurface;
     public bool calcAreaBalanceOpenCV = true;
 
-    [SerializeField]
-    private CalculateAreaTot calculateAreaTotal;
+    private Texture2D textureContours;
+    public bool calcThreshold = true;
 
-    private void Awake()
-    {
-        if (instanceCV2 != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instanceCV2 = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-    
-    private void Update()
+    private void OnPostRender()
         {
             //if true, The error log of the Native side OpenCV will be displayed on the Unity Editor Console.
             Utils.setDebugMode(true);
 
-            Texture2D imgTexture = toTexture2D(camRenderTexture);
-            Texture2D imgMaskTexture = toTexture2D(camMaskTexture);
+            Texture2D imgTexture = ToTexture2D(camRenderTexture);
         
-            imgMat = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC4);
+            ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
 
-            Utils.texture2DToMat(imgTexture, imgMat);
-
-            // for debugging TODO delete
-            texture = new Texture2D(imgMat.cols(), imgMat.rows(), TextureFormat.RGBA32, false);
-            Utils.matToTexture2D(imgMat, texture);
-            plane.GetComponent<Renderer>().material.mainTexture = texture;
-            //
-
+            Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
+            
             if (calcAreaBalanceOpenCV == true)
             {
-                calculateAreaTotal.CalculateAreaBalanceUsingOpenCV(imgMaskTexture);
+                CalculateAreaBalanceUsingOpenCV(imgTexture);
+            }
+            if (calcThreshold == true)
+            {
+                CalculateThreshold(imgTexture);
             }
 
             Utils.setDebugMode(false);
 
         }
 
-    private Texture2D toTexture2D(RenderTexture rTex)
+    private Texture2D ToTexture2D(RenderTexture rTex)
     {
-        Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGB24, false);
+        Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGBA32, false);
         RenderTexture.active = rTex;
         tex.ReadPixels(new UnityEngine.Rect(0, 0, rTex.width, rTex.height), 0, 0);
         tex.Apply();
         return tex;
     }
 
-    public void SaveTextureFromButton()
+    public void SaveTexturePNG(RenderTexture rTex)
     {
-        SaveTexturePNG(texture);
-    }
-
-    private void SaveTexturePNG(Texture2D tex)
-    {
-        // Encode texture into PNG
-        byte[] bytes = tex.EncodeToPNG();
+        Texture2D tex = ToTexture2D(rTex);
+        byte[] bytes = tex.EncodeToPNG(); // Encode texture into PNG
         Object.Destroy(tex);
-
-        // For testing purposes, also write to a file in the project folder
         File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", bytes);
     }
+
+    public void CalculateThreshold(Texture2D srcTexture)
+    {
+        Texture2D imgTexture = ToTexture2D(camRenderTexture); //
+
+        Mat imgMat = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
+
+        Utils.texture2DToMat(imgTexture, imgMat);
+        Debug.Log("imgMat.ToString() " + imgMat.ToString());
+
+
+        Imgproc.threshold(imgMat, imgMat, 1, 255, Imgproc.THRESH_BINARY);
+
+
+        Texture2D texture = new Texture2D(imgMat.cols(), imgMat.rows(), TextureFormat.RGBA32, false);
+        Utils.matToTexture2D(imgMat, texture);
+
+        VisualisationSurface.GetComponent<Renderer>().material.mainTexture = texture;
+    }
+
+    public void CalculateAreaBalanceUsingOpenCV(Texture2D srcTexture)
+    {
+        Mat srcMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC1);
+        Utils.texture2DToMat(srcTexture, srcMat);
+        Imgproc.threshold(srcMat, srcMat, 1, 255, Imgproc.THRESH_BINARY);
+
+
+        List<MatOfPoint> srcContours = new List<MatOfPoint>();
+        Mat srcHierarchy = new Mat();
+        
+        Imgproc.findContours(srcMat, srcContours, srcHierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_NONE);
+
+        //Debug.Log("srcContours.Count " + srcContours.Count);
+        //dstMat
+        Texture2D textureDestinationContours = new Texture2D(srcMat.cols(), srcMat.rows(), TextureFormat.RGBA32, false);
+        Mat dstMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC3);
+        Utils.texture2DToMat(textureDestinationContours, dstMat);
+
+        for (int i = 0; i < srcContours.Count; i++)
+        {
+            Imgproc.drawContours(dstMat, srcContours, i, new Scalar(150, 150, 150), 2, 8, srcHierarchy, 0, new Point());
+
+        }
+
+        
+        textureContours = new Texture2D(srcMat.cols(), srcMat.rows(), TextureFormat.RGBA32, false);
+
+        Utils.matToTexture2D(dstMat, textureDestinationContours);
+
+        VisualisationSurface.GetComponent<Renderer>().material.mainTexture = textureDestinationContours;
+    }
+
 }

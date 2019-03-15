@@ -69,7 +69,6 @@
     <Compile Include="Assets\_scripts\Interaction\MouseMover.cs" />
     <Compile Include="Assets\_scripts\Interaction\SelectMoveMouse.cs" />
     <Compile Include="Assets\_scripts\Interfaces\IElementOfComposition.cs" />
-    <Compile Include="Assets\_scripts\OpenCVScripts\CalculateAreaTot.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\QuickGlow.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\ReplacementShaderEffect.cs" />
