@@ -65,8 +65,11 @@
     <Compile Include="Assets\_scripts\Game_Manager.cs" />
     <Compile Include="Assets\_scripts\GameManagerCalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMove.cs" />
+    <Compile Include="Assets\_scripts\Interaction\ClickToMoveBySelection.cs" />
+    <Compile Include="Assets\_scripts\Interaction\ExampleClass.cs" />
     <Compile Include="Assets\_scripts\Interaction\MouseDrag.cs" />
     <Compile Include="Assets\_scripts\Interaction\MouseMover.cs" />
+    <Compile Include="Assets\_scripts\Interaction\SelectionOfItem.cs" />
     <Compile Include="Assets\_scripts\Interaction\SelectMoveMouse.cs" />
     <Compile Include="Assets\_scripts\Interfaces\IElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />

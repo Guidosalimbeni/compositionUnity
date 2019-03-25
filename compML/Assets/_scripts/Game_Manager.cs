@@ -23,6 +23,7 @@ public class Game_Manager : MonoBehaviour
             calculateBalanceAreaBounds = GetComponent<GameManagerCalculateBalanceAreaBounds>();
             PopulateListOfItemInComposition();
             SetLayerToForeground();
+            SetIdsToElementsOfCompositions();
 
             DontDestroyOnLoad(gameObject);
         }
@@ -50,4 +51,19 @@ public class Game_Manager : MonoBehaviour
             item.layer = 9; // set layer to Foreground
         }
     }
+
+    private void SetIdsToElementsOfCompositions()
+    {
+        int ID = 0;
+
+        foreach (var item in elementsOfComposition)
+        {
+            
+            var TagMeComponent = item.GetComponent<TagMeElementOfComposition>();
+            TagMeComponent.SetIdElementOfComposition(ID);
+            ID++;
+        }
+
+    }
+
 }
