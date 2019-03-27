@@ -60,8 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_scripts\CalculateCollisionDistanceVisualUnity.cs" />
-    <Compile Include="Assets\_scripts\CollisionChecker.cs" />
     <Compile Include="Assets\_scripts\Comp_obj_scripts\CompScreenAreaCalculation.cs" />
     <Compile Include="Assets\_scripts\Comp_obj_scripts\TagMeElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\Game_Manager.cs" />
@@ -75,12 +73,15 @@
     <Compile Include="Assets\_scripts\Interfaces\IElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
+    <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateCollisionDistanceVisualUnity.cs" />
+    <Compile Include="Assets\_scripts\OpenNOTCVScripts\CollisionChecker.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\QuickGlow.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\ReplacementShaderEffect.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\SimpleBlur.cs" />
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientPixelsBalance.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\ColorGradientVisualUnity.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\UI_text_manager.cs" />
     <Compile Include="Assets\OpenCVForUnity\Examples\Advanced\AlphaBlendingExample\AlphaBlendingExample.cs" />
     <Compile Include="Assets\OpenCVForUnity\Examples\Advanced\ComicFilterExample\ComicFilterExample.cs" />

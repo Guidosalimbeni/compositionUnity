@@ -30,9 +30,6 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
 
     public void UpdateBalancePixelsUI(float score)
     {
-        //balancePixelsUI.color = new Color(147f, 244f, 196f, 100f);
-        //lerpedColor = Color.Lerp(Color.red, Color.green, Mathf.PingPong(Time.time, 1));
-
         if (score < 0.8f)
         {
             lerpedColor = Color.Lerp(Color.red * 0.8f, Color.yellow, score);
@@ -43,7 +40,5 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
             lerpedColor = Color.Lerp(Color.yellow, Color.green, score);
             balanceBoundsShapesUI.color = lerpedColor;
         }
-
-
     }
 }
