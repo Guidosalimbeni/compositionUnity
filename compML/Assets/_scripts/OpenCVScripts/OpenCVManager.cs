@@ -12,8 +12,8 @@ public class OpenCVManager : MonoBehaviour
     public Mat ImageMatrixOpenCV;
     public RenderTexture camRenderTexture;
     public GameObject VisualisationSurface;
-    public bool DrawContourBool = true;
-    public bool calcThreshold = true;
+    public bool DrawContourBool;
+    public bool calcThreshold;
     public bool CalculateAreaLeftRightBool;
 
     private Texture2D textureContours;
@@ -128,11 +128,6 @@ public class OpenCVManager : MonoBehaviour
 
         if (OnPixelsCountBalanceChanged != null)
             OnPixelsCountBalanceChanged(visualScoreBalancePixels);
-
-        // draw
-        Texture2D texture = new Texture2D(imgMat.cols(), imgMat.rows(), TextureFormat.RGBA32, false);
-        Utils.matToTexture2D(imgMat, texture);
-        VisualisationSurface.GetComponent<Renderer>().material.mainTexture = texture;
 
     }
 

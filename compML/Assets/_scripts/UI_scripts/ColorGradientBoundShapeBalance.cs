@@ -16,7 +16,7 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
 
     private void Update()
     {
-        areaobjects = Game_Manager.Instance.areasObjects;
+        areaobjects = Game_Manager.Instance.AreasOfObjects;
         float leftWeight = areaobjects.ObjectsLeftAreaPercentage;
         float RightWeight = areaobjects.ObjectsRightAreaPercentage;
 
@@ -30,7 +30,6 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
 
     public void UpdateBalancePixelsUI(float score)
     {
-        Debug.Log(score * 100);
         //balancePixelsUI.color = new Color(147f, 244f, 196f, 100f);
         //lerpedColor = Color.Lerp(Color.red, Color.green, Mathf.PingPong(Time.time, 1));
 

@@ -27,7 +27,6 @@ public class ColorGradientPixelsBalance : MonoBehaviour
 
     public void UpdateBalancePixelsUI(float score)
     {
-        Debug.Log(score * 100);
         //balancePixelsUI.color = new Color(147f, 244f, 196f, 100f);
         //lerpedColor = Color.Lerp(Color.red, Color.green, Mathf.PingPong(Time.time, 1));
 

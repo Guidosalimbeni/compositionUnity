@@ -6,9 +6,9 @@ using System;
 
 public class Game_Manager : MonoBehaviour
 {
-    public AreasObjects areasObjects { get; private set; }
+    public AreasObjects AreasOfObjects { get; private set; }
     public static Game_Manager Instance { get; private set; }
-    public List<GameObject> elementsOfComposition { get; private set; }
+    public List<GameObject> ElementsOfComposition { get; private set; }
 
     private CalculateBalanceAreaBounds calculateBalanceAreaBounds;
     
@@ -32,22 +32,22 @@ public class Game_Manager : MonoBehaviour
 
     private void Update()
     {
-        areasObjects = calculateBalanceAreaBounds.CalculateBondsAreas();
+        AreasOfObjects = calculateBalanceAreaBounds.CalculateBondsAreas();
     }
 
     private void PopulateListOfItemInComposition()
     {
-        elementsOfComposition = new List<GameObject>();
+        ElementsOfComposition = new List<GameObject>();
         var ss = FindObjectsOfType<MonoBehaviour>().OfType<IElementOfComposition>();
         foreach (IElementOfComposition s in ss)
         {
-            elementsOfComposition.Add(s.TagMe());
+            ElementsOfComposition.Add(s.TagMe());
         }
     }
 
     private void SetLayerToForeground()
     {
-        foreach (var item in elementsOfComposition)
+        foreach (var item in ElementsOfComposition)
         {
             item.layer = 9; // set layer to Foreground
         }
@@ -57,7 +57,7 @@ public class Game_Manager : MonoBehaviour
     {
         int ID = 0;
 
-        foreach (var item in elementsOfComposition)
+        foreach (var item in ElementsOfComposition)
         {
             
             var TagMeComponent = item.GetComponent<TagMeElementOfComposition>();

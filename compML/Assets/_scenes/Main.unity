@@ -1160,7 +1160,7 @@ MonoBehaviour:
   camRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
   VisualisationSurface: {fileID: 1682903050}
   DrawContourBool: 0
-  calcThreshold: 0
+  calcThreshold: 1
   CalculateAreaLeftRightBool: 1
 --- !u!64 &922979891
 MeshCollider:
@@ -2311,6 +2311,7 @@ GameObject:
   - component: {fileID: 2085414078}
   - component: {fileID: 2085414080}
   - component: {fileID: 2085414081}
+  - component: {fileID: 2085414082}
   m_Layer: 0
   m_Name: '[GameManager]'
   m_TagString: Untagged
@@ -2368,6 +2369,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703b1681757b6134586293dab2c71f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2085414082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085414077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfcd095c7de6b6043b09cc113b45d725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawRenderedLinesDebug: 1
 --- !u!1 &2145935865
 GameObject:
   m_ObjectHideFlags: 0

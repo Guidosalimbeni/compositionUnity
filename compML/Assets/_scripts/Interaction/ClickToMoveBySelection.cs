@@ -30,7 +30,7 @@ public class ClickToMoveBySelection : MonoBehaviour
         }
         else
         {
-            Debug.Log("no item selected");
+            //Debug.Log("no item selected");
         }
   
     }

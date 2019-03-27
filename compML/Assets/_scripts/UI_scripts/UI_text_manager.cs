@@ -21,7 +21,7 @@ public class UI_text_manager : MonoBehaviour
 
     private void Update()
     {
-        areaobjects = Game_Manager.Instance.areasObjects;
+        areaobjects = Game_Manager.Instance.AreasOfObjects;
         string leftWeigthtPerc = ((areaobjects.ObjectsLeftAreaPercentage) * 100).ToString();
         string RightWeigthPerc =((areaobjects.ObjectsRightAreaPercentage) * 100).ToString();
         BondsLeftBalanceText.text = leftWeigthtPerc;
