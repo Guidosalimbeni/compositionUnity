@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,9 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
     private List<List<GameObject>> PairwaiseElementsOfComposition;
     private List<GameObject> pair;
     private List<GameObject> LineRendererObjectsList;
-    
+    private bool OverlappingColliders = false;
+
+    public float VisualUnityScore { get; private set; }
 
     private void Start()
     {
@@ -31,10 +34,13 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
     void Update()
     {
         DrawAndCalculateDistances(PairwaiseElementsOfComposition);
+
+        Debug.Log(VisualUnityScore);
     }
 
     void DrawAndCalculateDistances(List<List<GameObject>>  PairwaiseElementsOfComposition)
     {
+        float sumOfDistances = 0;
         int i = 0;
         foreach (List<GameObject> pair in PairwaiseElementsOfComposition)
         {
@@ -44,19 +50,29 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
             MeshCollider MeshColEnd = pair[1].GetComponent<MeshCollider>();
             Vector3 MeshCollEnd = MeshColEnd.ClosestPointOnBounds(pair[0].transform.position);
 
-            CalculateDistanceOf2MeshColliders(MeshCollStart, MeshCollEnd);
-
-            if(drawRenderedLinesDebug == true)
+            if (drawRenderedLinesDebug == true)
             {
                 LineRenderer lineRendererPair = LineRendererObjectsList[i].GetComponent<LineRenderer>();
                 lineRendererPair.SetPosition(0, MeshCollStart);
                 lineRendererPair.SetPosition(1, MeshCollEnd);
                 i++;
             }
-            
-        }
-    }
 
+            if (OverlappingColliders == false)
+            {
+                float dist = CalculateDistanceOf2MeshColliders(MeshCollStart, MeshCollEnd);
+                sumOfDistances += dist;
+            }
+
+            else if (OverlappingColliders == true)
+            {
+                VisualUnityScore = 0;
+                OverlappingColliders = false;
+                return;
+            }
+        }
+        VisualUnityScore = Mathf.Exp(-sumOfDistances);
+    }
 
     List<List<GameObject>> PairwaiseOperation(List<GameObject> ElementsOfComposition)
     {
@@ -78,9 +94,14 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
         return result;
     }
 
-    void CalculateDistanceOf2MeshColliders(Vector3 start, Vector3 end)
+    float CalculateDistanceOf2MeshColliders(Vector3 start, Vector3 end)
     {
         float dist = Vector3.Distance(start, end);
-        Debug.Log(dist);
+        return dist;
+    }
+
+    public void FoundCollisionOfCompositionalElements()
+    {
+        OverlappingColliders = true;
     }
 }
