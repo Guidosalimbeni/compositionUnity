@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Game_Manager : MonoBehaviour
     public static Game_Manager Instance { get; private set; }
     public List<GameObject> elementsOfComposition { get; private set; }
 
-    private GameManagerCalculateBalanceAreaBounds calculateBalanceAreaBounds;
+    private CalculateBalanceAreaBounds calculateBalanceAreaBounds;
     
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class Game_Manager : MonoBehaviour
         else
         {
             Instance = this;
-            calculateBalanceAreaBounds = GetComponent<GameManagerCalculateBalanceAreaBounds>();
+            calculateBalanceAreaBounds = GetComponent<CalculateBalanceAreaBounds>();
             PopulateListOfItemInComposition();
             SetLayerToForeground();
             SetIdsToElementsOfCompositions();

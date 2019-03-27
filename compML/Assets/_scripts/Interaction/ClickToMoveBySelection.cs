@@ -9,7 +9,7 @@ public class ClickToMoveBySelection : MonoBehaviour
 
     public float moveSpeed;                     // The Speed the character will move
     public float RotationSpeed = -90f;
-    public float minThreshold = 0.3f;
+    public float minThreshold = 0.05f;
 
 
     private void Start()

@@ -63,7 +63,6 @@
     <Compile Include="Assets\_scripts\Comp_obj_scripts\CompScreenAreaCalculation.cs" />
     <Compile Include="Assets\_scripts\Comp_obj_scripts\TagMeElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\Game_Manager.cs" />
-    <Compile Include="Assets\_scripts\GameManagerCalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMove.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMoveBySelection.cs" />
     <Compile Include="Assets\_scripts\Interaction\ExampleClass.cs" />
@@ -73,11 +72,14 @@
     <Compile Include="Assets\_scripts\Interaction\SelectMoveMouse.cs" />
     <Compile Include="Assets\_scripts\Interfaces\IElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />
+    <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\QuickGlow.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\ReplacementShaderEffect.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\SimpleBlur.cs" />
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
-    <Compile Include="Assets\_scripts\UI_scripts\UI_manager.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\ColorGradientPixelsBalance.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\UI_text_manager.cs" />
     <Compile Include="Assets\OpenCVForUnity\Examples\Advanced\AlphaBlendingExample\AlphaBlendingExample.cs" />
     <Compile Include="Assets\OpenCVForUnity\Examples\Advanced\ComicFilterExample\ComicFilterExample.cs" />
     <Compile Include="Assets\OpenCVForUnity\Examples\Advanced\GreenScreenExample\GreenScreenExample.cs" />
@@ -441,6 +443,7 @@
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\OCRHMM_transitions_table.xml" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\trained_classifierNM1.xml" />
+    <None Include="Assets\Material\SpriteGradient.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\OpenCVForUnity\OpenCVLicense.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

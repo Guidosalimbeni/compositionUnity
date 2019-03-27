@@ -5,36 +5,43 @@ using OpenCVForUnity.CoreModule;
 using OpenCVForUnity.UnityUtils;
 using System.IO;
 using OpenCVForUnity.ImgprocModule;
+using System;
 
 public class OpenCVManager : MonoBehaviour
 {
-
     public Mat ImageMatrixOpenCV;
     public RenderTexture camRenderTexture;
     public GameObject VisualisationSurface;
-    public bool calcAreaBalanceOpenCV = true;
+    public bool DrawContourBool = true;
+    public bool calcThreshold = true;
+    public bool CalculateAreaLeftRightBool;
 
     private Texture2D textureContours;
-    public bool calcThreshold = true;
+
+    public event Action<float> OnPixelsCountBalanceChanged;
 
     private void OnPostRender()
         {
+        
             //if true, The error log of the Native side OpenCV will be displayed on the Unity Editor Console.
             Utils.setDebugMode(true);
-
             Texture2D imgTexture = ToTexture2D(camRenderTexture);
         
             ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
 
             Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
             
-            if (calcAreaBalanceOpenCV == true)
+            if (DrawContourBool == true)
             {
-                CalculateAreaBalanceUsingOpenCV(imgTexture);
+                DrawContours(imgTexture);
             }
             if (calcThreshold == true)
             {
                 CalculateThreshold(imgTexture);
+            }
+            if (CalculateAreaLeftRightBool == true)
+            {
+                CalculateAreaLeftRight(imgTexture);
             }
 
             Utils.setDebugMode(false);
@@ -54,42 +61,36 @@ public class OpenCVManager : MonoBehaviour
     {
         Texture2D tex = ToTexture2D(rTex);
         byte[] bytes = tex.EncodeToPNG(); // Encode texture into PNG
-        Object.Destroy(tex);
+        UnityEngine.Object.Destroy(tex);
         File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", bytes);
     }
 
     public void CalculateThreshold(Texture2D srcTexture)
     {
-        Texture2D imgTexture = ToTexture2D(camRenderTexture); //
+        Texture2D imgTexture = ToTexture2D(camRenderTexture); 
 
         Mat imgMat = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
-
         Utils.texture2DToMat(imgTexture, imgMat);
-        Debug.Log("imgMat.ToString() " + imgMat.ToString());
-
-
+        //Debug.Log("imgMat.ToString() " + imgMat.ToString());
         Imgproc.threshold(imgMat, imgMat, 1, 255, Imgproc.THRESH_BINARY);
 
-
+        // draw
         Texture2D texture = new Texture2D(imgMat.cols(), imgMat.rows(), TextureFormat.RGBA32, false);
         Utils.matToTexture2D(imgMat, texture);
-
         VisualisationSurface.GetComponent<Renderer>().material.mainTexture = texture;
     }
 
-    public void CalculateAreaBalanceUsingOpenCV(Texture2D srcTexture)
+    public void DrawContours(Texture2D srcTexture)
     {
         Mat srcMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC1);
         Utils.texture2DToMat(srcTexture, srcMat);
         Imgproc.threshold(srcMat, srcMat, 1, 255, Imgproc.THRESH_BINARY);
-
 
         List<MatOfPoint> srcContours = new List<MatOfPoint>();
         Mat srcHierarchy = new Mat();
         
         Imgproc.findContours(srcMat, srcContours, srcHierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_NONE);
 
-        //Debug.Log("srcContours.Count " + srcContours.Count);
         //dstMat
         Texture2D textureDestinationContours = new Texture2D(srcMat.cols(), srcMat.rows(), TextureFormat.RGBA32, false);
         Mat dstMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC3);
@@ -98,9 +99,7 @@ public class OpenCVManager : MonoBehaviour
         for (int i = 0; i < srcContours.Count; i++)
         {
             Imgproc.drawContours(dstMat, srcContours, i, new Scalar(150, 150, 150), 2, 8, srcHierarchy, 0, new Point());
-
         }
-
         
         textureContours = new Texture2D(srcMat.cols(), srcMat.rows(), TextureFormat.RGBA32, false);
 
@@ -109,4 +108,53 @@ public class OpenCVManager : MonoBehaviour
         VisualisationSurface.GetComponent<Renderer>().material.mainTexture = textureDestinationContours;
     }
 
+
+    public void CalculateAreaLeftRight(Texture2D srcTexture)
+    {
+
+        Mat imgMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC1);
+        Utils.texture2DToMat(srcTexture, imgMat);
+        Imgproc.threshold(imgMat, imgMat, 1, 255, Imgproc.THRESH_BINARY);
+
+        int rows = imgMat.rows(); //Calculates number of rows
+        int cols = imgMat.cols(); //Calculates number of columns
+        int ch = imgMat.channels(); //Calculates number of channels (Grayscale: 1, RGB: 3, etc.)
+
+        //int totalPixelsCount = PixelCounting(imgMat, rows, 0, cols, ch);
+        int totalPixelsCountLeft = PixelCounting(imgMat, rows, 0, (int)cols/2, ch);
+        int totalPixelsCountRight = PixelCounting(imgMat, rows, (int)cols / 2 , cols, ch);
+        float DifferenceBetweenLeftandRight = Mathf.Abs(totalPixelsCountLeft - totalPixelsCountRight);
+        float visualScoreBalancePixels = 1 - ((DifferenceBetweenLeftandRight) / (totalPixelsCountRight + totalPixelsCountLeft));
+
+        if (OnPixelsCountBalanceChanged != null)
+            OnPixelsCountBalanceChanged(visualScoreBalancePixels);
+
+        // draw
+        Texture2D texture = new Texture2D(imgMat.cols(), imgMat.rows(), TextureFormat.RGBA32, false);
+        Utils.matToTexture2D(imgMat, texture);
+        VisualisationSurface.GetComponent<Renderer>().material.mainTexture = texture;
+
+    }
+
+    private static int PixelCounting(Mat imgMat, int rows,int startCols, int cols, int ch)
+    {
+        int totalPixelsCount = 0;
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = startCols; j < cols; j++)
+            {
+                double[] data = imgMat.get(i, j);
+                for (int k = 0; k < ch; k++)
+                {
+                    if ((float)data[k] > 0)
+                    {
+                        totalPixelsCount += 1;
+                    }
+                }
+            }
+        }
+
+        return totalPixelsCount;
+    }
 }
