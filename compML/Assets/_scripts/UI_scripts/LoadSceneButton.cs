@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 public class LoadSceneButton : MonoBehaviour
 {
     private Button button;
-    [SerializeField]
-    private int scene;
+    public int scene;
 
     static public string username;
 

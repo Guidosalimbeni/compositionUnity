@@ -9,14 +9,17 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
     Color lerpedColor = Color.white;
     private AreasObjects areaobjects;
 
+    private Game_Manager gamemanager;
+
     private void Awake()
     {
+        gamemanager = FindObjectOfType<Game_Manager>();
         balanceBoundsShapesUI = balanceBoundsShapesUI.GetComponent<RawImage>();
     }
 
     private void Update()
     {
-        areaobjects = Game_Manager.Instance.AreasOfObjects;
+        areaobjects = gamemanager.AreasOfObjects;
         float leftWeight = areaobjects.ObjectsLeftAreaPercentage;
         float RightWeight = areaobjects.ObjectsRightAreaPercentage;
 

@@ -7,13 +7,16 @@ using UnityEngine.UI;
 public class ColorGradientVisualUnity : MonoBehaviour
 {
     public RawImage VisualUnityUI;
-    public CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
+    private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity; //
     private Color lerpedColor = Color.white;
     private float VisualUnityScore;
+    private Game_Manager gamemanager;
 
     private void Awake()
     {
         VisualUnityUI = VisualUnityUI.GetComponent<RawImage>();
+        gamemanager = FindObjectOfType<Game_Manager>();
+        calculateCollisionDistanceVisualUnity = gamemanager.GetComponent<CalculateCollisionDistanceVisualUnity>();
     }
 
     private void Update()

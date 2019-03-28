@@ -4,30 +4,24 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+[RequireComponent(typeof(CalculateCollisionDistanceVisualUnity))]
+
 public class Game_Manager : MonoBehaviour
 {
     public AreasObjects AreasOfObjects { get; private set; }
-    public static Game_Manager Instance { get; private set; }
+    //public static Game_Manager Instance { get; private set; }
     public List<GameObject> ElementsOfComposition { get; private set; }
 
     private CalculateBalanceAreaBounds calculateBalanceAreaBounds;
     
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            calculateBalanceAreaBounds = GetComponent<CalculateBalanceAreaBounds>();
-            PopulateListOfItemInComposition();
-            SetLayerToForeground();
-            SetIdsToElementsOfCompositions();
-
-            DontDestroyOnLoad(gameObject);
-        }
+        
+        calculateBalanceAreaBounds = GetComponent<CalculateBalanceAreaBounds>();
+        PopulateListOfItemInComposition();
+        SetLayerToForeground();
+        SetIdsToElementsOfCompositions();
+        
     }
 
     private void Update()

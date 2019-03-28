@@ -9,8 +9,7 @@ using UnityEngine.SceneManagement;
 public class LoadSceneInputUsername : MonoBehaviour
 {
     private TMP_InputField usernameInputField;
-    [SerializeField]
-    private int scene;
+    public int scene;
 
     static public string username;
 

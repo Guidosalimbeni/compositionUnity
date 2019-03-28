@@ -12,16 +12,18 @@ public class UI_text_manager : MonoBehaviour
     private AreasObjects areaobjects;
     private TextMeshProUGUI BondsLeftBalanceText;
     private TextMeshProUGUI BondsRightBalanceText;
+    private Game_Manager gamemanager;
 
     void Awake()
     {
+        gamemanager = FindObjectOfType<Game_Manager>();
         BondsLeftBalanceText = BondsLeftBalanceObj.GetComponent<TextMeshProUGUI>();
         BondsRightBalanceText = BondsRightBalanceObj.GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
     {
-        areaobjects = Game_Manager.Instance.AreasOfObjects;
+        areaobjects = gamemanager.AreasOfObjects;
         string leftWeigthtPerc = ((areaobjects.ObjectsLeftAreaPercentage) * 100).ToString();
         string RightWeigthPerc =((areaobjects.ObjectsRightAreaPercentage) * 100).ToString();
         BondsLeftBalanceText.text = leftWeigthtPerc;

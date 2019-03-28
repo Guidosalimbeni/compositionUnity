@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
 {
     public bool drawRenderedLinesDebug;
@@ -16,11 +17,18 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
 
     public float VisualUnityScore { get; private set; }
 
+    private Game_Manager gamemanager;
+
+    private void Awake()
+    {
+        gamemanager = FindObjectOfType<Game_Manager>();
+    }
+
     private void Start()
     {
         LineRendererObjectsList = new List<GameObject>();
 
-        PairwaiseElementsOfComposition = PairwaiseOperation(Game_Manager.Instance.ElementsOfComposition);
+        PairwaiseElementsOfComposition = PairwaiseOperation(gamemanager.ElementsOfComposition);
         for (int i = 0; i < PairwaiseElementsOfComposition.Count; i++)
         {
             GameObject ObjectForLineRenderer = new GameObject("GameObject_LineRenderer_" + i.ToString());
