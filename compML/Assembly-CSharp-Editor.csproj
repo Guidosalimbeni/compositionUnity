@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\OpenCVForUnity\Editor\OpenCVForUnityIOSBuildPostprocessor.cs" />
     <Compile Include="Assets\OpenCVForUnity\Editor\OpenCVForUnityMenuItem.cs" />
+    <Compile Include="Assets\UITween\Editor\EditorUITween.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/compositionUnity/compML/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
