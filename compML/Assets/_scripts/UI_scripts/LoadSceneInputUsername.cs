@@ -8,20 +8,33 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneInputUsername : MonoBehaviour
 {
-    private TMP_InputField usernameInputField;
     public int scene;
-
+    public TMP_InputField usernameInputField;
     static public string username;
 
-    private void Start()
+    private void Awake()
     {
-        usernameInputField = GetComponent<TMP_InputField>();
-        usernameInputField.onEndEdit.AddListener(TryLoadScene);
+        //usernameInputField = GetComponent<TMP_InputField>();
+        //usernameInputField.onEndEdit.AddListener(TryLoadScene);
     }
 
+    public void SubmitAndStartGame()
+    {
+        usernameInputField.text = usernameInputField.text;
+        //Debug.Log(usernameInputField.text);
+        username = usernameInputField.text;
+        if (username != "")
+        {
+            SceneManager.LoadSceneAsync(scene);
+        }
+
+    }
+
+    /*
     private void TryLoadScene(string username)
     {
         Debug.Log(username);
         SceneManager.LoadSceneAsync(scene);
     }
+    */
 }
