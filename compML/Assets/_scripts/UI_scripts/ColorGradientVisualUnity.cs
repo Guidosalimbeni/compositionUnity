@@ -25,6 +25,11 @@ public class ColorGradientVisualUnity : MonoBehaviour
         UpdateBalancePixelsUI(VisualUnityScore);
     }
 
+    public float GetVisualUnityScore()
+    {
+        return VisualUnityScore;
+    }
+
     public void UpdateBalancePixelsUI(float score)
     {
         if (score < 0.8f)

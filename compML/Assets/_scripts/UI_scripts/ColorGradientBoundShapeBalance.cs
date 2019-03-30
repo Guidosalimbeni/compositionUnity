@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ColorGradientBoundShapeBalance : MonoBehaviour
 {
     public RawImage balanceBoundsShapesUI;
+
+    private float visualScoreBalanceBoundsShapes;
     Color lerpedColor = Color.white;
     private AreasObjects areaobjects;
 
@@ -24,12 +26,16 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
         float RightWeight = areaobjects.ObjectsRightAreaPercentage;
 
         float DifferenceBetweenLeftandRight = Mathf.Abs(leftWeight - RightWeight);
-        float visualScoreBalanceBoundsShapes = 1 - ((DifferenceBetweenLeftandRight) / (leftWeight + RightWeight));
+        visualScoreBalanceBoundsShapes = 1 - ((DifferenceBetweenLeftandRight) / (leftWeight + RightWeight));
 
         UpdateBalancePixelsUI(visualScoreBalanceBoundsShapes);
 
     }
 
+    public float GetvisualScoreBalanceBoundsShapes()
+    {
+        return visualScoreBalanceBoundsShapes;
+    }
 
     public void UpdateBalancePixelsUI(float score)
     {
