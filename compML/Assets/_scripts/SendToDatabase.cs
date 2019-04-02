@@ -9,9 +9,12 @@ public class SendToDatabase : MonoBehaviour
     // for not opencv score usually to access scores via components and methods from UI manager
 
     public OpenCVManager openCvManager;
-    private float scorePixelsBalance;
+    public float scorePixelsBalance { private set; get; }
+    public float scoreBoundsBalance { private set; get; }
+    public float scoreUnityVisual { private set; get; }
     private ColorGradientBoundShapeBalance colorgradientBoundsShapeBalance;
     private ColorGradientVisualUnity colorGradientVisualUnity;
+    
 
     private void Awake()
     {
@@ -37,8 +40,8 @@ public class SendToDatabase : MonoBehaviour
             username = "Debugging";
         }
 
-        float scoreBoundsBalance = colorgradientBoundsShapeBalance.GetvisualScoreBalanceBoundsShapes();
-        float scoreUnityVisual = colorGradientVisualUnity.GetVisualUnityScore();
+        scoreBoundsBalance = colorgradientBoundsShapeBalance.GetvisualScoreBalanceBoundsShapes();
+        scoreUnityVisual = colorGradientVisualUnity.GetVisualUnityScore();
 
         WWWForm form = new WWWForm();
         form.AddField("name", username);

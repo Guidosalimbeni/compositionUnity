@@ -11,6 +11,7 @@ public class ClickToMoveBySelection : MonoBehaviour
     public float RotationSpeed = -90f;
     public float minThreshold = 0.05f;
 
+    public bool AIisPlaying = false;
 
     private void Start()
     {
@@ -25,7 +26,12 @@ public class ClickToMoveBySelection : MonoBehaviour
         if (transform.GetComponent<TagMeElementOfComposition>().ElementOfCompositionID == elementToMove)
         {
             myTransform = transform;
-            PerformMovement();
+
+            if (AIisPlaying == false)
+            {
+                PerformMovement();
+            }
+            
             
         }
         else

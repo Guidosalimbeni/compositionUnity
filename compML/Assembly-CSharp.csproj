@@ -63,6 +63,9 @@
     <Compile Include="Assets\_scripts\Comp_obj_scripts\CompScreenAreaCalculation.cs" />
     <Compile Include="Assets\_scripts\Comp_obj_scripts\TagMeElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\Game_Manager.cs" />
+    <Compile Include="Assets\_scripts\Genetic_Algorithm\Brain.cs" />
+    <Compile Include="Assets\_scripts\Genetic_Algorithm\DNA.cs" />
+    <Compile Include="Assets\_scripts\Genetic_Algorithm\PopulationManager.cs" />
     <Compile Include="Assets\_scripts\info.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMove.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMoveBySelection.cs" />
