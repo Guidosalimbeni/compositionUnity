@@ -1368,7 +1368,7 @@ MonoBehaviour:
   triggerAI: 1
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
-  populationSize: 20
+  populationSize: 10
   elemComp_a: {fileID: 1294780}
   elemComp_b: {fileID: 1718927694}
   elemComp_c: {fileID: 349030383}
