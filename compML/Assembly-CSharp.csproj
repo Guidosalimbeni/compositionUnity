@@ -64,6 +64,7 @@
     <Compile Include="Assets\_scripts\Comp_obj_scripts\TagMeElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\Game_Manager.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\Brain.cs" />
+    <Compile Include="Assets\_scripts\Genetic_Algorithm\CoroutineWithData.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\DNA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\PopulationManager.cs" />
     <Compile Include="Assets\_scripts\info.cs" />
