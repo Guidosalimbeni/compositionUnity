@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1904
     height: 931
-  m_MinSize: {x: 681, y: 572}
-  m_MaxSize: {x: 12006, y: 12072}
+  m_MinSize: {x: 683, y: 572}
+  m_MaxSize: {x: 12008, y: 12072}
   vertical: 0
-  controlID: 54
+  controlID: 72
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 572}
   m_MaxSize: {x: 8006, y: 12072}
   vertical: 1
-  controlID: 122
+  controlID: 73
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 448}
   m_MaxSize: {x: 8006, y: 8048}
   vertical: 0
-  controlID: 123
+  controlID: 74
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 448}
   m_MaxSize: {x: 4004, y: 8048}
   vertical: 1
-  controlID: 102
+  controlID: 75
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -435,8 +435,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
+      m_SelectedIDs: 2ca9ffff
+      m_LastClickedID: -22228
       m_ExpandedIDs: d4fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -769,9 +769,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 082d0000
+    m_LastClickedInstanceID: 11528
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: bc31000000000000c82e00008093ffffc4070000ac350000f2310000be3700003c2b00004c330000aa450000803c0000c22d0000d05900004a2f0000d0340000f43400000c4b0000ce6cfefffe2400005a2600004825000052270000102700003a2a000028280000762700006a2700005e2f0000d2260000e64400003846000060470000b04900006244000002490000bc45000008440000482900004e450000302f0000885400004a4600000046000042460000d47bffffde270000d43c010084320100403a010040250000e024000042250000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

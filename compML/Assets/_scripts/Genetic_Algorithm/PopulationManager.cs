@@ -17,8 +17,10 @@ public class PopulationManager : MonoBehaviour {
 
     private bool BreedNewPopulation_Trigger = false;
     bool breedingHalf_1 = true;
-    private int indexSortedList = 0;
-    private bool SetNewIndex = true;
+    bool breedingHalf_2 = false;
+    private int indexOfHoldSortedListForBreeding = 0;
+    private bool SetNewIndexFirstHalf = true;
+    
     private List<GameObject> sortedListHold;
 
 
@@ -50,6 +52,8 @@ public class PopulationManager : MonoBehaviour {
             if (BreedNewPopulation_Trigger == true)
             {
                 BreedNewPopulation();
+
+                // might have to set here that we need to destroy the new generations?
             }
             
         }
@@ -66,7 +70,7 @@ public class PopulationManager : MonoBehaviour {
     {
         AICreatesPopulationTurn = false;
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
-
+        Debug.Log("First");
         IndividualCompositionSet.GetComponent<Brain>().Init();
         population.Add(IndividualCompositionSet);
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
@@ -79,25 +83,28 @@ public class PopulationManager : MonoBehaviour {
         }
         else
         {
-            AICreatesPopulationTurn = false;
+            AICreatesPopulationTurn = false; // STOP FIRST INITIAL POPULATION
             counterForPopulation = 0;
-            BreedNewPopulation_Trigger = true;
+            BreedNewPopulation_Trigger = true; // START NEW BREEDING to produce offsprings
+
+            /////////////// might need counter for created offsprings if not equal to original population count?
 
         }
+
     }
 
     void BreedNewPopulation()
     {
-        List<GameObject> sortedList = population.OrderByDescending(o => o.GetComponent<Brain>().TotalScore).ToList(); // might the opposite descedning
+        List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList(); 
 
-        if (SetNewIndex == true)
+        if (SetNewIndexFirstHalf == true)
         {
-            indexSortedList = (int)(sortedList.Count / 2.0f); 
+            indexOfHoldSortedListForBreeding = (int)(sortedList.Count / 2.0f); 
             sortedListHold = sortedList;
-            population.Clear();
-            SetNewIndex = false;
+            population.Clear();  // might not want to clear before end of second half?
+            SetNewIndexFirstHalf = false;
         }
-        
+
         BreedNewPopulationOnSortedList(sortedListHold);
 
         generation++;
@@ -110,22 +117,40 @@ public class PopulationManager : MonoBehaviour {
 
         if (breedingHalf_1 == true)
         {
-            StartCoroutine(BreedHalfSortedList_PreviousNext(sortedListHold, indexSortedList));
-
-            if (indexSortedList + 1 >= sortedListHold.Count)
+            StartCoroutine(BreedHalfSortedList_PreviousNext(sortedListHold, indexOfHoldSortedListForBreeding));
+            /*
+            Debug.Log(indexOfHoldSortedListForBreeding + "    first half indexsortedlist");
+            if (indexOfHoldSortedListForBreeding + 1 >= sortedListHold.Count)
             {
-                Debug.Log("didi I get here? +++++++++++++++++++++");
+                SetNewIndexFirstHalf = true; /////////////// might not need this bit at all at this point....????
+            }
+            
+            indexOfHoldSortedListForBreeding++;
+            */
+            indexOfHoldSortedListForBreeding++;
+        }
+
+        if (breedingHalf_2 == true)
+        {
+            StartCoroutine(BreedHalfSortedList_NextPrevious(sortedListHold, indexOfHoldSortedListForBreeding));
+
+            Debug.Log(indexOfHoldSortedListForBreeding + "    sedong half indexsortedlist");
+            if (indexOfHoldSortedListForBreeding + 1 >= sortedListHold.Count)
+            {
+                Debug.Log("didi I get here? +++++++++++++++++++++        "  + sortedListHold.Count); //////////
                 BreedNewPopulation_Trigger = false; // this might have to place after the second half is done? or look for generation?
                 // to extract?
                 for (int i = 0; i < sortedListHold.Count; i++)
                 {
                     Destroy(sortedListHold[i]);
                 }
-                SetNewIndex = true; ///////////////
+                SetNewIndexFirstHalf = true; ///////////////
+                
 
             }
 
-            indexSortedList++;
+            indexOfHoldSortedListForBreeding++;
+
         }
 
     }
@@ -136,26 +161,53 @@ public class PopulationManager : MonoBehaviour {
 
     private IEnumerator BreedHalfSortedList_PreviousNext(List<GameObject> sortedList, int InternalIndex)
     {
-        
         breedingHalf_1 = false;
 
         offspring = Breed(sortedList[InternalIndex - 1], sortedList[InternalIndex]); //
+        Debug.Log("firstHalf    " + (sortedList.Count - 1) + "internal index " + InternalIndex);
         population.Add(offspring);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(secondToWaitForPopGeneration);
         
         if (InternalIndex >= sortedList.Count - 1)
         {
-            //Debug.Log(" I AM HERE CONDITION MET");
+            Debug.Log(" I AM HERE CONDITION MET             " + sortedListHold.Count);
             breedingHalf_1 = false;
 
-            // breedingHalf_2 = true // becomes true when 1 is set to false
+            breedingHalf_2 = true; // becomes true when 1 is set to false
+
+            indexOfHoldSortedListForBreeding = (int)(sortedList.Count / 2.0f);
         }
         else
         {
+            if (breedingHalf_2 == false)
+            {
+                breedingHalf_1 = true;
+            }
             // if breedingHalf_2 == false ... but if it is true breedingHalf_1 becomes false..
-            breedingHalf_1 = true;
         }
-        
+    }
+
+    private IEnumerator BreedHalfSortedList_NextPrevious(List<GameObject> sortedList, int InternalIndex)
+    {
+        breedingHalf_2 = false;
+
+        offspring = Breed(sortedList[InternalIndex], sortedList[InternalIndex - 1]); //
+        Debug.Log("SecondHalf");
+        population.Add(offspring);
+        yield return new WaitForSeconds(secondToWaitForPopGeneration);
+
+        if (InternalIndex >= sortedList.Count - 1)
+        {
+            //Debug.Log(" I AM HERE CONDITION MET");
+            breedingHalf_2 = false;
+        }
+        else
+        {
+            breedingHalf_2 = true;
+            // if breedingHalf_2 == false ... but if it is true breedingHalf_1 becomes false..
+
+        }
+
 
     }
 
@@ -178,16 +230,9 @@ public class PopulationManager : MonoBehaviour {
            b.dna.Combine(parent1.GetComponent<Brain>().dna, parent2.GetComponent<Brain>().dna);
        }
 
-       //Debug.Log("offspring generated");
+       //Debug.Log(offspring.GetComponent<Brain>().TotalScore); ///////////////////
        return offspring;
 
     }
-
-    /*
-    CoroutineWithData cd = new CoroutineWithData(this, LoadSomeStuff());
-    yield return cd.coroutine;
-    Debug.Log("result is " + cd.result);  //  'success' or 'fail'
-    */
-
 }
 
