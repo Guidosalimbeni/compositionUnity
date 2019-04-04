@@ -9,42 +9,32 @@ public class PopulationManager : MonoBehaviour {
 	public GameObject Individual;
     public int populationSize = 10;
     public int NumberOfGeneration = 4;
-
-    private int counterForPopulation = 0;
-    private bool AICreatesPopulationTurn = true; //
-    private float secondToWaitForPopGeneration = 0.5f;
-    private List<GameObject> population = new List<GameObject>();
-
-    private bool BreedNewPopulation_Trigger = false;
-    bool breedingHalf_1 = true;
-    bool breedingHalf_2 = false;
-    private int indexOfHoldSortedListForBreeding = 0;
-    private bool SetNewIndexFirstHalf = true;
-    
-    private List<GameObject> sortedListHold;
-
-
-    [SerializeField]
-    private GameObject elemComp_a;
-    [SerializeField]
-    private GameObject elemComp_b;
-    [SerializeField]
-    private GameObject elemComp_c;
+    public GameObject elemComp_a;
+    public GameObject elemComp_b;
+    public GameObject elemComp_c;
 
     private int generation = 0;
-
+    private int counterForINITIALPopulation = 0;
+    private bool AICreatesInitialPopulationTurn = true; //
+    private float secondToWaitForPopGeneration = 0.5f;
+    private List<GameObject> population = new List<GameObject>();
+    private bool BreedNewPopulation_Trigger = false;
+    private bool breedingHalf_1 = true;
+    private bool breedingHalf_2 = false;
+    private int indexOfHoldSortedListForBreeding = 0;
+    private bool SetNewIndexToHandlePairingInSortedList = true;
+    private List<GameObject> sortedListHold;
     private GameObject offspring;
 
     private void FixedUpdate()
     {
-        if (triggerAI == true) 
+        if (triggerAI == true) // this is ok since the new trigger is on new type of learned scores from users..
         {
-            // move out of fixed upadte when set the trigger properly TODO
             elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
             elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
             elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
 
-            if (AICreatesPopulationTurn == true)
+            if (AICreatesInitialPopulationTurn == true)
             {
                 StartCoroutine(CreatePopulation());
             }
@@ -52,10 +42,7 @@ public class PopulationManager : MonoBehaviour {
             if (BreedNewPopulation_Trigger == true)
             {
                 BreedNewPopulation();
-
-                // might have to set here that we need to destroy the new generations?
             }
-            
         }
 
         if (triggerAI == false)
@@ -68,65 +55,67 @@ public class PopulationManager : MonoBehaviour {
 
     private IEnumerator CreatePopulation()
     {
-        AICreatesPopulationTurn = false;
+        AICreatesInitialPopulationTurn = false;
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
         Debug.Log("First");
         IndividualCompositionSet.GetComponent<Brain>().Init();
         population.Add(IndividualCompositionSet);
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
         
-        if (counterForPopulation < populationSize - 1) 
+        if (counterForINITIALPopulation < populationSize - 1) // handle to counter for trigger...
         {
             BreedNewPopulation_Trigger = false;
-            AICreatesPopulationTurn = true;
-            counterForPopulation++;
+            AICreatesInitialPopulationTurn = true; // KEEP running Start pop until hanlde says STOP
+            counterForINITIALPopulation++;
         }
         else
         {
-            AICreatesPopulationTurn = false; // STOP FIRST INITIAL POPULATION
-            counterForPopulation = 0;
+            AICreatesInitialPopulationTurn = false; // STOP FIRST INITIAL POPULATION
+            counterForINITIALPopulation = 0;
             BreedNewPopulation_Trigger = true; // START NEW BREEDING to produce offsprings
-
-            /////////////// might need counter for created offsprings if not equal to original population count?
-
+            
         }
-
     }
 
-    void BreedNewPopulation()
+    private void BreedNewPopulation()
     {
-        List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList(); 
+        //BreedNewPopulation_Trigger = false; //////// make it when generation.. play with this to cancel now..
+        List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList();
 
-        if (SetNewIndexFirstHalf == true)
+        if (population.Count == populationSize  )
+        {
+            population.Clear(); // if population count is greater than clean ???
+            if (generation < NumberOfGeneration)
+            {
+                Debug.Log(generation + "     ------------------------------------------------");
+                breedingHalf_1 = true; /// bread again change NAME into START FROM FIRST HALF and ON...
+            }
+
+        }
+        
+
+        Debug.Log(population.Count + " cooooounttt - -- - - -");
+        
+
+        if (SetNewIndexToHandlePairingInSortedList == true)
         {
             indexOfHoldSortedListForBreeding = (int)(sortedList.Count / 2.0f); 
             sortedListHold = sortedList;
-            population.Clear();  // might not want to clear before end of second half?
-            SetNewIndexFirstHalf = false;
+            SetNewIndexToHandlePairingInSortedList = false;
+            Debug.Log(sortedListHold.Count + "hold of sorted list count... this means is not repeated");
         }
 
-        BreedNewPopulationOnSortedList(sortedListHold);
+        
 
-        generation++;
-        //Debug.Log(generation); ////
+        BreedNewPopulationOnSortedList(sortedListHold);
+        
     }
 
     private void BreedNewPopulationOnSortedList(List<GameObject> sortedListHold)
     {
-        // we are still from FixedUpdate 
-
         if (breedingHalf_1 == true)
         {
             StartCoroutine(BreedHalfSortedList_PreviousNext(sortedListHold, indexOfHoldSortedListForBreeding));
-            /*
-            Debug.Log(indexOfHoldSortedListForBreeding + "    first half indexsortedlist");
-            if (indexOfHoldSortedListForBreeding + 1 >= sortedListHold.Count)
-            {
-                SetNewIndexFirstHalf = true; /////////////// might not need this bit at all at this point....????
-            }
-            
-            indexOfHoldSortedListForBreeding++;
-            */
             indexOfHoldSortedListForBreeding++;
         }
 
@@ -134,90 +123,70 @@ public class PopulationManager : MonoBehaviour {
         {
             StartCoroutine(BreedHalfSortedList_NextPrevious(sortedListHold, indexOfHoldSortedListForBreeding));
 
-            Debug.Log(indexOfHoldSortedListForBreeding + "    sedong half indexsortedlist");
             if (indexOfHoldSortedListForBreeding + 1 >= sortedListHold.Count)
             {
-                Debug.Log("didi I get here? +++++++++++++++++++++        "  + sortedListHold.Count); //////////
-                BreedNewPopulation_Trigger = false; // this might have to place after the second half is done? or look for generation?
-                // to extract?
+                
                 for (int i = 0; i < sortedListHold.Count; i++)
                 {
                     Destroy(sortedListHold[i]);
                 }
-                SetNewIndexFirstHalf = true; ///////////////
-                
 
+                SetNewIndexToHandlePairingInSortedList = true; /////////////// ///////////////
+                generation++;
+                
+                
             }
 
             indexOfHoldSortedListForBreeding++;
-
         }
-
     }
-
-    // to implement BreedHalfSortedList_NextPrevious ///////////////// TODO
-    // then when first generation is done ,,, need to set repeat of everything for each new generation count...at the top
-    // of the loop after first population and somehow in the middle of trigger AI
 
     private IEnumerator BreedHalfSortedList_PreviousNext(List<GameObject> sortedList, int InternalIndex)
     {
         breedingHalf_1 = false;
-
-        offspring = Breed(sortedList[InternalIndex - 1], sortedList[InternalIndex]); //
-        Debug.Log("firstHalf    " + (sortedList.Count - 1) + "internal index " + InternalIndex);
+        offspring = Breed(sortedList[InternalIndex - 1], sortedList[InternalIndex]); 
         population.Add(offspring);
+
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
         
         if (InternalIndex >= sortedList.Count - 1)
         {
-            Debug.Log(" I AM HERE CONDITION MET             " + sortedListHold.Count);
             breedingHalf_1 = false;
-
-            breedingHalf_2 = true; // becomes true when 1 is set to false
-
+            breedingHalf_2 = true; 
             indexOfHoldSortedListForBreeding = (int)(sortedList.Count / 2.0f);
         }
         else
         {
-            if (breedingHalf_2 == false)
+            if (breedingHalf_2 == false)  /// ??????????
             {
                 breedingHalf_1 = true;
             }
-            // if breedingHalf_2 == false ... but if it is true breedingHalf_1 becomes false..
         }
     }
 
     private IEnumerator BreedHalfSortedList_NextPrevious(List<GameObject> sortedList, int InternalIndex)
     {
         breedingHalf_2 = false;
-
-        offspring = Breed(sortedList[InternalIndex], sortedList[InternalIndex - 1]); //
-        Debug.Log("SecondHalf");
+        offspring = Breed(sortedList[InternalIndex], sortedList[InternalIndex - 1]); 
         population.Add(offspring);
+
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
 
         if (InternalIndex >= sortedList.Count - 1)
         {
-            //Debug.Log(" I AM HERE CONDITION MET");
             breedingHalf_2 = false;
+            Debug.Log(population.Count + " cooooounttt - -- - - -  999999999999999");
+            //BreedNewPopulation_Trigger = false; /// stop breeding first generation of offsprings +++ put it after GENERATIOn Count full
         }
         else
         {
             breedingHalf_2 = true;
-            // if breedingHalf_2 == false ... but if it is true breedingHalf_1 becomes false..
-
         }
-
-
     }
-
-    // if generation > x then BreedNewPopulation_Trigger to false...and true...
 
     GameObject Breed(GameObject parent1, GameObject parent2)
     {
-
        GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
-
        Brain b = offspring.GetComponent<Brain>();
        if (Random.Range(0, 20) == 1) //mutate 1 in 20
        {
@@ -230,9 +199,7 @@ public class PopulationManager : MonoBehaviour {
            b.dna.Combine(parent1.GetComponent<Brain>().dna, parent2.GetComponent<Brain>().dna);
        }
 
-       //Debug.Log(offspring.GetComponent<Brain>().TotalScore); ///////////////////
        return offspring;
-
     }
 }
 
