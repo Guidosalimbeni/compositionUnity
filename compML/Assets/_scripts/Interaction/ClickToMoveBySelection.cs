@@ -25,21 +25,31 @@ public class ClickToMoveBySelection : MonoBehaviour
      
         if (transform.GetComponent<TagMeElementOfComposition>().ElementOfCompositionID == elementToMove)
         {
-            myTransform = transform;
+            myTransform = transform; /////
 
             if (AIisPlaying == false)
             {
                 PerformMovement();
             }
-            
-            
+
+            else if (AIisPlaying == true)
+            {
+                destinationPosition = myTransform.position; /// 
+            }
+
         }
         else
         {
-            //Debug.Log("no item selected");
+            Debug.Log("no item selected");
         }
   
     }
+
+    public void SetLastDestinationPositionCorrectlyFromAI()
+    {
+        destinationPosition = myTransform.position;
+    }
+
 
     private void PerformMovement()
     {

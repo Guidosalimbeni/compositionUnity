@@ -65,8 +65,9 @@ public class Brain : MonoBehaviour
         elemComp_a.transform.position = new Vector3(dna.GetGene(0), 0, dna.GetGene(1));
         elemComp_b.transform.position = new Vector3(dna.GetGene(2), 0, dna.GetGene(3));
         elemComp_c.transform.position = new Vector3(dna.GetGene(4), 0, dna.GetGene(5));
-
-
+        elemComp_a.GetComponent<ClickToMoveBySelection>().SetLastDestinationPositionCorrectlyFromAI();
+        elemComp_b.GetComponent<ClickToMoveBySelection>().SetLastDestinationPositionCorrectlyFromAI();
+        elemComp_c.GetComponent<ClickToMoveBySelection>().SetLastDestinationPositionCorrectlyFromAI();
     }
 
 }

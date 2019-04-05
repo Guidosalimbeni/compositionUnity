@@ -80,6 +80,8 @@ public class PopulationManager : MonoBehaviour {
     {
         List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList();
 
+        Debug.Log(sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore + "     total score best update");
+
         if (population.Count == populationSize  )
         {
             population.Clear(); // if population count is greater than clean ???
@@ -89,19 +91,23 @@ public class PopulationManager : MonoBehaviour {
             }
             else
             {
+                triggerAI = false;
+                elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+                elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+                elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
                 // NEED TO FIX THIS !!!!!!!!!!!!!!!!!!!
                 sortedList[sortedList.Count - 1].GetComponent<Brain>().MoveCompositionOfBestFitAfterAIfinishedIsTurn();
-                Debug.Log(sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore + "     dddd");
+                Debug.Log(sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore + "     total score final");
+              
                 for (int i = 0; i < sortedList.Count; i++)
                 {
                     
                     //Destroy(sortedList[i]);
                 }
 
-                elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-                elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-                elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+                
                 triggerAI = false; // stop looping AI // need to implement the SEND DATA 
+                // need to check of counter for new AI trigger !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             }
 
@@ -135,8 +141,6 @@ public class PopulationManager : MonoBehaviour {
                 
                 for (int i = 0; i < sortedListHold.Count; i++)
                 {
-                    
-
                     Destroy(sortedListHold[i]); 
                 }
 

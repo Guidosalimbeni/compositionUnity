@@ -1368,9 +1368,9 @@ MonoBehaviour:
   triggerAI: 0
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
-  populationSize: 10
-  NumberOfGeneration: 4
-  secondToWaitForPopGeneration: 0.1
+  populationSize: 20
+  NumberOfGeneration: 10
+  secondToWaitForPopGeneration: 0.05
   elemComp_a: {fileID: 1294780}
   elemComp_b: {fileID: 1718927694}
   elemComp_c: {fileID: 349030383}
