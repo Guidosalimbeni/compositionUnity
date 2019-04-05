@@ -1365,11 +1365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3a254fc21718343aa976bc32038b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerAI: 1
+  triggerAI: 0
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
   populationSize: 10
-  NumberOfGeneration: 10
+  NumberOfGeneration: 4
+  secondToWaitForPopGeneration: 0.1
   elemComp_a: {fileID: 1294780}
   elemComp_b: {fileID: 1718927694}
   elemComp_c: {fileID: 349030383}

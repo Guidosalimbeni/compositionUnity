@@ -40,8 +40,6 @@ public class Brain : MonoBehaviour
         elemComp_b = elementsInComp[1];
         elemComp_c = elementsInComp[2];
 
-        
-
         sendtodatabase = FindObjectOfType<SendToDatabase>();
 
         MoveComposition();
@@ -49,7 +47,6 @@ public class Brain : MonoBehaviour
 
     }
 
-    
 
     private void MoveComposition()
     {
@@ -62,4 +59,14 @@ public class Brain : MonoBehaviour
         }
         
     }
+
+    public void MoveCompositionOfBestFitAfterAIfinishedIsTurn()
+    {
+        elemComp_a.transform.position = new Vector3(dna.GetGene(0), 0, dna.GetGene(1));
+        elemComp_b.transform.position = new Vector3(dna.GetGene(2), 0, dna.GetGene(3));
+        elemComp_c.transform.position = new Vector3(dna.GetGene(4), 0, dna.GetGene(5));
+
+
+    }
+
 }

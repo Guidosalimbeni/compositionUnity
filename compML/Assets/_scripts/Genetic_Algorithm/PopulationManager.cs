@@ -9,6 +9,7 @@ public class PopulationManager : MonoBehaviour {
 	public GameObject Individual;
     public int populationSize = 10;
     public int NumberOfGeneration = 4;
+    public float secondToWaitForPopGeneration = 0.1f;
     public GameObject elemComp_a;
     public GameObject elemComp_b;
     public GameObject elemComp_c;
@@ -16,7 +17,6 @@ public class PopulationManager : MonoBehaviour {
     private int generation = 0;
     private int counterForINITIALPopulation = 0;
     private bool AICreatesInitialPopulationTurn = true; //
-    private float secondToWaitForPopGeneration = 0.5f;
     private List<GameObject> population = new List<GameObject>();
     private bool BreedNewPopulation_Trigger = false;
     private bool breedingHalf_1 = true;
@@ -57,7 +57,6 @@ public class PopulationManager : MonoBehaviour {
     {
         AICreatesInitialPopulationTurn = false;
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
-        Debug.Log("First");
         IndividualCompositionSet.GetComponent<Brain>().Init();
         population.Add(IndividualCompositionSet);
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
@@ -79,7 +78,6 @@ public class PopulationManager : MonoBehaviour {
 
     private void BreedNewPopulation()
     {
-        //BreedNewPopulation_Trigger = false; //////// make it when generation.. play with this to cancel now..
         List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList();
 
         if (population.Count == populationSize  )
@@ -87,25 +85,34 @@ public class PopulationManager : MonoBehaviour {
             population.Clear(); // if population count is greater than clean ???
             if (generation < NumberOfGeneration)
             {
-                Debug.Log(generation + "     ------------------------------------------------");
                 breedingHalf_1 = true; /// bread again change NAME into START FROM FIRST HALF and ON...
+            }
+            else
+            {
+                // NEED TO FIX THIS !!!!!!!!!!!!!!!!!!!
+                sortedList[sortedList.Count - 1].GetComponent<Brain>().MoveCompositionOfBestFitAfterAIfinishedIsTurn();
+                Debug.Log(sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore + "     dddd");
+                for (int i = 0; i < sortedList.Count; i++)
+                {
+                    
+                    //Destroy(sortedList[i]);
+                }
+
+                elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+                elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+                elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+                triggerAI = false; // stop looping AI // need to implement the SEND DATA 
+
             }
 
         }
-        
-
-        Debug.Log(population.Count + " cooooounttt - -- - - -");
-        
 
         if (SetNewIndexToHandlePairingInSortedList == true)
         {
             indexOfHoldSortedListForBreeding = (int)(sortedList.Count / 2.0f); 
             sortedListHold = sortedList;
             SetNewIndexToHandlePairingInSortedList = false;
-            Debug.Log(sortedListHold.Count + "hold of sorted list count... this means is not repeated");
         }
-
-        
 
         BreedNewPopulationOnSortedList(sortedListHold);
         
@@ -128,12 +135,13 @@ public class PopulationManager : MonoBehaviour {
                 
                 for (int i = 0; i < sortedListHold.Count; i++)
                 {
-                    Destroy(sortedListHold[i]);
+                    
+
+                    Destroy(sortedListHold[i]); 
                 }
 
                 SetNewIndexToHandlePairingInSortedList = true; /////////////// ///////////////
                 generation++;
-                
                 
             }
 
@@ -175,8 +183,6 @@ public class PopulationManager : MonoBehaviour {
         if (InternalIndex >= sortedList.Count - 1)
         {
             breedingHalf_2 = false;
-            Debug.Log(population.Count + " cooooounttt - -- - - -  999999999999999");
-            //BreedNewPopulation_Trigger = false; /// stop breeding first generation of offsprings +++ put it after GENERATIOn Count full
         }
         else
         {

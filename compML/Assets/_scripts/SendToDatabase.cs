@@ -14,6 +14,7 @@ public class SendToDatabase : MonoBehaviour
     public float scoreUnityVisual { private set; get; }
     private ColorGradientBoundShapeBalance colorgradientBoundsShapeBalance;
     private ColorGradientVisualUnity colorGradientVisualUnity;
+    private PopulationManager populationmanager;
     
 
     private void Awake()
@@ -21,6 +22,7 @@ public class SendToDatabase : MonoBehaviour
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
         colorgradientBoundsShapeBalance = GetComponent<ColorGradientBoundShapeBalance>();
         colorGradientVisualUnity = GetComponent<ColorGradientVisualUnity>();
+        populationmanager = FindObjectOfType<PopulationManager>();
     }
 
     private void HandleOnPixelsCountBalanceChanged(float scoreOnpixelscountbalance)
@@ -31,6 +33,7 @@ public class SendToDatabase : MonoBehaviour
     public void PostDataFromButton()
     {
         StartCoroutine(PostData(LoadSceneInputUsername.username));
+        populationmanager.triggerAI = true;
     }
 
     IEnumerator PostData(string username)
