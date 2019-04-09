@@ -14,21 +14,28 @@ public class PopulationManager : MonoBehaviour {
     public GameObject elemComp_b;
     public GameObject elemComp_c;
 
-    private int generation = 0;
-    private int counterForINITIALPopulation = 0;
-    private bool AICreatesInitialPopulationTurn = true; //
-    private List<GameObject> population = new List<GameObject>();
-    private bool BreedNewPopulation_Trigger = false;
-    private bool breedingHalf_1 = true;
-    private bool breedingHalf_2 = false;
-    private int indexOfHoldSortedListForBreeding = 0;
-    private bool SetNewIndexToHandlePairingInSortedList = true;
-    private List<GameObject> sortedListHold;
-    private GameObject offspring;
+    public float g0;
+    public float g1;
+    public float g2;
+    public float g3;
+    public float g4;
+    public float g5;
+    public float bestScore;
 
-    private void FixedUpdate()
+    private int generation = 0;
+    private int counterForPopulation = 0;
+    private int CounterOffsprings = 0;
+    private bool AICreatesInitialPopulationTurn = true; //
+    public bool GenerateNewPopulatoinOffsprings_trigger = false;
+    private List<GameObject> population = new List<GameObject>();
+    private GameObject offspring;
+    List<GameObject> sortedList = new List<GameObject>();
+    private List<GameObject> populationToDelete = new List<GameObject>();
+    private bool sortNewGeneration = true;
+
+    private void Update()
     {
-        if (triggerAI == true) // this is ok since the new trigger is on new type of learned scores from users..
+        if (triggerAI == true) 
         {
             elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
             elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
@@ -39,9 +46,12 @@ public class PopulationManager : MonoBehaviour {
                 StartCoroutine(CreatePopulation());
             }
 
-            if (BreedNewPopulation_Trigger == true)
+            if (GenerateNewPopulatoinOffsprings_trigger == true)
             {
-                BreedNewPopulation();
+                if (generation < NumberOfGeneration) ///
+                {
+                    GenerateNewPopulationOffsprings();
+                }
             }
         }
 
@@ -58,158 +68,120 @@ public class PopulationManager : MonoBehaviour {
         AICreatesInitialPopulationTurn = false;
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
         IndividualCompositionSet.GetComponent<Brain>().Init();
-        population.Add(IndividualCompositionSet);
+        counterForPopulation++;
+
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
-        
-        if (counterForINITIALPopulation < populationSize - 1) // handle to counter for trigger...
+        IndividualCompositionSet.GetComponent<Brain>().CalculateTotalScore(); /// this is where the moved are updated
+        population.Add(IndividualCompositionSet);
+        populationToDelete.Add(IndividualCompositionSet); 
+
+        if (counterForPopulation < populationSize) ////
         {
-            BreedNewPopulation_Trigger = false;
-            AICreatesInitialPopulationTurn = true; // KEEP running Start pop until hanlde says STOP
-            counterForINITIALPopulation++;
+            AICreatesInitialPopulationTurn = true;
+            GenerateNewPopulatoinOffsprings_trigger = false;
         }
         else
         {
             AICreatesInitialPopulationTurn = false; // STOP FIRST INITIAL POPULATION
-            counterForINITIALPopulation = 0;
-            BreedNewPopulation_Trigger = true; // START NEW BREEDING to produce offsprings
-            
+            GenerateNewPopulatoinOffsprings_trigger = true; // START NEW BREEDING to produce offsprings
+
         }
     }
 
-    private void BreedNewPopulation()
+    private void GenerateNewPopulationOffsprings()
     {
-        List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList();
+        GenerateNewPopulatoinOffsprings_trigger = false; ///
 
-        Debug.Log(sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore + "     total score best update");
-
-        if (population.Count == populationSize  )
+        if (sortNewGeneration == true)
         {
-            population.Clear(); // if population count is greater than clean ???
-            if (generation < NumberOfGeneration)
-            {
-                breedingHalf_1 = true; /// bread again change NAME into START FROM FIRST HALF and ON...
-            }
-            else
-            {
-                triggerAI = false;
-                elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-                elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-                elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-                // NEED TO FIX THIS !!!!!!!!!!!!!!!!!!!
-                sortedList[sortedList.Count - 1].GetComponent<Brain>().MoveCompositionOfBestFitAfterAIfinishedIsTurn();
-                Debug.Log(sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore + "     total score final");
-              
-                for (int i = 0; i < sortedList.Count; i++)
-                {
-                    
-                    //Destroy(sortedList[i]);
-                }
+            sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList();
 
-                
-                triggerAI = false; // stop looping AI // need to implement the SEND DATA 
-                // need to check of counter for new AI trigger !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (population.Count == 10)
+            {
+                bestScore = sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore;
+                population.Clear(); // this is the list not the objects
 
             }
-
+            sortNewGeneration = false;
         }
+        StartCoroutine(Breed()); //
 
-        if (SetNewIndexToHandlePairingInSortedList == true)
-        {
-            indexOfHoldSortedListForBreeding = (int)(sortedList.Count / 2.0f); 
-            sortedListHold = sortedList;
-            SetNewIndexToHandlePairingInSortedList = false;
-        }
-
-        BreedNewPopulationOnSortedList(sortedListHold);
-        
     }
 
-    private void BreedNewPopulationOnSortedList(List<GameObject> sortedListHold)
+    private IEnumerator Breed()
     {
-        if (breedingHalf_1 == true)
-        {
-            StartCoroutine(BreedHalfSortedList_PreviousNext(sortedListHold, indexOfHoldSortedListForBreeding));
-            indexOfHoldSortedListForBreeding++;
-        }
+        int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count - 1);
+        int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count - 1);
+        GameObject parent1 = sortedList[InternalIndex_parent1];
+        GameObject parent2 = sortedList[InternalIndex_parent2];
 
-        if (breedingHalf_2 == true)
-        {
-            StartCoroutine(BreedHalfSortedList_NextPrevious(sortedListHold, indexOfHoldSortedListForBreeding));
-
-            if (indexOfHoldSortedListForBreeding + 1 >= sortedListHold.Count)
-            {
-                
-                for (int i = 0; i < sortedListHold.Count; i++)
-                {
-                    Destroy(sortedListHold[i]); 
-                }
-
-                SetNewIndexToHandlePairingInSortedList = true; /////////////// ///////////////
-                generation++;
-                
-            }
-
-            indexOfHoldSortedListForBreeding++;
-        }
-    }
-
-    private IEnumerator BreedHalfSortedList_PreviousNext(List<GameObject> sortedList, int InternalIndex)
-    {
-        breedingHalf_1 = false;
-        offspring = Breed(sortedList[InternalIndex - 1], sortedList[InternalIndex]); 
-        population.Add(offspring);
-
-        yield return new WaitForSeconds(secondToWaitForPopGeneration);
-        
-        if (InternalIndex >= sortedList.Count - 1)
-        {
-            breedingHalf_1 = false;
-            breedingHalf_2 = true; 
-            indexOfHoldSortedListForBreeding = (int)(sortedList.Count / 2.0f);
-        }
-        else
-        {
-            if (breedingHalf_2 == false)  /// ??????????
-            {
-                breedingHalf_1 = true;
-            }
-        }
-    }
-
-    private IEnumerator BreedHalfSortedList_NextPrevious(List<GameObject> sortedList, int InternalIndex)
-    {
-        breedingHalf_2 = false;
-        offspring = Breed(sortedList[InternalIndex], sortedList[InternalIndex - 1]); 
-        population.Add(offspring);
-
-        yield return new WaitForSeconds(secondToWaitForPopGeneration);
-
-        if (InternalIndex >= sortedList.Count - 1)
-        {
-            breedingHalf_2 = false;
-        }
-        else
-        {
-            breedingHalf_2 = true;
-        }
-    }
-
-    GameObject Breed(GameObject parent1, GameObject parent2)
-    {
        GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
        Brain b = offspring.GetComponent<Brain>();
-       if (Random.Range(0, 20) == 1) //mutate 1 in 20
+       if (Random.Range(0, 10) == 1) //mutate 1 in 10
        {
-           b.Init();
+           b.InitForBreed();
            b.dna.Mutate();
-       }
+           b.MoveComposition(); //////
+        }
        else
        {
-           b.Init();
+           b.InitForBreed();
            b.dna.Combine(parent1.GetComponent<Brain>().dna, parent2.GetComponent<Brain>().dna);
-       }
+           b.MoveComposition(); //////
+        }
 
-       return offspring;
+        yield return new WaitForSeconds(secondToWaitForPopGeneration);
+        offspring.GetComponent<Brain>().CalculateTotalScore();
+
+        population.Add(offspring);
+        populationToDelete.Add(offspring);
+        //Debug.Log(populationToDelete.Count + "   pop to delete  ");
+
+        GenerateNewPopulatoinOffsprings_trigger = true;
+
+        CounterOffsprings++;
+
+        Debug.Log(CounterOffsprings + "  CounterOffsprings");
+        
+        if (CounterOffsprings == populationSize)
+        {
+            sortNewGeneration = true;
+            CounterOffsprings = 0;
+            generation++; ///////////////
+        }
+
+        if (generation == NumberOfGeneration)
+        {
+            bestScore = sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore;
+            
+
+            sortNewGeneration = false;
+            GenerateNewPopulatoinOffsprings_trigger = false;
+            triggerAI = false;
+            AICreatesInitialPopulationTurn = true;
+            
+
+            g0 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g0;
+            g1 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g1;
+            g2 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g2;
+            g3 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g3;
+            g4 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g4;
+            g5 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g5;
+
+
+            sortedList[sortedList.Count - 1].GetComponent<Brain>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(g0, g1, g2, g3, g4, g5);
+
+            Debug.Log(populationToDelete.Count + " pop to delete");
+            generation = 0;
+
+            
+            for (int i = 0; i < populationToDelete.Count; i++)
+            {
+                Destroy(populationToDelete[i]);
+            }
+            
+
+        }
     }
 }
 

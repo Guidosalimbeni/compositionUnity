@@ -10,12 +10,19 @@ public class SendToDatabase : MonoBehaviour
 
     public OpenCVManager openCvManager;
     public float scorePixelsBalance { private set; get; }
-    public float scoreBoundsBalance { private set; get; }
-    public float scoreUnityVisual { private set; get; }
+    public float scoreBoundsBalance { private set; get; } //
+    public float scoreUnityVisual { private set; get; } //
+    private float DebuggingTotalScore;
     private ColorGradientBoundShapeBalance colorgradientBoundsShapeBalance;
     private ColorGradientVisualUnity colorGradientVisualUnity;
     private PopulationManager populationmanager;
-    
+
+    private void Update()
+    {
+        scoreBoundsBalance = colorgradientBoundsShapeBalance.GetvisualScoreBalanceBoundsShapes();
+        scoreUnityVisual = colorGradientVisualUnity.GetVisualUnityScore();
+        DebuggingTotalScore = scorePixelsBalance + scoreBoundsBalance + scoreUnityVisual;
+    }
 
     private void Awake()
     {
@@ -43,8 +50,8 @@ public class SendToDatabase : MonoBehaviour
             username = "Debugging";
         }
 
-        scoreBoundsBalance = colorgradientBoundsShapeBalance.GetvisualScoreBalanceBoundsShapes();
-        scoreUnityVisual = colorGradientVisualUnity.GetVisualUnityScore();
+        //scoreBoundsBalance = colorgradientBoundsShapeBalance.GetvisualScoreBalanceBoundsShapes();
+        //scoreUnityVisual = colorGradientVisualUnity.GetVisualUnityScore();
 
         WWWForm form = new WWWForm();
         form.AddField("name", username);

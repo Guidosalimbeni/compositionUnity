@@ -32,22 +32,21 @@ public class ClickToMoveBySelection : MonoBehaviour
                 PerformMovement();
             }
 
-            else if (AIisPlaying == true)
+            if (AIisPlaying == true)
             {
                 destinationPosition = myTransform.position; /// 
             }
 
         }
-        else
-        {
-            Debug.Log("no item selected");
-        }
   
     }
 
-    public void SetLastDestinationPositionCorrectlyFromAI()
+    public void SetLastDestinationPositionCorrectlyFromAI(float x, float y, float z)
     {
-        destinationPosition = myTransform.position;
+        destinationPosition = new Vector3 (x,y,z);
+        myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
+
+        //Debug.Log("set last " + x + y + z);
     }
 
 
@@ -58,7 +57,7 @@ public class ClickToMoveBySelection : MonoBehaviour
 
         if (destinationDistance < minThreshold)
         {       // To prevent shakin behavior when near destination
-            moveSpeed = 0;
+            moveSpeed = 0.1f;
         }
         else if (destinationDistance > minThreshold)
         {           // To Reset Speed to default
