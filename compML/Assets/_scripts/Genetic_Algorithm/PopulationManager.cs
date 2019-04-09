@@ -69,6 +69,7 @@ public class PopulationManager : MonoBehaviour {
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
         IndividualCompositionSet.GetComponent<Brain>().Init();
         counterForPopulation++;
+        Debug.Log(counterForPopulation + "    initial population counterForPopulation");
 
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
         IndividualCompositionSet.GetComponent<Brain>().CalculateTotalScore(); /// this is where the moved are updated
@@ -84,7 +85,6 @@ public class PopulationManager : MonoBehaviour {
         {
             AICreatesInitialPopulationTurn = false; // STOP FIRST INITIAL POPULATION
             GenerateNewPopulatoinOffsprings_trigger = true; // START NEW BREEDING to produce offsprings
-
         }
     }
 
@@ -92,16 +92,22 @@ public class PopulationManager : MonoBehaviour {
     {
         GenerateNewPopulatoinOffsprings_trigger = false; ///
 
+        Debug.Log(sortNewGeneration + "        sortNewGeneration    ");
+
         if (sortNewGeneration == true)
         {
             sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList();
+
+            Debug.Log(population.Count + "        population.Count  outside popCount == 10");
 
             if (population.Count == 10)
             {
                 bestScore = sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore;
                 population.Clear(); // this is the list not the objects
 
+                Debug.Log(sortedList.Count + "        sortedList.Count  inside popCount == 10");
             }
+
             sortNewGeneration = false;
         }
         StartCoroutine(Breed()); //
@@ -126,7 +132,7 @@ public class PopulationManager : MonoBehaviour {
        else
        {
            b.InitForBreed();
-           b.dna.Combine(parent1.GetComponent<Brain>().dna, parent2.GetComponent<Brain>().dna);
+           b.dna.Combine(parent1.GetComponent<Brain>().dna, parent2.GetComponent<Brain>().dna); ///////////////
            b.MoveComposition(); //////
         }
 
@@ -153,33 +159,30 @@ public class PopulationManager : MonoBehaviour {
         if (generation == NumberOfGeneration)
         {
             bestScore = sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore;
-            
-
-            sortNewGeneration = false;
+            //sortNewGeneration = false;
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
             AICreatesInitialPopulationTurn = true;
-            
-
             g0 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g0;
             g1 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g1;
             g2 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g2;
             g3 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g3;
             g4 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g4;
             g5 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g5;
-
-
             sortedList[sortedList.Count - 1].GetComponent<Brain>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(g0, g1, g2, g3, g4, g5);
-
             Debug.Log(populationToDelete.Count + " pop to delete");
             generation = 0;
-
-            
+            CounterOffsprings = 0;
+            counterForPopulation = 0;
             for (int i = 0; i < populationToDelete.Count; i++)
             {
                 Destroy(populationToDelete[i]);
             }
-            
+            sortNewGeneration = true;
+            population = new List<GameObject>();
+            populationToDelete = new List<GameObject>();
+            sortedList = new List<GameObject>();
+
 
         }
     }
