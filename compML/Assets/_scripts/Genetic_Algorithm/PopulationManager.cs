@@ -170,7 +170,7 @@ public class PopulationManager : MonoBehaviour {
             float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<Brain>().scorePixelsBalance;
             float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<Brain>().scoreUnityVisual;
             float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<Brain>().scoreBoundsBalance;
-            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance); //
+            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, g0, g1, g2, g3, g4, g5); //
 
 
             for (int i = 0; i < populationToDelete.Count; i++)

@@ -1381,7 +1381,6 @@ MonoBehaviour:
   g4: 0
   g5: 0
   bestScore: 0
-  GenerateNewPopulatoinOffsprings_trigger: 0
 --- !u!1 &1044126323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,6 +2613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCvManager: {fileID: 881400878}
+  gamemanager: {fileID: 2142160879}
 --- !u!1 &1794826628
 GameObject:
   m_ObjectHideFlags: 0

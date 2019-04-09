@@ -9,14 +9,12 @@ using System;
 public class Game_Manager : MonoBehaviour
 {
     public AreasObjects AreasOfObjects { get; private set; }
-    //public static Game_Manager Instance { get; private set; }
     public List<GameObject> ElementsOfComposition { get; private set; }
-
     private CalculateBalanceAreaBounds calculateBalanceAreaBounds;
     
     private void Awake()
     {
-        
+
         calculateBalanceAreaBounds = GetComponent<CalculateBalanceAreaBounds>();
         PopulateListOfItemInComposition();
         SetLayerToForeground();
@@ -59,6 +57,11 @@ public class Game_Manager : MonoBehaviour
             ID++;
         }
 
+    }
+
+    public List<GameObject> getListOfItemInComposition()
+    {
+        return ElementsOfComposition;
     }
 
 }
