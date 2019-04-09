@@ -26,12 +26,21 @@ public class PopulationManager : MonoBehaviour {
     private int counterForPopulation = 0;
     private int CounterOffsprings = 0;
     private bool AICreatesInitialPopulationTurn = true; //
-    public bool GenerateNewPopulatoinOffsprings_trigger = false;
+    private bool GenerateNewPopulatoinOffsprings_trigger = false;
     private List<GameObject> population = new List<GameObject>();
     private GameObject offspring;
     List<GameObject> sortedList = new List<GameObject>();
     private List<GameObject> populationToDelete = new List<GameObject>();
     private bool sortNewGeneration = true;
+
+    private SendToDatabase sendtodatabase;
+
+    private void Awake()
+    {
+        sendtodatabase = FindObjectOfType<SendToDatabase>();
+    }
+
+
 
     private void Update()
     {
@@ -69,14 +78,12 @@ public class PopulationManager : MonoBehaviour {
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
         IndividualCompositionSet.GetComponent<Brain>().Init();
         counterForPopulation++;
-        Debug.Log(counterForPopulation + "    initial population counterForPopulation");
-
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
         IndividualCompositionSet.GetComponent<Brain>().CalculateTotalScore(); /// this is where the moved are updated
         population.Add(IndividualCompositionSet);
         populationToDelete.Add(IndividualCompositionSet); 
 
-        if (counterForPopulation < populationSize) ////
+        if (counterForPopulation < populationSize) 
         {
             AICreatesInitialPopulationTurn = true;
             GenerateNewPopulatoinOffsprings_trigger = false;
@@ -92,26 +99,18 @@ public class PopulationManager : MonoBehaviour {
     {
         GenerateNewPopulatoinOffsprings_trigger = false; ///
 
-        Debug.Log(sortNewGeneration + "        sortNewGeneration    ");
-
         if (sortNewGeneration == true)
         {
             sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList();
-
-            Debug.Log(population.Count + "        population.Count  outside popCount == 10");
 
             if (population.Count == 10)
             {
                 bestScore = sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore;
                 population.Clear(); // this is the list not the objects
-
-                Debug.Log(sortedList.Count + "        sortedList.Count  inside popCount == 10");
             }
-
             sortNewGeneration = false;
         }
-        StartCoroutine(Breed()); //
-
+        StartCoroutine(Breed()); 
     }
 
     private IEnumerator Breed()
@@ -127,39 +126,32 @@ public class PopulationManager : MonoBehaviour {
        {
            b.InitForBreed();
            b.dna.Mutate();
-           b.MoveComposition(); //////
+           b.MoveComposition(); 
         }
        else
        {
            b.InitForBreed();
-           b.dna.Combine(parent1.GetComponent<Brain>().dna, parent2.GetComponent<Brain>().dna); ///////////////
-           b.MoveComposition(); //////
+           b.dna.Combine(parent1.GetComponent<Brain>().dna, parent2.GetComponent<Brain>().dna);
+           b.MoveComposition(); 
         }
 
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
         offspring.GetComponent<Brain>().CalculateTotalScore();
-
         population.Add(offspring);
         populationToDelete.Add(offspring);
-        //Debug.Log(populationToDelete.Count + "   pop to delete  ");
-
         GenerateNewPopulatoinOffsprings_trigger = true;
-
         CounterOffsprings++;
-
-        Debug.Log(CounterOffsprings + "  CounterOffsprings");
         
         if (CounterOffsprings == populationSize)
         {
             sortNewGeneration = true;
             CounterOffsprings = 0;
-            generation++; ///////////////
+            generation++; 
         }
 
         if (generation == NumberOfGeneration)
         {
             bestScore = sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore;
-            //sortNewGeneration = false;
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
             AICreatesInitialPopulationTurn = true;
@@ -170,10 +162,17 @@ public class PopulationManager : MonoBehaviour {
             g4 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g4;
             g5 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g5;
             sortedList[sortedList.Count - 1].GetComponent<Brain>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(g0, g1, g2, g3, g4, g5);
-            Debug.Log(populationToDelete.Count + " pop to delete");
             generation = 0;
             CounterOffsprings = 0;
             counterForPopulation = 0;
+
+   
+            float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<Brain>().scorePixelsBalance;
+            float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<Brain>().scoreUnityVisual;
+            float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<Brain>().scoreBoundsBalance;
+            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance); //
+
+
             for (int i = 0; i < populationToDelete.Count; i++)
             {
                 Destroy(populationToDelete[i]);
@@ -182,8 +181,6 @@ public class PopulationManager : MonoBehaviour {
             population = new List<GameObject>();
             populationToDelete = new List<GameObject>();
             sortedList = new List<GameObject>();
-
-
         }
     }
 }

@@ -18,6 +18,10 @@ public class Brain : MonoBehaviour
 	public float TotalScore;  //
 	public DNA dna;
 
+    public float scorePixelsBalance;
+    public float scoreUnityVisual;
+    public float scoreBoundsBalance;
+
     public float g0; ///
     public float g1;
     public float g2;
@@ -63,14 +67,16 @@ public class Brain : MonoBehaviour
 
     }
 
-
-
     // to fix scriptable variable???
     public void CalculateTotalScore()
     {
         if (sendtodatabase != null)
         {
             TotalScore = sendtodatabase.scorePixelsBalance + sendtodatabase.scoreUnityVisual + sendtodatabase.scoreBoundsBalance;
+            scorePixelsBalance = sendtodatabase.scorePixelsBalance;
+            scoreUnityVisual = sendtodatabase.scoreUnityVisual;
+            scoreBoundsBalance = sendtodatabase.scoreBoundsBalance;
+
         }
 
     }

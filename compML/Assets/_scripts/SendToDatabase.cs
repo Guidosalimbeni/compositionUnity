@@ -43,6 +43,14 @@ public class SendToDatabase : MonoBehaviour
         populationmanager.triggerAI = true;
     }
 
+    public void PostDataFromAI(float scorePixelsBalancefromAI, float scoreUnityVisualFromAI, float scoreBoundsBalancefromAI)
+    {
+        scorePixelsBalance = scorePixelsBalancefromAI;
+        scoreUnityVisual = scoreUnityVisualFromAI;
+        scoreBoundsBalance = scoreBoundsBalancefromAI;
+        StartCoroutine(PostData("AI"));
+    }
+
     IEnumerator PostData(string username)
     {
         if (username == "" | username == null)
