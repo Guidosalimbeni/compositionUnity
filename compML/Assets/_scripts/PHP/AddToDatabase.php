@@ -30,15 +30,6 @@
 
 
 
-	/*
-	$name                  = 'bla';
-    $filenameImg           = 'blo';
-    $scoreBoundsBalance    = 5;
-    $scorePixelsBalance    = 6;
-    $scoreUnityVisual      = 7;
-	*/
-
-
 	$connection = mysql_connect($servername, $server_username, $server_password);
 
 	if(! $connection ) {

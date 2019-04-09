@@ -71,6 +71,7 @@
     <Compile Include="Assets\_scripts\Genetic_Algorithm\CoroutineWithData.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\DNA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\PopulationManager.cs" />
+    <Compile Include="Assets\_scripts\GetFromDatabase.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMove.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMoveBySelection.cs" />
     <Compile Include="Assets\_scripts\Interaction\ExampleClass.cs" />
