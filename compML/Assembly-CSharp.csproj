@@ -84,6 +84,11 @@
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateCollisionDistanceVisualUnity.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CollisionChecker.cs" />
+    <Compile Include="Assets\_scripts\Scriptable Objects\DataForNeuralNetwork.cs" />
+    <Compile Include="Assets\_scripts\Scriptable Objects\GameEvent.cs" />
+    <Compile Include="Assets\_scripts\Scriptable Objects\GameEventListener.cs" />
+    <Compile Include="Assets\_scripts\Scriptable Objects\TestNNdata.cs" />
+    <Compile Include="Assets\_scripts\Scriptable Objects\UUU_test.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\QuickGlow.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\ReplacementShaderEffect.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\SimpleBlur.cs" />
