@@ -4010,7 +4010,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Easy Example, Header Title
+  m_Text: Composition AI
 --- !u!222 &1813624632
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4228,7 +4228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Android Animations
+  m_Text: by Guido Salimbeni
 --- !u!222 &1875541673
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4460,7 +4460,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Clickable Zone !!
+  m_Text: Right clic to select left clic to move middle to rotate
 --- !u!222 &1919535365
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -3,15 +3,15 @@ using System.Collections;
 
 public class ClickToMoveBySelection : MonoBehaviour
 {
+    public float moveSpeed;                     // The Speed the character will move
+    public float RotationSpeed = -90f;
+    public float minThreshold = 0.05f;
+    public bool AIisPlaying = false;
+
     private Transform myTransform;              // this transform
     private Vector3 destinationPosition;        // The destination Point
     private float destinationDistance;          // The distance between myTransform and destinationPosition
 
-    public float moveSpeed;                     // The Speed the character will move
-    public float RotationSpeed = -90f;
-    public float minThreshold = 0.05f;
-
-    public bool AIisPlaying = false;
 
     private void Start()
     {

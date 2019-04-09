@@ -14,13 +14,13 @@ public class PopulationManager : MonoBehaviour {
     public GameObject elemComp_b;
     public GameObject elemComp_c;
 
-    public float g0;
-    public float g1;
-    public float g2;
-    public float g3;
-    public float g4;
-    public float g5;
-    public float bestScore;
+    private float g0;
+    private float g1;
+    private float g2;
+    private float g3;
+    private float g4;
+    private float g5;
+    private float bestScore;
 
     private int generation = 0;
     private int counterForPopulation = 0;

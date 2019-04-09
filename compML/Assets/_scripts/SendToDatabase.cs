@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.EventSystems;
 
 public class SendToDatabase : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class SendToDatabase : MonoBehaviour
     public float scorePixelsBalance { private set; get; }
     public float scoreBoundsBalance { private set; get; } //
     public float scoreUnityVisual { private set; get; } //
+    public int MaxMoves = 4;
+
     public GameObject gamemanager;
     private Game_Manager GM;
-    private float DebuggingTotalScore;
+    private float CurrentTotalScore;
     private ColorGradientBoundShapeBalance colorgradientBoundsShapeBalance;
     private ColorGradientVisualUnity colorGradientVisualUnity;
     private PopulationManager populationmanager;
@@ -27,10 +30,12 @@ public class SendToDatabase : MonoBehaviour
     private float judge;
     private List<GameObject> listOfelementsInComposition;
     private List<float> listOfgenes;
+    private int moves;
 
     private void Awake()
     {
-        openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
+        openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged; //
+
         colorgradientBoundsShapeBalance = GetComponent<ColorGradientBoundShapeBalance>();
         colorGradientVisualUnity = GetComponent<ColorGradientVisualUnity>();
         populationmanager = FindObjectOfType<PopulationManager>();
@@ -43,20 +48,58 @@ public class SendToDatabase : MonoBehaviour
         {
             listOfelementsInComposition = GM.getListOfItemInComposition();
         }
-
     }
 
     private void Update()
     {
         scoreBoundsBalance = colorgradientBoundsShapeBalance.GetvisualScoreBalanceBoundsShapes();
         scoreUnityVisual = colorGradientVisualUnity.GetVisualUnityScore();
-        DebuggingTotalScore = scorePixelsBalance + scoreBoundsBalance + scoreUnityVisual;
+        CurrentTotalScore = scorePixelsBalance + scoreBoundsBalance + scoreUnityVisual;
+
+        if (populationmanager.triggerAI == false && CurrentTotalScore != 0.0f)
+        {
+
+            if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false && moves < MaxMoves)
+            {
+                PostDataFromAttemptsOfMoves();
+                moves++;
+            }
+        }
+
+        if (populationmanager.triggerAI == true)
+        {
+            moves = 0;
+        }
     }
    
     private void HandleOnPixelsCountBalanceChanged(float scoreOnpixelscountbalance)
     {
         scorePixelsBalance = scoreOnpixelscountbalance;
     }
+
+
+    public void PostDataFromAttemptsOfMoves()
+    {
+        listOfgenes = new List<float>();
+        foreach (GameObject element in listOfelementsInComposition)
+        {
+            listOfgenes.Add(element.transform.position.x);
+            listOfgenes.Add(element.transform.position.z);
+        }
+
+        g0 = listOfgenes[0];
+        g1 = listOfgenes[1];
+        g2 = listOfgenes[2];
+        g3 = listOfgenes[3];
+        g4 = listOfgenes[4];
+        g5 = listOfgenes[5];
+        judge = 0;               //////////////////
+
+        listOfgenes.Clear();
+
+        StartCoroutine(PostData(LoadSceneInputUsername.username));
+    }
+
 
     public void PostDataFromButton()
     {
