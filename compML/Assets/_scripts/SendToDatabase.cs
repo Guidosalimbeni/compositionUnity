@@ -139,7 +139,7 @@ public class SendToDatabase : MonoBehaviour
         g3 = g3AI;
         g4 = g4AI;
         g5 = g5AI;
-        judge = 1;                  //////////////////////
+        judge = 0.25f;                  ////////////////////// TODO
 
         StartCoroutine(PostData("AI_TURN"));
     }

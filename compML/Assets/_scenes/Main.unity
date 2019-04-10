@@ -1369,8 +1369,8 @@ MonoBehaviour:
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
   populationSize: 20
-  NumberOfGeneration: 4
-  secondToWaitForPopGeneration: 0.1
+  NumberOfGeneration: 3
+  secondToWaitForPopGeneration: 0.05
   elemComp_a: {fileID: 1294780}
   elemComp_b: {fileID: 1718927694}
   elemComp_c: {fileID: 349030383}
@@ -2303,8 +2303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf0b9d74779a124491d706ced99a0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trigger_prediction: 0
   dataNN: {fileID: 11400000, guid: 7cd99f02c1392a64d96866ac8987f611, type: 2}
+  nnScore: {fileID: 11400000, guid: 51d5c8293601d1d4bb622122c8150de0, type: 2}
 --- !u!4 &1610376823
 Transform:
   m_ObjectHideFlags: 0

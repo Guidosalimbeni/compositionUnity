@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Assets\_scripts\ANN\ANN.cs" />
     <Compile Include="Assets\_scripts\ANN\BrainNN_CompML.cs" />
-    <Compile Include="Assets\_scripts\ANN\BrainNN_Example.cs" />
     <Compile Include="Assets\_scripts\ANN\LayerNN.cs" />
     <Compile Include="Assets\_scripts\ANN\Neuron.cs" />
     <Compile Include="Assets\_scripts\Comp_obj_scripts\CompScreenAreaCalculation.cs" />
@@ -86,6 +85,7 @@
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateCollisionDistanceVisualUnity.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CollisionChecker.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataForNeuralNetwork_CompML.cs" />
+    <Compile Include="Assets\_scripts\Scriptable Objects\DataScores.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\DataForNeuralNetwork.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\GameEvent.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\GameEventListener.cs" />

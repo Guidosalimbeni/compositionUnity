@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c804637eea845d54cbbd605344e047bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerGetData: 0
+  triggerGetData: 1
   dataNN: {fileID: 11400000, guid: 7cd99f02c1392a64d96866ac8987f611, type: 2}
 --- !u!4 &203471788
 Transform:

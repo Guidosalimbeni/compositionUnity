@@ -13,6 +13,7 @@ public class Brain : MonoBehaviour
     public GameObject elemComp_b;
     public GameObject elemComp_c;
     public SendToDatabase sendtodatabase;
+    public BrainNN_CompML brainNN_compML;
 
     public int DNALength = 6;
 	public float TotalScore;  //
@@ -28,6 +29,12 @@ public class Brain : MonoBehaviour
     public float g3;
     public float g4;
     public float g5;
+
+
+    private void Awake()
+    {
+        brainNN_compML = FindObjectOfType<BrainNN_CompML>();
+    }
 
     public void Init()
 	{
@@ -48,8 +55,9 @@ public class Brain : MonoBehaviour
         elemComp_c = elementsInComp[2];
 
         sendtodatabase = FindObjectOfType<SendToDatabase>();
+        
 
-        MoveComposition(); ////// to fix!!!!!!!!!! or extract total score... 
+        MoveComposition(); //////
 
 
     }
@@ -70,13 +78,25 @@ public class Brain : MonoBehaviour
     // to fix scriptable variable???
     public void CalculateTotalScore()
     {
-        if (sendtodatabase != null)
+        if (sendtodatabase != null && brainNN_compML != null) 
         {
-            TotalScore = sendtodatabase.scorePixelsBalance + sendtodatabase.scoreUnityVisual + sendtodatabase.scoreBoundsBalance;
+            // calculate score comes after movement so genes are updated
+            float scoreNN = 0;
+            /*
+            g0 = dna.GetGene(0); ///
+            g1 = dna.GetGene(1);
+            g2 = dna.GetGene(2);
+            g3 = dna.GetGene(3);
+            g4 = dna.GetGene(4);
+            g5 = dna.GetGene(5);
+            */
+            scoreNN = brainNN_compML.PredictFromNN(g0, g1, g2, g3, g4, g5);  // might want to MULTIPLY
+
+            TotalScore = sendtodatabase.scorePixelsBalance + sendtodatabase.scoreUnityVisual + sendtodatabase.scoreBoundsBalance + scoreNN;
             scorePixelsBalance = sendtodatabase.scorePixelsBalance;
             scoreUnityVisual = sendtodatabase.scoreUnityVisual;
             scoreBoundsBalance = sendtodatabase.scoreBoundsBalance;
-
+            
         }
 
     }

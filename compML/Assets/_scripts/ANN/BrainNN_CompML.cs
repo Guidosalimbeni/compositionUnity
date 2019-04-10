@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BrainNN_CompML : MonoBehaviour
 {
-    public bool trigger_prediction = false;
+
     [SerializeField]
     private DataForNeuralNetwork_CompML dataNN;
+    [SerializeField]
+    private DataScores nnScore;
 
     ANN ann;
     double sumSquareError = 0;
@@ -19,7 +21,6 @@ public class BrainNN_CompML : MonoBehaviour
 
         for (int i = 0; i < 1000; i++)
         {
-
             for (int j = 0; j < dataNN.Names.Count; j++)
             {
                 double i0 = dataNN.G0[j];
@@ -35,8 +36,9 @@ public class BrainNN_CompML : MonoBehaviour
                 sumSquareError += Mathf.Pow((float)result[0] - 0, 2);
             }
 
+            Debug.Log("SSE: " + sumSquareError);
         }
-        Debug.Log("SSE: " + sumSquareError);
+        
     }
 
     List<double> Train(double i0, double i1, double i2, double i3, double i4, double i5, double output)
@@ -50,19 +52,38 @@ public class BrainNN_CompML : MonoBehaviour
         inputs.Add(i4);
         inputs.Add(i5);
         outputs.Add(output);
-        return (ann.Go(inputs, outputs));
+        return (ann.Train(inputs, outputs));
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public float PredictFromNN(double i0, double i1, double i2, double i3, double i4, double i5, double output = 0)
     {
-        if (trigger_prediction == true)
-        {
-            List<double> result;
+        List<double> result;
+        float ScoreNN = 0;
 
-            result = Train(0.5, 0.4, 0.4,0.6,0.7,0.9, 0);
-            Debug.Log("from updated" + result[0]);
-        }
+        result = Prediction(i0,i1,i2,i3,i4,i5);
+        nnScore.NNSCORE = result[0]; /// not used
+        ScoreNN = (float)(result[0]);
+
+        return ScoreNN;
     }
+
+
+    List<double> Prediction(double i0, double i1, double i2, double i3, double i4, double i5, double output = 0)
+    {
+        List<double> inputs = new List<double>();
+        List<double> outputs = new List<double>();
+        inputs.Add(i0);
+        inputs.Add(i1);
+        inputs.Add(i2);
+        inputs.Add(i3);
+        inputs.Add(i4);
+        inputs.Add(i5);
+        outputs.Add(output);
+
+        return (ann.CalcOutput(inputs, outputs));
+
+    }
+
 }
 

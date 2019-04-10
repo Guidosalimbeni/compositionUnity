@@ -5,7 +5,7 @@ using System;
 
 public class GetFromDatabase : MonoBehaviour
 {
-    public bool triggerGetData = false;
+    public bool triggerGetData = true;
     private string DataFromMysql = "http://www.guidosalimbeni.it/UnityComp/GetFromDatabase.php";
 
     [SerializeField]
@@ -69,7 +69,7 @@ public class GetFromDatabase : MonoBehaviour
 
             foreach (int name in judge)
             {
-                Debug.Log(name);
+                // Debug.Log(name);
             }
         }
     }
