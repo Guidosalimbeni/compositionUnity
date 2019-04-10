@@ -14,6 +14,7 @@ public class Brain : MonoBehaviour
     public GameObject elemComp_c;
     public SendToDatabase sendtodatabase;
     public BrainNN_CompML brainNN_compML;
+    public OpenCVManager openCVmanager;
 
     public int DNALength = 6;
 	public float TotalScore;  //
@@ -34,6 +35,7 @@ public class Brain : MonoBehaviour
     private void Awake()
     {
         brainNN_compML = FindObjectOfType<BrainNN_CompML>();
+        openCVmanager = FindObjectOfType<OpenCVManager>();
     }
 
     public void Init()
@@ -80,6 +82,9 @@ public class Brain : MonoBehaviour
     {
         if (sendtodatabase != null && brainNN_compML != null) 
         {
+
+
+            openCVmanager.CallTOCalculateAreaLeftRight(); // to update the score pixels balance of opencv..
             // calculate score comes after movement so genes are updated
             float scoreNN = 0;
             /*
@@ -91,6 +96,7 @@ public class Brain : MonoBehaviour
             g5 = dna.GetGene(5);
             */
             scoreNN = brainNN_compML.PredictFromNN(g0, g1, g2, g3, g4, g5);  // might want to MULTIPLY
+            
 
             TotalScore = sendtodatabase.scorePixelsBalance + sendtodatabase.scoreUnityVisual + sendtodatabase.scoreBoundsBalance + scoreNN;
             scorePixelsBalance = sendtodatabase.scorePixelsBalance;

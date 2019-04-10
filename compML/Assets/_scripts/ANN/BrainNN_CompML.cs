@@ -36,7 +36,7 @@ public class BrainNN_CompML : MonoBehaviour
                 sumSquareError += Mathf.Pow((float)result[0] - 0, 2);
             }
 
-            Debug.Log("SSE: " + sumSquareError);
+            //Debug.Log("SSE: " + sumSquareError);
         }
         
     }

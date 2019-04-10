@@ -84,7 +84,7 @@ public class ClickToMoveBySelection : MonoBehaviour
         // Moves the player if the mouse button is hold down
 
         //else if
-        if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && GUIUtility.hotControl == 0) // Input.GetMouseButton(0)
         {
 
             Plane playerPlane = new Plane(Vector3.up, myTransform.position);

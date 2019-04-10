@@ -14,6 +14,7 @@ public class SendToDatabase : MonoBehaviour
     public float scoreBoundsBalance { private set; get; } //
     public float scoreUnityVisual { private set; get; } //
     public int MaxMoves = 4;
+    public int sendaftereverymoves = 3;
 
     public GameObject gamemanager;
     private Game_Manager GM;
@@ -59,9 +60,13 @@ public class SendToDatabase : MonoBehaviour
         if (populationmanager.triggerAI == false && CurrentTotalScore != 0.0f)
         {
 
-            if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false && moves < MaxMoves)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && EventSystem.current.IsPointerOverGameObject() == false && moves < MaxMoves)
             {
-                PostDataFromAttemptsOfMoves();
+                if (moves != 0 && moves % sendaftereverymoves == 0)
+                {
+                    PostDataFromAttemptsOfMoves();
+                }
+                
                 moves++;
             }
         }

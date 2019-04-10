@@ -6,6 +6,7 @@ using OpenCVForUnity.UnityUtils;
 using System.IO;
 using OpenCVForUnity.ImgprocModule;
 using System;
+using UnityEngine.EventSystems;
 
 public class OpenCVManager : MonoBehaviour
 {
@@ -16,37 +17,51 @@ public class OpenCVManager : MonoBehaviour
     public bool calcThreshold;
     public bool CalculateAreaLeftRightBool;
 
+    public bool AbleVisualSurface = false;
+
     private Texture2D textureContours;
 
     public event Action<float> OnPixelsCountBalanceChanged;
 
-    private void OnPostRender()
+    private void Update() //
+    {
+        
+        //if true, The error log of the Native side OpenCV will be displayed on the Unity Editor Console.
+        // THESE ARE ONLY FOR DUBUGGING 
+        if (DrawContourBool == true)
         {
-        
-            //if true, The error log of the Native side OpenCV will be displayed on the Unity Editor Console.
-            Utils.setDebugMode(true);
             Texture2D imgTexture = ToTexture2D(camRenderTexture);
-        
             ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
-
             Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
-            
-            if (DrawContourBool == true)
-            {
-                DrawContours(imgTexture);
-            }
-            if (calcThreshold == true)
-            {
-                CalculateThreshold(imgTexture);
-            }
-            if (CalculateAreaLeftRightBool == true)
-            {
-                CalculateAreaLeftRight(imgTexture);
-            }
-
-            Utils.setDebugMode(false);
-
+            DrawContours(imgTexture);
         }
+        if (calcThreshold == true)
+        {
+            Texture2D imgTexture = ToTexture2D(camRenderTexture);
+            ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
+            Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
+            CalculateThreshold(imgTexture);
+        }
+        if (CalculateAreaLeftRightBool == true)  // set all to false since CPU expensive
+        {
+            Texture2D imgTexture = ToTexture2D(camRenderTexture);
+            ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
+            Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
+            CalculateAreaLeftRight(imgTexture);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && EventSystem.current.IsPointerOverGameObject() == false )
+        {
+            CallTOCalculateAreaLeftRight();
+        }
+
+    }
+
+    public void CallTOCalculateAreaLeftRight()
+    {
+        Texture2D imgTexture = ToTexture2D(camRenderTexture);
+        CalculateAreaLeftRight(imgTexture);
+    }
 
     private Texture2D ToTexture2D(RenderTexture rTex)
     {
@@ -77,7 +92,14 @@ public class OpenCVManager : MonoBehaviour
         // draw
         Texture2D texture = new Texture2D(imgMat.cols(), imgMat.rows(), TextureFormat.RGBA32, false);
         Utils.matToTexture2D(imgMat, texture);
-        VisualisationSurface.GetComponent<Renderer>().material.mainTexture = texture;
+
+        if (AbleVisualSurface)
+        {
+            VisualisationSurface.SetActive(true);
+            VisualisationSurface.GetComponent<Renderer>().material.mainTexture = texture;
+        }
+
+        
     }
 
     public void DrawContours(Texture2D srcTexture)
@@ -104,17 +126,25 @@ public class OpenCVManager : MonoBehaviour
         textureContours = new Texture2D(srcMat.cols(), srcMat.rows(), TextureFormat.RGBA32, false);
 
         Utils.matToTexture2D(dstMat, textureDestinationContours);
-
-        VisualisationSurface.GetComponent<Renderer>().material.mainTexture = textureDestinationContours;
+        if (AbleVisualSurface)
+        {
+            VisualisationSurface.SetActive(true);
+            VisualisationSurface.GetComponent<Renderer>().material.mainTexture = textureDestinationContours;
+        }
+            
     }
 
 
-    public void CalculateAreaLeftRight(Texture2D srcTexture)
+    public void CalculateAreaLeftRight(Texture2D srcTexture) ///
     {
 
         Mat imgMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC1);
         Utils.texture2DToMat(srcTexture, imgMat);
         Imgproc.threshold(imgMat, imgMat, 1, 255, Imgproc.THRESH_BINARY);
+
+        Size sz = new Size((int) (srcTexture.height / 10), (int)(srcTexture.width / 10));
+        Imgproc.resize(imgMat, imgMat, sz);
+
 
         int rows = imgMat.rows(); //Calculates number of rows
         int cols = imgMat.cols(); //Calculates number of columns
