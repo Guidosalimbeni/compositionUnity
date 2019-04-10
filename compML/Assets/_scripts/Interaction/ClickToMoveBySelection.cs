@@ -63,7 +63,7 @@ public class ClickToMoveBySelection : MonoBehaviour
         {           // To Reset Speed to default
             moveSpeed = 3;
         }
-
+        /*
         // Moves the Player if the Left Mouse Button was clicked
         if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0)
         {
@@ -80,9 +80,11 @@ public class ClickToMoveBySelection : MonoBehaviour
                 //myTransform.rotation = targetRotation;
             }
         }
-
+        */
         // Moves the player if the mouse button is hold down
-        else if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
+
+        //else if
+        if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
         {
 
             Plane playerPlane = new Plane(Vector3.up, myTransform.position);

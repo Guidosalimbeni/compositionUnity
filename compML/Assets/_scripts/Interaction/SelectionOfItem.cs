@@ -8,7 +8,7 @@ public class SelectionOfItem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1) && GUIUtility.hotControl == 0)
+        if (Input.GetMouseButtonDown(1)) //&& GUIUtility.hotControl == 0 || Input.GetMouseButtonDown(2)
         {
             Vector2 mousePosition = Input.mousePosition;
             RaycastHit hit;
