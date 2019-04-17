@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TagMeElementOfComposition : MonoBehaviour, IElementOfComposition
 {
-
     public int ElementOfCompositionID;
 
     public GameObject TagMe()
@@ -15,7 +14,5 @@ public class TagMeElementOfComposition : MonoBehaviour, IElementOfComposition
     public void SetIdElementOfComposition(int ID)
     {
         ElementOfCompositionID = ID;
-
     }
-    
 }

@@ -1,6 +1,6 @@
 WebGL
 PlayerPath?
-D:/COMPML
+D:/compML2
 SceneListBegin?
 Assets/_scenes/Start.unity
 Assets/_scenes/Main.unity

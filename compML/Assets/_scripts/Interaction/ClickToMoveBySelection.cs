@@ -7,11 +7,9 @@ public class ClickToMoveBySelection : MonoBehaviour
     public float RotationSpeed = -90f;
     public float minThreshold = 0.05f;
     public bool AIisPlaying = false;
-
     private Transform myTransform;              // this transform
     private Vector3 destinationPosition;        // The destination Point
     private float destinationDistance;          // The distance between myTransform and destinationPosition
-
 
     private void Start()
     {
@@ -31,14 +29,11 @@ public class ClickToMoveBySelection : MonoBehaviour
             {
                 PerformMovement();
             }
-
             if (AIisPlaying == true)
             {
                 destinationPosition = myTransform.position; /// 
             }
-
         }
-  
     }
 
     public void SetLastDestinationPositionCorrectlyFromAI(float x, float y, float z)
@@ -46,44 +41,23 @@ public class ClickToMoveBySelection : MonoBehaviour
         destinationPosition = new Vector3 (x,y,z);
         myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
 
-        //Debug.Log("set last " + x + y + z);
     }
-
 
     private void PerformMovement()
     {
-        // keep track of the distance between this gameObject and destinationPosition
         destinationDistance = Vector3.Distance(destinationPosition, myTransform.position);
 
         if (destinationDistance < minThreshold)
-        {       // To prevent shakin behavior when near destination
+        {       
             moveSpeed = 0.1f;
         }
         else if (destinationDistance > minThreshold)
-        {           // To Reset Speed to default
+        {           
             moveSpeed = 3;
         }
-        /*
-        // Moves the Player if the Left Mouse Button was clicked
-        if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0)
-        {
+        
 
-            Plane playerPlane = new Plane(Vector3.up, myTransform.position);
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float hitdist = 0.0f;
-
-            if (playerPlane.Raycast(ray, out hitdist))
-            {
-                Vector3 targetPoint = ray.GetPoint(hitdist);
-                destinationPosition = ray.GetPoint(hitdist);
-                //Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
-                //myTransform.rotation = targetRotation;
-            }
-        }
-        */
-        // Moves the player if the mouse button is hold down
-
-        //else if
+//#if UNITY_STANDALONE || UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Mouse0) && GUIUtility.hotControl == 0) // Input.GetMouseButton(0)
         {
 
@@ -95,13 +69,39 @@ public class ClickToMoveBySelection : MonoBehaviour
             {
                 Vector3 targetPoint = ray.GetPoint(hitdist);
                 destinationPosition = ray.GetPoint(hitdist);
-                //Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
-                //myTransform.rotation = targetRotation;
             }
-            //myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
+        }
+//#endif
+
+
+/*
+#if UNITY_ANDROID || UNITY_WEBGL
+
+
+        if (Input.touchCount > 0)
+        {
+            Touch myTouch = Input.touches[0];
+            //Check if the phase of that touch equals Began
+            if (myTouch.phase == TouchPhase.Began)
+            {
+                Plane playerPlane = new Plane(Vector3.up, myTransform.position);
+                Ray ray = Camera.main.ScreenPointToRay(myTouch.position);
+                float hitdist = 0.0f;
+
+                if (playerPlane.Raycast(ray, out hitdist))
+                {
+                    Vector3 targetPoint = ray.GetPoint(hitdist);
+                    destinationPosition = ray.GetPoint(hitdist);
+
+                }
+
+            }
+
         }
 
-        // To prevent code from running if not needed
+        
+#endif
+*/
         if (destinationDistance > minThreshold)
         {
             myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
@@ -113,9 +113,7 @@ public class ClickToMoveBySelection : MonoBehaviour
 
         }
 
-
     }
-
 }
 
 
