@@ -71,7 +71,6 @@
     <Compile Include="Assets\_scripts\Genetic_Algorithm\CoroutineWithData.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\DNA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\PopulationManager.cs" />
-    <Compile Include="Assets\_scripts\GetFromDatabase.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMove.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMoveBySelection.cs" />
     <Compile Include="Assets\_scripts\Interaction\ExampleClass.cs" />
@@ -80,12 +79,16 @@
     <Compile Include="Assets\_scripts\Interaction\SelectionOfItem.cs" />
     <Compile Include="Assets\_scripts\Interaction\SelectMoveMouse.cs" />
     <Compile Include="Assets\_scripts\Interfaces\IElementOfComposition.cs" />
+    <Compile Include="Assets\_scripts\OpenCVScripts\CollectDataRenderTexture.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateCollisionDistanceVisualUnity.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CollisionChecker.cs" />
+    <Compile Include="Assets\_scripts\PHP\GetFromDatabase.cs" />
+    <Compile Include="Assets\_scripts\PHP\SendToDatabase.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataForNeuralNetwork_CompML.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataScores.cs" />
+    <Compile Include="Assets\_scripts\Scriptable Objects\ImageMatrixData.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\DataForNeuralNetwork.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\GameEvent.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\GameEventListener.cs" />
@@ -94,7 +97,6 @@
     <Compile Include="Assets\_scripts\Scripts_for_shader\QuickGlow.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\ReplacementShaderEffect.cs" />
     <Compile Include="Assets\_scripts\Scripts_for_shader\SimpleBlur.cs" />
-    <Compile Include="Assets\_scripts\SendToDatabase.cs" />
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientPixelsBalance.cs" />

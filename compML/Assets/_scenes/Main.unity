@@ -1239,6 +1239,7 @@ GameObject:
   - component: {fileID: 881400876}
   - component: {fileID: 881400875}
   - component: {fileID: 881400878}
+  - component: {fileID: 881400879}
   m_Layer: 0
   m_Name: renderCam[OpenCV]
   m_TagString: Untagged
@@ -1328,6 +1329,20 @@ MonoBehaviour:
   calcThreshold: 0
   CalculateAreaLeftRightBool: 0
   AbleVisualSurface: 0
+--- !u!114 &881400879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881400874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imagePixelsValues: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
+  resizefactor: 10
 --- !u!64 &922979891
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2762,6 +2777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openCvManager: {fileID: 881400878}
+  imagePixelsValues: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
   MaxMoves: 10
   sendaftereverymoves: 3
   gamemanager: {fileID: 2142160879}

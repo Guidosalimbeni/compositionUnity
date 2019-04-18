@@ -26,8 +26,19 @@
 	$g4      = $_POST['g4'];
 	$g5      = $_POST['g5'];
 
+	$ImagePixelsList = $_POST['ImagePixelsList'];
+
 	$judge      = $_POST['judge'];
 
+
+
+	/*
+	$name                  = 'bla';
+    $filenameImg           = 'blo';
+    $scoreBoundsBalance    = 5;
+    $scorePixelsBalance    = 6;
+    $scoreUnityVisual      = 7;
+	*/
 
 
 	$connection = mysql_connect($servername, $server_username, $server_password);
@@ -39,8 +50,8 @@
     // These are the MySQL queries that we are going to use when
     // we store our new score, and return our top 10 players.
     
-    $insert   = "INSERT INTO $table (`id`, `name`, `filenameImg`, `scoreBoundsBalance`, `scorePixelsBalance`, `scoreUnityVisual` , `g0` , `g1` , `g2` , `g3` , `g4` , `g5` , `judge`) 
-	VALUES (NULL, '$name', '$filenameImg', '$scoreBoundsBalance', '$scorePixelsBalance' , '$scoreUnityVisual' , '$g0' , '$g1' , '$g2' , '$g3' , '$g4' , '$g5' , '$judge')";
+    $insert   = "INSERT INTO $table (`id`, `name`, `filenameImg`, `scoreBoundsBalance`, `scorePixelsBalance`, `scoreUnityVisual` , `g0` , `g1` , `g2` , `g3` , `g4` , `g5`, `ImagePixelsList` , `judge`) 
+	VALUES (NULL, '$name', '$filenameImg', '$scoreBoundsBalance', '$scorePixelsBalance' , '$scoreUnityVisual' , '$g0' , '$g1' , '$g2' , '$g3' , '$g4' , '$g5', '$ImagePixelsList' , '$judge')";
                      
     //$select   = "SELECT * FROM $table WHERE game='$game' ORDER BY score DESC LIMIT 10";
 	
