@@ -1,3 +1,5 @@
 compML/Assets/OpenCVForUnity/
 compML/Library/webgl_cache
 compML/Library/il2cpp_cache
+compML/Assets/ML-Agents
+compML/Assets/ML-Agents/Plugins/Computer/liblibtensorflow.so
