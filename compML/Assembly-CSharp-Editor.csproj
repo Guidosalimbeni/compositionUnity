@@ -63,6 +63,27 @@
     <Compile Include="Assets\OpenCVForUnity\Editor\OpenCVForUnityIOSBuildPostprocessor.cs" />
     <Compile Include="Assets\OpenCVForUnity\Editor\OpenCVForUnityMenuItem.cs" />
     <Compile Include="Assets\UITween\Editor\EditorUITween.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\AgentEditor.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\BrainEditor.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\BrainParametersDrawer.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\BroadcastHubDrawer.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Builder.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\BuilderUtils.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\DemonstrationDrawer.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\DemonstrationImporter.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\HeuristicBrainEditor.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\LearningBrainEditor.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\PlayerBrainEditor.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\ResetParameterDrawer.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\DemonstrationTests.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\EditModeTestActionMasker.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\EditModeTestInternalBrainTensorApplier.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\EditModeTestInternalBrainTensorGenerator.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\MLAgentsEditModeTest.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\MultinomialTest.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\RandomNormalTest.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\RayPerceptionTests.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Editor\Tests\UtilitiesTests.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/compositionUnity/compML/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -347,6 +368,24 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>D:/compositionUnity/compML/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Abstractions.TestingHelpers">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.TestingHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Barracuda">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/Barracuda.Core/Barracuda/Barracuda.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Abstractions">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Interactive.Async">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/programs/unity2018_31/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -713,6 +752,18 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{14AD6DAE-6DC3-1766-2A7F-4FEFBA59F213}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="MacBLAS.csproj">
+      <Project>{745EACA0-F8B3-FD09-1015-E7FD4F25A21C}</Project>
+      <Name>MacBLAS</Name>
+    </ProjectReference>
+    <ProjectReference Include="Barracuda-editor.csproj">
+      <Project>{655E05F3-3266-596F-ADED-47329F399184}</Project>
+      <Name>Barracuda-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="iOSBLAS.csproj">
+      <Project>{59D61C1D-111B-4561-865C-06F27539FF68}</Project>
+      <Name>iOSBLAS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

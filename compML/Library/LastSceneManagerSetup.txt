@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_scenes/Main.unity
+- path: Assets/UnitySDK/Assets/ML-Agents/Examples/3DBall/Scenes/3DBall.unity
   isLoaded: 1
   isActive: 1

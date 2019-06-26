@@ -67,7 +67,7 @@
     <Compile Include="Assets\_scripts\Comp_obj_scripts\CompScreenAreaCalculation.cs" />
     <Compile Include="Assets\_scripts\Comp_obj_scripts\TagMeElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\Game_Manager.cs" />
-    <Compile Include="Assets\_scripts\Genetic_Algorithm\Brain.cs" />
+    <Compile Include="Assets\_scripts\Genetic_Algorithm\BrainGA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\CoroutineWithData.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\DNA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\PopulationManager.cs" />
@@ -461,15 +461,139 @@
     <Compile Include="Assets\UITween\Scripts\EasyTween.cs" />
     <Compile Include="Assets\UITween\Scripts\ReferencedFrom.cs" />
     <Compile Include="Assets\UITween\Scripts\UITween.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\3DBall\Scripts\Ball3DAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\3DBall\Scripts\Ball3DAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\3DBall\Scripts\Ball3DDecision.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\3DBall\Scripts\Ball3DHardAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\BananaCollectors\Scripts\BananaAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\BananaCollectors\Scripts\BananaAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\BananaCollectors\Scripts\BananaArea.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\BananaCollectors\Scripts\BananaLogic.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Basic\Scripts\BasicAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Basic\Scripts\BasicAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Basic\Scripts\BasicDecision.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Bouncer\Scripts\BouncerAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Bouncer\Scripts\BouncerAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Bouncer\Scripts\BouncerBanana.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Crawler\Scripts\CrawlerAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Crawler\Scripts\CrawlerAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\GridWorld\Scripts\GridAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\GridWorld\Scripts\GridAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Hallway\Scripts\HallwayAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Hallway\Scripts\HallwayAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\PushBlock\Scripts\GoalDetect.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\PushBlock\Scripts\PushAgentBasic.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\PushBlock\Scripts\PushBlockAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Pyramids\Scripts\PyramidAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Pyramids\Scripts\PyramidAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Pyramids\Scripts\PyramidArea.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Pyramids\Scripts\PyramidSwitch.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Reacher\Scripts\ReacherAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Reacher\Scripts\ReacherAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Reacher\Scripts\ReacherDecision.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Reacher\Scripts\ReacherGoal.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\AdjustTrainingTimescale.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\Area.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\FlyCamera.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\GroundContact.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\JointDriveController.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\RandomDecision.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\RayPerception.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\RayPerception2D.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\RayPerception3D.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\SharedAssets\Scripts\TargetContact.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Soccer\Scripts\AgentSoccer.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Soccer\Scripts\SoccerAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Soccer\Scripts\SoccerBallController.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Soccer\Scripts\SoccerFieldArea.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Template\Scripts\TemplateAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Template\Scripts\TemplateAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Template\Scripts\TemplateDecision.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Tennis\Scripts\HitWall.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Tennis\Scripts\TennisAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Tennis\Scripts\TennisAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Tennis\Scripts\TennisArea.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Walker\Scripts\WalkerAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\Walker\Scripts\WalkerAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\WallJump\Scripts\WallJumpAcademy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Examples\WallJump\Scripts\WallJumpAgent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Academy.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\ActionMasker.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Agent.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Batcher.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\BCTeacherHelper.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Brain.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\BrainParameters.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\BroadcastHub.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Communicator.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\AgentActionProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\AgentInfoProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\BrainParametersProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\CommandProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\CustomAction.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\CustomObservation.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\CustomResetParameters.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\DemonstrationMetaProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\EngineConfigurationProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\EnvironmentParametersProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\Header.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\ResolutionProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\SpaceTypeProto.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityInput.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityMessage.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityOutput.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityRlInitializationInput.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityRlInitializationOutput.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityRlInput.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityRlOutput.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityToExternal.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\CommunicatorObjects\UnityToExternalGrpc.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Decision.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Demonstration.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\DemonstrationRecorder.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\DemonstrationStore.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\HeuristicBrain.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\ApplierImpl.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\BarracudaModelParamLoader.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\GeneratorImpl.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\ModelParamLoader.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\Tensor.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\TensorApplier.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\TensorGenerator.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\TensorNames.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\TFSharpInferenceEngine.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\Utils\Multinomial.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\InferenceBrain\Utils\RandomNormal.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\LearningBrain.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Monitor.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\PlayerBrain.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\ResetParameters.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\RpcCommunicator.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\SocketCommunicator.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Startup.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\UnityAgentsException.cs" />
+    <Compile Include="Assets\UnitySDK\Assets\ML-Agents\Scripts\Utilities.cs" />
     <None Include="Assets\Shaders\QuickBlur.shader" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Experimental.compute" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\haarcascade_frontalface_alt.xml" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\lbpcascade_frontalface.xml" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Conv.compute" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Random.cginc" />
+    <None Include="Assets\UnitySDK\ProjectSettings\ProjectVersion.txt" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\BarracudaReferenceImpl.compute" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Activation.compute" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Broadcast.compute" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\DenseFP16.compute" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\TexConv.compute" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\trained_classifier_erGrouping.xml" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\ConvOld.compute" />
     <None Include="Assets\Shaders\CompositeAdd.shader" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Tensor.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
@@ -479,10 +603,13 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\trained_classifierNM1.xml" />
     <None Include="Assets\Material\SpriteGradient.shader" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\FastNV.compute" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\OpenCVForUnity\OpenCVLicense.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Shaders\ShowDepth.shader" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Dense.compute" />
+    <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Generic.compute" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\trained_classifierNM2.xml" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
@@ -719,6 +846,24 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>D:/compositionUnity/compML/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Abstractions.TestingHelpers">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.TestingHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Barracuda">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/Barracuda.Core/Barracuda/Barracuda.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Abstractions">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Interactive.Async">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/programs/unity2018_31/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -1065,6 +1210,20 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>D:/programs/unity2018_31/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="MacBLAS.csproj">
+      <Project>{745EACA0-F8B3-FD09-1015-E7FD4F25A21C}</Project>
+      <Name>MacBLAS</Name>
+    </ProjectReference>
+    <ProjectReference Include="Barracuda-editor.csproj">
+      <Project>{655E05F3-3266-596F-ADED-47329F399184}</Project>
+      <Name>Barracuda-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="iOSBLAS.csproj">
+      <Project>{59D61C1D-111B-4561-865C-06F27539FF68}</Project>
+      <Name>iOSBLAS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

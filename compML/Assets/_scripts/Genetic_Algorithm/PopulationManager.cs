@@ -76,10 +76,10 @@ public class PopulationManager : MonoBehaviour {
     {
         AICreatesInitialPopulationTurn = false;
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
-        IndividualCompositionSet.GetComponent<Brain>().Init();
+        IndividualCompositionSet.GetComponent<BrainGA>().Init();
         counterForPopulation++;
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
-        IndividualCompositionSet.GetComponent<Brain>().CalculateTotalScore(); /// this is where the moved are updated
+        IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the moved are updated
         population.Add(IndividualCompositionSet);
         populationToDelete.Add(IndividualCompositionSet); 
 
@@ -101,11 +101,11 @@ public class PopulationManager : MonoBehaviour {
 
         if (sortNewGeneration == true)
         {
-            sortedList = population.OrderBy(o => o.GetComponent<Brain>().TotalScore).ToList();
+            sortedList = population.OrderBy(o => o.GetComponent<BrainGA>().TotalScore).ToList();
 
             if (population.Count == 10)
             {
-                bestScore = sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore;
+                bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore;
                 population.Clear(); // this is the list not the objects
             }
             sortNewGeneration = false;
@@ -121,7 +121,7 @@ public class PopulationManager : MonoBehaviour {
         GameObject parent2 = sortedList[InternalIndex_parent2];
 
        GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
-       Brain b = offspring.GetComponent<Brain>();
+       BrainGA b = offspring.GetComponent<BrainGA>();
        if (Random.Range(0, 10) == 1) //mutate 1 in 10
        {
            b.InitForBreed();
@@ -131,12 +131,12 @@ public class PopulationManager : MonoBehaviour {
        else
        {
            b.InitForBreed();
-           b.dna.Combine(parent1.GetComponent<Brain>().dna, parent2.GetComponent<Brain>().dna);
+           b.dna.Combine(parent1.GetComponent<BrainGA>().dna, parent2.GetComponent<BrainGA>().dna);
            b.MoveComposition(); 
         }
 
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
-        offspring.GetComponent<Brain>().CalculateTotalScore();
+        offspring.GetComponent<BrainGA>().CalculateTotalScore();
         population.Add(offspring);
         populationToDelete.Add(offspring);
         GenerateNewPopulatoinOffsprings_trigger = true;
@@ -151,25 +151,25 @@ public class PopulationManager : MonoBehaviour {
 
         if (generation == NumberOfGeneration)
         {
-            bestScore = sortedList[sortedList.Count - 1].GetComponent<Brain>().TotalScore;
+            bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore;
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
             AICreatesInitialPopulationTurn = true;
-            g0 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g0;
-            g1 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g1;
-            g2 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g2;
-            g3 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g3;
-            g4 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g4;
-            g5 = sortedList[sortedList.Count - 1].GetComponent<Brain>().g5;
-            sortedList[sortedList.Count - 1].GetComponent<Brain>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(g0, g1, g2, g3, g4, g5);
+            g0 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g0;
+            g1 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g1;
+            g2 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g2;
+            g3 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g3;
+            g4 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g4;
+            g5 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g5;
+            sortedList[sortedList.Count - 1].GetComponent<BrainGA>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(g0, g1, g2, g3, g4, g5);
             generation = 0;
             CounterOffsprings = 0;
             counterForPopulation = 0;
 
    
-            float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<Brain>().scorePixelsBalance;
-            float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<Brain>().scoreUnityVisual;
-            float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<Brain>().scoreBoundsBalance;
+            float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scorePixelsBalance;
+            float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisual;
+            float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalance;
             sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, g0, g1, g2, g3, g4, g5); //
 
 
