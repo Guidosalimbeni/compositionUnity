@@ -4,3 +4,5 @@ compML/Library/il2cpp_cache
 compML/Assets/ML-Agents
 compML/Assets/ML-Agents/Plugins/Computer/liblibtensorflow.so
 compML/Assets/UnitySDK
+compML/Assets/StreamingAssets
+compML/Temp

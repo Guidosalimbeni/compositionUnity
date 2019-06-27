@@ -19,6 +19,8 @@ public class OpenCVManager : MonoBehaviour
 
     public bool AbleVisualSurface = false;
 
+    
+
     private Texture2D textureContours;
 
     public event Action<float> OnPixelsCountBalanceChanged;

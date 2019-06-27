@@ -79,6 +79,8 @@
     <Compile Include="Assets\_scripts\Interaction\SelectionOfItem.cs" />
     <Compile Include="Assets\_scripts\Interaction\SelectMoveMouse.cs" />
     <Compile Include="Assets\_scripts\Interfaces\IElementOfComposition.cs" />
+    <Compile Include="Assets\_scripts\NeuralNetwork\MobileNetModel.cs" />
+    <Compile Include="Assets\_scripts\OpenCVScripts\CollectCompositionImage.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\CollectDataRenderTexture.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CollisionChecker.cs" />
     <Compile Include="Assets\_scripts\PHP\GetFromDatabase.cs" />
     <Compile Include="Assets\_scripts\PHP\SendToDatabase.cs" />
+    <Compile Include="Assets\_scripts\Scriptable Objects\CompositionImage.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataForNeuralNetwork_CompML.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataScores.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\ImageMatrixData.cs" />
@@ -838,6 +841,24 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/programs/unity2018_31/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Abstractions">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Abstractions.TestingHelpers">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.TestingHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Barracuda">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/Barracuda.Core/Barracuda/Barracuda.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Grpc.Core">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Interactive.Async">
+      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/compositionUnity/compML/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -846,24 +867,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>D:/compositionUnity/compML/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf">
-      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Abstractions.TestingHelpers">
-      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.TestingHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Barracuda">
-      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/Barracuda.Core/Barracuda/Barracuda.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Abstractions">
-      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Interactive.Async">
-      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="Grpc.Core">
-      <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/programs/unity2018_31/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
