@@ -1,0 +1,6 @@
+https://github.com/shaqian/TF-Unity-ARFoundation
+
+plus https://github.com/shaqian/TF-Unity that is linked to the above and have instruction 
+
+the project is also in D where I copied the assets from one to the other correctly
+
