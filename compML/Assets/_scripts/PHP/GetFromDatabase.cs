@@ -11,7 +11,7 @@ public class GetFromDatabase : MonoBehaviour
     [SerializeField]
     private DataForNeuralNetwork_CompML dataNN; // this is scribtable object to train the model..
 
-    private void Update()
+    private void Update() //TODO turn this into a start function !!
     {
         if (triggerGetData == true)
         {
