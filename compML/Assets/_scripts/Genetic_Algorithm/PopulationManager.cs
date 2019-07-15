@@ -5,6 +5,9 @@ using System.Linq;
 
 public class PopulationManager : MonoBehaviour {
 
+    public float MaxValues_x = 2.0f;
+    public float MinValues_z = -2.0f;
+
     public bool triggerAI = false;
 	public GameObject Individual;
     public int populationSize = 10;
@@ -39,8 +42,6 @@ public class PopulationManager : MonoBehaviour {
     {
         sendtodatabase = FindObjectOfType<SendToDatabase>();
     }
-
-
 
     private void Update()
     {

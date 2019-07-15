@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class BrainGA : MonoBehaviour
 {
+
     public GameObject elemComp_a;
     public GameObject elemComp_b;
     public GameObject elemComp_c;
@@ -31,24 +32,18 @@ public class BrainGA : MonoBehaviour
     public float g4;
     public float g5;
 
+    private PopulationManager population_manager;
 
     private void Awake()
     {
         brainNN_compML = FindObjectOfType<BrainNN_CompML>();
         openCVmanager = FindObjectOfType<OpenCVManager>();
+        population_manager = FindObjectOfType<PopulationManager>();
     }
 
     public void Init()
 	{
-		//initialise DNA
-        //0 obj1 x
-        //1 obj1 z
-        //2 obj2 x
-        //3 obj2 z
-        //4 obj3 x
-        //5 obj3 z
-        dna = new DNA(DNALength,1f,-1f); 
-        //TotalScore = 0;
+        dna = new DNA(DNALength, population_manager.MaxValues_x, population_manager.MinValues_z); 
        
         //TODO obviously fix this bit!!!!
         GameObject[] elementsInComp = GameObject.FindGameObjectsWithTag("ItemsInComposition");
@@ -57,16 +52,13 @@ public class BrainGA : MonoBehaviour
         elemComp_c = elementsInComp[2];
 
         sendtodatabase = FindObjectOfType<SendToDatabase>();
-        
 
         MoveComposition(); //////
-
-
     }
 
     public void InitForBreed()
     {
-        dna = new DNA(DNALength, 1f, -1f);
+        dna = new DNA(DNALength, population_manager.MaxValues_x, population_manager.MinValues_z);
 
         GameObject[] elementsInComp = GameObject.FindGameObjectsWithTag("ItemsInComposition");
         elemComp_a = elementsInComp[0];

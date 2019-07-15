@@ -14,12 +14,10 @@ public class Game_Manager : MonoBehaviour
     
     private void Awake()
     {
-
         calculateBalanceAreaBounds = GetComponent<CalculateBalanceAreaBounds>();
         PopulateListOfItemInComposition();
         SetLayerToForeground();
         SetIdsToElementsOfCompositions();
-        
     }
 
     private void Update()

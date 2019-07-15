@@ -68,16 +68,8 @@
     <Compile Include="Assets\_scripts\Classification\DetectorCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\UtilsCompositionML.cs" />
-    <Compile Include="Assets\_scripts\ClassificationDetectionNOT\Classifier.cs" />
-    <Compile Include="Assets\_scripts\ClassificationDetectionNOT\CompMLClassifier.cs" />
-    <Compile Include="Assets\_scripts\ClassificationDetectionNOT\Detector.cs" />
-    <Compile Include="Assets\_scripts\ClassificationDetectionNOT\PhoneCamera.cs" />
-    <Compile Include="Assets\_scripts\ClassificationDetectionNOT\TextureTools.cs" />
-    <Compile Include="Assets\_scripts\Comp_obj_scripts\CompScreenAreaCalculation.cs" />
-    <Compile Include="Assets\_scripts\Comp_obj_scripts\TagMeElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\Game_Manager.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\BrainGA.cs" />
-    <Compile Include="Assets\_scripts\Genetic_Algorithm\CoroutineWithData.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\DNA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\PopulationManager.cs" />
     <Compile Include="Assets\_scripts\Interaction\ClickToMove.cs" />
@@ -87,6 +79,7 @@
     <Compile Include="Assets\_scripts\Interaction\MouseMover.cs" />
     <Compile Include="Assets\_scripts\Interaction\SelectionOfItem.cs" />
     <Compile Include="Assets\_scripts\Interaction\SelectMoveMouse.cs" />
+    <Compile Include="Assets\_scripts\Interaction\TagMeElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\Interfaces\IElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\NeuralNetwork\MobileNetModel.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\CollectCompositionImage.cs" />
@@ -95,6 +88,7 @@
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateCollisionDistanceVisualUnity.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CollisionChecker.cs" />
+    <Compile Include="Assets\_scripts\OpenNOTCVScripts\CompScreenAreaCalculation.cs" />
     <Compile Include="Assets\_scripts\PHP\GetFromDatabase.cs" />
     <Compile Include="Assets\_scripts\PHP\SendToDatabase.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\CompositionImage.cs" />
@@ -106,9 +100,6 @@
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\GameEventListener.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\TestNNdata.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\UUU_test.cs" />
-    <Compile Include="Assets\_scripts\Scripts_for_shader\QuickGlow.cs" />
-    <Compile Include="Assets\_scripts\Scripts_for_shader\ReplacementShaderEffect.cs" />
-    <Compile Include="Assets\_scripts\Scripts_for_shader\SimpleBlur.cs" />
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientPixelsBalance.cs" />
@@ -120,6 +111,15 @@
     <Compile Include="Assets\_scripts\UnityPDO\OpenMenu.cs" />
     <Compile Include="Assets\_scripts\UnityPDO\RegisterSystem.cs" />
     <Compile Include="Assets\_scripts\UnityPDO\TransferToOfficial.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\Classifier.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\CompMLClassifier.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\Detector.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\PhoneCamera.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\TextureTools.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\CoroutineWithData.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\Scripts_for_shader\QuickGlow.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\Scripts_for_shader\ReplacementShaderEffect.cs" />
+    <Compile Include="Assets\_scripts\Z_Not_used\Scripts_for_shader\SimpleBlur.cs" />
     <Compile Include="Assets\Lean\Common\Examples\Scripts\LeanCircuit.cs" />
     <Compile Include="Assets\Lean\Common\Examples\Scripts\LeanDocumentation.cs" />
     <Compile Include="Assets\Lean\Common\Examples\Scripts\LeanMarker.cs" />
@@ -613,7 +613,7 @@
     <None Include="Assets\OpenCVForUnity\StreamingAssets\haarcascade_frontalface_alt.xml" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\lbpcascade_frontalface.xml" />
     <None Include="Assets\Resources\imagenet_comp_graph_label_strings.txt" />
-    <None Include="Assets\_scripts\ClassificationDetectionNOT\link.txt" />
+    <None Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\link.txt" />
     <None Include="Assets\Lean\Common\Examples\Shaders\Alpha.shader" />
     <None Include="Assets\Resources\coco_labels_list.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Lean/Touch+/Examples/TransformConstrain.unity
+- path: Assets/_scenes/Main 1.unity
   isLoaded: 1
   isActive: 1

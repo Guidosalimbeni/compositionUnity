@@ -1719,7 +1719,7 @@ GameObject:
   - component: {fileID: 936761971}
   - component: {fileID: 936761972}
   m_Layer: 0
-  m_Name: '[Agent]'
+  m_Name: '[GENETIC ALGORITHM]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4084,6 +4084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679cb5ed47559da4b9c277f56bb9ec3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxValues_x: 2
+  MinValues_z: -2
 --- !u!4 &2142160884
 Transform:
   m_ObjectHideFlags: 0
