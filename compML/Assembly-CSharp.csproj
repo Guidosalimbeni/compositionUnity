@@ -80,6 +80,7 @@
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateCollisionDistanceVisualUnity.cs" />
+    <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateVolumeOfElementComp.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CollisionChecker.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CompScreenAreaCalculation.cs" />
     <Compile Include="Assets\_scripts\PHP\GetFromDatabase.cs" />
