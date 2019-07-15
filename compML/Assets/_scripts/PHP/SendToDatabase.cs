@@ -9,20 +9,14 @@ public class SendToDatabase : MonoBehaviour
     // for opencv score usually I created an events from Opencv Manager
     // for not opencv score usually to access scores via components and methods from UI manager
 
-    public OpenCVManager openCvManager;
     public ImageMatrixData imagePixelsValues;
-    public float scorePixelsBalance { private set; get; }
-    public float scoreBoundsBalance { private set; get; } //
-    public float scoreUnityVisual { private set; get; } //
     public int MaxMoves = 4;
     public int sendaftereverymoves = 3;
     public GameObject gamemanager;
 
     private CollectDataRenderTexture collectdatarendertexture;
     private Game_Manager GM;
-    private float CurrentTotalScore;
-    private ColorGradientBoundShapeBalance colorgradientBoundsShapeBalance;
-    private ColorGradientVisualUnity colorGradientVisualUnity;
+    private ScoreCalculator scoreCalculator;
     private PopulationManager populationmanager;
     private float g0;
     private float g1;
@@ -34,13 +28,15 @@ public class SendToDatabase : MonoBehaviour
     private List<GameObject> listOfelementsInComposition;
     private List<float> listOfgenes;
     private int moves;
+    private float scorePixelsBalance;
+    private float scoreBoundsBalance;
+    private float scoreUnityVisual;
 
     private void Awake()
     {
-        openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged; //
         collectdatarendertexture = FindObjectOfType<CollectDataRenderTexture>();
-        colorgradientBoundsShapeBalance = GetComponent<ColorGradientBoundShapeBalance>();
-        colorGradientVisualUnity = GetComponent<ColorGradientVisualUnity>();
+
+        scoreCalculator = FindObjectOfType<ScoreCalculator>();
         populationmanager = FindObjectOfType<PopulationManager>();
         GM = gamemanager.GetComponent<Game_Manager>();
     }
@@ -49,40 +45,42 @@ public class SendToDatabase : MonoBehaviour
     {
         if (GM != null)
         {
-            listOfelementsInComposition = GM.getListOfItemInComposition();
+            listOfelementsInComposition = GM.getListOfItemInComposition(); // to fix since it is probably already in composition
         }
     }
 
-    private void Update()
-    {
-        scoreBoundsBalance = colorgradientBoundsShapeBalance.GetvisualScoreBalanceBoundsShapes();
-        scoreUnityVisual = colorGradientVisualUnity.GetVisualUnityScore();
-        CurrentTotalScore = scorePixelsBalance + scoreBoundsBalance + scoreUnityVisual;
+    //private void Update()
+    //{
+        
+    //    // to change all with a button that say I don't like it...
 
-        if (populationmanager.triggerAI == false && CurrentTotalScore != 0.0f)
-        {
+    //    //float CurrentTotalScore = scorePixelsBalance + scoreBoundsBalance + scoreUnityVisual; //
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && EventSystem.current.IsPointerOverGameObject() == false && moves < MaxMoves)
-            {
-                if (moves != 0 && moves % sendaftereverymoves == 0)
-                {
-                    PostDataFromAttemptsOfMoves();
-                }
-                moves++;
-            }
-        }
+    //    if (populationmanager.triggerAI == false && CurrentTotalScore != 0.0f)
+    //    {
 
-        if (populationmanager.triggerAI == true)
-        {
-            moves = 0;
-        }
-    }
+    //        if (Input.GetKeyDown(KeyCode.Mouse0) && EventSystem.current.IsPointerOverGameObject() == false && moves < MaxMoves)
+    //        {
+    //            if (moves != 0 && moves % sendaftereverymoves == 0)
+    //            {
+    //                PostDataFromAttemptsOfMoves();
+    //            }
+    //            moves++;
+    //        }
+    //    }
+
+    //    if (populationmanager.triggerAI == true)
+    //    {
+    //        moves = 0;
+    //    }
+    //}
    
-    private void HandleOnPixelsCountBalanceChanged(float scoreOnpixelscountbalance)
-    {
-        scorePixelsBalance = scoreOnpixelscountbalance;
-    }
 
+    public void SendNegativeJudge()
+    {
+        PostDataFromAttemptsOfMoves();
+
+    }
 
     public void PostDataFromAttemptsOfMoves()
     {
@@ -92,7 +90,9 @@ public class SendToDatabase : MonoBehaviour
             listOfgenes.Add(element.transform.position.x);
             listOfgenes.Add(element.transform.position.z);
         }
-
+        scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
+        scoreUnityVisual = scoreCalculator.scoreUnityVisual;
+        scorePixelsBalance = scoreCalculator.scorePixelsBalance;
         g0 = listOfgenes[0];
         g1 = listOfgenes[1];
         g2 = listOfgenes[2];
@@ -114,7 +114,9 @@ public class SendToDatabase : MonoBehaviour
             listOfgenes.Add(element.transform.position.x);
             listOfgenes.Add(element.transform.position.z);
         }
-
+        scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
+        scoreUnityVisual = scoreCalculator.scoreUnityVisual;
+        scorePixelsBalance = scoreCalculator.scorePixelsBalance;
         g0 = listOfgenes[0];
         g1 = listOfgenes[1];
         g2 = listOfgenes[2];
@@ -125,7 +127,7 @@ public class SendToDatabase : MonoBehaviour
 
         listOfgenes.Clear();
 
-        StartCoroutine(PostData(LoadSceneInputUsername.username));
+        StartCoroutine(PostData(LoadSceneInputUsername.username)); //TO FIX
         populationmanager.triggerAI = true;
     }
 
@@ -133,11 +135,11 @@ public class SendToDatabase : MonoBehaviour
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
                                 List<float> genesAI)
-                                //float g0AI, float g1AI, float g2AI, float g3AI, float g4AI, float g5AI)
     {
-        scorePixelsBalance = scorePixelsBalancefromAI;
+        scorePixelsBalance = scorePixelsBalancefromAI; 
         scoreUnityVisual = scoreUnityVisualFromAI;
         scoreBoundsBalance = scoreBoundsBalancefromAI;
+
         g0 = genesAI[0];
         g1 = genesAI[1];
         g2 = genesAI[2];

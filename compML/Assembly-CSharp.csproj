@@ -84,6 +84,7 @@
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CompScreenAreaCalculation.cs" />
     <Compile Include="Assets\_scripts\PHP\GetFromDatabase.cs" />
     <Compile Include="Assets\_scripts\PHP\SendToDatabase.cs" />
+    <Compile Include="Assets\_scripts\ScoreCalculator.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\CompositionImage.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataForNeuralNetwork_CompML.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataScores.cs" />
