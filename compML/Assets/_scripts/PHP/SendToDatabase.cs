@@ -132,17 +132,18 @@ public class SendToDatabase : MonoBehaviour
     public void PostDataFromAI(float scorePixelsBalancefromAI, 
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
-                                float g0AI, float g1AI, float g2AI, float g3AI, float g4AI, float g5AI)
+                                List<float> genesAI)
+                                //float g0AI, float g1AI, float g2AI, float g3AI, float g4AI, float g5AI)
     {
         scorePixelsBalance = scorePixelsBalancefromAI;
         scoreUnityVisual = scoreUnityVisualFromAI;
         scoreBoundsBalance = scoreBoundsBalancefromAI;
-        g0 = g0AI;
-        g1 = g1AI;
-        g2 = g2AI;
-        g3 = g3AI;
-        g4 = g4AI;
-        g5 = g5AI;
+        g0 = genesAI[0];
+        g1 = genesAI[1];
+        g2 = genesAI[2];
+        g3 = genesAI[3];
+        g4 = genesAI[4];
+        g5 = genesAI[5];
         judge = 1;                  ////////////////////// TODO
 
         StartCoroutine(PostData("AI_TURN"));

@@ -13,16 +13,13 @@ public class PopulationManager : MonoBehaviour {
     public int populationSize = 10;
     public int NumberOfGeneration = 4;
     public float secondToWaitForPopGeneration = 0.1f;
-    public GameObject elemComp_a;
-    public GameObject elemComp_b;
-    public GameObject elemComp_c;
+    //public GameObject elemComp_a; // to delete
+    //public GameObject elemComp_b;
+    //public GameObject elemComp_c;
 
-    private float g0;
-    private float g1;
-    private float g2;
-    private float g3;
-    private float g4;
-    private float g5;
+    public List<GameObject> elementsCompositions;
+
+
     private float bestScore;
 
     private int generation = 0;
@@ -43,13 +40,29 @@ public class PopulationManager : MonoBehaviour {
         sendtodatabase = FindObjectOfType<SendToDatabase>();
     }
 
+    private void Start()
+    {
+        PopulateTheElementsOfCompositionInTheScene();
+    }
+
+    private void PopulateTheElementsOfCompositionInTheScene()
+    {
+
+        elementsCompositions = new List<GameObject>();
+
+        TagMeElementOfComposition[] elementstags = FindObjectsOfType<TagMeElementOfComposition>();
+        foreach (var elementtag in elementstags)
+        {
+            GameObject go = elementtag.gameObject;
+            elementsCompositions.Add(go);
+        }
+
+    }
+
     private void Update()
     {
         if (triggerAI == true) 
         {
-            //elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
-            //elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
-            //elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
 
             if (AICreatesInitialPopulationTurn == true)
             {
@@ -67,9 +80,7 @@ public class PopulationManager : MonoBehaviour {
 
         if (triggerAI == false)
         {
-            //elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-            //elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-            //elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+            Debug.Log("trigger AI is off");
         }
     }
 
@@ -156,13 +167,19 @@ public class PopulationManager : MonoBehaviour {
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
             AICreatesInitialPopulationTurn = true;
-            g0 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g0;
-            g1 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g1;
-            g2 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g2;
-            g3 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g3;
-            g4 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g4;
-            g5 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g5;
-            sortedList[sortedList.Count - 1].GetComponent<BrainGA>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(g0, g1, g2, g3, g4, g5);
+            //float g0 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g0;
+            //float g1 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g1;
+            //float g2 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g2;
+            //float g3 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g3;
+            //float g4 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g4;
+            //float g5 = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().g5;
+
+            List<float> genes = new List<float>();
+            genes.Clear();
+            genes = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().genes;
+
+            //sortedList[sortedList.Count - 1].GetComponent<BrainGA>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(g0, g1, g2, g3, g4, g5);
+            sortedList[sortedList.Count - 1].GetComponent<BrainGA>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(genes);
             generation = 0;
             CounterOffsprings = 0;
             counterForPopulation = 0;
@@ -171,7 +188,7 @@ public class PopulationManager : MonoBehaviour {
             float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scorePixelsBalance;
             float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisual;
             float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalance;
-            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, g0, g1, g2, g3, g4, g5); //
+            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, genes); //
 
 
             for (int i = 0; i < populationToDelete.Count; i++)

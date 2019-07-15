@@ -5,7 +5,7 @@ using UnityEngine;
 // not a monodeveloper
 public class DNA {
 
-	List<float> genes = new List<float>();
+	private List<float> genes = new List<float>();
 	private int DnaLength = 0;
 	private float MaxValues = 0;
     private float MinValue = 0;
@@ -59,5 +59,10 @@ public class DNA {
 	{
 		return genes[pos];
 	}
+
+    public List<float> GetGenesList()
+    {
+        return genes;
+    }
 
 }

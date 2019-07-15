@@ -63,3 +63,5 @@ public class Game_Manager : MonoBehaviour
     }
 
 }
+
+// to fix this since already in population manager...
