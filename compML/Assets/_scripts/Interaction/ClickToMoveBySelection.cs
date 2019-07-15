@@ -3,6 +3,11 @@ using System.Collections;
 
 public class ClickToMoveBySelection : MonoBehaviour
 {
+    // NOT USED since I am using LEAN TOUCh
+    // this need Selection of itme attached to  game manager if I want to put it back and not using LEan touch ... 
+    // also in population manager many things to uncommment and put back to life in case..
+
+
     public float moveSpeed;                     // The Speed the character will move
     public float RotationSpeed = -90f;
     public float minThreshold = 0.05f;
@@ -20,7 +25,7 @@ public class ClickToMoveBySelection : MonoBehaviour
     void Update()
     {
         int elementToMove = SelectionOfItem.elementToMove;
-     
+
         if (transform.GetComponent<TagMeElementOfComposition>().ElementOfCompositionID == elementToMove)
         {
             myTransform = transform; /////

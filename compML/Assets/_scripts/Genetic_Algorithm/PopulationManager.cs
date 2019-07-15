@@ -46,9 +46,9 @@ public class PopulationManager : MonoBehaviour {
     {
         if (triggerAI == true) 
         {
-            elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
-            elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
-            elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
+            //elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
+            //elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
+            //elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = true;
 
             if (AICreatesInitialPopulationTurn == true)
             {
@@ -66,9 +66,9 @@ public class PopulationManager : MonoBehaviour {
 
         if (triggerAI == false)
         {
-            elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-            elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
-            elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+            //elemComp_a.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+            //elemComp_b.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
+            //elemComp_c.GetComponent<ClickToMoveBySelection>().AIisPlaying = false;
         }
     }
 

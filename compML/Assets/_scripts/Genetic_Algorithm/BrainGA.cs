@@ -127,9 +127,20 @@ public class BrainGA : MonoBehaviour
         elemComp_a.transform.position = new Vector3(g0, 0, g1);
         elemComp_b.transform.position = new Vector3(g2, 0, g3);
         elemComp_c.transform.position = new Vector3(g4, 0, g5);
-        elemComp_a.GetComponent<ClickToMoveBySelection>().SetLastDestinationPositionCorrectlyFromAI(g0, 0.0f, g1);
-        elemComp_b.GetComponent<ClickToMoveBySelection>().SetLastDestinationPositionCorrectlyFromAI(g2, 0.0f, g3);
-        elemComp_c.GetComponent<ClickToMoveBySelection>().SetLastDestinationPositionCorrectlyFromAI(g4, 0.0f, g5);
+
+        //TODO to delete if lean touch works well
+
+        //ClickToMoveBySelection ClickToMoveBySelection_A = elemComp_a.GetComponent<ClickToMoveBySelection>();
+        //ClickToMoveBySelection ClickToMoveBySelection_B = elemComp_b.GetComponent<ClickToMoveBySelection>();
+        //ClickToMoveBySelection ClickToMoveBySelection_C = elemComp_c.GetComponent<ClickToMoveBySelection>();
+
+        //if (ClickToMoveBySelection_A != null && ClickToMoveBySelection_B != null && ClickToMoveBySelection_C != null )
+        //{
+        //    ClickToMoveBySelection_A.SetLastDestinationPositionCorrectlyFromAI(g0, 0.0f, g1);
+        //    ClickToMoveBySelection_B.SetLastDestinationPositionCorrectlyFromAI(g2, 0.0f, g3);
+        //    ClickToMoveBySelection_C.SetLastDestinationPositionCorrectlyFromAI(g4, 0.0f, g5);
+        //}
+        
     }
 
 }
