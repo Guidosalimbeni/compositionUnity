@@ -14,12 +14,23 @@ public class OpenCVManager : MonoBehaviour
     public event Action<float> OnPixelsCountBalanceChanged;
 
 
+    // call from leantouch and population manager one during breeding and one for last move
+    public void CallForOpenCVCalculationUpdates()  /// call from EVENT
+    {
+        CallTOCalculateVisualScoreBalancePixelsCount();
 
-    public void CallTOCalculateVisualScoreBalancePixelsCount()  /// call from EVENT
+
+
+
+
+    }
+
+    private void CallTOCalculateVisualScoreBalancePixelsCount()
     {
         Texture2D imgTexture = ToTexture2D(camRenderTexture);
         CalculateAreaLeftRightPixelsCountBalance(imgTexture);
     }
+
 
     private Texture2D ToTexture2D(RenderTexture rTex) ///
     {

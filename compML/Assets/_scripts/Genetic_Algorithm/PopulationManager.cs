@@ -7,17 +7,17 @@ public class PopulationManager : MonoBehaviour {
 
     public float MaxValues_x = 2.0f;
     public float MinValues_z = -2.0f;
-
     public bool triggerAI = false;
 	public GameObject Individual;
     public int populationSize = 10;
     public int NumberOfGeneration = 4;
     public float secondToWaitForPopGeneration = 0.1f;
 
-    public List<GameObject> elementsCompositions;
+    public List<GameObject> elementsCompositions { get; set; }
 
+    public float bestScore; // for debugging only
+    public List<float> debugingList; // for debugging only
 
-    private float bestScore;
 
     private int generation = 0;
     private int counterForPopulation = 0;
@@ -26,20 +26,29 @@ public class PopulationManager : MonoBehaviour {
     private bool GenerateNewPopulatoinOffsprings_trigger = false;
     private List<GameObject> population = new List<GameObject>();
     private GameObject offspring;
-    List<GameObject> sortedList = new List<GameObject>();
+
+    public List<GameObject> sortedList;
+    //List<GameObject> sortedList = new List<GameObject>();
+
+
     private List<GameObject> populationToDelete = new List<GameObject>();
     private bool sortNewGeneration = true;
 
     private SendToDatabase sendtodatabase;
+    private OpenCVManager openCVmanager;
+    private Game_Manager gameManagerNotOpenCV;
 
     private void Awake()
     {
         sendtodatabase = FindObjectOfType<SendToDatabase>();
+        sortedList = new List<GameObject>();
     }
 
     private void Start()
     {
         PopulateTheElementsOfCompositionInTheScene();
+        openCVmanager = FindObjectOfType<OpenCVManager>();
+        gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
     }
 
     private void PopulateTheElementsOfCompositionInTheScene()
@@ -84,10 +93,20 @@ public class PopulationManager : MonoBehaviour {
         AICreatesInitialPopulationTurn = false;
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
 
-        IndividualCompositionSet.GetComponent<BrainGA>().Init();
+        IndividualCompositionSet.GetComponent<BrainGA>().Init(); // init initial 
+        BrainGA b = IndividualCompositionSet.GetComponent<BrainGA>();
+        b.MoveComposition();
         counterForPopulation++;
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
-        IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the moved are updated and score
+
+
+        // to need another yield?
+
+        openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
+        gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+
+
+        IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the score is updated
         population.Add(IndividualCompositionSet);
         populationToDelete.Add(IndividualCompositionSet); 
 
@@ -113,10 +132,7 @@ public class PopulationManager : MonoBehaviour {
 
             if (population.Count == populationSize)
             {
-                bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore;
-
-                //Debug.Log(" first best " + bestScore);
-                //Debug.Log("second best " + sortedList[sortedList.Count - 2].GetComponent<BrainGA>().TotalScore);
+                bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore; // for debugging only
 
                 population.Clear(); // this is the list not the objects
             }
@@ -149,6 +165,15 @@ public class PopulationManager : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
+
+        openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
+        gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+
+
+        // to need another yield?
+
+
+
         offspring.GetComponent<BrainGA>().CalculateTotalScore(); // this is where the moved are updated and score
         population.Add(offspring);
         populationToDelete.Add(offspring);
@@ -164,7 +189,8 @@ public class PopulationManager : MonoBehaviour {
 
         if (generation == NumberOfGeneration)
         {
-            bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore;
+            bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore; // for debugging only
+
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
             AICreatesInitialPopulationTurn = true;
@@ -173,7 +199,21 @@ public class PopulationManager : MonoBehaviour {
             genes.Clear();
             genes = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().genes;
 
+
+            // to delete debugging
+            debugingList = new List<float>();
+            foreach (GameObject go in sortedList)
+            {
+                debugingList.Add(go.GetComponent<BrainGA>().TotalScore);
+            }
+            
+
             sortedList[sortedList.Count - 1].GetComponent<BrainGA>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(genes);
+
+            
+
+
+
             generation = 0;
             CounterOffsprings = 0;
             counterForPopulation = 0;
@@ -194,6 +234,14 @@ public class PopulationManager : MonoBehaviour {
             population = new List<GameObject>();
             populationToDelete = new List<GameObject>();
             sortedList = new List<GameObject>();
+
+            yield return new WaitForSeconds(secondToWaitForPopGeneration);
+
+            openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
+            gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+
+
+
         }
     }
 }

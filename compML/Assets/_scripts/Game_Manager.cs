@@ -28,12 +28,7 @@ public class Game_Manager : MonoBehaviour
         SetIdsToElementsOfCompositions();
     }
 
-    //private void Update()
-    //{
-    //    AreasOfObjects = calculateBalanceAreaBounds.CalculateBondsAreas(); // what ??
-    //}
-
-
+    // call from leantouch and population manager one during breeding and one for last move
     public void CallTOCalculateNOTOpenCVScores()
     {
         UpdateBalanceAreaBoundsShapes();

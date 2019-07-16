@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ScoreCalculator : MonoBehaviour
 {
-    public float visualScoreBalancePixelsCount { private set; get; }
-
-
+    public float visualScoreBalancePixelsCount { private set; get; } //
     public float scoreBoundsBalance { private set; get; } //
     public float scoreUnityVisual { private set; get; } //
 

@@ -103,6 +103,7 @@
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientVisualUnity.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\LoadSceneButton.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\LoadSceneInputUsername.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\TotalScoreUI.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\UI_text_manager.cs" />
     <Compile Include="Assets\_scripts\UnityPDO\LoginScript.cs" />
     <Compile Include="Assets\_scripts\UnityPDO\OpenMenu.cs" />

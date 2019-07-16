@@ -1757,6 +1757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 936761971}
   - component: {fileID: 936761972}
+  - component: {fileID: 936761970}
   m_Layer: 0
   m_Name: '[GENETIC ALGORITHM]'
   m_TagString: Untagged
@@ -1764,6 +1765,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &936761970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936761969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a760d5c82089a6343bc9c2ed8af1d70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TOTALSCOREDebugging: 0
 --- !u!4 &936761971
 Transform:
   m_ObjectHideFlags: 0
@@ -1795,10 +1809,12 @@ MonoBehaviour:
   triggerAI: 0
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
-  populationSize: 20
-  NumberOfGeneration: 10
-  secondToWaitForPopGeneration: 0.05
-  elementsCompositions: []
+  populationSize: 10
+  NumberOfGeneration: 2
+  secondToWaitForPopGeneration: 0.2
+  bestScore: 0
+  debugingList: []
+  sortedList: []
 --- !u!1 &1044126323
 GameObject:
   m_ObjectHideFlags: 0

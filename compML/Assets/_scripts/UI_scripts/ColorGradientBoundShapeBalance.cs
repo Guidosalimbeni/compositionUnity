@@ -26,26 +26,6 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
     }
 
 
-    // need to subscribe to an event as I did for the open cv
-
-    //private void Update()
-    //{
-    //    areaobjects = gameManagerNotOpenCV.AreasOfObjects;  // not really need to pass from game manager
-    //    float leftWeight = areaobjects.ObjectsLeftAreaPercentage;
-    //    float RightWeight = areaobjects.ObjectsRightAreaPercentage;
-
-    //    float DifferenceBetweenLeftandRight = Mathf.Abs(leftWeight - RightWeight);
-    //    visualScoreBalanceBoundsShapes = 1 - ((DifferenceBetweenLeftandRight) / (leftWeight + RightWeight));
-
-    //    UpdateBalancePixelsUI(visualScoreBalanceBoundsShapes);
-
-    //}
-
-    public float GetvisualScoreBalanceBoundsShapes() // who is calling this?
-    {
-        return visualScoreBalanceBoundsShapes;
-    }
-
     public void UpdateBalancePixelsUI(float score)
     {
         if (score < 0.8f)

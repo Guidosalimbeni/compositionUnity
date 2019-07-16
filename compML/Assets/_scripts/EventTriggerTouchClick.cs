@@ -46,7 +46,7 @@ namespace Lean.Touch
 
         public void OnFingerSet(LeanFinger finger)
         {
-            openCVManager.CallTOCalculateVisualScoreBalancePixelsCount();
+            openCVManager.CallForOpenCVCalculationUpdates();
             gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
             //Debug.Log("Finger " + finger.Index + " is still touching the screen");
         }

@@ -22,23 +22,24 @@ public class BrainGA : MonoBehaviour
     private PopulationManager population_manager;
     private ScoreCalculator scoreCalculator;
     private BrainNN_CompML brainNN_compML;
-    private OpenCVManager openCVmanager;
-    private Game_Manager gameManagerNotOpenCV;
+    //private OpenCVManager openCVmanager;
+    //private Game_Manager gameManagerNotOpenCV;
 
     private void Awake()
     {
         brainNN_compML = FindObjectOfType<BrainNN_CompML>();
-        openCVmanager = FindObjectOfType<OpenCVManager>();
+        
         population_manager = FindObjectOfType<PopulationManager>();
-        gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
+        
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
+
+        //openCVmanager = FindObjectOfType<OpenCVManager>();
+        //gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
     }
 
     public void Init()
 	{
         dna = new DNA(DNALength, population_manager.MaxValues_x, population_manager.MinValues_z);
-
-        MoveComposition(); //////
     }
 
     public void InitForBreed()
@@ -46,17 +47,26 @@ public class BrainGA : MonoBehaviour
         dna = new DNA(DNALength, population_manager.MaxValues_x, population_manager.MinValues_z);
     }
 
+    public void MoveComposition()
+    {
+        int genePos = 0;
+        foreach (var elementComp in population_manager.elementsCompositions)
+        {
+            elementComp.transform.position = new Vector3(dna.GetGene(genePos), 0, dna.GetGene(genePos + 1));
+            genePos = genePos + 2;
+        }
+    }
+
+
     public void CalculateTotalScore()
     {
         if (scoreCalculator != null && brainNN_compML != null) 
         {
+
             // call to trigger the events
             // the other calls are from leantouch event trigger
-            openCVmanager.CallTOCalculateVisualScoreBalancePixelsCount(); // to update the score pixels balance of opencv..
-            gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
-
-
-            // might need to wait one frame so they update correctly ?
+            //openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
+            //gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
 
             // calculate score comes after movement so genes are updated
             float scoreNN = 0;
@@ -70,22 +80,16 @@ public class BrainGA : MonoBehaviour
             scoreBoundsBalanceIndividual = scoreCalculator.scoreBoundsBalance;
             scoreUnityVisualIndividual = scoreCalculator.scoreUnityVisual;
 
-            TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual + scoreNN;
-            Debug.Log(TotalScore);
+            // add back the NEURAL NETWORK
+
+            TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual;// + scoreNN;
+            
 
         }
 
     }
 
-    public void MoveComposition()
-    {
-        int genePos = 0;
-        foreach (var elementComp in population_manager.elementsCompositions)
-        {
-            elementComp.transform.position = new Vector3(dna.GetGene(genePos), 0, dna.GetGene(genePos + 1));
-            genePos = genePos +2;
-        }
-    }
+    
 
     public void MoveCompositionOfBestFitAfterAIfinishedIsTurn(List<float> genes)
     {
