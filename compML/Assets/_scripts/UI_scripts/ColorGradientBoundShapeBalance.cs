@@ -11,28 +11,37 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
     Color lerpedColor = Color.white;
     private AreasObjects areaobjects;
 
-    private Game_Manager gamemanager;
+    private Game_Manager gameManagerNotOpenCV;
 
     private void Awake()
     {
-        gamemanager = FindObjectOfType<Game_Manager>();
+        gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
+        gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += HandleOnScoreBoundsBalanceChanged;
         balanceBoundsShapesUI = balanceBoundsShapesUI.GetComponent<RawImage>();
     }
 
-    private void Update()
+    private void HandleOnScoreBoundsBalanceChanged(float visualScoreBalanceBoundsShapes)
     {
-        areaobjects = gamemanager.AreasOfObjects;
-        float leftWeight = areaobjects.ObjectsLeftAreaPercentage;
-        float RightWeight = areaobjects.ObjectsRightAreaPercentage;
-
-        float DifferenceBetweenLeftandRight = Mathf.Abs(leftWeight - RightWeight);
-        visualScoreBalanceBoundsShapes = 1 - ((DifferenceBetweenLeftandRight) / (leftWeight + RightWeight));
-
         UpdateBalancePixelsUI(visualScoreBalanceBoundsShapes);
-
     }
 
-    public float GetvisualScoreBalanceBoundsShapes()
+
+    // need to subscribe to an event as I did for the open cv
+
+    //private void Update()
+    //{
+    //    areaobjects = gameManagerNotOpenCV.AreasOfObjects;  // not really need to pass from game manager
+    //    float leftWeight = areaobjects.ObjectsLeftAreaPercentage;
+    //    float RightWeight = areaobjects.ObjectsRightAreaPercentage;
+
+    //    float DifferenceBetweenLeftandRight = Mathf.Abs(leftWeight - RightWeight);
+    //    visualScoreBalanceBoundsShapes = 1 - ((DifferenceBetweenLeftandRight) / (leftWeight + RightWeight));
+
+    //    UpdateBalancePixelsUI(visualScoreBalanceBoundsShapes);
+
+    //}
+
+    public float GetvisualScoreBalanceBoundsShapes() // who is calling this?
     {
         return visualScoreBalanceBoundsShapes;
     }

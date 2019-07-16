@@ -25,8 +25,7 @@ public class CalculateBalanceAreaBounds : MonoBehaviour
 
     public AreasObjects CalculateBondsAreas()
     {
-        
-        foreach (var compObj in compositionObjects)
+        foreach (var compObj in compositionObjects) 
         {
             TypeOfScreenData typeofscreendata = compObj.CalcScreenPercentage();
             totalLeftArea += typeofscreendata.ScreenAreaLeftObject;
@@ -37,8 +36,6 @@ public class CalculateBalanceAreaBounds : MonoBehaviour
         totalLeftArea = 0;
         totalRightArea = 0;
         return areasObjects;
-        
-        
         
     }
 }

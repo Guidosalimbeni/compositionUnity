@@ -68,6 +68,7 @@
     <Compile Include="Assets\_scripts\Classification\DetectorCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\UtilsCompositionML.cs" />
+    <Compile Include="Assets\_scripts\EventTriggerTouchClick.cs" />
     <Compile Include="Assets\_scripts\Game_Manager.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\BrainGA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\DNA.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\_scripts\OpenCVScripts\CollectCompositionImage.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\CollectDataRenderTexture.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />
+    <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVSceneUtils.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateCollisionDistanceVisualUnity.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateVolumeOfElementComp.cs" />

@@ -4,38 +4,45 @@ using UnityEngine;
 
 public class ScoreCalculator : MonoBehaviour
 {
-    public float scorePixelsBalance { private set; get; }
+    public float visualScoreBalancePixelsCount { private set; get; }
+
+
     public float scoreBoundsBalance { private set; get; } //
     public float scoreUnityVisual { private set; get; } //
 
-    //public float CurrentTotalScore;
-
     private OpenCVManager openCvManager;
-
-    private ColorGradientBoundShapeBalance colorgradientBoundsShapeBalance; //
-    private ColorGradientVisualUnity colorGradientVisualUnity; //
+    private Game_Manager gameManagerNotOpenCV;
 
     private void Awake()
     {
         openCvManager = FindObjectOfType<OpenCVManager>();
+        gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
+
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
+        gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;
+        gameManagerNotOpenCV.OnScoreUnityVisualChanged += Handle_OnScoreUnityVisualChanged;
         
-        colorgradientBoundsShapeBalance = GetComponent<ColorGradientBoundShapeBalance>();
-        colorGradientVisualUnity = GetComponent<ColorGradientVisualUnity>();
     }
-    
+
+    private void Handle_OnScoreUnityVisualChanged(float ScoreUnityVisualPassed)
+    {
+        scoreUnityVisual = ScoreUnityVisualPassed;
+    }
+
+    private void Handle_OnScoreBoundsBalanceChanged(float visualScoreBalanceBoundsShapes)
+    {
+        scoreBoundsBalance = visualScoreBalanceBoundsShapes;
+    }
 
     private void HandleOnPixelsCountBalanceChanged(float scoreOnpixelscountbalance)
     {
-        scorePixelsBalance = scoreOnpixelscountbalance;
+        visualScoreBalancePixelsCount = scoreOnpixelscountbalance;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        scoreBoundsBalance = colorgradientBoundsShapeBalance.GetvisualScoreBalanceBoundsShapes();
-        scoreUnityVisual = colorGradientVisualUnity.GetVisualUnityScore();
-
-        //CurrentTotalScore = scorePixelsBalance + scoreBoundsBalance + scoreUnityVisual;
+        openCvManager.OnPixelsCountBalanceChanged -= HandleOnPixelsCountBalanceChanged;
+        gameManagerNotOpenCV.OnScoreBoundsBalanceChanged -= Handle_OnScoreBoundsBalanceChanged;
+        gameManagerNotOpenCV.OnScoreUnityVisualChanged -= Handle_OnScoreUnityVisualChanged;
     }
-
 }

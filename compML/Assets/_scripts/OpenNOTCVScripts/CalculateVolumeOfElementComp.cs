@@ -8,9 +8,11 @@ public class CalculateVolumeOfElementComp : MonoBehaviour
     private void Start()
     {
         Mesh mesh = GetComponent<MeshFilter>().sharedMesh;
-        float volume = VolumeOfMesh(mesh);
-        string msg = "The volume of the mesh is " + volume + " cube units.";
-        Debug.Log(msg);
+
+        //float volume = VolumeOfMesh(mesh);
+        //string msg = "The volume of the mesh is " + volume + " cube units.";
+        //Debug.Log(msg);
+
         float volume2 = calculateBondingVolume(mesh);
         string msg2 = "The volume of the mesh is BOUNDING " + volume2 + " cube units.";
         Debug.Log(msg2);

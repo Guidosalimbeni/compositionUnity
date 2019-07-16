@@ -7,23 +7,22 @@ using UnityEngine.UI;
 public class ColorGradientVisualUnity : MonoBehaviour
 {
     public RawImage VisualUnityUI;
-    private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity; //
     private Color lerpedColor = Color.white;
     private float VisualUnityScore;
-    private Game_Manager gamemanager;
+    private Game_Manager gamemanagerNotOpenCV;
 
     private void Awake()
     {
-        VisualUnityUI = VisualUnityUI.GetComponent<RawImage>();
-        gamemanager = FindObjectOfType<Game_Manager>();
-        calculateCollisionDistanceVisualUnity = gamemanager.GetComponent<CalculateCollisionDistanceVisualUnity>();
+        //VisualUnityUI = VisualUnityUI.GetComponent<RawImage>();
+        gamemanagerNotOpenCV = FindObjectOfType<Game_Manager>();
+        gamemanagerNotOpenCV.OnScoreUnityVisualChanged += Handle_OnScoreUnityVisualChanged;
     }
 
-    private void Update()
+    private void Handle_OnScoreUnityVisualChanged(float VisualUnityScore)
     {
-        VisualUnityScore = calculateCollisionDistanceVisualUnity.VisualUnityScore;
-        UpdateBalancePixelsUI(VisualUnityScore);
+        UpdateBalancePixelsUI(VisualUnityScore); ;
     }
+
 
     public float GetVisualUnityScore()
     {
@@ -43,6 +42,4 @@ public class ColorGradientVisualUnity : MonoBehaviour
             VisualUnityUI.color = lerpedColor;
         }
     }
-
-
 }

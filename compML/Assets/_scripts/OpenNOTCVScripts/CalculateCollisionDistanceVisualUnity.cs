@@ -40,12 +40,13 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
         }
     }
     
-    void Update()
+    public float CalculateUnityVisualScoreAndDrawLine()
     {
-        DrawAndCalculateDistances(PairwaiseElementsOfComposition);
+        VisualUnityScore = DrawAndCalculateDistances(PairwaiseElementsOfComposition);
+        return VisualUnityScore;
     }
 
-    void DrawAndCalculateDistances(List<List<GameObject>>  PairwaiseElementsOfComposition)
+    private float DrawAndCalculateDistances(List<List<GameObject>>  PairwaiseElementsOfComposition)
     {
         float sumOfDistances = 0;
         int i = 0;
@@ -75,10 +76,11 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
             {
                 VisualUnityScore = 0;
                 OverlappingColliders = false;
-                return;
+                return VisualUnityScore;
             }
         }
-        VisualUnityScore = Mathf.Exp(-sumOfDistances * weight); 
+        VisualUnityScore = Mathf.Exp(-sumOfDistances * weight);
+        return VisualUnityScore;
     }
 
     List<List<GameObject>> PairwaiseOperation(List<GameObject> ElementsOfComposition)

@@ -10,62 +10,18 @@ using UnityEngine.EventSystems;
 
 public class OpenCVManager : MonoBehaviour
 {
-    public Mat ImageMatrixOpenCV;
     public RenderTexture camRenderTexture;
-    public GameObject VisualisationSurface;
-    public bool DrawContourBool;
-    public bool calcThreshold;
-    public bool CalculateAreaLeftRightBool;
-
-    public bool AbleVisualSurface = false;
-
-    
-
-    private Texture2D textureContours;
-
     public event Action<float> OnPixelsCountBalanceChanged;
 
-    private void Update() //
-    {
-        
-        //if true, The error log of the Native side OpenCV will be displayed on the Unity Editor Console.
-        // THESE ARE ONLY FOR DUBUGGING 
-        if (DrawContourBool == true)
-        {
-            Texture2D imgTexture = ToTexture2D(camRenderTexture);
-            ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
-            Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
-            DrawContours(imgTexture);
-        }
-        if (calcThreshold == true)
-        {
-            Texture2D imgTexture = ToTexture2D(camRenderTexture);
-            ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
-            Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
-            CalculateThreshold(imgTexture);
-        }
-        if (CalculateAreaLeftRightBool == true)  // set all to false since CPU expensive
-        {
-            Texture2D imgTexture = ToTexture2D(camRenderTexture);
-            ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
-            Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
-            CalculateAreaLeftRight(imgTexture);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && EventSystem.current.IsPointerOverGameObject() == false )
-        {
-            CallTOCalculateAreaLeftRight();
-        }
 
-    }
-
-    public void CallTOCalculateAreaLeftRight()
+    public void CallTOCalculateVisualScoreBalancePixelsCount()  /// call from EVENT
     {
         Texture2D imgTexture = ToTexture2D(camRenderTexture);
-        CalculateAreaLeftRight(imgTexture);
+        CalculateAreaLeftRightPixelsCountBalance(imgTexture);
     }
 
-    private Texture2D ToTexture2D(RenderTexture rTex)
+    private Texture2D ToTexture2D(RenderTexture rTex) ///
     {
         Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGBA32, false);
         RenderTexture.active = rTex;
@@ -74,79 +30,14 @@ public class OpenCVManager : MonoBehaviour
         return tex;
     }
 
-    public void SaveTexturePNG(RenderTexture rTex)
+    private void CalculateAreaLeftRightPixelsCountBalance(Texture2D srcTexture) 
     {
-        Texture2D tex = ToTexture2D(rTex);
-        byte[] bytes = tex.EncodeToPNG(); // Encode texture into PNG
-        UnityEngine.Object.Destroy(tex);
-        File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", bytes);
-    }
-
-    public void CalculateThreshold(Texture2D srcTexture)
-    {
-        Texture2D imgTexture = ToTexture2D(camRenderTexture); 
-
-        Mat imgMat = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1);
-        Utils.texture2DToMat(imgTexture, imgMat);
-        //Debug.Log("imgMat.ToString() " + imgMat.ToString());
-        Imgproc.threshold(imgMat, imgMat, 1, 255, Imgproc.THRESH_BINARY);
-
-        // draw
-        Texture2D texture = new Texture2D(imgMat.cols(), imgMat.rows(), TextureFormat.RGBA32, false);
-        Utils.matToTexture2D(imgMat, texture);
-
-        if (AbleVisualSurface)
-        {
-            VisualisationSurface.SetActive(true);
-            VisualisationSurface.GetComponent<Renderer>().material.mainTexture = texture;
-        }
-
-        
-    }
-
-    public void DrawContours(Texture2D srcTexture)
-    {
-        Mat srcMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC1);
-        Utils.texture2DToMat(srcTexture, srcMat);
-        Imgproc.threshold(srcMat, srcMat, 1, 255, Imgproc.THRESH_BINARY);
-
-        List<MatOfPoint> srcContours = new List<MatOfPoint>();
-        Mat srcHierarchy = new Mat();
-        
-        Imgproc.findContours(srcMat, srcContours, srcHierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_NONE);
-
-        //dstMat
-        Texture2D textureDestinationContours = new Texture2D(srcMat.cols(), srcMat.rows(), TextureFormat.RGBA32, false);
-        Mat dstMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC3);
-        Utils.texture2DToMat(textureDestinationContours, dstMat);
-
-        for (int i = 0; i < srcContours.Count; i++)
-        {
-            Imgproc.drawContours(dstMat, srcContours, i, new Scalar(150, 150, 150), 2, 8, srcHierarchy, 0, new Point());
-        }
-        
-        textureContours = new Texture2D(srcMat.cols(), srcMat.rows(), TextureFormat.RGBA32, false);
-
-        Utils.matToTexture2D(dstMat, textureDestinationContours);
-        if (AbleVisualSurface)
-        {
-            VisualisationSurface.SetActive(true);
-            VisualisationSurface.GetComponent<Renderer>().material.mainTexture = textureDestinationContours;
-        }
-            
-    }
-
-
-    public void CalculateAreaLeftRight(Texture2D srcTexture) ///
-    {
-
         Mat imgMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC1);
         Utils.texture2DToMat(srcTexture, imgMat);
         Imgproc.threshold(imgMat, imgMat, 1, 255, Imgproc.THRESH_BINARY);
 
         Size sz = new Size((int) (srcTexture.height / 10), (int)(srcTexture.width / 10));
         Imgproc.resize(imgMat, imgMat, sz);
-
 
         int rows = imgMat.rows(); //Calculates number of rows
         int cols = imgMat.cols(); //Calculates number of columns
@@ -156,11 +47,10 @@ public class OpenCVManager : MonoBehaviour
         int totalPixelsCountLeft = PixelCounting(imgMat, rows, 0, (int)cols/2, ch);
         int totalPixelsCountRight = PixelCounting(imgMat, rows, (int)cols / 2 , cols, ch);
         float DifferenceBetweenLeftandRight = Mathf.Abs(totalPixelsCountLeft - totalPixelsCountRight);
-        float visualScoreBalancePixels = 1 - ((DifferenceBetweenLeftandRight) / (totalPixelsCountRight + totalPixelsCountLeft));
+        float visualScoreBalancePixelsCount = 1 - ((DifferenceBetweenLeftandRight) / (totalPixelsCountRight + totalPixelsCountLeft));
 
         if (OnPixelsCountBalanceChanged != null)
-            OnPixelsCountBalanceChanged(visualScoreBalancePixels);
-
+            OnPixelsCountBalanceChanged(visualScoreBalancePixelsCount);
     }
 
     private static int PixelCounting(Mat imgMat, int rows,int startCols, int cols, int ch)

@@ -296,7 +296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294780}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7999928, y: -9.313226e-10, z: -0.010000231}
+  m_LocalPosition: {x: -0.604, y: -9.313226e-10, z: -0.010000231}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 360015650}
@@ -1525,6 +1525,7 @@ GameObject:
   - component: {fileID: 881400875}
   - component: {fileID: 881400878}
   - component: {fileID: 881400879}
+  - component: {fileID: 881400880}
   m_Layer: 0
   m_Name: renderCam[OpenCV]
   m_TagString: Untagged
@@ -1609,11 +1610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
-  VisualisationSurface: {fileID: 1682903050}
-  DrawContourBool: 0
-  calcThreshold: 0
-  CalculateAreaLeftRightBool: 0
-  AbleVisualSurface: 0
 --- !u!114 &881400879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1628,6 +1624,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imagePixelsValues: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
   resizefactor: 10
+--- !u!114 &881400880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881400874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907d177aacc63cb4dab37cb9ac53ce7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
+  AbleVisualSurface: 0
+  VisualisationSurface: {fileID: 1682903050}
+  DrawContourBool: 0
+  calcThreshold: 0
 --- !u!21 &899123885
 Material:
   serializedVersion: 6
@@ -1783,7 +1796,7 @@ MonoBehaviour:
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
   populationSize: 20
-  NumberOfGeneration: 3
+  NumberOfGeneration: 10
   secondToWaitForPopGeneration: 0.05
   elementsCompositions: []
 --- !u!1 &1044126323
@@ -2608,7 +2621,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 881400880}
         m_MethodName: SaveTexturePNG
         m_Mode: 2
         m_Arguments:
@@ -3064,11 +3077,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
-  VisualisationSurface: {fileID: 1682903050}
-  DrawContourBool: 0
-  calcThreshold: 0
-  CalculateAreaLeftRightBool: 0
-  AbleVisualSurface: 0
 --- !u!81 &1665053205
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3561,8 +3569,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imagePixelsValues: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
-  MaxMoves: 10
-  sendaftereverymoves: 3
   gamemanager: {fileID: 2142160879}
 --- !u!114 &1769680393
 MonoBehaviour:
@@ -4299,6 +4305,7 @@ GameObject:
   - component: {fileID: 2142160883}
   - component: {fileID: 2142160882}
   - component: {fileID: 2142160880}
+  - component: {fileID: 2142160881}
   m_Layer: 0
   m_Name: '[GameManager]'
   m_TagString: Untagged
@@ -4320,6 +4327,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawRenderedLinesDebug: 1
   weight: 0.36
+--- !u!114 &2142160881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142160879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1697b416b88594449b895cfc497b9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2142160882
 MonoBehaviour:
   m_ObjectHideFlags: 0

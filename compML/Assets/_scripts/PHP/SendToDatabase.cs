@@ -7,11 +7,11 @@ using UnityEngine.EventSystems;
 public class SendToDatabase : MonoBehaviour
 {
     // for opencv score usually I created an events from Opencv Manager
-    // for not opencv score usually to access scores via components and methods from UI manager
+    // for not opencv score usually to access scores via components and methods from UI manager -- which I am fixing.. since do not make sense
 
     public ImageMatrixData imagePixelsValues;
-    public int MaxMoves = 4;
-    public int sendaftereverymoves = 3;
+    //public int MaxMoves = 4;
+    //public int sendaftereverymoves = 3;
     public GameObject gamemanager;
 
     private CollectDataRenderTexture collectdatarendertexture;
@@ -27,7 +27,7 @@ public class SendToDatabase : MonoBehaviour
     private float judge;
     private List<GameObject> listOfelementsInComposition;
     private List<float> listOfgenes;
-    private int moves;
+    //private int moves;
     private float scorePixelsBalance;
     private float scoreBoundsBalance;
     private float scoreUnityVisual;
@@ -49,33 +49,6 @@ public class SendToDatabase : MonoBehaviour
         }
     }
 
-    //private void Update()
-    //{
-        
-    //    // to change all with a button that say I don't like it...
-
-    //    //float CurrentTotalScore = scorePixelsBalance + scoreBoundsBalance + scoreUnityVisual; //
-
-    //    if (populationmanager.triggerAI == false && CurrentTotalScore != 0.0f)
-    //    {
-
-    //        if (Input.GetKeyDown(KeyCode.Mouse0) && EventSystem.current.IsPointerOverGameObject() == false && moves < MaxMoves)
-    //        {
-    //            if (moves != 0 && moves % sendaftereverymoves == 0)
-    //            {
-    //                PostDataFromAttemptsOfMoves();
-    //            }
-    //            moves++;
-    //        }
-    //    }
-
-    //    if (populationmanager.triggerAI == true)
-    //    {
-    //        moves = 0;
-    //    }
-    //}
-   
-
     public void SendNegativeJudge()
     {
         PostDataFromAttemptsOfMoves();
@@ -92,7 +65,7 @@ public class SendToDatabase : MonoBehaviour
         }
         scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
-        scorePixelsBalance = scoreCalculator.scorePixelsBalance;
+        scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         g0 = listOfgenes[0];
         g1 = listOfgenes[1];
         g2 = listOfgenes[2];
@@ -116,7 +89,7 @@ public class SendToDatabase : MonoBehaviour
         }
         scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
-        scorePixelsBalance = scoreCalculator.scorePixelsBalance;
+        scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         g0 = listOfgenes[0];
         g1 = listOfgenes[1];
         g2 = listOfgenes[2];

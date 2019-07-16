@@ -83,10 +83,11 @@ public class PopulationManager : MonoBehaviour {
     {
         AICreatesInitialPopulationTurn = false;
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
+
         IndividualCompositionSet.GetComponent<BrainGA>().Init();
         counterForPopulation++;
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
-        IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the moved are updated
+        IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the moved are updated and score
         population.Add(IndividualCompositionSet);
         populationToDelete.Add(IndividualCompositionSet); 
 
@@ -110,9 +111,13 @@ public class PopulationManager : MonoBehaviour {
         {
             sortedList = population.OrderBy(o => o.GetComponent<BrainGA>().TotalScore).ToList();
 
-            if (population.Count == 10)
+            if (population.Count == populationSize)
             {
                 bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore;
+
+                //Debug.Log(" first best " + bestScore);
+                //Debug.Log("second best " + sortedList[sortedList.Count - 2].GetComponent<BrainGA>().TotalScore);
+
                 population.Clear(); // this is the list not the objects
             }
             sortNewGeneration = false;
@@ -122,18 +127,19 @@ public class PopulationManager : MonoBehaviour {
 
     private IEnumerator Breed()
     {
-        int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count - 1);
-        int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count - 1);
-        GameObject parent1 = sortedList[InternalIndex_parent1];
-        GameObject parent2 = sortedList[InternalIndex_parent2];
+       int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count - 1);
+       int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count - 1);
+       GameObject parent1 = sortedList[InternalIndex_parent1];
+       GameObject parent2 = sortedList[InternalIndex_parent2];
 
        GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
+
        BrainGA b = offspring.GetComponent<BrainGA>();
        if (Random.Range(0, 10) == 1) //mutate 1 in 10
        {
-           b.InitForBreed();
-           b.dna.Mutate();
-           b.MoveComposition(); 
+            b.InitForBreed();
+            b.dna.Mutate();
+            b.MoveComposition(); 
         }
        else
        {
@@ -143,7 +149,7 @@ public class PopulationManager : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
-        offspring.GetComponent<BrainGA>().CalculateTotalScore();
+        offspring.GetComponent<BrainGA>().CalculateTotalScore(); // this is where the moved are updated and score
         population.Add(offspring);
         populationToDelete.Add(offspring);
         GenerateNewPopulatoinOffsprings_trigger = true;
@@ -171,7 +177,9 @@ public class PopulationManager : MonoBehaviour {
             generation = 0;
             CounterOffsprings = 0;
             counterForPopulation = 0;
-   
+
+            
+
             float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scorePixelsBalanceIndividual;
             float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisualIndividual;
             float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalanceIndividual;
