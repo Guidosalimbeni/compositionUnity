@@ -99,6 +99,7 @@
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\GameEventListener.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\TestNNdata.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\tests\UUU_test.cs" />
+    <Compile Include="Assets\_scripts\SelectorOfItemInCompositionStart.cs" />
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientPixelsBalance.cs" />

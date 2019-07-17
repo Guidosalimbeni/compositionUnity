@@ -7,10 +7,13 @@ public class GamePopulationController : MonoBehaviour
     
     public float MaxValues_x = 2.0f;
     public float MinValues_z = -2.0f;
-    public List<GameObject> ElementsCompositions { get; set; }
+    public List<GameObject> ElementsCompositions { get; set; } 
 
     private void Start()
     {
+
+        // instantiate from game manager... (if there already in scene for debugging ... no problem...)
+
         PopulateTheElementsOfCompositionInTheScene();
         SetLayerToForeground();
     }
