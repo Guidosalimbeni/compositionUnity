@@ -124,6 +124,17 @@ public class PopulationManager : MonoBehaviour {
 
     private void GenerateNewPopulationOffsprings()
     {
+
+        // to delete debugging
+        debugingList = new List<float>();
+        foreach (GameObject go in sortedList)
+        {
+            debugingList.Add(go.GetComponent<BrainGA>().TotalScore);
+        }
+
+
+
+
         GenerateNewPopulatoinOffsprings_trigger = false; ///
 
         if (sortNewGeneration == true)
@@ -143,8 +154,8 @@ public class PopulationManager : MonoBehaviour {
 
     private IEnumerator Breed()
     {
-       int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count - 1);
-       int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count - 1);
+       int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
+       int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
        GameObject parent1 = sortedList[InternalIndex_parent1];
        GameObject parent2 = sortedList[InternalIndex_parent2];
 
