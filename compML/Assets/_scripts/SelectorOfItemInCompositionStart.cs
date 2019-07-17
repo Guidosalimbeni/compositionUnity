@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class SelectorOfItemInCompositionStart : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class SelectorOfItemInCompositionStart : MonoBehaviour
 
     private List<int> selectedItemIDS;
     private List<GameObject> CompositionElementsPrefabsSELECTED;
+
+    public event Action<int> OnSelectionADDEDOfItemID;
+    public event Action<int> OnSelectionREMOVEDOfItemID;
 
     private void Start()
     {
@@ -18,12 +22,19 @@ public class SelectorOfItemInCompositionStart : MonoBehaviour
     public void PopulateSelectedItemIdsFromButton(int ID)
     {
         selectedItemIDS.Add(ID);
+        if (OnSelectionADDEDOfItemID != null)
+            OnSelectionADDEDOfItemID(ID);
     }
 
     public void RemoveUnselectedItemIdsFromButton(int ID)
     {
         selectedItemIDS.Remove(ID);
+        if (OnSelectionREMOVEDOfItemID != null)
+            OnSelectionREMOVEDOfItemID(ID);
     }
+
+
+
 
     public void PopulateElementsCompositionsSelected()
     {

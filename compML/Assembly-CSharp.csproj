@@ -68,6 +68,7 @@
     <Compile Include="Assets\_scripts\Classification\DetectorCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\UtilsCompositionML.cs" />
+    <Compile Include="Assets\_scripts\CurrentIDitemTag.cs" />
     <Compile Include="Assets\_scripts\EventTriggerTouchClick.cs" />
     <Compile Include="Assets\_scripts\GameManagerCompML.cs" />
     <Compile Include="Assets\_scripts\GamePopulationController.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Assets\_scripts\UnityPDO\OpenMenu.cs" />
     <Compile Include="Assets\_scripts\UnityPDO\RegisterSystem.cs" />
     <Compile Include="Assets\_scripts\UnityPDO\TransferToOfficial.cs" />
+    <Compile Include="Assets\_scripts\UpdateCountUIonSelectionItem.cs" />
     <Compile Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\Classifier.cs" />
     <Compile Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\CompMLClassifier.cs" />
     <Compile Include="Assets\_scripts\Z_Not_used\ClassificationDetectionNOT\Detector.cs" />
