@@ -9,7 +9,8 @@ using UnityEngine;
 
 public class BrainGA : MonoBehaviour
 {
-    public int DNALength = 6;
+    
+    public int NumberOfgenes = 2; // still need to hard code the genes anyway..
 	public float TotalScore;  //
 	public DNA dna;
 
@@ -19,17 +20,18 @@ public class BrainGA : MonoBehaviour
 
     public List<float> genes = new List<float>();
 
+    private int DNALength;
     private ScoreCalculator scoreCalculator;
     private BrainNN_CompML brainNN_compML;
     private GamePopulationController gamePopulationController;
-    //private OpenCVManager openCVmanager;
-    //private Game_Manager gameManagerNotOpenCV;
 
     private void Awake()
     {
         brainNN_compML = FindObjectOfType<BrainNN_CompML>();
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
         gamePopulationController = FindObjectOfType<GamePopulationController>();
+        DNALength = gamePopulationController.ElementsCompositions.Count * NumberOfgenes;
+        Debug.Log(DNALength);
     }
 
     public void Init()
@@ -48,7 +50,7 @@ public class BrainGA : MonoBehaviour
         foreach (var elementComp in gamePopulationController.ElementsCompositions)
         {
             elementComp.transform.position = new Vector3(dna.GetGene(genePos), 0, dna.GetGene(genePos + 1));
-            genePos = genePos + 2;
+            genePos = genePos + NumberOfgenes;
         }
     }
 
@@ -87,7 +89,7 @@ public class BrainGA : MonoBehaviour
         foreach (var elementComp in gamePopulationController.ElementsCompositions)
         {
             elementComp.transform.position = new Vector3(genes[genePos], 0, genes[genePos + 1]);
-            genePos = genePos + 2;
+            genePos = genePos + NumberOfgenes;
         }
     }
 }

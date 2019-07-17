@@ -40,6 +40,13 @@ public class PopulationManager : MonoBehaviour {
         gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
     }
 
+
+    public void TriggerAIfromButton()
+    {
+        triggerAI = true;
+    }
+
+
     private void Update()
     {
         if (triggerAI == true) 

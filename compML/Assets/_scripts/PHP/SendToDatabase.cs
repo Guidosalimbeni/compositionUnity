@@ -10,7 +10,6 @@ public class SendToDatabase : MonoBehaviour
     // for not opencv score usually to access scores via components and methods from UI manager -- which I am fixing.. since do not make sense
 
     public ImageMatrixData imagePixelsValues;
-    //public GameObject gamemanager;
 
     private CollectDataRenderTexture collectdatarendertexture;
     private GamePopulationController gamePopulationController;
@@ -47,11 +46,10 @@ public class SendToDatabase : MonoBehaviour
 
     public void SendNegativeJudge()
     {
-        PostDataFromAttemptsOfMoves();
-
+        PostDataFromAFromNegativeJudge();
     }
 
-    public void PostDataFromAttemptsOfMoves()
+    public void PostDataFromAFromNegativeJudge()
     {
         listOfgenes = new List<float>();
         foreach (GameObject element in listOfelementsInComposition)
@@ -68,14 +66,14 @@ public class SendToDatabase : MonoBehaviour
         g3 = listOfgenes[3];
         g4 = listOfgenes[4];
         g5 = listOfgenes[5];
-        judge = 0;               //////////////////
+        judge = 0;               
 
         listOfgenes.Clear();
 
         StartCoroutine(PostData(LoadSceneInputUsername.username));
     }
 
-    public void PostDataFromButton()
+    public void PostDataForPositiveJudge()
     {
         listOfgenes = new List<float>();
         foreach (GameObject element in listOfelementsInComposition)
@@ -92,13 +90,38 @@ public class SendToDatabase : MonoBehaviour
         g3 = listOfgenes[3];
         g4 = listOfgenes[4];
         g5 = listOfgenes[5];
-        judge = 1;               //////////////////
+        judge = 1;               
 
         listOfgenes.Clear();
 
         StartCoroutine(PostData(LoadSceneInputUsername.username)); //TO FIX
-        populationmanager.triggerAI = true;
+
     }
+
+    //public void PostDataFromButtonRobotAndStartGeneticAlgorithm()
+    //{
+    //    listOfgenes = new List<float>();
+    //    foreach (GameObject element in listOfelementsInComposition)
+    //    {
+    //        listOfgenes.Add(element.transform.position.x);
+    //        listOfgenes.Add(element.transform.position.z);
+    //    }
+    //    scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
+    //    scoreUnityVisual = scoreCalculator.scoreUnityVisual;
+    //    scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
+    //    g0 = listOfgenes[0];
+    //    g1 = listOfgenes[1];
+    //    g2 = listOfgenes[2];
+    //    g3 = listOfgenes[3];
+    //    g4 = listOfgenes[4];
+    //    g5 = listOfgenes[5];
+    //    judge = 1;               //////////////////
+
+    //    listOfgenes.Clear();
+
+    //    StartCoroutine(PostData(LoadSceneInputUsername.username)); //TO FIX
+    //    populationmanager.triggerAI = true;
+    //}
 
     public void PostDataFromAI(float scorePixelsBalancefromAI, 
                                 float scoreUnityVisualFromAI, 
@@ -115,7 +138,7 @@ public class SendToDatabase : MonoBehaviour
         g3 = genesAI[3];
         g4 = genesAI[4];
         g5 = genesAI[5];
-        judge = 1;                  ////////////////////// TODO
+        judge = 0.5f;                  ////////////////////// TODO I can then validate or penalise with my vote...
 
         StartCoroutine(PostData("AI_TURN"));
     }

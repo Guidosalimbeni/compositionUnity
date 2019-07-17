@@ -40,6 +40,13 @@ public class GamePopulationController : MonoBehaviour
             GameObject go = elementtag.gameObject;
             ElementsCompositions.Add(go);
         }
+
+        //debug
+        foreach (var g in ElementsCompositions)
+        {
+            Debug.Log(g.name);
+        }
+
     }
 
     private void SetLayerToForeground()

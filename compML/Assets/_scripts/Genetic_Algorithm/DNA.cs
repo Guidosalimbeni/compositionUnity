@@ -13,8 +13,8 @@ public class DNA {
 	public DNA(int lenght, float Maxv, float MinV)
 	{
 		DnaLength = lenght;
-		MaxValues = Maxv;  // +1
-        MinValue = MinV;  // -1
+		MaxValues = Maxv;  // +2
+        MinValue = MinV;  // -2
         // TODO define for each axis
         SetRandom();
 	}
