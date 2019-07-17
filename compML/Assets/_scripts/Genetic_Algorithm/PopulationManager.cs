@@ -27,6 +27,7 @@ public class PopulationManager : MonoBehaviour {
     private SendToDatabase sendtodatabase;
     private OpenCVManager openCVmanager;
     private GameVisualManager gameManagerNotOpenCV;
+    private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
 
     private void Awake()
     {
@@ -38,12 +39,14 @@ public class PopulationManager : MonoBehaviour {
     {
         openCVmanager = FindObjectOfType<OpenCVManager>();
         gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
+        calculateCollisionDistanceVisualUnity = FindObjectOfType<CalculateCollisionDistanceVisualUnity>();
     }
 
 
     public void TriggerAIfromButton()
     {
         triggerAI = true;
+        calculateCollisionDistanceVisualUnity.drawRenderedLinesDebug = false;
     }
 
 
@@ -81,7 +84,6 @@ public class PopulationManager : MonoBehaviour {
         b.MoveComposition();
         counterForPopulation++;
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
-
 
         // to need another yield?
 
@@ -184,6 +186,7 @@ public class PopulationManager : MonoBehaviour {
 
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
+            calculateCollisionDistanceVisualUnity.drawRenderedLinesDebug = true;
             AICreatesInitialPopulationTurn = true;
 
             List<float> genes = new List<float>();

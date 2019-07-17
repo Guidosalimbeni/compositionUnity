@@ -9,9 +9,8 @@ using UnityEngine;
 
 public class BrainGA : MonoBehaviour
 {
-    
     public int NumberOfgenes = 2; // still need to hard code the genes anyway..
-	public float TotalScore;  //
+	public float TotalScore;  // THIS IS IMPORTANT SINCE LINKS TO THE SORTED POPULATION INDIVIDUAL BRAIN
 	public DNA dna;
 
     public float scorePixelsBalanceIndividual { get; set; }
@@ -24,6 +23,7 @@ public class BrainGA : MonoBehaviour
     private ScoreCalculator scoreCalculator;
     private BrainNN_CompML brainNN_compML;
     private GamePopulationController gamePopulationController;
+    private InferenceCompositionML inferenceCompositionML;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class BrainGA : MonoBehaviour
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
         gamePopulationController = FindObjectOfType<GamePopulationController>();
         DNALength = gamePopulationController.ElementsCompositions.Count * NumberOfgenes;
-        Debug.Log(DNALength);
+        inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
     }
 
     public void Init()
@@ -75,6 +75,10 @@ public class BrainGA : MonoBehaviour
             scorePixelsBalanceIndividual = scoreCalculator.visualScoreBalancePixelsCount; 
             scoreBoundsBalanceIndividual = scoreCalculator.scoreBoundsBalance;
             scoreUnityVisualIndividual = scoreCalculator.scoreUnityVisual;
+
+
+            inferenceCompositionML.MakePrecitionCompMLMobileNet();
+
 
             // add back the NEURAL NETWORK
 

@@ -40,7 +40,6 @@ public class InferenceCompositionML : MonoBehaviour
         }
     }
 
-
     public void MakePrecitionCompMLMobileNet()
     {
         m_Texture = ToTexture2D(camRenderTexture);
