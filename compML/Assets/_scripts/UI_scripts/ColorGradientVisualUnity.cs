@@ -24,10 +24,10 @@ public class ColorGradientVisualUnity : MonoBehaviour
     }
 
 
-    public float GetVisualUnityScore()
-    {
-        return VisualUnityScore;
-    }
+    //public float GetVisualUnityScore() // do i need this ???
+    //{
+    //    return VisualUnityScore;
+    //}
 
     public void UpdateBalancePixelsUI(float score)
     {

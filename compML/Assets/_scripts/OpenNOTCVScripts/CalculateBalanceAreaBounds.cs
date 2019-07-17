@@ -17,7 +17,7 @@ public class CalculateBalanceAreaBounds : MonoBehaviour
     float totalLeftArea;
     float totalRightArea;
 
-    private void Awake()
+    private void Start()
     {
         compositionObjects = FindObjectsOfType<CompScreenAreaCalculation>();
         areasObjects = new AreasObjects();
