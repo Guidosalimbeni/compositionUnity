@@ -19,44 +19,38 @@ public class BrainGA : MonoBehaviour
 
     public List<float> genes = new List<float>();
 
-    private PopulationManager population_manager;
     private ScoreCalculator scoreCalculator;
     private BrainNN_CompML brainNN_compML;
+    private GamePopulationController gamePopulationController;
     //private OpenCVManager openCVmanager;
     //private Game_Manager gameManagerNotOpenCV;
 
     private void Awake()
     {
         brainNN_compML = FindObjectOfType<BrainNN_CompML>();
-        
-        population_manager = FindObjectOfType<PopulationManager>();
-        
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
-
-        //openCVmanager = FindObjectOfType<OpenCVManager>();
-        //gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
+        gamePopulationController = FindObjectOfType<GamePopulationController>();
     }
 
     public void Init()
 	{
-        dna = new DNA(DNALength, population_manager.MaxValues_x, population_manager.MinValues_z);
+        dna = new DNA(DNALength, gamePopulationController.MaxValues_x, gamePopulationController.MinValues_z);
     }
 
     public void InitForBreed()
     {
-        dna = new DNA(DNALength, population_manager.MaxValues_x, population_manager.MinValues_z);
+        dna = new DNA(DNALength, gamePopulationController.MaxValues_x, gamePopulationController.MinValues_z);
     }
 
     public void MoveComposition()
     {
         int genePos = 0;
-        foreach (var elementComp in population_manager.elementsCompositions)
+        foreach (var elementComp in gamePopulationController.ElementsCompositions)
         {
             elementComp.transform.position = new Vector3(dna.GetGene(genePos), 0, dna.GetGene(genePos + 1));
             genePos = genePos + 2;
         }
     }
-
 
     public void CalculateTotalScore()
     {
@@ -84,17 +78,13 @@ public class BrainGA : MonoBehaviour
 
             TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual;// + scoreNN;
             
-
         }
-
     }
-
-    
 
     public void MoveCompositionOfBestFitAfterAIfinishedIsTurn(List<float> genes)
     {
         int genePos = 0;
-        foreach (var elementComp in population_manager.elementsCompositions)
+        foreach (var elementComp in gamePopulationController.ElementsCompositions)
         {
             elementComp.transform.position = new Vector3(genes[genePos], 0, genes[genePos + 1]);
             genePos = genePos + 2;

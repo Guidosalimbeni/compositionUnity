@@ -69,7 +69,9 @@
     <Compile Include="Assets\_scripts\Classification\InferenceCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\UtilsCompositionML.cs" />
     <Compile Include="Assets\_scripts\EventTriggerTouchClick.cs" />
-    <Compile Include="Assets\_scripts\Game_Manager.cs" />
+    <Compile Include="Assets\_scripts\GameManagerCompML.cs" />
+    <Compile Include="Assets\_scripts\GamePopulationController.cs" />
+    <Compile Include="Assets\_scripts\GameVisualManager.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\BrainGA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\DNA.cs" />
     <Compile Include="Assets\_scripts\Genetic_Algorithm\PopulationManager.cs" />

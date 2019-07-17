@@ -5,7 +5,7 @@ using UnityEngine;
 public class TotalScoreUI : MonoBehaviour
 {
     private OpenCVManager openCvManager;
-    private Game_Manager gameManagerNotOpenCV;
+    private GameVisualManager gameManagerNotOpenCV;
 
     public float TOTALSCOREDebugging;
 
@@ -17,7 +17,7 @@ public class TotalScoreUI : MonoBehaviour
     {
 
         openCvManager = FindObjectOfType<OpenCVManager>();
-        gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
+        gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
 
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;

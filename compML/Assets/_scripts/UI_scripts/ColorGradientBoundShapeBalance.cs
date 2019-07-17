@@ -11,11 +11,11 @@ public class ColorGradientBoundShapeBalance : MonoBehaviour
     Color lerpedColor = Color.white;
     private AreasObjects areaobjects;
 
-    private Game_Manager gameManagerNotOpenCV;
+    private GameVisualManager gameManagerNotOpenCV;
 
     private void Awake()
     {
-        gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
+        gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += HandleOnScoreBoundsBalanceChanged;
         balanceBoundsShapesUI = balanceBoundsShapesUI.GetComponent<RawImage>();
     }

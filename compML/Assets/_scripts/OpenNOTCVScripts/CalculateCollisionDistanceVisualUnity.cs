@@ -17,18 +17,19 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
 
     public float VisualUnityScore { get; private set; }
 
-    private Game_Manager gamemanager;
+    private GameVisualManager gamemanager;
+    private GamePopulationController gamePopulationController;
 
     private void Awake()
     {
-        gamemanager = FindObjectOfType<Game_Manager>();
+        gamePopulationController = FindObjectOfType<GamePopulationController>();
     }
 
     private void Start()
     {
         LineRendererObjectsList = new List<GameObject>();
 
-        PairwaiseElementsOfComposition = PairwaiseOperation(gamemanager.ElementsOfComposition);
+        PairwaiseElementsOfComposition = PairwaiseOperation(gamePopulationController.ElementsCompositions);
         for (int i = 0; i < PairwaiseElementsOfComposition.Count; i++)
         {
             GameObject ObjectForLineRenderer = new GameObject("GameObject_LineRenderer_" + i.ToString());
@@ -83,19 +84,19 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
         return VisualUnityScore;
     }
 
-    List<List<GameObject>> PairwaiseOperation(List<GameObject> ElementsOfComposition)
+    List<List<GameObject>> PairwaiseOperation(List<GameObject> ElementsOfCompositionForPaiwiseOperation)
     {
         List<List<GameObject>>  result = new List<List<GameObject>>();
 
-        for (int i = 0; i < ElementsOfComposition.Count; i++)
+        for (int i = 0; i < ElementsOfCompositionForPaiwiseOperation.Count; i++)
         {
-            for (int j = i; j < ElementsOfComposition.Count; j++)
+            for (int j = i; j < ElementsOfCompositionForPaiwiseOperation.Count; j++)
             {
                 if (i != j)
                 {
                     pair = new List<GameObject>();
-                    pair.Add(ElementsOfComposition[i]);
-                    pair.Add(ElementsOfComposition[j]);
+                    pair.Add(ElementsOfCompositionForPaiwiseOperation[i]);
+                    pair.Add(ElementsOfCompositionForPaiwiseOperation[j]);
                     result.Add(pair);
                 }
             }

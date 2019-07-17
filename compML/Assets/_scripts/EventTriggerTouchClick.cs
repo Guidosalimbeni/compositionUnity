@@ -7,7 +7,7 @@ namespace Lean.Touch
     {
 
         private OpenCVManager openCVManager;
-        private Game_Manager gameManagerNotOpenCV;
+        private GameVisualManager gameManagerNotOpenCV;
 
 
         protected virtual void OnEnable()
@@ -24,7 +24,7 @@ namespace Lean.Touch
         private void Start()
         {
             openCVManager = FindObjectOfType<OpenCVManager>();
-            gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
+            gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
         }
 
         protected virtual void OnDisable()

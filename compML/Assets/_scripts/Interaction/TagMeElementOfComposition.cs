@@ -11,8 +11,4 @@ public class TagMeElementOfComposition : MonoBehaviour, IElementOfComposition
         return gameObject;
     }
 
-    public void SetIdElementOfComposition(int ID)
-    {
-        ElementOfCompositionID = ID;
-    }
 }

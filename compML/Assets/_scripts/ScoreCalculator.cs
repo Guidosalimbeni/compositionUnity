@@ -9,12 +9,12 @@ public class ScoreCalculator : MonoBehaviour
     public float scoreUnityVisual { private set; get; } //
 
     private OpenCVManager openCvManager;
-    private Game_Manager gameManagerNotOpenCV;
+    private GameVisualManager gameManagerNotOpenCV;
 
     private void Awake()
     {
         openCvManager = FindObjectOfType<OpenCVManager>();
-        gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
+        gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
 
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;

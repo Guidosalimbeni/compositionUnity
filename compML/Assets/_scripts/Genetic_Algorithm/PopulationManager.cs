@@ -5,19 +5,13 @@ using System.Linq;
 
 public class PopulationManager : MonoBehaviour {
 
-    public float MaxValues_x = 2.0f;
-    public float MinValues_z = -2.0f;
     public bool triggerAI = false;
 	public GameObject Individual;
     public int populationSize = 10;
     public int NumberOfGeneration = 4;
     public float secondToWaitForPopGeneration = 0.1f;
-
-    public List<GameObject> elementsCompositions { get; set; }
-
     public float bestScore; // for debugging only
     public List<float> debugingList; // for debugging only
-
 
     private int generation = 0;
     private int counterForPopulation = 0;
@@ -27,16 +21,12 @@ public class PopulationManager : MonoBehaviour {
     private List<GameObject> population = new List<GameObject>();
     private GameObject offspring;
 
-    public List<GameObject> sortedList;
-    //List<GameObject> sortedList = new List<GameObject>();
-
-
+    private List<GameObject> sortedList;
     private List<GameObject> populationToDelete = new List<GameObject>();
     private bool sortNewGeneration = true;
-
     private SendToDatabase sendtodatabase;
     private OpenCVManager openCVmanager;
-    private Game_Manager gameManagerNotOpenCV;
+    private GameVisualManager gameManagerNotOpenCV;
 
     private void Awake()
     {
@@ -46,22 +36,8 @@ public class PopulationManager : MonoBehaviour {
 
     private void Start()
     {
-        PopulateTheElementsOfCompositionInTheScene();
         openCVmanager = FindObjectOfType<OpenCVManager>();
-        gameManagerNotOpenCV = FindObjectOfType<Game_Manager>();
-    }
-
-    private void PopulateTheElementsOfCompositionInTheScene()
-    {
-
-        elementsCompositions = new List<GameObject>();
-
-        TagMeElementOfComposition[] elementstags = FindObjectsOfType<TagMeElementOfComposition>();
-        foreach (var elementtag in elementstags)
-        {
-            GameObject go = elementtag.gameObject;
-            elementsCompositions.Add(go);
-        }
+        gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
     }
 
     private void Update()
@@ -124,17 +100,6 @@ public class PopulationManager : MonoBehaviour {
 
     private void GenerateNewPopulationOffsprings()
     {
-
-        // to delete debugging
-        debugingList = new List<float>();
-        foreach (GameObject go in sortedList)
-        {
-            debugingList.Add(go.GetComponent<BrainGA>().TotalScore);
-        }
-
-
-
-
         GenerateNewPopulatoinOffsprings_trigger = false; ///
 
         if (sortNewGeneration == true)
@@ -189,13 +154,21 @@ public class PopulationManager : MonoBehaviour {
         population.Add(offspring);
         populationToDelete.Add(offspring);
         GenerateNewPopulatoinOffsprings_trigger = true;
-        CounterOffsprings++;
+        CounterOffsprings++; // counter
         
         if (CounterOffsprings == populationSize)
         {
             sortNewGeneration = true;
             CounterOffsprings = 0;
-            generation++; 
+            generation++; // counter
+
+            // to delete debugging
+            //debugingList = new List<float>();
+            //foreach (GameObject go in sortedList)
+            //{
+            //    debugingList.Add(go.GetComponent<BrainGA>().TotalScore);
+            //}
+
         }
 
         if (generation == NumberOfGeneration)
@@ -210,26 +183,18 @@ public class PopulationManager : MonoBehaviour {
             genes.Clear();
             genes = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().genes;
 
-
             // to delete debugging
-            debugingList = new List<float>();
-            foreach (GameObject go in sortedList)
-            {
-                debugingList.Add(go.GetComponent<BrainGA>().TotalScore);
-            }
-            
+            //debugingList = new List<float>();
+            //foreach (GameObject go in sortedList)
+            //{
+            //    debugingList.Add(go.GetComponent<BrainGA>().TotalScore);
+            //}
 
             sortedList[sortedList.Count - 1].GetComponent<BrainGA>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(genes);
-
-            
-
-
 
             generation = 0;
             CounterOffsprings = 0;
             counterForPopulation = 0;
-
-            
 
             float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scorePixelsBalanceIndividual;
             float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisualIndividual;
@@ -250,8 +215,6 @@ public class PopulationManager : MonoBehaviour {
 
             openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
             gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
-
-
 
         }
     }

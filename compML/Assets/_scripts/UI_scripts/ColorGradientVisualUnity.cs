@@ -9,12 +9,12 @@ public class ColorGradientVisualUnity : MonoBehaviour
     public RawImage VisualUnityUI;
     private Color lerpedColor = Color.white;
     private float VisualUnityScore;
-    private Game_Manager gamemanagerNotOpenCV;
+    private GameVisualManager gamemanagerNotOpenCV;
 
     private void Awake()
     {
         //VisualUnityUI = VisualUnityUI.GetComponent<RawImage>();
-        gamemanagerNotOpenCV = FindObjectOfType<Game_Manager>();
+        gamemanagerNotOpenCV = FindObjectOfType<GameVisualManager>();
         gamemanagerNotOpenCV.OnScoreUnityVisualChanged += Handle_OnScoreUnityVisualChanged;
     }
 

@@ -10,12 +10,10 @@ public class SendToDatabase : MonoBehaviour
     // for not opencv score usually to access scores via components and methods from UI manager -- which I am fixing.. since do not make sense
 
     public ImageMatrixData imagePixelsValues;
-    //public int MaxMoves = 4;
-    //public int sendaftereverymoves = 3;
-    public GameObject gamemanager;
+    //public GameObject gamemanager;
 
     private CollectDataRenderTexture collectdatarendertexture;
-    private Game_Manager GM;
+    private GamePopulationController gamePopulationController;
     private ScoreCalculator scoreCalculator;
     private PopulationManager populationmanager;
     private float g0;
@@ -27,7 +25,6 @@ public class SendToDatabase : MonoBehaviour
     private float judge;
     private List<GameObject> listOfelementsInComposition;
     private List<float> listOfgenes;
-    //private int moves;
     private float scorePixelsBalance;
     private float scoreBoundsBalance;
     private float scoreUnityVisual;
@@ -35,17 +32,16 @@ public class SendToDatabase : MonoBehaviour
     private void Awake()
     {
         collectdatarendertexture = FindObjectOfType<CollectDataRenderTexture>();
-
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
         populationmanager = FindObjectOfType<PopulationManager>();
-        GM = gamemanager.GetComponent<Game_Manager>();
+        gamePopulationController = FindObjectOfType<GamePopulationController>();
     }
 
     private void Start()
     {
-        if (GM != null)
+        if (gamePopulationController != null)
         {
-            listOfelementsInComposition = GM.getListOfItemInComposition(); // to fix since it is probably already in composition
+            listOfelementsInComposition = gamePopulationController.ElementsCompositions; // to fix since it is probably already in composition -- I think I fixed
         }
     }
 

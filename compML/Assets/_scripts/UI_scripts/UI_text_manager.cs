@@ -12,11 +12,11 @@ public class UI_text_manager : MonoBehaviour
     private AreasObjects areaobjects;
     private TextMeshProUGUI BondsLeftBalanceText;
     private TextMeshProUGUI BondsRightBalanceText;
-    private Game_Manager gamemanager;
+    private GameVisualManager gamemanager;
 
     void Awake()
     {
-        gamemanager = FindObjectOfType<Game_Manager>();
+        gamemanager = FindObjectOfType<GameVisualManager>();
         BondsLeftBalanceText = BondsLeftBalanceObj.GetComponent<TextMeshProUGUI>();
         BondsRightBalanceText = BondsRightBalanceObj.GetComponent<TextMeshProUGUI>();
     }
