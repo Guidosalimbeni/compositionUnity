@@ -316,6 +316,18 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="System.Numerics">
+      <HintPath>D:/compositionUnity/compML/Assets/ML-Agents/Plugins/System.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>D:/compositionUnity/compML/Assets/ML-Agents/Plugins/System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="TensorFlowSharp.Android">
+      <HintPath>D:/compositionUnity/compML/Assets/ML-Agents/Plugins/Android/TensorFlowSharp.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="TensorFlowSharp">
+      <HintPath>D:/compositionUnity/compML/Assets/ML-Agents/Plugins/Computer/TensorFlowSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Abstractions">
       <HintPath>D:/compositionUnity/compML/Assets/UnitySDK/Assets/ML-Agents/Plugins/System.IO.Abstractions.dll</HintPath>
     </Reference>
