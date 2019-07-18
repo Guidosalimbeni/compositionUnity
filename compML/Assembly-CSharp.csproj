@@ -92,6 +92,7 @@
     <Compile Include="Assets\_scripts\ScoreCalculator.cs" />
     <Compile Include="Assets\_scripts\SCRIPT_AI_COMP\CompAiAcademy.cs" />
     <Compile Include="Assets\_scripts\SCRIPT_AI_COMP\CompAiAgent.cs" />
+    <Compile Include="Assets\_scripts\SCRIPT_AI_COMP\RewardControllerAIComp.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\CompositionImage.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataForNeuralNetwork_CompML.cs" />
     <Compile Include="Assets\_scripts\Scriptable Objects\DataScores.cs" />

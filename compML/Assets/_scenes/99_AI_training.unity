@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 255941182}
   - component: {fileID: 255941181}
   m_Layer: 0
-  m_Name: Directional Light (1)
+  m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5453,7 +5453,7 @@ GameObject:
   - component: {fileID: 1809762582}
   - component: {fileID: 1809762581}
   m_Layer: 0
-  m_Name: renderCam[OpenCV]
+  m_Name: renderCam[OpenCV_Main_AI]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6391,10 +6391,11 @@ MonoBehaviour:
     agentCameras: []
     agentRenderTextures:
     - {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
-    maxStep: 0
+    maxStep: 50
     resetOnDone: 1
-    onDemandDecision: 0
+    onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
+  renderCamera: {fileID: 1809762585}
 --- !u!114 &3358845019740874720
 MonoBehaviour:
   m_ObjectHideFlags: 0
