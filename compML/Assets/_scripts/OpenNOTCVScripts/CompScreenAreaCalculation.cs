@@ -17,8 +17,14 @@ using UnityEngine;
 If you can live with an approximation, you can take corners of the bounds of the mesh, convert to world positions (Transform.TransformPoint()), then convert the result to Screen or Viewport points. Taking the minimum and maximum x and y values will give an XY axes aligned bounding rect that can be used to calculate a percentage. Here is an example script:
 */
 
+
+
+
 public class CompScreenAreaCalculation : MonoBehaviour
 {
+
+    public float percentageScreenOccupiedByItem { get; set; } // used by ml-agents
+
     public TypeOfScreenData CalcScreenPercentage()
     {
         TypeOfScreenData typeofscreendata = new TypeOfScreenData();
@@ -61,9 +67,9 @@ public class CompScreenAreaCalculation : MonoBehaviour
         var width = maxX - minX;
         var height = maxY - minY;
         var area = width * height;
-        var percentage = area / (Screen.width * Screen.height) * 100.0f;
+        percentageScreenOccupiedByItem = area / (Screen.width * Screen.height) * 100.0f;
 
-        typeofscreendata.percentageObject = percentage;
+        typeofscreendata.percentageObject = percentageScreenOccupiedByItem;
 
         typeofscreendata.ScreenAreaLeftObject = width * height;
 
@@ -83,6 +89,5 @@ public class CompScreenAreaCalculation : MonoBehaviour
 
         return typeofscreendata;
     }
-
 
 }

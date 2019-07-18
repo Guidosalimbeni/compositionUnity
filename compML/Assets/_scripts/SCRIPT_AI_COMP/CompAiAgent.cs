@@ -18,15 +18,21 @@ public class CompAiAgent : Agent
     public Camera renderCamera;
 
 
+    private CompScreenAreaCalculation CompScreenAreaCalculation;
+
     public override void InitializeAgent()
     {
         academy = FindObjectOfType(typeof(CompAiAcademy)) as CompAiAcademy;
+        CompScreenAreaCalculation = GetComponent<CompScreenAreaCalculation>();
     }
+
+    
 
     public override void CollectObservations()
     {
-        // There are no numeric observations to collect as this environment uses visual
-        // observations.
+        AddVectorObs(gameObject.transform.position.x ); //normalise ...
+        AddVectorObs(gameObject.transform.position.z);
+        AddVectorObs(CompScreenAreaCalculation.percentageScreenOccupiedByItem); // is it 100 or 1?
 
     }
 
@@ -35,9 +41,15 @@ public class CompAiAgent : Agent
     {
 
 
+        //float torque_x = Mathf.Clamp(vectorAction[0], -1, 1) * 100f;
+        //float torque_z = Mathf.Clamp(vectorAction[1], -1, 1) * 100f;
+        //rbA.AddTorque(new Vector3(torque_x, 0f, torque_z));
 
+        //torque_x = Mathf.Clamp(vectorAction[2], -1, 1) * 100f;
+        //torque_z = Mathf.Clamp(vectorAction[3], -1, 1) * 100f;
+        //rbB.AddTorque(new Vector3(torque_x, 0f, torque_z));
 
-
+        // need to rescale to the dimension of the composition table...
 
     }
 
@@ -56,7 +68,7 @@ public class CompAiAgent : Agent
 
         if (!academy.GetIsInference())
         {
-            RequestDecision();
+            RequestDecision(); // eventually set a rule to wait other to make their action ... but maybe soved bt stacked .. or try to use recurrent..
         }
         else
         {

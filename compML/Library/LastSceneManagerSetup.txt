@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/UnitySDK/Assets/ML-Agents/Examples/3DBall/Scenes/3DBall.unity
+- path: Assets/_scenes/99_AI_training_many_brain.unity
   isLoaded: 1
   isActive: 1
