@@ -13,16 +13,15 @@ MonoBehaviour:
   m_Name: CompAILearning_01
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 3
+    vectorObservationSize: 14
     numStackedVectorObservations: 2
-    vectorActionSize: 0200000002000000
+    vectorActionSize: 07000000
     cameraResolutions:
     - width: 240
       height: 180
       blackAndWhite: 0
     vectorActionDescriptions:
-    - pos_x
-    - pos_z
+    - position_rotation_nothing
     vectorActionSpaceType: 0
   model: {fileID: 0}
   inferenceDevice: 0

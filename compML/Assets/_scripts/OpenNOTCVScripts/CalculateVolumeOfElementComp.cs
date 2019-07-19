@@ -5,17 +5,19 @@ using UnityEngine;
 public class CalculateVolumeOfElementComp : MonoBehaviour
 {
 
+    public float Volume { get; private set; }
+
     private void Start()
     {
         Mesh mesh = GetComponent<MeshFilter>().sharedMesh;
 
-        //float volume = VolumeOfMesh(mesh);
+        Volume = VolumeOfMesh(mesh);
         //string msg = "The volume of the mesh is " + volume + " cube units.";
         //Debug.Log(msg);
 
-        float volume2 = calculateBondingVolume(mesh);
-        string msg2 = "The volume of the mesh is BOUNDING " + volume2 + " cube units.";
-        Debug.Log(msg2);
+        //float volume2 = calculateBondingVolume(mesh);
+        //string msg2 = "The volume of the mesh is BOUNDING " + volume2 + " cube units.";
+        //Debug.Log(msg2);
     }
 
     public float SignedVolumeOfTriangle(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 o)
@@ -61,5 +63,10 @@ public class CalculateVolumeOfElementComp : MonoBehaviour
         return volume;
     }
 
+
+    public float GetVolumeOftheItem()
+    {
+        return Volume;
+    }
     
 }
