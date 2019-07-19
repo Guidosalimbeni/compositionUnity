@@ -68,8 +68,8 @@ public class CompAiAgent : Agent
 
         AddVectorObs(gameObject.transform.position.x / 2); //normalise ... normalizedValue = (currentValue - minValue)/(maxValue - minValue)
         AddVectorObs(gameObject.transform.position.z / 2);
-        AddVectorObs(CompScreenAreaCalculation.percentageScreenOccupiedByItem); // is it 100 or 1?
-        Debug.Log(CompScreenAreaCalculation.percentageScreenOccupiedByItem);
+        AddVectorObs(CompScreenAreaCalculation.percentageScreenOccupiedByItem / 100.0f); // is it 100 or 1?
+        
         AddVectorObs(distaceToCenter);
         AddVectorObs(CenterOfMass);
         AddVectorObs(SizeColliderBounds / 2);
@@ -143,7 +143,7 @@ public class CompAiAgent : Agent
 
         float visualTotalReward = rewardControllerAIComp.CalculateTheVisualReward();
 
-        AddReward(visualTotalReward);
+        SetReward(visualTotalReward);
 
         if (collisionChecker.CollisionWithOtherItemFoundForAIReward == true)
         {
@@ -202,7 +202,12 @@ public class CompAiAgent : Agent
 
     public override void AgentReset()
     {
-        gameObject.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        Debug.Log("has been called the reset");
+
+        float X = Random.Range(-1.0f, 1.0f);
+        float Z = Random.Range(-1.0f, 1.0f);
+
+        gameObject.transform.position = new Vector3(X, 0.0f, Z);
         // reset position if the item goes behond the fram boundary...
 
 

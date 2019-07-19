@@ -17,11 +17,14 @@ MonoBehaviour:
     numStackedVectorObservations: 2
     vectorActionSize: 07000000
     cameraResolutions:
-    - width: 240
-      height: 180
+    - width: 40
+      height: 40
+      blackAndWhite: 0
+    - width: 40
+      height: 40
       blackAndWhite: 0
     vectorActionDescriptions:
     - position_rotation_nothing
     vectorActionSpaceType: 0
   model: {fileID: 0}
-  inferenceDevice: 0
+  inferenceDevice: 1
