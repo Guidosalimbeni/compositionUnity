@@ -20,10 +20,10 @@ public class BrainGA : MonoBehaviour
     public List<float> genes = new List<float>();
 
     private int DNALength;
-    private ScoreCalculator scoreCalculator;
+    private ScoreCalculator scoreCalculator; 
     private BrainNN_CompML brainNN_compML;
     private GamePopulationController gamePopulationController;
-    private InferenceCompositionML inferenceCompositionML;
+    
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class BrainGA : MonoBehaviour
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
         gamePopulationController = FindObjectOfType<GamePopulationController>();
         DNALength = gamePopulationController.ElementsCompositions.Count * NumberOfgenes;
-        inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
+        
     }
 
     public void Init()
@@ -64,6 +64,10 @@ public class BrainGA : MonoBehaviour
             //openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
             //gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
 
+
+            // TODO change this so that it takes the images and calculate the DNN inside unity
+            // this is important and avoid me to use genes !!!!!!!!!!!!
+
             // calculate score comes after movement so genes are updated
             float scoreNN = 0;
 
@@ -76,9 +80,9 @@ public class BrainGA : MonoBehaviour
             scoreBoundsBalanceIndividual = scoreCalculator.scoreBoundsBalance;
             scoreUnityVisualIndividual = scoreCalculator.scoreUnityVisual;
 
-
-            inferenceCompositionML.MakePrecitionCompMLMobileNet();
-
+            // this is the MOBILE NET -- still need to add to the total score
+            // not returning anything for now... need to implement it.
+            scoreCalculator.GetTheScoreFromTheMobileNet();
 
             // add back the NEURAL NETWORK
 

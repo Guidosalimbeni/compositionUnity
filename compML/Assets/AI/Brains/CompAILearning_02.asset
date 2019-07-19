@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CompAILearning_02
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 14
+    vectorObservationSize: 12
     numStackedVectorObservations: 2
     vectorActionSize: 07000000
     cameraResolutions:

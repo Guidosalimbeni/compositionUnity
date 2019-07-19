@@ -10,11 +10,14 @@ public class ScoreCalculator : MonoBehaviour
 
     private OpenCVManager openCvManager;
     private GameVisualManager gameManagerNotOpenCV;
+    private InferenceCompositionML inferenceCompositionML;
+
 
     private void Awake()
     {
         openCvManager = FindObjectOfType<OpenCVManager>();
         gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
+        inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
 
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;
@@ -43,4 +46,10 @@ public class ScoreCalculator : MonoBehaviour
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged -= Handle_OnScoreBoundsBalanceChanged;
         gameManagerNotOpenCV.OnScoreUnityVisualChanged -= Handle_OnScoreUnityVisualChanged;
     }
+
+    public void GetTheScoreFromTheMobileNet()
+    {
+        inferenceCompositionML.MakePrecitionCompMLMobileNet();
+    }
+
 }

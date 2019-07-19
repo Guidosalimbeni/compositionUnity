@@ -12,15 +12,20 @@ public class GamePopulationController : MonoBehaviour
 
     private void Awake() // important to come first
     {
-        if (GameManagerCompML.Instance.ElementsCompositionsSelected != null)
-        {
-            List<GameObject> prefabs = GameManagerCompML.Instance.ElementsCompositionsSelected;
 
-            foreach (GameObject prefab in prefabs)
+        if (GameManagerCompML.Instance != null)
+        {
+            if (GameManagerCompML.Instance.ElementsCompositionsSelected != null)
             {
-                GameObject go = Instantiate(prefab, parent);
+                List<GameObject> prefabs = GameManagerCompML.Instance.ElementsCompositionsSelected;
+
+                foreach (GameObject prefab in prefabs)
+                {
+                    GameObject go = Instantiate(prefab, parent);
+                }
             }
         }
+        
 
         
         // instantiate from game manager... (if there already in scene for debugging ... no problem...)

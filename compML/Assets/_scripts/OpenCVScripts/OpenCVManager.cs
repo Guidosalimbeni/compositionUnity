@@ -15,6 +15,7 @@ public class OpenCVManager : MonoBehaviour
 
 
     // call from leantouch and population manager one during breeding and one for last move
+    // also called from the AGENTCompAi to update the reward on decision on demand..
     public void CallForOpenCVCalculationUpdates()  /// call from EVENT
     {
         CallTOCalculateVisualScoreBalancePixelsCount();
