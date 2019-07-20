@@ -10,12 +10,13 @@ public class CompAiAgent : Agent
     [Header("Specific to CompAI")]
     private CompAiAcademy academy;
     public float timeBetweenDecisionsAtInference;
-    
+    //public float TimeDelayForPredictionsAndScoreCalculation = 1.0f;
 
     [Tooltip("Because we want an observation right before making a decision, we can force " +
              "a camera to render before making a decision. Place the agentCam here if using " +
              "RenderTexture as observations.")]
-    public Camera renderCamera;
+    public Camera CameraTopView;
+    public Camera CameraFrontView;
 
     // Speed of agent rotation.
     public float turnSpeed = 300;
@@ -29,10 +30,10 @@ public class CompAiAgent : Agent
     // for reward calls
     private OpenCVManager openCVManager;
     private GameVisualManager gameVisualManager;
-    private RewardControllerAIComp rewardControllerAIComp;
     private CollisionChecker collisionChecker;
+    private ScoreCalculator scoreCalculator;
 
-    float distaceToCenter = 0.0f;
+    float distanceToCenter = 0.0f;
     Vector3 CenterOfScene = Vector3.zero;
     Vector3 CenterOfMass = Vector3.zero;
     Vector3 SizeColliderBounds = Vector3.zero;
@@ -49,8 +50,7 @@ public class CompAiAgent : Agent
         collisionChecker = GetComponent<CollisionChecker>();
         openCVManager = FindObjectOfType<OpenCVManager>();
         gameVisualManager = FindObjectOfType<GameVisualManager>();
-        rewardControllerAIComp = FindObjectOfType<RewardControllerAIComp>();
-
+        scoreCalculator = FindObjectOfType<ScoreCalculator>();
         // TODO the mobile net score might need to be separated since its call only .. or maybe I can also update UI? ,..  but another MobileNetManagerScript..with action...etc
     }
 
@@ -58,10 +58,7 @@ public class CompAiAgent : Agent
 
     public override void CollectObservations()
     {
-
-
-        
-        distaceToCenter = Vector3.Distance (gameObject.transform.position , CenterOfScene);
+        distanceToCenter = Vector3.Distance (gameObject.transform.position , CenterOfScene);
         CenterOfMass = colliderBounds.GetCenterOfMass();
         SizeColliderBounds = colliderBounds.GetVectorSizeOfVolumeBounds();
         AngleRotY = transform.localEulerAngles.y;
@@ -70,7 +67,7 @@ public class CompAiAgent : Agent
         AddVectorObs(gameObject.transform.position.z / 2);
         AddVectorObs(CompScreenAreaCalculation.percentageScreenOccupiedByItem / 100.0f); // is it 100 or 1?
         
-        AddVectorObs(distaceToCenter);
+        AddVectorObs(distanceToCenter);
         AddVectorObs(CenterOfMass);
         AddVectorObs(SizeColliderBounds / 2);
         AddVectorObs(AngleRotY);
@@ -122,13 +119,11 @@ public class CompAiAgent : Agent
 
         transform.Rotate(rotateDir, Time.deltaTime * turnSpeed);
         //agentRb.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
-
         // banana collector is the good example here for alos changing to continuos values
-
         // I could use WITHOUT RIGID BODY
-
         transform.Translate(dirToGo * Time.deltaTime * moveSpeed, Space.World);
 
+        
 
         // call here so that both for wait decision and for inference will update the UI and the scores
         openCVManager.CallForOpenCVCalculationUpdates();
@@ -136,69 +131,145 @@ public class CompAiAgent : Agent
 
         // ADD THE CALL TO MOBILE NET HERE... need to wait here???
 
-        // plus nn ? or nn only for reward ??
+        // add call for contour render / edges render / hog renderes...
+
+        // plus nn ? or nn only for reward ?? see above comment per solution..
+
+
+        CalculateRewards();
+
+
+        // all the action wait for the decisions rules below
+    }
+
+
+    //IEnumerator WaitForModelToPredictForReward()
+    //{
+
+    //    yield return new WaitForSeconds(TimeDelayForPredictionsAndScoreCalculation);
+        
+    //}
+
+
+    private void CalculateRewards()
+    {
+
+
+        
+
 
         // REMEMBER TO ADD PENALTIES FOT COLLISION TO OTHER OBJECTS
         // PENALTY FOR COLLISION WITH THE OUT OF FRAME
 
-        float visualTotalReward = rewardControllerAIComp.CalculateTheVisualReward();
+        float visualScoreBalancePixelsCount = scoreCalculator.visualScoreBalancePixelsCount;
+        float scoreBoundsBalance = scoreCalculator.visualScoreBalancePixelsCount;
+        float scoreUnityVisual = scoreCalculator.scoreUnityVisual;
 
-        SetReward(visualTotalReward);
+        float visualTotalReward = (visualScoreBalancePixelsCount + scoreBoundsBalance + scoreUnityVisual) / 3;
+
+        //if (visualScoreBalancePixelsCount > 0.5f)
+        //{
+
+        //    AddReward(visualScoreBalancePixelsCount);
+        //}
+
+        //if (scoreBoundsBalance > 0.5f)
+        //{
+
+        //    AddReward(scoreBoundsBalance);
+        //}
+
+        if (scoreUnityVisual > 0.5f)
+        {
+
+            AddReward(1.0f);
+        }
+
+        //if (visualTotalReward > 0.8f)
+        //{
+        //    AddReward(visualTotalReward);
+        //    Debug.Log("got it");
+        //}
+
+        //AddReward(-0.1f);
+
+        //if (distanceToCenter > 0.5f)
+        //{
+        //    SetReward(-1.0f);
+        //}
+
 
         if (collisionChecker.CollisionWithOtherItemFoundForAIReward == true)
         {
-            AddReward(-1.0f);
+            Debug.Log(" collision no penalties to implement...");
+            //SetReward(-1.0f);
+            //Done();
         }
 
-        if (gameObject.transform.position.x < -2.0f || gameObject.transform.position.x > 2.0f)
+        if (gameObject.transform.position.x < -1.5f || gameObject.transform.position.x > 1.5f)
         {
-            AddReward(-1.0f);
+            Debug.Log(" out of X");
+            SetReward(-1.0f);
             Done();
         }
 
-        if (gameObject.transform.position.z < -2.0f || gameObject.transform.position.z > 2.0f)
+        if (gameObject.transform.position.z < -1.5f || gameObject.transform.position.z > 1.5f)
         {
-            AddReward(-1.0f);
+            Debug.Log(" out of Z");
+            SetReward(-1.0f);
             Done();
         }
 
-        if (distaceToCenter > 1.5f)
-        {
-            AddReward(-0.1f);
-        }
+        
 
+        // REALLY NEED TO PASS TOP CAMERA VIEW TO OF SINGLE ATTACHED CAMERA AND 20 x 20 or 40 x 40 to vector non visual observation !!!
+        // also add HOGS 
+
+        // IMPORTANT THERE IS NO WAY TO KNOW IF OTHER OBJECTS ARE CLOSE UNLESS I USE NN from training not cnn from ml-agents 
+        // if i want to collect observation with external NN in tensorflow I cannot then inference with both tensor flow and barracuda...
+        // I check if there is only DNN in yaml option
+        // https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-PPO.md
+        // the trick is to pass the observation to vector observation so that they are not treated for cnn encoding!!!!
     }
 
 
-    public void FixedUpdate()
-    {
-        WaitTimeInference();
-    }
+    // changed so it is only for decision one after the other
 
-    private void WaitTimeInference() // this is mainly for having the time for the MobileNet to make prediction and the NN, opencv..etc
-    {
-        if (renderCamera != null)
-        {
-            renderCamera.Render();
-        }
+    //public void FixedUpdate() 
+    //{
+    //    WaitTimeInference();
+    //}
 
-        if (!academy.GetIsInference())  // so if get inference is true this is false and the agent makes decision normally otherwise uses this decision call
-        {
-            RequestDecision(); // eventually set a rule to wait other to make their action ... but maybe soved bt stacked .. or try to use recurrent..
-        }
-        else
-        {
-            if (timeSinceDecision >= timeBetweenDecisionsAtInference)
-            {
-                timeSinceDecision = 0f;
-                RequestDecision();
-            }
-            else
-            {
-                timeSinceDecision += Time.fixedDeltaTime;
-            }
-        }
-    }
+    //private void WaitTimeInference() // this is mainly for having the time for the MobileNet to make prediction and the NN, opencv..etc
+    //{
+    //    if (CameraTopView != null && CameraFrontView != null)
+    //    {
+    //        CameraTopView.Render(); // might not need this call
+    //        CameraFrontView.Render(); // might not need this call
+
+
+
+    //    }
+
+    //    else { Debug.Log("check that cameras are attached to game object AI agents scripts !!!!!!!!!!!!!!!!!"); }
+
+    //    if (!academy.GetIsInference())  // so if get inference is true this is false and the agent makes decision normally otherwise uses this decision call
+    //    {
+    //        RequestDecision(); // eventually set a rule to wait other to make their action ... but maybe soved bt stacked .. or try to use recurrent..
+    //    }
+    //    else
+    //    {
+    //        if (timeSinceDecision >= timeBetweenDecisionsAtInference)
+    //        {
+    //            timeSinceDecision = 0f;
+    //            RequestDecision();
+    //        }
+    //        else
+    //        {
+    //            timeSinceDecision += Time.fixedDeltaTime;
+    //        }
+    //    }
+    //}
 
     public override void AgentReset()
     {

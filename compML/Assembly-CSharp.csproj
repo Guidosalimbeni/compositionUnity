@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Assets\_scripts\AI_COMP\CompAiAcademy.cs" />
     <Compile Include="Assets\_scripts\AI_COMP\CompAiAgent.cs" />
-    <Compile Include="Assets\_scripts\AI_COMP\RewardControllerAIComp.cs" />
     <Compile Include="Assets\_scripts\ANN\ANN.cs" />
     <Compile Include="Assets\_scripts\ANN\BrainNN_CompML.cs" />
     <Compile Include="Assets\_scripts\ANN\LayerNN.cs" />
@@ -107,6 +106,7 @@
     <Compile Include="Assets\_scripts\SelectionScene\SelectorOfItemInCompositionStart.cs" />
     <Compile Include="Assets\_scripts\SelectionScene\UpdateCountUIonSelectionItem.cs" />
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\AIDebugText.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientPixelsBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientVisualUnity.cs" />
