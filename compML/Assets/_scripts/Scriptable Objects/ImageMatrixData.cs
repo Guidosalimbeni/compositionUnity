@@ -8,8 +8,14 @@ using UnityEngine;
 public class ImageMatrixData : ScriptableObject
 {
     [SerializeField]
-    private string imagePixelsList;
+    private string imagePixelsListMainPaintWiew; // 240 x 180
+    [SerializeField]
+    private string imageNNtopView; // 20 x 20
+    [SerializeField]
+    private string imageNNFrontView; // 20 x 20
 
-    public string ImagePixelsList { get { return imagePixelsList; } set { imagePixelsList = value; } }
+    public string ImagePixelsListMainPaintView { get { return imagePixelsListMainPaintWiew; } set { imagePixelsListMainPaintWiew = value; } }
+    public string ImageNNtopView { get { return imageNNtopView; } set { imageNNtopView = value; } }
+    public string ImageNNFrontView { get { return imageNNFrontView; } set { imageNNFrontView = value; } }
 }
 

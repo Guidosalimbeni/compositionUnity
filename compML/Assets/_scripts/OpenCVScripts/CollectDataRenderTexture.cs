@@ -10,26 +10,30 @@ public class CollectDataRenderTexture: MonoBehaviour
 {
     // this was probably only to store on the database some information about the image that has been evaluated. currently only scaled 10 times ... does it make any sense? try to increase?
 
-    public ImageMatrixData imagePixelsValues;
+    public ImageMatrixData imageMatrixData;
     public float resizefactor = 10.0f;
-    private Mat ImageMatrixOpenCV;
     private RenderTexture camRenderTexture; // 240 * 180  // mobile net works with 224, 224
     private OpenCVManager opencvmanager;
+    [SerializeField]
+    private RenderTexture ImageNNFrontViewRT; // 20 x 20
+    [SerializeField]
+    private RenderTexture ImageNNtopViewRT; // 20 x 20
 
     private void Awake()
     {
         opencvmanager = FindObjectOfType<OpenCVManager>();
         camRenderTexture = opencvmanager.camRenderTexture;
-        imagePixelsValues.ImagePixelsList = "";
+        imageMatrixData.ImagePixelsListMainPaintView = "";
+        imageMatrixData.ImageNNFrontView = "";
+        imageMatrixData.ImageNNtopView = "";
     }
 
-    public void CollectPixelsValuesFromImage()
+    public void CollectPixelsValuesFromImageForMainViewRecordInDatabase()
     {
         Texture2D imgTexture = ToTexture2D(camRenderTexture);
-        ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1); // 180 * 240 * cv_8uc1
+        Mat ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1); // 180 * 240 * cv_8uc1
         
         Utils.texture2DToMat(imgTexture, ImageMatrixOpenCV);
-        
 
         int rows = ImageMatrixOpenCV.rows();
         int cols = ImageMatrixOpenCV.cols();
@@ -39,7 +43,27 @@ public class CollectDataRenderTexture: MonoBehaviour
         Imgproc.resize(ImageMatrixOpenCV, ImageMatrixOpenCV, sz);
         Imgproc.cvtColor(ImageMatrixOpenCV, ImageMatrixOpenCV, Imgproc.COLOR_RGB2GRAY);
         string dataFromMat = ImageMatrixOpenCV.reshape(1, 1).dump();
-        imagePixelsValues.ImagePixelsList = dataFromMat;
+        imageMatrixData.ImagePixelsListMainPaintView = dataFromMat;
+    }
+
+    public void CollectPixelsValuesFromImageForNeuralNetworkDNNOfflineTraining()
+    {
+        Texture2D ImageNNFrontViewTexture = ToTexture2D(ImageNNFrontViewRT);
+        Mat ImageMatrixNNfrontView = new Mat(ImageNNFrontViewTexture.height, ImageNNFrontViewTexture.width, CvType.CV_8UC1); // 180 * 240 * cv_8uc1
+        Utils.texture2DToMat(ImageNNFrontViewTexture, ImageMatrixNNfrontView);
+        
+        Imgproc.cvtColor(ImageMatrixNNfrontView, ImageMatrixNNfrontView, Imgproc.COLOR_RGB2GRAY);
+        string dataFromMatFrontView = ImageMatrixNNfrontView.reshape(1, 1).dump();
+        imageMatrixData.ImageNNFrontView = dataFromMatFrontView;
+
+        Texture2D ImageNNtopViewTexture = ToTexture2D(ImageNNtopViewRT);
+        Mat ImageMatrixNNtopView = new Mat(ImageNNtopViewTexture.height, ImageNNtopViewTexture.width, CvType.CV_8UC1); // 180 * 240 * cv_8uc1
+        Utils.texture2DToMat(ImageNNtopViewTexture, ImageMatrixNNtopView);
+
+        Imgproc.cvtColor(ImageMatrixNNtopView, ImageMatrixNNtopView, Imgproc.COLOR_RGB2GRAY);
+        string dataFromMatTopView = ImageMatrixNNtopView.reshape(1, 1).dump();
+        imageMatrixData.ImageNNtopView = dataFromMatTopView;
+
     }
 
     private Texture2D ToTexture2D(RenderTexture rTex)

@@ -1279,7 +1279,6 @@ GameObject:
   - component: {fileID: 881400877}
   - component: {fileID: 881400876}
   - component: {fileID: 881400878}
-  - component: {fileID: 881400879}
   - component: {fileID: 881400880}
   m_Layer: 0
   m_Name: renderCam[OpenCV]
@@ -1357,20 +1356,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
---- !u!114 &881400879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881400874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imagePixelsValues: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
-  resizefactor: 10
 --- !u!114 &881400880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,8 +1468,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagePixelsValues: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
+  imageMatrixData: {fileID: 0}
   resizefactor: 10
+  ImageNNFrontViewRT: {fileID: 0}
+  ImageNNtopViewRT: {fileID: 0}
 --- !u!20 &943048034
 Camera:
   m_ObjectHideFlags: 0
@@ -2423,6 +2410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1306251481}
   - component: {fileID: 1306251480}
+  - component: {fileID: 1306251482}
   m_Layer: 0
   m_Name: '[ DATABASE ]'
   m_TagString: Untagged
@@ -2457,6 +2445,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1306251482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306251479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageMatrixData: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
+  resizefactor: 10
+  ImageNNFrontViewRT: {fileID: 8400000, guid: 47502361a74b3e945adb492b0c19e90c, type: 2}
+  ImageNNtopViewRT: {fileID: 8400000, guid: 315e2bf30e299cc4f9e72fe2fda83bcf, type: 2}
 --- !u!1 &1312505096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,8 +2954,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagePixelsValues: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
+  imageMatrixData: {fileID: 0}
   resizefactor: 10
+  ImageNNFrontViewRT: {fileID: 0}
+  ImageNNtopViewRT: {fileID: 0}
 --- !u!20 &1540648806
 Camera:
   m_ObjectHideFlags: 0
@@ -3386,8 +3392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagePixelsValues: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
+  imageMatrixData: {fileID: 0}
   resizefactor: 10
+  ImageNNFrontViewRT: {fileID: 0}
+  ImageNNtopViewRT: {fileID: 0}
 --- !u!114 &1665053204
 MonoBehaviour:
   m_ObjectHideFlags: 0

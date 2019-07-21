@@ -81,8 +81,6 @@ public class SendToDatabase : MonoBehaviour
     {
         UpdateActualListOfInfoForDatabase();
 
-
-
         scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
@@ -106,8 +104,6 @@ public class SendToDatabase : MonoBehaviour
                                 List<float> genesAI)// I can delete this at one point
     {
         UpdateActualListOfInfoForDatabase();
-
-
 
         scorePixelsBalance = scorePixelsBalancefromAI;
         scoreUnityVisual = scoreUnityVisualFromAI;
@@ -133,7 +129,9 @@ public class SendToDatabase : MonoBehaviour
             username = "Debugging";
         }
 
-        collectdatarendertexture.CollectPixelsValuesFromImage(); // this update the scriptable object with the image string list pixels values
+        collectdatarendertexture.CollectPixelsValuesFromImageForMainViewRecordInDatabase(); // this update the scriptable object with the image string list pixels values
+        collectdatarendertexture.CollectPixelsValuesFromImageForNeuralNetworkDNNOfflineTraining(); // this also update the scriptable object
+
 
         WWWForm form = new WWWForm();
 
@@ -147,13 +145,15 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("scoreBoundsBalance", scoreBoundsBalance.ToString());
         form.AddField("scorePixelsBalance", scorePixelsBalance.ToString());
         form.AddField("scoreUnityVisual", scoreUnityVisual.ToString());
+        form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString());
+        form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString());
         form.AddField("g0", g0.ToString());// I can delete this at one point
         form.AddField("g1", g1.ToString());// I can delete this at one point
         form.AddField("g2", g2.ToString());// I can delete this at one point
         form.AddField("g3", g3.ToString());// I can delete this at one point
         form.AddField("g4", g4.ToString());// I can delete this at one point
         form.AddField("g5", g5.ToString());// I can delete this at one point
-        form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsList.ToString());
+        form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsListMainPaintView.ToString());
         form.AddField("judge", judge.ToString());
 
         using (UnityWebRequest www = UnityWebRequest.Post("http://www.guidosalimbeni.it/UnityComp/AddToDatabase.php", form))
