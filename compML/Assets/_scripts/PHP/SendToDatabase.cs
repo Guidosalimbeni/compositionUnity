@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.EventSystems;
+using System;
 
 public class SendToDatabase : MonoBehaviour
 {
@@ -23,10 +24,13 @@ public class SendToDatabase : MonoBehaviour
     private float g5;
     private float judge;
     private List<GameObject> listOfelementsInComposition;
-    private List<float> listOfgenes;
+    private List<float> ListOfInfoForDatabase;
     private float scorePixelsBalance;
     private float scoreBoundsBalance;
     private float scoreUnityVisual;
+    private string genesString;
+    private int numberOfItems;
+    private string sequence;
 
     private void Awake()
     {
@@ -38,6 +42,8 @@ public class SendToDatabase : MonoBehaviour
 
     private void Start()
     {
+        ListOfInfoForDatabase = new List<float>();
+
         if (gamePopulationController != null)
         {
             listOfelementsInComposition = gamePopulationController.ElementsCompositions; // to fix since it is probably already in composition -- I think I fixed
@@ -46,99 +52,76 @@ public class SendToDatabase : MonoBehaviour
 
     public void SendNegativeJudge()
     {
+        Debug.Log("button pressed");
         PostDataFromAFromNegativeJudge();
     }
 
     public void PostDataFromAFromNegativeJudge()
     {
-        listOfgenes = new List<float>();
-        foreach (GameObject element in listOfelementsInComposition)
-        {
-            listOfgenes.Add(element.transform.position.x);
-            listOfgenes.Add(element.transform.position.z);
-        }
+        UpdateActualListOfInfoForDatabase();
+
+
         scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
-        g0 = listOfgenes[0];
-        g1 = listOfgenes[1];
-        g2 = listOfgenes[2];
-        g3 = listOfgenes[3];
-        g4 = listOfgenes[4];
-        g5 = listOfgenes[5];
+        g0 = ListOfInfoForDatabase[0];// I can delete this at one point
+        g1 = ListOfInfoForDatabase[1];// I can delete this at one point
+        g2 = ListOfInfoForDatabase[2];// I can delete this at one point
+        g3 = ListOfInfoForDatabase[3];// I can delete this at one point
+        g4 = ListOfInfoForDatabase[4];// I can delete this at one point
+        g5 = ListOfInfoForDatabase[5]; // I can delete this at one point
         judge = 0;               
 
-        listOfgenes.Clear();
+        ListOfInfoForDatabase.Clear();
 
         StartCoroutine(PostData(LoadSceneInputUsername.username));
     }
 
     public void PostDataForPositiveJudge()
     {
-        listOfgenes = new List<float>();
-        foreach (GameObject element in listOfelementsInComposition)
-        {
-            listOfgenes.Add(element.transform.position.x);
-            listOfgenes.Add(element.transform.position.z);
-        }
+        UpdateActualListOfInfoForDatabase();
+
+
+
         scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
-        g0 = listOfgenes[0];
-        g1 = listOfgenes[1];
-        g2 = listOfgenes[2];
-        g3 = listOfgenes[3];
-        g4 = listOfgenes[4];
-        g5 = listOfgenes[5];
+        g0 = ListOfInfoForDatabase[0];// I can delete this at one point
+        g1 = ListOfInfoForDatabase[1];// I can delete this at one point
+        g2 = ListOfInfoForDatabase[2];// I can delete this at one point
+        g3 = ListOfInfoForDatabase[3];// I can delete this at one point
+        g4 = ListOfInfoForDatabase[4];// I can delete this at one point
+        g5 = ListOfInfoForDatabase[5];// I can delete this at one point
         judge = 1;               
 
-        listOfgenes.Clear();
+        ListOfInfoForDatabase.Clear();
 
         StartCoroutine(PostData(LoadSceneInputUsername.username)); //TO FIX
 
     }
 
-    //public void PostDataFromButtonRobotAndStartGeneticAlgorithm()
-    //{
-    //    listOfgenes = new List<float>();
-    //    foreach (GameObject element in listOfelementsInComposition)
-    //    {
-    //        listOfgenes.Add(element.transform.position.x);
-    //        listOfgenes.Add(element.transform.position.z);
-    //    }
-    //    scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
-    //    scoreUnityVisual = scoreCalculator.scoreUnityVisual;
-    //    scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
-    //    g0 = listOfgenes[0];
-    //    g1 = listOfgenes[1];
-    //    g2 = listOfgenes[2];
-    //    g3 = listOfgenes[3];
-    //    g4 = listOfgenes[4];
-    //    g5 = listOfgenes[5];
-    //    judge = 1;               //////////////////
-
-    //    listOfgenes.Clear();
-
-    //    StartCoroutine(PostData(LoadSceneInputUsername.username)); //TO FIX
-    //    populationmanager.triggerAI = true;
-    //}
-
     public void PostDataFromAI(float scorePixelsBalancefromAI, 
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
-                                List<float> genesAI)
+                                List<float> genesAI)// I can delete this at one point
     {
-        scorePixelsBalance = scorePixelsBalancefromAI; 
+        UpdateActualListOfInfoForDatabase();
+
+
+
+        scorePixelsBalance = scorePixelsBalancefromAI;
         scoreUnityVisual = scoreUnityVisualFromAI;
         scoreBoundsBalance = scoreBoundsBalancefromAI;
 
-        g0 = genesAI[0];
-        g1 = genesAI[1];
-        g2 = genesAI[2];
-        g3 = genesAI[3];
-        g4 = genesAI[4];
-        g5 = genesAI[5];
+        g0 = genesAI[0];// I can delete this at one point
+        g1 = genesAI[1];// I can delete this at one point
+        g2 = genesAI[2];// I can delete this at one point
+        g3 = genesAI[3];// I can delete this at one point
+        g4 = genesAI[4];// I can delete this at one point
+        g5 = genesAI[5];// I can delete this at one point
         judge = 0.5f;                  ////////////////////// TODO I can then validate or penalise with my vote...
+
+        ListOfInfoForDatabase.Clear();
 
         StartCoroutine(PostData("AI_TURN"));
     }
@@ -153,17 +136,23 @@ public class SendToDatabase : MonoBehaviour
         collectdatarendertexture.CollectPixelsValuesFromImage(); // this update the scriptable object with the image string list pixels values
 
         WWWForm form = new WWWForm();
+
+        Debug.Log(genesString);
+
         form.AddField("name", username);
         form.AddField("filenameImg", "NotImplemented");
+        form.AddField("numberOfItems", numberOfItems.ToString()); //
+        form.AddField("sequence", sequence); // 
+        form.AddField("genesString", genesString);
         form.AddField("scoreBoundsBalance", scoreBoundsBalance.ToString());
         form.AddField("scorePixelsBalance", scorePixelsBalance.ToString());
         form.AddField("scoreUnityVisual", scoreUnityVisual.ToString());
-        form.AddField("g0", g0.ToString());
-        form.AddField("g1", g1.ToString());
-        form.AddField("g2", g2.ToString());
-        form.AddField("g3", g3.ToString());
-        form.AddField("g4", g4.ToString());
-        form.AddField("g5", g5.ToString());
+        form.AddField("g0", g0.ToString());// I can delete this at one point
+        form.AddField("g1", g1.ToString());// I can delete this at one point
+        form.AddField("g2", g2.ToString());// I can delete this at one point
+        form.AddField("g3", g3.ToString());// I can delete this at one point
+        form.AddField("g4", g4.ToString());// I can delete this at one point
+        form.AddField("g5", g5.ToString());// I can delete this at one point
         form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsList.ToString());
         form.AddField("judge", judge.ToString());
 
@@ -181,4 +170,29 @@ public class SendToDatabase : MonoBehaviour
             }
         }
     }
+
+
+    private void UpdateActualListOfInfoForDatabase()
+    {
+        sequence = "";
+        genesString = "";
+
+
+        foreach (GameObject element in listOfelementsInComposition)
+        {
+            ListOfInfoForDatabase.Add(element.transform.position.x);
+
+            ListOfInfoForDatabase.Add(element.transform.position.z);
+            ListOfInfoForDatabase.Add(element.transform.localEulerAngles.y);
+            sequence += element.GetComponent<TagMeElementOfComposition>().ElementOfCompositionID.ToString() + ",";
+            genesString += element.transform.position.x.ToString("0.000") + "," + element.transform.position.z .ToString("0.000") + "," + element.transform.localEulerAngles.y.ToString("0.000") + ",";
+
+        }
+
+        //genesString = string.Join(",", ListOfInfoForDatabase.ToArray());
+
+        numberOfItems = listOfelementsInComposition.Count;
+    }
+
+
 }

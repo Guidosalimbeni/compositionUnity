@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_scenes/99_AI_training_many_brain.unity
+- path: Assets/_scenes/03_Main_Genetic_Algorithm.unity
   isLoaded: 1
   isActive: 1
