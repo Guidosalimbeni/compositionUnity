@@ -75,4 +75,19 @@ public class CollectDataRenderTexture: MonoBehaviour
         return tex;
     }
 
+    public byte[] CollectPNG()
+    {
+        Texture2D tex = ToTexture2D(camRenderTexture);
+
+        // Read screen contents into the texture
+        tex.ReadPixels(new UnityEngine.Rect(0, 0, camRenderTexture.width, camRenderTexture.height), 0, 0);
+        tex.Apply();
+
+        // Encode texture into PNG
+        byte[] bytes = tex.EncodeToPNG();
+        Destroy(tex);
+
+        return bytes;
+    }
+
 }

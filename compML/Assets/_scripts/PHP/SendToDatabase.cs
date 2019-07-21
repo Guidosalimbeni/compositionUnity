@@ -131,7 +131,7 @@ public class SendToDatabase : MonoBehaviour
 
         collectdatarendertexture.CollectPixelsValuesFromImageForMainViewRecordInDatabase(); // this update the scriptable object with the image string list pixels values
         collectdatarendertexture.CollectPixelsValuesFromImageForNeuralNetworkDNNOfflineTraining(); // this also update the scriptable object
-
+        byte[] bytes = collectdatarendertexture.CollectPNG();
 
         WWWForm form = new WWWForm();
 
@@ -155,6 +155,11 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("g5", g5.ToString());// I can delete this at one point
         form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsListMainPaintView.ToString());
         form.AddField("judge", judge.ToString());
+
+
+
+        //form.AddBinaryData("image", bytes, "screenShot.png", "image/png");
+        form.AddBinaryData("image", bytes);
 
         using (UnityWebRequest www = UnityWebRequest.Post("http://www.guidosalimbeni.it/UnityComp/AddToDatabase.php", form))
         {

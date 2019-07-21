@@ -1448,7 +1448,6 @@ GameObject:
   m_Component:
   - component: {fileID: 943048035}
   - component: {fileID: 943048034}
-  - component: {fileID: 943048033}
   m_Layer: 0
   m_Name: renderCam[NN_paint_view]
   m_TagString: Untagged
@@ -1456,22 +1455,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &943048033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 943048032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageMatrixData: {fileID: 0}
-  resizefactor: 10
-  ImageNNFrontViewRT: {fileID: 0}
-  ImageNNtopViewRT: {fileID: 0}
 --- !u!20 &943048034
 Camera:
   m_ObjectHideFlags: 0
@@ -2934,7 +2917,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1540648807}
   - component: {fileID: 1540648806}
-  - component: {fileID: 1540648805}
   m_Layer: 0
   m_Name: renderCam[NN_Top]
   m_TagString: Untagged
@@ -2942,22 +2924,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1540648805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540648804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageMatrixData: {fileID: 0}
-  resizefactor: 10
-  ImageNNFrontViewRT: {fileID: 0}
-  ImageNNtopViewRT: {fileID: 0}
 --- !u!20 &1540648806
 Camera:
   m_ObjectHideFlags: 0
@@ -2984,7 +2950,7 @@ Camera:
   far clip plane: 1000
   field of view: 33.6
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 1.5
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -3371,8 +3337,6 @@ GameObject:
   - component: {fileID: 1665053207}
   - component: {fileID: 1665053206}
   - component: {fileID: 1665053205}
-  - component: {fileID: 1665053204}
-  - component: {fileID: 1665053203}
   m_Layer: 0
   m_Name: renderCam[MobileNet]
   m_TagString: Untagged
@@ -3380,35 +3344,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1665053203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665053202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d77d67baba8894db220e60e6f381b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageMatrixData: {fileID: 0}
-  resizefactor: 10
-  ImageNNFrontViewRT: {fileID: 0}
-  ImageNNtopViewRT: {fileID: 0}
---- !u!114 &1665053204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665053202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948816794123f034ab9110a85da76247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
 --- !u!81 &1665053205
 AudioListener:
   m_ObjectHideFlags: 0
