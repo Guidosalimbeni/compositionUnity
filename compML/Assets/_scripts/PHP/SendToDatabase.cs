@@ -131,8 +131,9 @@ public class SendToDatabase : MonoBehaviour
 
         collectdatarendertexture.CollectPixelsValuesFromImageForMainViewRecordInDatabase(); // this update the scriptable object with the image string list pixels values
         collectdatarendertexture.CollectPixelsValuesFromImageForNeuralNetworkDNNOfflineTraining(); // this also update the scriptable object
-        byte[] bytes = collectdatarendertexture.CollectPNG();
-
+        byte[] bytesFullViewPaintCam = collectdatarendertexture.CollectPNGMainPaintCameraFullResolution();
+        byte[] bytesFrontCam = collectdatarendertexture.CollectPNGFrontViewNN();
+        byte[] bytesTopCam = collectdatarendertexture.CollectPNGFTopViewNN();
         WWWForm form = new WWWForm();
 
         Debug.Log(genesString);
@@ -145,8 +146,8 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("scoreBoundsBalance", scoreBoundsBalance.ToString());
         form.AddField("scorePixelsBalance", scorePixelsBalance.ToString());
         form.AddField("scoreUnityVisual", scoreUnityVisual.ToString());
-        form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString());
-        form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString());
+        form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString()); // not need anymore
+        form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString()); // not need anymore
         form.AddField("g0", g0.ToString());// I can delete this at one point
         form.AddField("g1", g1.ToString());// I can delete this at one point
         form.AddField("g2", g2.ToString());// I can delete this at one point
@@ -156,10 +157,10 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsListMainPaintView.ToString());
         form.AddField("judge", judge.ToString());
 
-
-
         //form.AddBinaryData("image", bytes, "screenShot.png", "image/png");
-        form.AddBinaryData("image", bytes);
+        form.AddBinaryData("image", bytesFullViewPaintCam);
+        form.AddBinaryData("imageFront", bytesFrontCam);
+        form.AddBinaryData("imageTop", bytesTopCam);
 
         using (UnityWebRequest www = UnityWebRequest.Post("http://www.guidosalimbeni.it/UnityComp/AddToDatabase.php", form))
         {

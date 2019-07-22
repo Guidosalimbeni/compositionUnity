@@ -32,13 +32,13 @@ public class InferenceCompositionML : MonoBehaviour
         CloseTF();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            MakePrecitionCompMLMobileNet();
-        }
-    }
+    //private void Update() // to delete
+    //{
+    //    if (Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        MakePrecitionCompMLMobileNet();
+    //    }
+    //}
 
     public void MakePrecitionCompMLMobileNet()
     {

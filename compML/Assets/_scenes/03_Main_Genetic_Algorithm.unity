@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 97396422}
   - component: {fileID: 97396424}
   - component: {fileID: 97396423}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spiral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   SelectUsing: 0
   LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 1843
   Camera: {fileID: 0}
   MaxSelectables: 0
   Search: 0
@@ -2241,7 +2241,7 @@ GameObject:
   - component: {fileID: 1236133765}
   - component: {fileID: 1236133767}
   - component: {fileID: 1236133766}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RuleOfThird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2441,7 +2441,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageMatrixData: {fileID: 11400000, guid: f379abcdae1e8a349a3ebb4111eb6959, type: 2}
-  resizefactor: 10
+  resizefactorMainCam: 10
+  CompositionRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54,
+    type: 2}
   ImageNNFrontViewRT: {fileID: 8400000, guid: 47502361a74b3e945adb492b0c19e90c, type: 2}
   ImageNNtopViewRT: {fileID: 8400000, guid: 315e2bf30e299cc4f9e72fe2fda83bcf, type: 2}
 --- !u!1 &1312505096
@@ -3290,7 +3292,7 @@ GameObject:
   - component: {fileID: 1610376823}
   - component: {fileID: 1610376822}
   m_Layer: 0
-  m_Name: '[Neural Network]'
+  m_Name: '[Neural Network] To Pause and use OFFLINE TF'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3336,7 +3338,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1665053207}
   - component: {fileID: 1665053206}
-  - component: {fileID: 1665053205}
   m_Layer: 0
   m_Name: renderCam[MobileNet]
   m_TagString: Untagged
@@ -3344,14 +3345,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1665053205
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665053202}
-  m_Enabled: 0
 --- !u!20 &1665053206
 Camera:
   m_ObjectHideFlags: 0
