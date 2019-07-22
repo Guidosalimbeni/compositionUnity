@@ -26,8 +26,6 @@ public class GamePopulationController : MonoBehaviour
             }
         }
         
-
-        
         // instantiate from game manager... (if there already in scene for debugging ... no problem...)
 
         PopulateTheElementsOfCompositionInTheScene();
