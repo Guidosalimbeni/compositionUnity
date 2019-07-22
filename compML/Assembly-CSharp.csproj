@@ -67,8 +67,10 @@
     <Compile Include="Assets\_scripts\ANN\LayerNN.cs" />
     <Compile Include="Assets\_scripts\ANN\Neuron.cs" />
     <Compile Include="Assets\_scripts\Classification\ClassfierCompositionML.cs" />
+    <Compile Include="Assets\_scripts\Classification\ClassifierNNDATABASE.cs" />
     <Compile Include="Assets\_scripts\Classification\DetectorCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceCompositionML.cs" />
+    <Compile Include="Assets\_scripts\Classification\InferenceNNfomDATABASE.cs" />
     <Compile Include="Assets\_scripts\Classification\UtilsCompositionML.cs" />
     <Compile Include="Assets\_scripts\ColliderBounds.cs" />
     <Compile Include="Assets\_scripts\EventTriggerTouchClick.cs" />
@@ -780,6 +782,7 @@
     <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Dense.compute" />
     <None Include="Assets\UnitySDK\Assets\ML-Agents\Plugins\Barracuda.Core\Barracuda\Resources\Generic.compute" />
     <None Include="Assets\_scripts\Classification\link.txt" />
+    <None Include="Assets\Resources\NN_bad_good.txt" />
     <None Include="Assets\OpenCVForUnity\StreamingAssets\text\trained_classifierNM2.xml" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

@@ -136,7 +136,7 @@ public class SendToDatabase : MonoBehaviour
         byte[] bytesTopCam = collectdatarendertexture.CollectPNGFTopViewNN();
         WWWForm form = new WWWForm();
 
-        Debug.Log(genesString);
+        //Debug.Log(genesString);
 
         form.AddField("name", username);
         form.AddField("filenameImg", "NotImplemented");
