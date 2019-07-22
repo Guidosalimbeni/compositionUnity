@@ -39,7 +39,7 @@ public class InferenceNNfomDATABASE : MonoBehaviour
         CloseTF();
     }
 
-    private void Update()
+    private void Update() // to delete
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -53,8 +53,6 @@ public class InferenceNNfomDATABASE : MonoBehaviour
     {
         m_TextureFront = ToTexture2D(camRenderFront);
         m_TextureTop = ToTexture2D(camRenderTop);
-
-
 
         Texture2D TextureConcatanate = Concat2Texture2D(m_TextureFront, m_TextureTop);
 
@@ -83,7 +81,10 @@ public class InferenceNNfomDATABASE : MonoBehaviour
     public void InitTF()
     {
         
-           classifierNNDatabase = new ClassifierNNDATABASE(model, labels, input: "conv2d_1_input", output: "dense_3/Softmax");
+           classifierNNDatabase = new ClassifierNNDATABASE(model, labels, 
+                                                           input: "conv2d_1_input", output: "dense_3/Softmax", 
+                                                           height: 20, 
+                                                           width: 40);
     }
 
     public void CloseTF()
