@@ -215,9 +215,9 @@ public class PopulationManager : MonoBehaviour {
             float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisualIndividual;
             float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalanceIndividual;
             float scoreLawOfLever = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreLawOfLeverIndividual;
+            float scoreNNTopFront = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreNNFrontTopIndividual;
 
-
-            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, genes, scoreLawOfLever); //
+            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, genes, scoreLawOfLever, scoreNNTopFront); //
 
             for (int i = 0; i < populationToDelete.Count; i++)
             {

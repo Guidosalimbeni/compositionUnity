@@ -50,10 +50,6 @@ public class ClassifierNNDATABASE : MonoBehaviour
         labels = null;
     }
 
-    
-
-
-
     public float ClassifyNN(Texture2D texture, int numResults = 5, float threshold = 0.1f,
                           int angle = 0, Flip flip = Flip.NONE)
     {
@@ -64,9 +60,6 @@ public class ClassifierNNDATABASE : MonoBehaviour
 
         if (input.OutputType == TFDataType.Float)
         {
-            Debug.Log(" I am here I am type FLoat "); // 40 x 20 
-            
-
             float[] imgData = UtilsCompositionML.DecodeTexture(texture, inputWidth, inputHeight,
                                                   inputMean, inputStd, angle, flip);
             inputTensor = TFTensor.FromBuffer(shape, imgData, 0, imgData.Length);

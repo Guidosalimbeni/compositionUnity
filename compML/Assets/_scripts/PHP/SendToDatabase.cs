@@ -32,6 +32,7 @@ public class SendToDatabase : MonoBehaviour
     private int numberOfItems;
     private string sequence;
     private float scoreLawOfLever;
+    private float scoreNNFrontTop;
 
     private void Awake()
     {
@@ -66,6 +67,7 @@ public class SendToDatabase : MonoBehaviour
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
+        scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
 
         g0 = ListOfInfoForDatabase[0];// I can delete this at one point
         g1 = ListOfInfoForDatabase[1];// I can delete this at one point
@@ -88,6 +90,7 @@ public class SendToDatabase : MonoBehaviour
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
+        scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
 
         g0 = ListOfInfoForDatabase[0];// I can delete this at one point
         g1 = ListOfInfoForDatabase[1];// I can delete this at one point
@@ -107,7 +110,8 @@ public class SendToDatabase : MonoBehaviour
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
                                 List<float> genesAI, // I can delete this at one point
-                                float scoreLawOfLeverFromAI)
+                                float scoreLawOfLeverFromAI,
+                                float scoreNNFrontTopFromAI)
     {
         UpdateActualListOfInfoForDatabase();
 
@@ -115,6 +119,7 @@ public class SendToDatabase : MonoBehaviour
         scoreUnityVisual = scoreUnityVisualFromAI;
         scoreBoundsBalance = scoreBoundsBalancefromAI;
         scoreLawOfLever = scoreLawOfLeverFromAI;
+        scoreNNFrontTop = scoreNNFrontTopFromAI;
 
         g0 = genesAI[0];// I can delete this at one point
         g1 = genesAI[1];// I can delete this at one point
@@ -154,6 +159,7 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("scorePixelsBalance", scorePixelsBalance.ToString());
         form.AddField("scoreUnityVisual", scoreUnityVisual.ToString());
         form.AddField("scoreLawOfLever", scoreLawOfLever.ToString());
+        form.AddField("scoreNNFrontTop", scoreNNFrontTop.ToString());
 
         form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString()); // not need anymore
         form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString()); // not need anymore
