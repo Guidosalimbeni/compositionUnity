@@ -86,6 +86,7 @@ public class BrainGA : MonoBehaviour
 
             // this is the MOBILE NET -- still need to add to the total score
             // not returning anything for now... need to implement it.
+            // still need to add the last call from inference the same way i did for NN and check that is working properly
             scoreCalculator.GetTheScoreFromTheMobileNet();
 
             // add back the NEURAL NETWORK

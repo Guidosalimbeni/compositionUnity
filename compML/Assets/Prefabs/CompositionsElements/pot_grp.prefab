@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5411984315395165971}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 8460336343536760522}
   - component: {fileID: 8460336343536760521}
   - component: {fileID: 8460336343536760520}
+  - component: {fileID: 6950824871411646088}
   m_Layer: 0
   m_Name: pot
   m_TagString: Untagged
@@ -344,3 +345,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 291653ac9dafd6341a7477941564f47c, type: 3}
+--- !u!114 &6950824871411646088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460336343536760534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81be3d69d20cc243931b3ad9ecd9f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

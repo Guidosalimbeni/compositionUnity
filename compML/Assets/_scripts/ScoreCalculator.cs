@@ -73,7 +73,13 @@ public class ScoreCalculator : MonoBehaviour
 
     public void GetTheScoreFromTheMobileNet()
     {
-        inferenceCompositionML.MakePrecitionCompMLMobileNet();
+
+        // still need to add the last call from inference the same way i did for NN and check that is working properly
+
+        //inferenceCompositionML.MakePrecitionCompMLMobileNet();
+
+        Debug.Log("finish implementation here..");
+
     }
 
 }
