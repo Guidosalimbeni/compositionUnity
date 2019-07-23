@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class ScoreCalculator : MonoBehaviour
 {
+    // this holds the score... woud be better to have the UI gradient to look at this values instead of subscribe to the events again...TODO
+
     public float visualScoreBalancePixelsCount { private set; get; } //
     public float scoreBoundsBalance { private set; get; } //
     public float scoreUnityVisual { private set; get; } //
+    public float scoreLawOfLever { private set; get; } //
+    public float scoreNNFrontTop { private set; get; } //
 
     private OpenCVManager openCvManager;
     private GameVisualManager gameManagerNotOpenCV;
+    private InferenceNNfomDATABASE inferenceNNfomDATABASE;
+
     private InferenceCompositionML inferenceCompositionML;
 
 
@@ -17,12 +23,28 @@ public class ScoreCalculator : MonoBehaviour
     {
         openCvManager = FindObjectOfType<OpenCVManager>();
         gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
+        
+        inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
+
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
 
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;
         gameManagerNotOpenCV.OnScoreUnityVisualChanged += Handle_OnScoreUnityVisualChanged;
-        
+        gameManagerNotOpenCV.OnScoreLawOfLeverChanged += Handle_OnScoreLawOfLeverChanged;
+
+        inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged += Handle_OnScorescoreNNFrontTopChanged;
+
+    }
+
+    private void Handle_OnScorescoreNNFrontTopChanged(float scoreNNFrontTopPassed)
+    {
+        scoreNNFrontTop = scoreNNFrontTopPassed;
+    }
+
+    private void Handle_OnScoreLawOfLeverChanged(float scoreLawOfLeverPassed)
+    {
+        scoreLawOfLever = scoreLawOfLeverPassed;
     }
 
     private void Handle_OnScoreUnityVisualChanged(float ScoreUnityVisualPassed)
@@ -45,6 +67,8 @@ public class ScoreCalculator : MonoBehaviour
         openCvManager.OnPixelsCountBalanceChanged -= HandleOnPixelsCountBalanceChanged;
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged -= Handle_OnScoreBoundsBalanceChanged;
         gameManagerNotOpenCV.OnScoreUnityVisualChanged -= Handle_OnScoreUnityVisualChanged;
+        gameManagerNotOpenCV.OnScoreLawOfLeverChanged -= Handle_OnScoreLawOfLeverChanged;
+        inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged -= Handle_OnScorescoreNNFrontTopChanged;
     }
 
     public void GetTheScoreFromTheMobileNet()

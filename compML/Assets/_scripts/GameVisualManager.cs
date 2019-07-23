@@ -13,15 +13,17 @@ public class GameVisualManager : MonoBehaviour
 
     private CalculateBalanceAreaBounds calculateBalanceAreaBounds;
     private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
+    private CalculateLawOfLever calculateLawOfLever;
 
     public event Action<float> OnScoreBoundsBalanceChanged;
     public event Action<float> OnScoreUnityVisualChanged;
-
+    public event Action<float> OnScoreLawOfLeverChanged;
 
     private void Awake()
     {
         calculateBalanceAreaBounds = GetComponent<CalculateBalanceAreaBounds>();
         calculateCollisionDistanceVisualUnity = GetComponent<CalculateCollisionDistanceVisualUnity>();
+        calculateLawOfLever = GetComponent<CalculateLawOfLever>();
     }
 
     // call from leantouch and population manager one during breeding and one for last move
@@ -30,9 +32,20 @@ public class GameVisualManager : MonoBehaviour
     {
         UpdateBalanceAreaBoundsShapes();
         UpdateScoreUnityVisual();
+        UpdateLawOfLeverScore();
 
 
 
+
+    }
+
+    private void UpdateLawOfLeverScore()
+    {
+        float ScoreLawOfLever = calculateLawOfLever.CalculateLawOfLeverLeftRigth();
+        if (OnScoreLawOfLeverChanged != null)
+        {
+            OnScoreLawOfLeverChanged(ScoreLawOfLever);
+        }
     }
 
     private void UpdateScoreUnityVisual()

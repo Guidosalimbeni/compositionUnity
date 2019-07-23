@@ -41,5 +41,10 @@ public class ColorGradientPixelsBalance : MonoBehaviour
 
         
     }
-    
+
+    private void OnDisable()
+    {
+        openCvManager.OnPixelsCountBalanceChanged -= HandlePixelsCountBalanceChanged;
+    }
+
 }

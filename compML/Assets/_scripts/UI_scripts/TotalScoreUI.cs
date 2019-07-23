@@ -12,6 +12,7 @@ public class TotalScoreUI : MonoBehaviour
     float a;
     float b;
     float c;
+    float d;
 
     private void Awake()
     {
@@ -22,11 +23,17 @@ public class TotalScoreUI : MonoBehaviour
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;
         gameManagerNotOpenCV.OnScoreUnityVisualChanged += Handle_OnScoreUnityVisualChanged;
+        gameManagerNotOpenCV.OnScoreLawOfLeverChanged += Handlex_OnScoreLawOfLeverChanged;
+    }
+
+    private void Handlex_OnScoreLawOfLeverChanged(float obj)
+    {
+        d = obj;
     }
 
     private void Update()
     {
-        TOTALSCOREDebugging = a + b + c;
+        TOTALSCOREDebugging = a + b + c + d;
     }
 
     private void Handle_OnScoreUnityVisualChanged(float obj)
@@ -43,4 +50,13 @@ public class TotalScoreUI : MonoBehaviour
     {
         c = obj;
     }
+
+    private void OnDisable()
+    {
+        openCvManager.OnPixelsCountBalanceChanged -= HandleOnPixelsCountBalanceChanged;
+        gameManagerNotOpenCV.OnScoreBoundsBalanceChanged -= Handle_OnScoreBoundsBalanceChanged;
+        gameManagerNotOpenCV.OnScoreUnityVisualChanged -= Handle_OnScoreUnityVisualChanged;
+        gameManagerNotOpenCV.OnScoreLawOfLeverChanged -= Handlex_OnScoreLawOfLeverChanged;
+    }
+
 }

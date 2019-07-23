@@ -94,7 +94,7 @@ public static class UtilsCompositionML
         tex.ReadPixels(texR, 0, 0, true);
         tex.Apply(true);
 
-        var pixels = RotateImage(tex, angle);
+        var pixels = RotateImage(tex, angle); //
 
         UnityEngine.Object.Destroy(tex);
         tex = null;

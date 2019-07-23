@@ -31,6 +31,7 @@ public class SendToDatabase : MonoBehaviour
     private string genesString;
     private int numberOfItems;
     private string sequence;
+    private float scoreLawOfLever;
 
     private void Awake()
     {
@@ -64,6 +65,8 @@ public class SendToDatabase : MonoBehaviour
         scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
+        scoreLawOfLever = scoreCalculator.scoreLawOfLever;
+
         g0 = ListOfInfoForDatabase[0];// I can delete this at one point
         g1 = ListOfInfoForDatabase[1];// I can delete this at one point
         g2 = ListOfInfoForDatabase[2];// I can delete this at one point
@@ -84,6 +87,8 @@ public class SendToDatabase : MonoBehaviour
         scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
+        scoreLawOfLever = scoreCalculator.scoreLawOfLever;
+
         g0 = ListOfInfoForDatabase[0];// I can delete this at one point
         g1 = ListOfInfoForDatabase[1];// I can delete this at one point
         g2 = ListOfInfoForDatabase[2];// I can delete this at one point
@@ -101,13 +106,15 @@ public class SendToDatabase : MonoBehaviour
     public void PostDataFromAI(float scorePixelsBalancefromAI, 
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
-                                List<float> genesAI)// I can delete this at one point
+                                List<float> genesAI, // I can delete this at one point
+                                float scoreLawOfLeverFromAI)
     {
         UpdateActualListOfInfoForDatabase();
 
         scorePixelsBalance = scorePixelsBalancefromAI;
         scoreUnityVisual = scoreUnityVisualFromAI;
         scoreBoundsBalance = scoreBoundsBalancefromAI;
+        scoreLawOfLever = scoreLawOfLeverFromAI;
 
         g0 = genesAI[0];// I can delete this at one point
         g1 = genesAI[1];// I can delete this at one point
@@ -146,6 +153,8 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("scoreBoundsBalance", scoreBoundsBalance.ToString());
         form.AddField("scorePixelsBalance", scorePixelsBalance.ToString());
         form.AddField("scoreUnityVisual", scoreUnityVisual.ToString());
+        form.AddField("scoreLawOfLever", scoreLawOfLever.ToString());
+
         form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString()); // not need anymore
         form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString()); // not need anymore
         form.AddField("g0", g0.ToString());// I can delete this at one point
@@ -164,6 +173,9 @@ public class SendToDatabase : MonoBehaviour
 
         using (UnityWebRequest www = UnityWebRequest.Post("http://www.guidosalimbeni.it/UnityComp/AddToDatabase.php", form))
         {
+            //System.Net.ServicePointManager.Expect100Continue = false; // to avoid some proxy blocking
+            www.useHttpContinue = false;
+
             yield return www.SendWebRequest();
 
             if (www.isNetworkError || www.isHttpError)
@@ -176,6 +188,8 @@ public class SendToDatabase : MonoBehaviour
             }
         }
     }
+
+    
 
 
     private void UpdateActualListOfInfoForDatabase()

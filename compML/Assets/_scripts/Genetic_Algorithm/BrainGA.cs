@@ -16,6 +16,8 @@ public class BrainGA : MonoBehaviour
     public float scorePixelsBalanceIndividual { get; set; }
     public float scoreUnityVisualIndividual { get; set; }
     public float scoreBoundsBalanceIndividual { get; set; }
+    public float scoreLawOfLeverIndividual { get; set; }
+    public float scoreNNFrontTopIndividual { get; set; }
 
     public List<float> genes = new List<float>();
 
@@ -79,6 +81,8 @@ public class BrainGA : MonoBehaviour
             scorePixelsBalanceIndividual = scoreCalculator.visualScoreBalancePixelsCount; 
             scoreBoundsBalanceIndividual = scoreCalculator.scoreBoundsBalance;
             scoreUnityVisualIndividual = scoreCalculator.scoreUnityVisual;
+            scoreLawOfLeverIndividual = scoreCalculator.scoreLawOfLever;
+            scoreNNFrontTopIndividual = scoreCalculator.scoreNNFrontTop;
 
             // this is the MOBILE NET -- still need to add to the total score
             // not returning anything for now... need to implement it.
@@ -86,7 +90,10 @@ public class BrainGA : MonoBehaviour
 
             // add back the NEURAL NETWORK
 
-            TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual;// + scoreNN;
+            TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual 
+                         + scoreLawOfLeverIndividual + scoreNNFrontTopIndividual;// + scoreNN;
+
+            // when I add a new score I need to update the last generation in population manager so that the score has sent to the database
             
         }
     }

@@ -57,17 +57,17 @@ public class InferenceCompositionML : MonoBehaviour
         // Tiny YOLOv2
         //outputs = detector.Detect(m_Texture, angle: 90, threshold: 0.1f);
 
-        ShowOutputs(outputs);
+        //ShowOutputs(outputs);
 
     }
 
-    private void ShowOutputs(IList outputs)
-    {
-        foreach (var o in outputs)
-        {
-            Debug.Log("from inference " + o);
-        }
-    }
+    //private void ShowOutputs(IList outputs)
+    //{
+    //    foreach (var o in outputs)
+    //    {
+    //        Debug.Log("from inference " + o);
+    //    }
+    //}
 
     public void InitTF()
     {

@@ -13,12 +13,14 @@ public class CalculateLawOfLever : MonoBehaviour
     private float averageDistanceLeftToFulcrum;
     private float averageDistanceRightToFulcrum;
 
+    public float scoreLawOfLever { get; set; }
+
     private void Awake()
     {
         gamePopulationController = FindObjectOfType<GamePopulationController>();
     }
 
-    public void CalculateLawOfLeverLeftRigth()
+    public float CalculateLawOfLeverLeftRigth()
     {
         TotalVolumeLeft = 0.0f;
         TotalVolumeRight = 0.0f;
@@ -80,23 +82,28 @@ public class CalculateLawOfLever : MonoBehaviour
         float distL = Mathf.Abs(meanLeftX);
         float distR = Mathf.Abs(meanRightX);
         float difference;
-        float Force;
-
+        double Force;
+        float error;
+        float k = 1.0f;
+        // https://en.wikipedia.org/wiki/Sigmoid_function#/media/File:Gjl-t(x).svg
         if (distL > 0.0f)
         {
             difference = (TotalVolumeRight * distR) / distL;
-            Force = TotalVolumeLeft - difference;
+            Force = Mathf.Abs(TotalVolumeLeft - difference);
+            //double cost = 1 / (1 + Math.Exp(k * -Force));
+            double cost = Math.Tanh(Force);
+
+            error = (float)cost;
         }
         else
         {
-            Force = 1;
+            error = 1;
         }
 
-        float score = 1 - Force;
+        scoreLawOfLever = 1 - error;
+
+        return scoreLawOfLever;
     }
 
-    private void Update()
-    {
-        CalculateLawOfLeverLeftRigth();
-    }
+    
 }

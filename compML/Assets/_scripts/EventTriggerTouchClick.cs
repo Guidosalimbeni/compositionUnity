@@ -8,6 +8,7 @@ namespace Lean.Touch
 
         private OpenCVManager openCVManager;
         private GameVisualManager gameManagerNotOpenCV;
+        private InferenceNNfomDATABASE inferenceNNfomDATABASE;
 
 
         protected virtual void OnEnable()
@@ -25,6 +26,7 @@ namespace Lean.Touch
         {
             openCVManager = FindObjectOfType<OpenCVManager>();
             gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
+            inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
         }
 
         protected virtual void OnDisable()
@@ -48,6 +50,8 @@ namespace Lean.Touch
         {
             openCVManager.CallForOpenCVCalculationUpdates();
             gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+            inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
+
             //Debug.Log("Finger " + finger.Index + " is still touching the screen");
         }
 

@@ -25,9 +25,13 @@ public class InferenceNNfomDATABASE : MonoBehaviour
     ClassifierNNDATABASE classifierNNDatabase;
     DetectorCompositionML detector;
 
-    private IList outputs;
+    //private IList outputs;
     private Texture2D m_TextureFront;
     private Texture2D m_TextureTop;
+
+    private float scoreNNFrontTop;
+
+    public event Action<float> OnScorescoreNNFrontTopChanged;
 
     void OnEnable()
     {
@@ -39,15 +43,15 @@ public class InferenceNNfomDATABASE : MonoBehaviour
         CloseTF();
     }
 
-    private void Update() // to delete
+    // call from leantouch and population manager one during breeding and one for last move
+    // also called from the AGENTCompAi to update the reward on decision on demand..
+    public void CallTOCalculateNNFrontTopcore()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
+        MakePrecitionNNDatabase();
 
-            MakePrecitionNNDatabase();
-        }
+
+
     }
-
 
     public void MakePrecitionNNDatabase()
     {
@@ -64,25 +68,20 @@ public class InferenceNNfomDATABASE : MonoBehaviour
     public void RunTFNN(Texture2D TextureConcatanate)
     {
         // NN from database collected and trained offline
-        outputs = classifierNNDatabase.ClassifyNN(TextureConcatanate, angle: 90, threshold: 0.05f);
+        scoreNNFrontTop = classifierNNDatabase.ClassifyNN(TextureConcatanate, angle: 0, threshold: 0.05f);
 
-        ShowOutputs(outputs);
-
-    }
-
-    private void ShowOutputs(IList outputs)
-    {
-        foreach (var o in outputs)
+        if (OnScorescoreNNFrontTopChanged != null)
         {
-            Debug.Log("from inference " + o);
+            OnScorescoreNNFrontTopChanged(scoreNNFrontTop);
         }
+
     }
 
     public void InitTF()
     {
         
            classifierNNDatabase = new ClassifierNNDATABASE(model, labels, 
-                                                           input: "conv2d_1_input", output: "dense_3/Softmax", 
+                                                           input: "conv2d_1_input_1", output: "dense_3_1/Softmax", 
                                                            height: 20, 
                                                            width: 40);
     }
@@ -113,9 +112,9 @@ public class InferenceNNfomDATABASE : MonoBehaviour
         Texture2D TextureConcatanate = new Texture2D(front.width * 2, front.height, TextureFormat.RGBA32, false);
         Mat imgMatTextureConcatanate = new Mat(front.height, front.width * 2,  CvType.CV_8UC1);
         Utils.texture2DToMat(TextureConcatanate, imgMatTextureConcatanate);
-        Mat imgMatFront = new Mat(front.width, front.height, CvType.CV_8UC1);
+        Mat imgMatFront = new Mat(front.height, front.width, CvType.CV_8UC1);
         Utils.texture2DToMat(front, imgMatFront);
-        Mat imgMatTop = new Mat(top.width, top.height, CvType.CV_8UC1);
+        Mat imgMatTop = new Mat(top.height, top.width, CvType.CV_8UC1);
         Utils.texture2DToMat(top, imgMatTop);
 
         List<Mat> ListToConcat = new List<Mat>();

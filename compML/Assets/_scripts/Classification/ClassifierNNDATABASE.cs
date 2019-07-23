@@ -21,8 +21,8 @@ public class ClassifierNNDATABASE : MonoBehaviour
                       TextAsset labelFile,
                       string input = "input",
                       string output = "output",
-                      int height = 224,
-                      int width = 224,
+                      int height = 20,
+                      int width = 40,
                       float mean = 127.5f,
                       float std = 127.5f)
     {
@@ -54,15 +54,19 @@ public class ClassifierNNDATABASE : MonoBehaviour
 
 
 
-    public IList ClassifyNN(Texture2D texture, int numResults = 5, float threshold = 0.1f,
+    public float ClassifyNN(Texture2D texture, int numResults = 5, float threshold = 0.1f,
                           int angle = 0, Flip flip = Flip.NONE)
     {
         var shape = new TFShape(1, inputWidth, inputHeight, 3);
         var input = graph[inputName][0];
+
         TFTensor inputTensor = null;
 
         if (input.OutputType == TFDataType.Float)
         {
+            Debug.Log(" I am here I am type FLoat "); // 40 x 20 
+            
+
             float[] imgData = UtilsCompositionML.DecodeTexture(texture, inputWidth, inputHeight,
                                                   inputMean, inputStd, angle, flip);
             inputTensor = TFTensor.FromBuffer(shape, imgData, 0, imgData.Length);
@@ -81,10 +85,11 @@ public class ClassifierNNDATABASE : MonoBehaviour
         runner.AddInput(input, inputTensor).Fetch(graph[outputName][0]);
 
         var output = runner.Run()[0];
+
         var outputs = output.GetValue() as float[,];
 
-        Debug.Log("this is good " + outputs[0, 1]); // this is good
-        Debug.Log("this is bad " + outputs[0, 0]); // this is bad
+        //Debug.Log("this is good " + outputs[0, 1]); // this is good
+        //Debug.Log("this is bad " + outputs[0, 0]); // this is bad
 
         inputTensor.Dispose();
         output.Dispose();
@@ -103,6 +108,19 @@ public class ClassifierNNDATABASE : MonoBehaviour
 
         //UtilsCompositionML.Log(results);
 
-        return results;
+        //return results;
+
+        return outputs[0, 1];
     }
+
+
+    //private void ShowOutputs(IList outputs)
+    //{
+    //    foreach (var o in outputs)
+    //    {
+    //        Debug.Log("from inference " + o);
+
+    //    }
+
+    //}
 }

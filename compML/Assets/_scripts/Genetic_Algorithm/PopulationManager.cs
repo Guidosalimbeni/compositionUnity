@@ -27,6 +27,8 @@ public class PopulationManager : MonoBehaviour {
     private SendToDatabase sendtodatabase;
     private OpenCVManager openCVmanager;
     private GameVisualManager gameManagerNotOpenCV;
+    private InferenceNNfomDATABASE inferenceNNfomDATABASE;
+
     private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
 
     private void Awake()
@@ -40,6 +42,7 @@ public class PopulationManager : MonoBehaviour {
         openCVmanager = FindObjectOfType<OpenCVManager>();
         gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
         calculateCollisionDistanceVisualUnity = FindObjectOfType<CalculateCollisionDistanceVisualUnity>();
+        inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
     }
 
 
@@ -89,6 +92,7 @@ public class PopulationManager : MonoBehaviour {
 
         openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
         gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+        inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
 
 
         IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the score is updated
@@ -153,6 +157,7 @@ public class PopulationManager : MonoBehaviour {
 
         openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
         gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+        inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
 
 
         // to need another yield?
@@ -186,7 +191,7 @@ public class PopulationManager : MonoBehaviour {
 
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
-            calculateCollisionDistanceVisualUnity.drawRenderedLinesDebug = true;
+            calculateCollisionDistanceVisualUnity.drawRenderedLinesDebug = true;  //////
             AICreatesInitialPopulationTurn = true;
 
             List<float> genes = new List<float>();
@@ -209,8 +214,10 @@ public class PopulationManager : MonoBehaviour {
             float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scorePixelsBalanceIndividual;
             float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisualIndividual;
             float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalanceIndividual;
+            float scoreLawOfLever = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreLawOfLeverIndividual;
 
-            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, genes); //
+
+            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, genes, scoreLawOfLever); //
 
             for (int i = 0; i < populationToDelete.Count; i++)
             {
@@ -225,6 +232,7 @@ public class PopulationManager : MonoBehaviour {
 
             openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
             gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+            inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
 
         }
     }

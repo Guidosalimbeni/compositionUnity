@@ -32,6 +32,7 @@ public class CompAiAgent : Agent
     private GameVisualManager gameVisualManager;
     private CollisionChecker collisionChecker;
     private ScoreCalculator scoreCalculator;
+    private InferenceNNfomDATABASE inferenceNNfomDATABASE;
 
     float distanceToCenter = 0.0f;
     Vector3 CenterOfScene = Vector3.zero;
@@ -51,6 +52,7 @@ public class CompAiAgent : Agent
         openCVManager = FindObjectOfType<OpenCVManager>();
         gameVisualManager = FindObjectOfType<GameVisualManager>();
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
+        inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
         // TODO the mobile net score might need to be separated since its call only .. or maybe I can also update UI? ,..  but another MobileNetManagerScript..with action...etc
     }
 
@@ -128,6 +130,7 @@ public class CompAiAgent : Agent
         // call here so that both for wait decision and for inference will update the UI and the scores
         openCVManager.CallForOpenCVCalculationUpdates();
         gameVisualManager.CallTOCalculateNOTOpenCVScores();
+        inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
 
         // ADD THE CALL TO MOBILE NET HERE... need to wait here???
 

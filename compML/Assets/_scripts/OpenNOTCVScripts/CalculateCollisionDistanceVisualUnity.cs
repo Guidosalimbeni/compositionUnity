@@ -17,7 +17,7 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
 
     public float VisualUnityScore { get; private set; }
 
-    private GameVisualManager gamemanager;
+    //private GameVisualManager gamemanager;
     private GamePopulationController gamePopulationController;
 
     private void Awake()
