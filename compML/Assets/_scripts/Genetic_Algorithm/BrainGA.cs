@@ -18,6 +18,7 @@ public class BrainGA : MonoBehaviour
     public float scoreBoundsBalanceIndividual { get; set; }
     public float scoreLawOfLeverIndividual { get; set; }
     public float scoreNNFrontTopIndividual { get; set; }
+    public float scoreMobileNetIndividual { get; set; }
 
     public List<float> genes = new List<float>();
 
@@ -81,17 +82,11 @@ public class BrainGA : MonoBehaviour
             scoreUnityVisualIndividual = scoreCalculator.scoreUnityVisual;
             scoreLawOfLeverIndividual = scoreCalculator.scoreLawOfLever;
             scoreNNFrontTopIndividual = scoreCalculator.scoreNNFrontTop;
-
-            // this is the MOBILE NET -- still need to add to the total score
-            // not returning anything for now... need to implement it.
-            // still need to add the last call from inference the same way i did for NN and check that is working properly
-            scoreCalculator.GetTheScoreFromTheMobileNet();
-
-
+            scoreMobileNetIndividual = scoreCalculator.scoreMobileNet;
             
 
             TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual
-                         + scoreLawOfLeverIndividual + scoreNNFrontTopIndividual;
+                         + scoreLawOfLeverIndividual + scoreNNFrontTopIndividual + scoreMobileNetIndividual;
 
             // when I add a new score I need to update the last generation in population manager so that the score has sent to the database
             

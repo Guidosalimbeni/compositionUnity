@@ -81,7 +81,7 @@ public class InferenceNNfomDATABASE : MonoBehaviour
     {
         
            classifierNNDatabase = new ClassifierNNDATABASE(model, labels, 
-                                                           input: "conv2d_1_input_1", output: "dense_3_1/Softmax", 
+                                                           input: "conv2d_3_input", output: "dense_9/Softmax", 
                                                            height: 20, 
                                                            width: 40);
     }

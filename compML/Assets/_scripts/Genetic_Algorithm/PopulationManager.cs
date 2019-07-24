@@ -28,6 +28,7 @@ public class PopulationManager : MonoBehaviour {
     private OpenCVManager openCVmanager;
     private GameVisualManager gameManagerNotOpenCV;
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
+    private InferenceCompositionML inferenceCompositionML;
 
     private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
 
@@ -43,6 +44,7 @@ public class PopulationManager : MonoBehaviour {
         gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
         calculateCollisionDistanceVisualUnity = FindObjectOfType<CalculateCollisionDistanceVisualUnity>();
         inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
+        inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
     }
 
 
@@ -93,6 +95,7 @@ public class PopulationManager : MonoBehaviour {
         openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
         gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
+        inferenceCompositionML.CallTOCalculateMobileNetScore();
 
 
         IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the score is updated
@@ -158,6 +161,7 @@ public class PopulationManager : MonoBehaviour {
         openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
         gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
+        inferenceCompositionML.CallTOCalculateMobileNetScore();
 
 
         // to need another yield?
@@ -203,8 +207,9 @@ public class PopulationManager : MonoBehaviour {
             float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalanceIndividual;
             float scoreLawOfLever = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreLawOfLeverIndividual;
             float scoreNNTopFront = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreNNFrontTopIndividual;
+            float scoreMobileNet = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreMobileNetIndividual;
 
-            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, scoreLawOfLever, scoreNNTopFront); //
+            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, scoreLawOfLever, scoreNNTopFront, scoreMobileNet); //
 
             for (int i = 0; i < populationToDelete.Count; i++)
             {
@@ -220,6 +225,7 @@ public class PopulationManager : MonoBehaviour {
             openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
             gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
             inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
+            inferenceCompositionML.CallTOCalculateMobileNetScore();
 
         }
     }

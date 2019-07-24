@@ -14,6 +14,8 @@ public class InferenceCompositionML : MonoBehaviour
     [SerializeField]
     TextAsset labels;
 
+    public bool MobileNetScoring = true;
+
     public RenderTexture camRenderTexture; // this is 224 * 224 for mobile net
 
     ClassfierCompositionML classifier;
@@ -21,6 +23,9 @@ public class InferenceCompositionML : MonoBehaviour
 
     private IList outputs;
     private Texture2D m_Texture;
+
+    public event Action<float> OnScorescoreMobileNetChanged;
+
 
     void OnEnable()
     {
@@ -32,13 +37,20 @@ public class InferenceCompositionML : MonoBehaviour
         CloseTF();
     }
 
-    //private void Update() // to delete
-    //{
-    //    if (Input.GetKeyDown(KeyCode.A))
-    //    {
-    //        MakePrecitionCompMLMobileNet();
-    //    }
-    //}
+
+    // call from leantouch and population manager one during breeding and one for last move
+    // also called from the AGENTCompAi to update the reward on decision on demand..
+    public void CallTOCalculateMobileNetScore()
+    {
+
+        if (MobileNetScoring == true)
+        {
+            MakePrecitionCompMLMobileNet();
+        }
+        
+
+    }
+
 
     public void MakePrecitionCompMLMobileNet()
     {
@@ -49,7 +61,13 @@ public class InferenceCompositionML : MonoBehaviour
     public void RunTF(Texture2D texture)
     {
         // MobileNet
-        outputs = classifier.Classify(texture, angle: 90, threshold: 0.05f);
+        float ScoreFromMobileNet = classifier.Classify(texture, angle: 90, threshold: 0.05f);
+
+
+        if (OnScorescoreMobileNetChanged != null)
+        {
+            OnScorescoreMobileNetChanged(ScoreFromMobileNet);
+        }
 
         // SSD MobileNet
         //outputs = detector.Detect(m_Texture, angle: 90, threshold: 0.6f);
@@ -73,7 +91,7 @@ public class InferenceCompositionML : MonoBehaviour
     {
         // MobileNet
         //classifier = new ClassfierCompositionML(model, labels, output: "MobilenetV1/Predictions/Reshape_1");
-        classifier = new ClassfierCompositionML(model, labels,input: "input_1",  output: "dense_2/Softmax");
+        classifier = new ClassfierCompositionML(model, labels,input: "input_1_1",  output: "dense_2_1/Softmax");
         // SSD MobileNet
         //detector = new DetectorCompositionML(model, labels,input: "image_tensor");
 

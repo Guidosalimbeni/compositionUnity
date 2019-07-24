@@ -10,7 +10,7 @@ public class SendToDatabase : MonoBehaviour
     // for opencv score usually I created an events from Opencv Manager
     // for not opencv score usually to access scores via components and methods from UI manager -- which I am fixing.. since do not make sense
 
-    public ImageMatrixData imagePixelsValues;
+    public ImageMatrixData imagePixelsValues; // not using it ... sending empty strings..
     public bool collectExtraStringImageData = false;
 
     private CollectDataRenderTexture collectdatarendertexture;
@@ -28,6 +28,7 @@ public class SendToDatabase : MonoBehaviour
     private string sequence;
     private float scoreLawOfLever;
     private float scoreNNFrontTop;
+    private float scoreMobileNet;
 
     private void Awake()
     {
@@ -62,6 +63,7 @@ public class SendToDatabase : MonoBehaviour
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
+        scoreMobileNet = scoreCalculator.scoreMobileNet;
 
         judge = 0;               
 
@@ -79,6 +81,7 @@ public class SendToDatabase : MonoBehaviour
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
+        scoreMobileNet = scoreCalculator.scoreMobileNet;
 
 
         judge = 1;               
@@ -93,7 +96,8 @@ public class SendToDatabase : MonoBehaviour
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
                                 float scoreLawOfLeverFromAI,
-                                float scoreNNFrontTopFromAI)
+                                float scoreNNFrontTopFromAI,
+                                float scoreMobileNetFromAI)
     {
         UpdateActualListOfInfoForDatabase();
 
@@ -102,6 +106,7 @@ public class SendToDatabase : MonoBehaviour
         scoreBoundsBalance = scoreBoundsBalancefromAI;
         scoreLawOfLever = scoreLawOfLeverFromAI;
         scoreNNFrontTop = scoreNNFrontTopFromAI;
+        scoreMobileNet = scoreMobileNetFromAI;
 
 
         judge = 0.5f;                  ////////////////////// TODO I can then validate or penalise with my vote...
@@ -141,11 +146,11 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("scoreUnityVisual", scoreUnityVisual.ToString());
         form.AddField("scoreLawOfLever", scoreLawOfLever.ToString());
         form.AddField("scoreNNFrontTop", scoreNNFrontTop.ToString());
+        form.AddField("scoreMobileNet", scoreMobileNet.ToString());
 
         form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString()); // not need anymore // sending empty string 
         form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString()); // not need anymore // sending empty string
         form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsListMainPaintView.ToString()); // not need anymore // sending empty string
-
 
         form.AddField("judge", judge.ToString());
 

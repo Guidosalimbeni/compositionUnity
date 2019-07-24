@@ -97,7 +97,7 @@ public class ClassifierNNDATABASE : MonoBehaviour
             list.Add(new KeyValuePair<string, float>(labels[i], confidence));
         }
 
-        var results = list.OrderByDescending(i => i.Value).Take(numResults).ToList();
+        var results = list.OrderByDescending(i => i.Value).Take(numResults).ToList(); // what is number of result here???
 
         //UtilsCompositionML.Log(results);
 

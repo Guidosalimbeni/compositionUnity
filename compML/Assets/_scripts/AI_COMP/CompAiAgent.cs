@@ -33,6 +33,7 @@ public class CompAiAgent : Agent
     private CollisionChecker collisionChecker;
     private ScoreCalculator scoreCalculator;
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
+    private InferenceCompositionML inferenceCompositionML;
 
     float distanceToCenter = 0.0f;
     Vector3 CenterOfScene = Vector3.zero;
@@ -53,7 +54,9 @@ public class CompAiAgent : Agent
         gameVisualManager = FindObjectOfType<GameVisualManager>();
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
         inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
-        // TODO the mobile net score might need to be separated since its call only .. or maybe I can also update UI? ,..  but another MobileNetManagerScript..with action...etc
+        inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
+
+
     }
 
     
@@ -133,6 +136,7 @@ public class CompAiAgent : Agent
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
 
         // ADD THE CALL TO MOBILE NET HERE... need to wait here???
+        inferenceCompositionML.CallTOCalculateMobileNetScore();
 
         // add call for contour render / edges render / hog renderes...
 

@@ -50,8 +50,8 @@ public class ClassfierCompositionML : MonoBehaviour
         graph?.Dispose();
         labels = null;
     }
-
-    public IList Classify(Texture2D texture, int numResults = 5, float threshold = 0.1f,
+    // previously was IList
+    public float Classify(Texture2D texture, int numResults = 5, float threshold = 0.1f,
                           int angle = 0, Flip flip = Flip.NONE)
     {
         var shape = new TFShape(1, inputWidth, inputHeight, 3);
@@ -86,20 +86,20 @@ public class ClassfierCompositionML : MonoBehaviour
         inputTensor.Dispose();
         output.Dispose();
 
-        var list = new List<KeyValuePair<string, float>>();
+        //var list = new List<KeyValuePair<string, float>>();
 
-        for (int i = 0; i < labels.Length; i++)
-        {
-            var confidence = outputs[0, i];
-            if (confidence < threshold) continue;
+        //for (int i = 0; i < labels.Length; i++)
+        //{
+        //    var confidence = outputs[0, i];
+        //    if (confidence < threshold) continue;
 
-            list.Add(new KeyValuePair<string, float>(labels[i], confidence));
-        }
+        //    list.Add(new KeyValuePair<string, float>(labels[i], confidence));
+        //}
 
-        var results = list.OrderByDescending(i => i.Value).Take(numResults).ToList();
+        //var results = list.OrderByDescending(i => i.Value).Take(numResults).ToList();
 
         //UtilsCompositionML.Log(results);
 
-        return results;
+        return outputs[0, 1];
     }
 }

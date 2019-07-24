@@ -11,13 +11,12 @@ public class ScoreCalculator : MonoBehaviour
     public float scoreUnityVisual { private set; get; } //
     public float scoreLawOfLever { private set; get; } //
     public float scoreNNFrontTop { private set; get; } //
+    public float scoreMobileNet { private set; get; } //
 
     private OpenCVManager openCvManager;
     private GameVisualManager gameManagerNotOpenCV;
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
-
     private InferenceCompositionML inferenceCompositionML;
-
 
     private void Awake()
     {
@@ -34,7 +33,14 @@ public class ScoreCalculator : MonoBehaviour
         gameManagerNotOpenCV.OnScoreLawOfLeverChanged += Handle_OnScoreLawOfLeverChanged;
 
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged += Handle_OnScorescoreNNFrontTopChanged;
+        inferenceCompositionML.OnScorescoreMobileNetChanged += Handle_OnScorescoreMobileNetFrontTopChanged;
 
+
+    }
+
+    private void Handle_OnScorescoreMobileNetFrontTopChanged(float scoreMobileNetPassed)
+    {
+        scoreMobileNet = scoreMobileNetPassed;
     }
 
     private void Handle_OnScorescoreNNFrontTopChanged(float scoreNNFrontTopPassed)
@@ -62,6 +68,8 @@ public class ScoreCalculator : MonoBehaviour
         visualScoreBalancePixelsCount = scoreOnpixelscountbalance;
     }
 
+    
+
     private void OnDisable()
     {
         openCvManager.OnPixelsCountBalanceChanged -= HandleOnPixelsCountBalanceChanged;
@@ -69,17 +77,6 @@ public class ScoreCalculator : MonoBehaviour
         gameManagerNotOpenCV.OnScoreUnityVisualChanged -= Handle_OnScoreUnityVisualChanged;
         gameManagerNotOpenCV.OnScoreLawOfLeverChanged -= Handle_OnScoreLawOfLeverChanged;
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged -= Handle_OnScorescoreNNFrontTopChanged;
-    }
-
-    public void GetTheScoreFromTheMobileNet()
-    {
-
-        // still need to add the last call from inference the same way i did for NN and check that is working properly
-
-        //inferenceCompositionML.MakePrecitionCompMLMobileNet();
-
-        Debug.Log("finish implementation here..");
-
     }
 
 }
