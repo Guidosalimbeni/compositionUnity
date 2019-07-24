@@ -91,7 +91,9 @@ public class BrainGA : MonoBehaviour
 
             // add back the NEURAL NETWORK
 
-            TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual 
+            
+
+            TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual
                          + scoreLawOfLeverIndividual + scoreNNFrontTopIndividual;// + scoreNN;
 
             // when I add a new score I need to update the last generation in population manager so that the score has sent to the database

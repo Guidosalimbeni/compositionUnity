@@ -7,7 +7,7 @@ using UnityEngine;
 public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
 {
     public bool drawRenderedLinesDebug;
-    public float weight = 0.36f;
+    public float weight = 1.0f;
 
     private LineRenderer lineRenderer;
     private List<List<GameObject>> PairwaiseElementsOfComposition;
@@ -80,7 +80,19 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
                 return VisualUnityScore;
             }
         }
-        VisualUnityScore = Mathf.Exp(-sumOfDistances * weight);
+        double meanDistance = 0.0f;
+        if (PairwaiseElementsOfComposition.Count > 0)
+        {
+            meanDistance  = sumOfDistances / PairwaiseElementsOfComposition.Count;
+        }
+        else
+        {
+            VisualUnityScore = 1.0f;
+        }
+
+        double VisualUnityScoreDouble = Math.Tanh(meanDistance * weight);
+        VisualUnityScore = 1 - (float)VisualUnityScoreDouble;
+
         return VisualUnityScore;
     }
 

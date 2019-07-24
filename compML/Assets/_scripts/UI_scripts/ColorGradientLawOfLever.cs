@@ -23,16 +23,24 @@ public class ColorGradientLawOfLever : MonoBehaviour
     public void UpdateLawOfLeverPixelsUI(float score)
     {
 
-        if (score < 0.8f)
+        float weight = 1.0f;
+
+        if (score < 0.90f)
         {
-            lerpedColor = Color.Lerp(Color.red * 0.8f, Color.yellow, score);
-            LawOfLeverRawImage.color = lerpedColor;
+            weight = 0.8f;
         }
-        else
+
+        if (score < 0.85f)
         {
-            lerpedColor = Color.Lerp(Color.yellow, Color.green, score);
-            LawOfLeverRawImage.color = lerpedColor;
+            weight = 0.5f;
         }
+        if (score < 0.5f)
+        {
+            weight = 0.2f;
+        }
+
+        lerpedColor = Color.Lerp(Color.black, Color.white, score * weight);
+        LawOfLeverRawImage.color = lerpedColor;
     }
 
     private void OnDisable()

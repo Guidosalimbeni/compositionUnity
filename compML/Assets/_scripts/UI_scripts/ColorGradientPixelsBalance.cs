@@ -28,18 +28,25 @@ public class ColorGradientPixelsBalance : MonoBehaviour
     public void UpdateBalancePixelsUI(float score)
     {
 
-        if (score < 0.8f)
+        float weight = 1.0f;
+
+        if (score < 0.90f)
         {
-            lerpedColor = Color.Lerp(Color.red * 0.8f, Color.yellow, score);
-            balancePixelsUI.color = lerpedColor;
-        }
-        else
-        {
-            lerpedColor = Color.Lerp(Color.yellow, Color.green, score);
-            balancePixelsUI.color = lerpedColor;
+            weight = 0.8f;
         }
 
-        
+        if (score < 0.85f)
+        {
+            weight = 0.5f;
+        }
+        if (score < 0.5f)
+        {
+            weight = 0.2f;
+        }
+
+        lerpedColor = Color.Lerp(Color.black, Color.white, score * weight);
+        balancePixelsUI.color = lerpedColor;
+
     }
 
     private void OnDisable()

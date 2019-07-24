@@ -24,17 +24,24 @@ public class ColorGradientNNFrontTop : MonoBehaviour
 
     public void UpdateLawOfLeverPixelsUI(float score)
     {
+        float weight = 1.0f;
 
-        if (score < 0.8f)
+        if (score < 0.90f)
         {
-            lerpedColor = Color.Lerp(Color.red * 0.8f, Color.yellow, score);
-            NN_front_top_score_RawImage.color = lerpedColor;
+            weight = 0.8f;
         }
-        else
+
+        if (score < 0.85f)
         {
-            lerpedColor = Color.Lerp(Color.yellow, Color.green, score);
-            NN_front_top_score_RawImage.color = lerpedColor;
+            weight = 0.5f;
         }
+        if (score < 0.5f)
+        {
+            weight = 0.2f;
+        }
+
+        lerpedColor = Color.Lerp(Color.black, Color.white, score * weight);
+        NN_front_top_score_RawImage.color = lerpedColor;
     }
 
     private void OnDisable()

@@ -8,6 +8,9 @@ using System;
 
 public class GameVisualManager : MonoBehaviour
 {
+
+    public bool CalculateAreaBounds = false;
+
     public AreasObjects AreasOfObjects { get; private set; }
     //public List<GameObject> ElementsOfComposition { get; private set; }
 
@@ -30,7 +33,11 @@ public class GameVisualManager : MonoBehaviour
     // also called from the AGENTCompAi to update the reward on decision on demand..
     public void CallTOCalculateNOTOpenCVScores()
     {
-        UpdateBalanceAreaBoundsShapes();
+        if(CalculateAreaBounds == true)
+        {
+            UpdateBalanceAreaBoundsShapes();
+        }
+        
         UpdateScoreUnityVisual();
         UpdateLawOfLeverScore();
 

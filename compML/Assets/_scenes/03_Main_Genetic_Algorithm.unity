@@ -862,7 +862,7 @@ PrefabInstance:
     - target: {fileID: 6122406353790318771, guid: 077b41ef9247ec1439e7f8d312dfcf76,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6122406353790318764, guid: 077b41ef9247ec1439e7f8d312dfcf76,
         type: 3}
@@ -1009,7 +1009,7 @@ PrefabInstance:
     - target: {fileID: 3358845019314140019, guid: 79935e0cbd47a574da479d97758997b0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3358845019314140018, guid: 79935e0cbd47a574da479d97758997b0,
         type: 3}
@@ -1207,7 +1207,7 @@ PrefabInstance:
     - target: {fileID: 7719399981264397584, guid: f748e1920ae966e4494b1be6b52b446f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
         type: 3}
@@ -1562,9 +1562,9 @@ MonoBehaviour:
   triggerAI: 0
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
-  populationSize: 10
-  NumberOfGeneration: 4
-  secondToWaitForPopGeneration: 0.2
+  populationSize: 20
+  NumberOfGeneration: 10
+  secondToWaitForPopGeneration: 0.5
   bestScore: 0
   debugingList: []
 --- !u!1 &943048032
@@ -4550,12 +4550,12 @@ GameObject:
   - component: {fileID: 1946018043}
   - component: {fileID: 1946018042}
   m_Layer: 0
-  m_Name: BalanceBoundsShapesUI
+  m_Name: NOT used_BalanceBoundsShapesUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1946018041
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4697,7 +4697,7 @@ PrefabInstance:
     - target: {fileID: 8465226299762030692, guid: 1e16dacea503684408d3c8287facde6c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8465226299762030693, guid: 1e16dacea503684408d3c8287facde6c,
         type: 3}
@@ -5043,6 +5043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679cb5ed47559da4b9c277f56bb9ec3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CalculateAreaBounds: 0
 --- !u!4 &2142160884
 Transform:
   m_ObjectHideFlags: 0
