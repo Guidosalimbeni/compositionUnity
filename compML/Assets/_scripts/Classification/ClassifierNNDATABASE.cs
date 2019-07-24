@@ -101,7 +101,7 @@ public class ClassifierNNDATABASE : MonoBehaviour
 
         //UtilsCompositionML.Log(results);
 
-        //return results;
+        // not need tanh here since it is already from 0 to 1
 
         return outputs[0, 1];
     }

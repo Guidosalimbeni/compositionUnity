@@ -176,13 +176,6 @@ public class PopulationManager : MonoBehaviour {
             CounterOffsprings = 0;
             generation++; // counter
 
-            // to delete debugging
-            //debugingList = new List<float>();
-            //foreach (GameObject go in sortedList)
-            //{
-            //    debugingList.Add(go.GetComponent<BrainGA>().TotalScore);
-            //}
-
         }
 
         if (generation == NumberOfGeneration)
@@ -198,12 +191,6 @@ public class PopulationManager : MonoBehaviour {
             genes.Clear();
             genes = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().genes;
 
-            // to delete debugging
-            //debugingList = new List<float>();
-            //foreach (GameObject go in sortedList)
-            //{
-            //    debugingList.Add(go.GetComponent<BrainGA>().TotalScore);
-            //}
 
             sortedList[sortedList.Count - 1].GetComponent<BrainGA>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(genes);
 

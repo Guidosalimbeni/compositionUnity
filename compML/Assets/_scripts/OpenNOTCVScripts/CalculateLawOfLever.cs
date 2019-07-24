@@ -90,7 +90,6 @@ public class CalculateLawOfLever : MonoBehaviour
         {
             difference = (TotalVolumeRight * distR) / distL;
             Force = Mathf.Abs(TotalVolumeLeft - difference);
-            //double cost = 1 / (1 + Math.Exp(k * -Force));
             double cost = Math.Tanh(Force);
 
             error = (float)cost;

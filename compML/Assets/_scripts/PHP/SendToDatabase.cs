@@ -16,12 +16,6 @@ public class SendToDatabase : MonoBehaviour
     private GamePopulationController gamePopulationController;
     private ScoreCalculator scoreCalculator;
     private PopulationManager populationmanager;
-    private float g0;
-    private float g1;
-    private float g2;
-    private float g3;
-    private float g4;
-    private float g5;
     private float judge;
     private List<GameObject> listOfelementsInComposition;
     private List<float> ListOfInfoForDatabase;
@@ -62,19 +56,12 @@ public class SendToDatabase : MonoBehaviour
     {
         UpdateActualListOfInfoForDatabase();
 
-
         scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
 
-        g0 = ListOfInfoForDatabase[0];// I can delete this at one point
-        g1 = ListOfInfoForDatabase[1];// I can delete this at one point
-        g2 = ListOfInfoForDatabase[2];// I can delete this at one point
-        g3 = ListOfInfoForDatabase[3];// I can delete this at one point
-        g4 = ListOfInfoForDatabase[4];// I can delete this at one point
-        g5 = ListOfInfoForDatabase[5]; // I can delete this at one point
         judge = 0;               
 
         ListOfInfoForDatabase.Clear();
@@ -92,12 +79,7 @@ public class SendToDatabase : MonoBehaviour
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
 
-        g0 = ListOfInfoForDatabase[0];// I can delete this at one point
-        g1 = ListOfInfoForDatabase[1];// I can delete this at one point
-        g2 = ListOfInfoForDatabase[2];// I can delete this at one point
-        g3 = ListOfInfoForDatabase[3];// I can delete this at one point
-        g4 = ListOfInfoForDatabase[4];// I can delete this at one point
-        g5 = ListOfInfoForDatabase[5];// I can delete this at one point
+
         judge = 1;               
 
         ListOfInfoForDatabase.Clear();
@@ -121,12 +103,7 @@ public class SendToDatabase : MonoBehaviour
         scoreLawOfLever = scoreLawOfLeverFromAI;
         scoreNNFrontTop = scoreNNFrontTopFromAI;
 
-        g0 = genesAI[0];// I can delete this at one point
-        g1 = genesAI[1];// I can delete this at one point
-        g2 = genesAI[2];// I can delete this at one point
-        g3 = genesAI[3];// I can delete this at one point
-        g4 = genesAI[4];// I can delete this at one point
-        g5 = genesAI[5];// I can delete this at one point
+
         judge = 0.5f;                  ////////////////////// TODO I can then validate or penalise with my vote...
 
         ListOfInfoForDatabase.Clear();
@@ -163,12 +140,7 @@ public class SendToDatabase : MonoBehaviour
 
         form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString()); // not need anymore
         form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString()); // not need anymore
-        form.AddField("g0", g0.ToString());// I can delete this at one point
-        form.AddField("g1", g1.ToString());// I can delete this at one point
-        form.AddField("g2", g2.ToString());// I can delete this at one point
-        form.AddField("g3", g3.ToString());// I can delete this at one point
-        form.AddField("g4", g4.ToString());// I can delete this at one point
-        form.AddField("g5", g5.ToString());// I can delete this at one point
+
         form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsListMainPaintView.ToString());
         form.AddField("judge", judge.ToString());
 
