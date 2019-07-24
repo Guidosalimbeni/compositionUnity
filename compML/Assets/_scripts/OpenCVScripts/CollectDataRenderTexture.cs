@@ -30,7 +30,7 @@ public class CollectDataRenderTexture: MonoBehaviour
     }
 
     // to commnet out for eventually not lose this bit of code
-    public void CollectPixelsValuesFromImageForMainViewRecordInDatabase() // probably not need this if bytes works
+    public void CollectPixelsValuesFromImageForMainViewRecordInDatabase() // NOT USING THIS
     {
         Texture2D imgTexture = ToTexture2D(CompositionRenderTexture);
         Mat ImageMatrixOpenCV = new Mat(imgTexture.height, imgTexture.width, CvType.CV_8UC1); // 180 * 240 * cv_8uc1
@@ -48,7 +48,7 @@ public class CollectDataRenderTexture: MonoBehaviour
         imageMatrixData.ImagePixelsListMainPaintView = dataFromMat;
     }
 
-    public void CollectPixelsValuesFromImageForNeuralNetworkDNNOfflineTraining() // to commnet out for eventually not lose this bit of code
+    public void CollectPixelsValuesFromImageForNeuralNetworkDNNOfflineTraining() // NOT USING THIS
     {
         Texture2D ImageNNFrontViewTexture = ToTexture2D(ImageNNFrontViewRT);
         Mat ImageMatrixNNfrontView = new Mat(ImageNNFrontViewTexture.height, ImageNNFrontViewTexture.width, CvType.CV_8UC1); // 180 * 240 * cv_8uc1

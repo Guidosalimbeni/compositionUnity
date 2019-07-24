@@ -11,6 +11,7 @@ public class SendToDatabase : MonoBehaviour
     // for not opencv score usually to access scores via components and methods from UI manager -- which I am fixing.. since do not make sense
 
     public ImageMatrixData imagePixelsValues;
+    public bool collectExtraStringImageData = false;
 
     private CollectDataRenderTexture collectdatarendertexture;
     private GamePopulationController gamePopulationController;
@@ -118,14 +119,18 @@ public class SendToDatabase : MonoBehaviour
             username = "Debugging";
         }
 
-        collectdatarendertexture.CollectPixelsValuesFromImageForMainViewRecordInDatabase(); // this update the scriptable object with the image string list pixels values
-        collectdatarendertexture.CollectPixelsValuesFromImageForNeuralNetworkDNNOfflineTraining(); // this also update the scriptable object
+        if (collectExtraStringImageData == true)
+        {
+            collectdatarendertexture.CollectPixelsValuesFromImageForMainViewRecordInDatabase(); // this update the scriptable object with the image string list pixels values
+            collectdatarendertexture.CollectPixelsValuesFromImageForNeuralNetworkDNNOfflineTraining(); // this also update the scriptable object
+        }
+
+        // I now use the blob which is faster and then in python I can open using the script in COmp Anlysis in Artist Supervision Project
         byte[] bytesFullViewPaintCam = collectdatarendertexture.CollectPNGMainPaintCameraFullResolution();
         byte[] bytesFrontCam = collectdatarendertexture.CollectPNGFrontViewNN();
         byte[] bytesTopCam = collectdatarendertexture.CollectPNGFTopViewNN();
         WWWForm form = new WWWForm();
 
-        //Debug.Log(genesString);
 
         form.AddField("name", username);
         form.AddField("filenameImg", "NotImplemented");
@@ -138,10 +143,11 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("scoreLawOfLever", scoreLawOfLever.ToString());
         form.AddField("scoreNNFrontTop", scoreNNFrontTop.ToString());
 
-        form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString()); // not need anymore
-        form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString()); // not need anymore
+        form.AddField("NNtopView", imagePixelsValues.ImageNNtopView.ToString()); // not need anymore // sending empty string 
+        form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString()); // not need anymore // sending empty string
+        form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsListMainPaintView.ToString()); // not need anymore // sending empty string
 
-        form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsListMainPaintView.ToString());
+
         form.AddField("judge", judge.ToString());
 
         //form.AddBinaryData("image", bytes, "screenShot.png", "image/png");
