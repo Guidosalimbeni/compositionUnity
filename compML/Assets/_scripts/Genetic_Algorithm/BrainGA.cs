@@ -54,6 +54,10 @@ public class BrainGA : MonoBehaviour
             elementComp.transform.position = new Vector3(dna.GetGene(genePos), 0, dna.GetGene(genePos + 1));
             genePos = genePos + NumberOfgenes;
         }
+
+        genes.Clear();
+        genes = dna.GetGenesList();
+
     }
 
     public void CalculateTotalScore()
@@ -70,13 +74,7 @@ public class BrainGA : MonoBehaviour
             // TODO change this so that it takes the images and calculate the DNN inside unity
             // this is important and avoid me to use genes !!!!!!!!!!!!
 
-            // calculate score comes after movement so genes are updated
-            float scoreNN = 0;
 
-            genes.Clear();
-            genes = dna.GetGenesList();
-
-            scoreNN = brainNN_compML.PredictFromNN(genes[0], genes[1], genes[2], genes[3], genes[4], genes[5]);  // might want to MULTIPLY
             
             scorePixelsBalanceIndividual = scoreCalculator.visualScoreBalancePixelsCount; 
             scoreBoundsBalanceIndividual = scoreCalculator.scoreBoundsBalance;
@@ -89,12 +87,11 @@ public class BrainGA : MonoBehaviour
             // still need to add the last call from inference the same way i did for NN and check that is working properly
             scoreCalculator.GetTheScoreFromTheMobileNet();
 
-            // add back the NEURAL NETWORK
 
             
 
             TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual
-                         + scoreLawOfLeverIndividual + scoreNNFrontTopIndividual;// + scoreNN;
+                         + scoreLawOfLeverIndividual + scoreNNFrontTopIndividual;
 
             // when I add a new score I need to update the last generation in population manager so that the score has sent to the database
             

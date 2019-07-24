@@ -85,5 +85,8 @@ public class BrainNN_CompML : MonoBehaviour
 
     }
 
+    // create then a script for prdiction...
+
+    //brainNN_compML.PredictFromNN(genes[0], genes[1], genes[2], genes[3], genes[4], genes[5]);  // might want to MULTIPLY
 }
 

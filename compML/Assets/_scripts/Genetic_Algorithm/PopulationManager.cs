@@ -144,13 +144,13 @@ public class PopulationManager : MonoBehaviour {
        {
             b.InitForBreed();
             b.dna.Mutate();
-            b.MoveComposition(); 
+            b.MoveComposition(); // this is where the moved 
         }
        else
        {
            b.InitForBreed();
            b.dna.Combine(parent1.GetComponent<BrainGA>().dna, parent2.GetComponent<BrainGA>().dna);
-           b.MoveComposition(); 
+           b.MoveComposition(); // this is where the moved 
         }
 
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
@@ -164,7 +164,7 @@ public class PopulationManager : MonoBehaviour {
 
 
 
-        offspring.GetComponent<BrainGA>().CalculateTotalScore(); // this is where the moved are updated and score
+        offspring.GetComponent<BrainGA>().CalculateTotalScore(); // are updated and score
         population.Add(offspring);
         populationToDelete.Add(offspring);
         GenerateNewPopulatoinOffsprings_trigger = true;
@@ -204,7 +204,7 @@ public class PopulationManager : MonoBehaviour {
             float scoreLawOfLever = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreLawOfLeverIndividual;
             float scoreNNTopFront = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreNNFrontTopIndividual;
 
-            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, genes, scoreLawOfLever, scoreNNTopFront); //
+            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, scoreLawOfLever, scoreNNTopFront); //
 
             for (int i = 0; i < populationToDelete.Count; i++)
             {

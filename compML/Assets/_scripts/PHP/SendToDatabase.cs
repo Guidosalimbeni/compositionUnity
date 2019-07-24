@@ -92,7 +92,6 @@ public class SendToDatabase : MonoBehaviour
     public void PostDataFromAI(float scorePixelsBalancefromAI, 
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
-                                List<float> genesAI, // I can delete this at one point
                                 float scoreLawOfLeverFromAI,
                                 float scoreNNFrontTopFromAI)
     {
@@ -172,9 +171,6 @@ public class SendToDatabase : MonoBehaviour
             }
         }
     }
-
-    
-
 
     private void UpdateActualListOfInfoForDatabase()
     {
