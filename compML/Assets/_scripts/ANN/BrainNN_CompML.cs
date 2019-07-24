@@ -13,9 +13,9 @@ public class BrainNN_CompML : MonoBehaviour
     ANN ann;
     double sumSquareError = 0;
 
-    void Start()
+    public void TrainNeuralNetworkForWeightScoreUpdateFromDatabase()
     {
-        ann = new ANN(6, 1, 4, 4, 0.8);
+        ann = new ANN(5, 1, 0, 0, 0.8);
 
         List<double> result;
 
@@ -23,25 +23,30 @@ public class BrainNN_CompML : MonoBehaviour
         {
             for (int j = 0; j < dataNN.Names.Count; j++)
             {
-                double i0 = dataNN.G0[j];
-                double i1 = dataNN.G1[j];
-                double i2 = dataNN.G2[j];
-                double i3 = dataNN.G3[j];
-                double i4 = dataNN.G4[j];
-                double i5 = dataNN.G5[j];
+                double i0 = dataNN.ScorePixelsBalance[j];
+                double i1 = dataNN.ScoreUnityVisual[j];
+                double i2 = dataNN.ScoreLawOfLever[j];
+                double i3 = dataNN.ScoreNNFrontTop[j];
+                double i4 = dataNN.ScoreMobileNet[j];
+                
+
                 double output = dataNN.JUDGE[j];
 
                 sumSquareError = 0;
-                result = Train(i0, i1, i2, i3, i4, i5, output);
+                result = Train(i0, i1, i2, i3, i4, output);
                 sumSquareError += Mathf.Pow((float)result[0] - 0, 2);
             }
 
             //Debug.Log("SSE: " + sumSquareError);
+
+            string weigths = ann.PrintWeights();
+
+            Debug.Log(weigths);
         }
         
     }
 
-    List<double> Train(double i0, double i1, double i2, double i3, double i4, double i5, double output)
+    List<double> Train(double i0, double i1, double i2, double i3, double i4, double output)
     {
         List<double> inputs = new List<double>();
         List<double> outputs = new List<double>();
@@ -50,18 +55,18 @@ public class BrainNN_CompML : MonoBehaviour
         inputs.Add(i2);
         inputs.Add(i3);
         inputs.Add(i4);
-        inputs.Add(i5);
+        
         outputs.Add(output);
         return (ann.Train(inputs, outputs));
     }
 
 
-    public float PredictFromNN(double i0, double i1, double i2, double i3, double i4, double i5, double output = 0)
+    public float PredictFromNN(double i0, double i1, double i2, double i3, double i4, double output = 0)
     {
         List<double> result;
         float ScoreNN = 0;
 
-        result = Prediction(i0,i1,i2,i3,i4,i5);
+        result = Prediction(i0,i1,i2,i3,i4);
         nnScore.NNSCORE = result[0]; /// not used
         ScoreNN = (float)(result[0]);
 
@@ -69,7 +74,7 @@ public class BrainNN_CompML : MonoBehaviour
     }
 
 
-    List<double> Prediction(double i0, double i1, double i2, double i3, double i4, double i5, double output = 0)
+    List<double> Prediction(double i0, double i1, double i2, double i3, double i4, double output = 0)
     {
         List<double> inputs = new List<double>();
         List<double> outputs = new List<double>();
@@ -78,7 +83,7 @@ public class BrainNN_CompML : MonoBehaviour
         inputs.Add(i2);
         inputs.Add(i3);
         inputs.Add(i4);
-        inputs.Add(i5);
+        
         outputs.Add(output);
 
         return (ann.CalcOutput(inputs, outputs));

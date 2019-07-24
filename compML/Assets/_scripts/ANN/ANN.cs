@@ -96,6 +96,7 @@ public class ANN{
 		string weightStr = "";
 		foreach(LayerNN l in layers)
 		{
+
 			foreach(Neuron n in l.neurons)
 			{
 				foreach(double w in n.weights)

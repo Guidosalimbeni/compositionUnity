@@ -862,7 +862,7 @@ PrefabInstance:
     - target: {fileID: 6122406353790318771, guid: 077b41ef9247ec1439e7f8d312dfcf76,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6122406353790318764, guid: 077b41ef9247ec1439e7f8d312dfcf76,
         type: 3}
@@ -2785,6 +2785,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 0
+--- !u!1001 &1323350259
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7719399981264397584, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_Name
+      value: box_grp (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397584, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f748e1920ae966e4494b1be6b52b446f, type: 3}
 --- !u!1 &1328088897
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,8 +3716,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1610376823}
   - component: {fileID: 1610376822}
+  - component: {fileID: 1610376824}
   m_Layer: 0
-  m_Name: '[Neural Network] To Pause and use OFFLINE TF'
+  m_Name: '[Neural Network] FOR WEIGHTS'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3677,6 +3752,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1610376824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610376821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c804637eea845d54cbbd605344e047bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerGetData: 1
+  dataNN: {fileID: 11400000, guid: 7cd99f02c1392a64d96866ac8987f611, type: 2}
 --- !u!1 &1665053202
 GameObject:
   m_ObjectHideFlags: 0
@@ -4862,7 +4951,7 @@ PrefabInstance:
     - target: {fileID: 8465226299762030692, guid: 1e16dacea503684408d3c8287facde6c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8465226299762030693, guid: 1e16dacea503684408d3c8287facde6c,
         type: 3}
@@ -5341,7 +5430,7 @@ PrefabInstance:
     - target: {fileID: 5411984315395165971, guid: 7818dc83decf7b047bfae520d14a960c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5411984315395165972, guid: 7818dc83decf7b047bfae520d14a960c,
         type: 3}
@@ -5415,7 +5504,7 @@ PrefabInstance:
     - target: {fileID: 2940102590694826192, guid: 6b3ebc83c04a51043b9a84140069b27c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2940102590694826193, guid: 6b3ebc83c04a51043b9a84140069b27c,
         type: 3}

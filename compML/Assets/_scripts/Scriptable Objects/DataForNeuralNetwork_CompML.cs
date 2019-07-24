@@ -11,28 +11,27 @@ public class DataForNeuralNetwork_CompML : ScriptableObject
     [SerializeField]
     private List<string> names;
     [SerializeField]
-    private List<double> g0s;
+    private List<double> scorePixelsBalance;
     [SerializeField]
-    private List<double> g1s;
+    private List<double> scoreUnityVisual;
     [SerializeField]
-    private List<double> g2s;
+    private List<double> scoreLawOfLever;
     [SerializeField]
-    private List<double> g3s;
+    private List<double> scoreNNFrontTop;
     [SerializeField]
-    private List<double> g4s;
-    [SerializeField]
-    private List<double> g5s;
+    private List<double> scoreMobileNet;
+    
     [SerializeField]
     private List<double> judges;
 
 
     public List<string> Names { get { return names; } set { names = value; } }
-    public List<double> G0 { get { return g0s; } set { g0s = value; } }
-    public List<double> G1 { get { return g1s; } set { g1s = value; } }
-    public List<double> G2 { get { return g2s; } set { g2s = value; } }
-    public List<double> G3 { get { return g3s; } set { g3s = value; } }
-    public List<double> G4 { get { return g4s; } set { g4s = value; } }
-    public List<double> G5 { get { return g5s; } set { g5s = value; } }
+    public List<double> ScorePixelsBalance { get { return scorePixelsBalance; } set { scorePixelsBalance = value; } }
+    public List<double> ScoreUnityVisual { get { return scoreUnityVisual; } set { scoreUnityVisual = value; } }
+    public List<double> ScoreLawOfLever { get { return scoreLawOfLever; } set { scoreLawOfLever = value; } }
+    public List<double> ScoreNNFrontTop { get { return scoreNNFrontTop; } set { scoreNNFrontTop = value; } }
+    public List<double> ScoreMobileNet { get { return scoreMobileNet; } set { scoreMobileNet = value; } }
+
     public List<double> JUDGE { get { return judges; } set { judges = value; } }
 
 }
