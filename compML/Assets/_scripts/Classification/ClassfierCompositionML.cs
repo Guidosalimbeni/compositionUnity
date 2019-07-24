@@ -80,8 +80,8 @@ public class ClassfierCompositionML : MonoBehaviour
         var output = runner.Run()[0];
         var outputs = output.GetValue() as float[,];
 
-        Debug.Log("this is good "  + outputs[0,1]); // this is good
-        Debug.Log("this is bad " + outputs[0,0]); // this is bad
+        //Debug.Log("this is good "  + outputs[0,1]); // this is good
+        //Debug.Log("this is bad " + outputs[0,0]); // this is bad
 
         inputTensor.Dispose();
         output.Dispose();

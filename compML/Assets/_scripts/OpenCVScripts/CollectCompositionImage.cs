@@ -5,8 +5,10 @@ using UnityEngine;
 public class CollectCompositionImage : MonoBehaviour
 {
 
+    // NOT USED I THINK..
+
     public CompositionImage mainCompImage224;
-    public RenderTexture camRenderTexture; // this is 224 * 224 for mobile net
+    public RenderTexture camRenderTexture; // I was using this for the BARRACUDA but need 
 
     public void AssignCompRenderToTexture()
     {

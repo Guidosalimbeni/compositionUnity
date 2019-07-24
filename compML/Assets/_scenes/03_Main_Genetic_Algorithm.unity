@@ -4384,10 +4384,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289909f922258fc46a77414516e5d7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 4900000, guid: dbe4369ff28ecbb4c8d032419f776b03, type: 3}
+  model: {fileID: 4900000, guid: 6203f98e17607094c97ccebfd7f12cfc, type: 3}
   labels: {fileID: 4900000, guid: 8dc4ecd018ff2a84c9a8db6e18e5890e, type: 3}
-  MobileNetScoring: 0
-  camRenderTexture: {fileID: 8400000, guid: 0e9dcc42becc35843839a70fc4cbd65c, type: 2}
+  CustomCNNEnable: 1
+  camRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
+  W: 64
+  H: 64
 --- !u!114 &1902142335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5413,7 +5415,7 @@ PrefabInstance:
     - target: {fileID: 2940102590694826192, guid: 6b3ebc83c04a51043b9a84140069b27c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2940102590694826193, guid: 6b3ebc83c04a51043b9a84140069b27c,
         type: 3}
@@ -5487,7 +5489,7 @@ PrefabInstance:
     - target: {fileID: 7478693250018327905, guid: 975ed36a1799bcd449b54af7bacbf85d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7478693250018327904, guid: 975ed36a1799bcd449b54af7bacbf85d,
         type: 3}

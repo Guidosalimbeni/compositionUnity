@@ -2,6 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OpenCVForUnity.CoreModule;
+using OpenCVForUnity.ImgprocModule;
+using OpenCVForUnity.UnityUtils;
+
 
 public class InferenceCompositionML : MonoBehaviour
 {
@@ -14,9 +18,12 @@ public class InferenceCompositionML : MonoBehaviour
     [SerializeField]
     TextAsset labels;
 
-    public bool MobileNetScoring = true;
+    public bool CustomCNNEnable = true;
 
-    public RenderTexture camRenderTexture; // this is 224 * 224 for mobile net
+    public RenderTexture camRenderTexture; // this is 64 x 64 changed using custom... but need this to come as 240 x 180 and then convert to 64 64
+
+    public int W = 64;
+    public int H = 64;
 
     ClassfierCompositionML classifier;
     DetectorCompositionML detector;
@@ -43,18 +50,18 @@ public class InferenceCompositionML : MonoBehaviour
     public void CallTOCalculateMobileNetScore()
     {
 
-        if (MobileNetScoring == true)
+        if (CustomCNNEnable == true)
         {
-            MakePrecitionCompMLMobileNet();
+            MakePrecitionCUSTOMCNNNet();
         }
         
 
     }
 
 
-    public void MakePrecitionCompMLMobileNet()
+    public void MakePrecitionCUSTOMCNNNet()
     {
-        m_Texture = ToTexture2D(camRenderTexture);
+        m_Texture = ToTexture2DAndResize(camRenderTexture, W, H);
         RunTF(m_Texture);
     }
 
@@ -91,7 +98,11 @@ public class InferenceCompositionML : MonoBehaviour
     {
         // MobileNet
         //classifier = new ClassfierCompositionML(model, labels, output: "MobilenetV1/Predictions/Reshape_1");
-        classifier = new ClassfierCompositionML(model, labels,input: "input_1_1",  output: "dense_2_1/Softmax");
+        classifier = new ClassfierCompositionML(model, labels,input: "conv2d_1_input_1",  output: "dense_2_1/Softmax",
+                                                height: H,
+                                                width: W,
+                                                mean: 127.5f,
+                                                std: 127.5f);
         // SSD MobileNet
         //detector = new DetectorCompositionML(model, labels,input: "image_tensor");
 
@@ -112,13 +123,25 @@ public class InferenceCompositionML : MonoBehaviour
             detector.Close();
     }
 
-    private Texture2D ToTexture2D(RenderTexture rTex)
+    private Texture2D ToTexture2DAndResize(RenderTexture rTex, int W, int H)
     {
         Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGBA32, false);
         RenderTexture.active = rTex;
         tex.ReadPixels(new UnityEngine.Rect(0, 0, rTex.width, rTex.height), 0, 0);
         tex.Apply();
-        return tex;
+
+        Mat imgMat = new Mat(tex.height, tex.width, CvType.CV_8UC1);
+        Utils.texture2DToMat(tex, imgMat);
+
+        Size scaleSize = new Size(W, H);
+        Imgproc.resize(imgMat, imgMat, scaleSize,0,0,interpolation: Imgproc.INTER_AREA );
+        Texture2D resizedTexture = new Texture2D(W, H, TextureFormat.RGBA32, false);
+
+        Utils.matToTexture2D(imgMat, resizedTexture);
+
+
+        return resizedTexture;
+
     }
 
 }
