@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ColorGradientPixelsBalance : MonoBehaviour
 {
     public RawImage balancePixelsUI;
+    public Text text;
     Color lerpedColor = Color.white;
     private OpenCVManager openCvManager;
 
@@ -23,6 +24,8 @@ public class ColorGradientPixelsBalance : MonoBehaviour
     private void HandlePixelsCountBalanceChanged(float score)
     {
         UpdateBalancePixelsUI(score);
+        if (text != null)
+            text.text = score.ToString();
     }
 
     public void UpdateBalancePixelsUI(float score)

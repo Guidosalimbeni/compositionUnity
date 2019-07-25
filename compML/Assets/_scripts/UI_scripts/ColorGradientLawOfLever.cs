@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ColorGradientLawOfLever : MonoBehaviour
 {
     public RawImage LawOfLeverRawImage;
+    public Text text;
     private Color lerpedColor = Color.white;
     private GameVisualManager gameVisualManager;
 
@@ -18,6 +19,10 @@ public class ColorGradientLawOfLever : MonoBehaviour
     private void Handle_OnScoreLawOfLeverChanged(float scorelawOfLever)
     {
         UpdateLawOfLeverPixelsUI(scorelawOfLever);
+        if (text != null)
+        {
+            text.text = scorelawOfLever.ToString();
+        }
     }
 
     public void UpdateLawOfLeverPixelsUI(float score)

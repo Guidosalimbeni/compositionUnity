@@ -31,8 +31,6 @@ public class CalculateLawOfLever : MonoBehaviour
         {
             //Vector3 centerOfMass = item.GetComponent<ColliderBounds>().GetCenterOfMass(); // I can change with a locator at some point
 
-
-
             if (item.transform.position.x < 0)
             {
                 float volumeOfItem = item.GetComponent<CalculateVolumeOfElementComp>().Volume;
@@ -45,7 +43,6 @@ public class CalculateLawOfLever : MonoBehaviour
                 float volumeOfItem = item.GetComponent<CalculateVolumeOfElementComp>().Volume;
                 TotalVolumeRight += volumeOfItem;
                 RightX.Add(item.transform.position.x);
-
             }
 
         }
@@ -73,20 +70,19 @@ public class CalculateLawOfLever : MonoBehaviour
             meanRightX = tot2 / RightX.Count;
         }
 
-        leftX.Clear();
-        RightX.Clear();
-
-
         // since the fulcrum is at 0.0
 
+        Debug.Log(meanLeftX + "       left x");
+        Debug.Log(meanRightX + "       meanRightX x");
         float distL = Mathf.Abs(meanLeftX);
         float distR = Mathf.Abs(meanRightX);
         float difference;
         double Force;
         float error;
         float k = 1.0f;
+
         // https://en.wikipedia.org/wiki/Sigmoid_function#/media/File:Gjl-t(x).svg
-        if (distL > 0.0f)
+        if (distL > 0.0f && distR > 0.0f)
         {
             difference = (TotalVolumeRight * distR) / distL;
             Force = Mathf.Abs(TotalVolumeLeft - difference);
@@ -94,10 +90,15 @@ public class CalculateLawOfLever : MonoBehaviour
 
             error = (float)cost;
         }
+
         else
         {
             error = 1;
         }
+
+        leftX.Clear();
+        RightX.Clear();
+
 
         scoreLawOfLever = 1 - error;
 
