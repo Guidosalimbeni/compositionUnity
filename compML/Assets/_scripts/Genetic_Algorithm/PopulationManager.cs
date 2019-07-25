@@ -11,20 +11,23 @@ public class PopulationManager : MonoBehaviour {
     public int NumberOfGeneration = 4;
     public float secondToWaitForPopGeneration = 0.1f;
     public float bestScore; // for debugging only
-    
+
+    public GameObject parent1; // for debugging only
+    public GameObject parent2;
 
     private int generation = 0;
     private int counterForPopulation = 0;
     private int CounterOffsprings = 0;
     private bool AICreatesInitialPopulationTurn = true; //
     private bool GenerateNewPopulatoinOffsprings_trigger = false;
-    private List<GameObject> population = new List<GameObject>();
+
+    private List<GameObject> population;
     private GameObject offspring;
 
-    public List<GameObject> sortedList;
-    private List<GameObject> populationToDelete = new List<GameObject>();
+    public List<GameObject> sortedList; // public for debugging
+
     private bool sortNewGeneration = true;
-    private SendToDatabase sendtodatabase;
+    //private SendToDatabase sendtodatabase;
     private OpenCVManager openCVmanager;
     private GameVisualManager gameManagerNotOpenCV;
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
@@ -34,8 +37,7 @@ public class PopulationManager : MonoBehaviour {
 
     private void Awake()
     {
-        sendtodatabase = FindObjectOfType<SendToDatabase>();
-        sortedList = new List<GameObject>();
+        //sendtodatabase = FindObjectOfType<SendToDatabase>();
     }
 
     private void Start()
@@ -47,11 +49,12 @@ public class PopulationManager : MonoBehaviour {
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
     }
 
-
     public void TriggerAIfromButton()
     {
         triggerAI = true;
         calculateCollisionDistanceVisualUnity.drawRenderedLinesDebug = false;
+        sortedList = new List<GameObject>();
+        population = new List<GameObject>();
     }
 
 
@@ -87,20 +90,19 @@ public class PopulationManager : MonoBehaviour {
         IndividualCompositionSet.GetComponent<BrainGA>().Init(); // init initial 
         BrainGA b = IndividualCompositionSet.GetComponent<BrainGA>();
         b.MoveComposition();
-        counterForPopulation++;
-        yield return new WaitForSeconds(secondToWaitForPopGeneration);
 
-        // to need another yield?
+        counterForPopulation++; // COUNTER
+
+        yield return new WaitForSeconds(secondToWaitForPopGeneration);
 
         openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
         gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
         inferenceCompositionML.CallTOCalculateMobileNetScore();
 
-
         IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the score is updated
         population.Add(IndividualCompositionSet);
-        populationToDelete.Add(IndividualCompositionSet); 
+
 
         if (counterForPopulation < populationSize) 
         {
@@ -120,41 +122,43 @@ public class PopulationManager : MonoBehaviour {
 
         if (sortNewGeneration == true)
         {
-            sortedList = population.OrderBy(o => o.GetComponent<BrainGA>().TotalScore).ToList();
+            sortedList = population.OrderBy(o => o.GetComponent<BrainGA>().TotalScore).ToList();   
 
             if (population.Count == populationSize)
             {
                 bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore; // for debugging only
+                
+                population.Clear(); // this is the list that contains all the prefabs individual in the scene
 
-                population.Clear(); // this is the list not the objects
             }
             sortNewGeneration = false;
         }
+
         StartCoroutine(Breed()); 
     }
 
     private IEnumerator Breed()
     {
 
-       int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
-       int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
-       GameObject parent1 = sortedList[InternalIndex_parent1];
-       GameObject parent2 = sortedList[InternalIndex_parent2];
+        int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
+        int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
+        parent1 = sortedList[InternalIndex_parent1];
+        parent2 = sortedList[InternalIndex_parent2]; 
 
-       GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
+        GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
 
-       BrainGA b = offspring.GetComponent<BrainGA>();
-       if (Random.Range(0, 10) == 1) //mutate 1 in 10
-       {
+        BrainGA b = offspring.GetComponent<BrainGA>();
+        if (Random.Range(0, 10) == 1) //mutate 1 in 10
+        {
             b.InitForBreed();
             b.dna.Mutate();
             b.MoveComposition(); // this is where the moved 
         }
-       else
-       {
-           b.InitForBreed();
-           b.dna.Combine(parent1.GetComponent<BrainGA>().dna, parent2.GetComponent<BrainGA>().dna);
-           b.MoveComposition(); // this is where the moved 
+        else
+        {
+            b.InitForBreed();
+            b.dna.Combine(parent1.GetComponent<BrainGA>().dna, parent2.GetComponent<BrainGA>().dna);
+            b.MoveComposition(); // this is where the moved 
         }
 
         yield return new WaitForSeconds(secondToWaitForPopGeneration);
@@ -164,62 +168,54 @@ public class PopulationManager : MonoBehaviour {
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
         inferenceCompositionML.CallTOCalculateMobileNetScore();
 
-
-        // to need another yield?
-
-
-
         offspring.GetComponent<BrainGA>().CalculateTotalScore(); // are updated and score
+
         population.Add(offspring);
-        populationToDelete.Add(offspring);
         GenerateNewPopulatoinOffsprings_trigger = true;
-        CounterOffsprings++; // counter
+
+        CounterOffsprings++;                                           // counter
         
         if (CounterOffsprings == populationSize)
         {
             sortNewGeneration = true;
             CounterOffsprings = 0;
-            generation++; // counter
-
+            generation++;                                             // counter
         }
 
         if (generation == NumberOfGeneration)
         {
-            bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore; // for debugging only
-
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
             calculateCollisionDistanceVisualUnity.drawRenderedLinesDebug = true;  //////
             AICreatesInitialPopulationTurn = true;
 
+
+            sortedList = population.OrderBy(o => o.GetComponent<BrainGA>().TotalScore).ToList();
             List<float> genes = new List<float>();
             genes.Clear();
             genes = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().genes;
-
-
             sortedList[sortedList.Count - 1].GetComponent<BrainGA>().MoveCompositionOfBestFitAfterAIfinishedIsTurn(genes);
+
+            bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore; // for debugging only
 
             generation = 0;
             CounterOffsprings = 0;
             counterForPopulation = 0;
 
-            float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scorePixelsBalanceIndividual;
-            float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisualIndividual;
-            float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalanceIndividual;
-            float scoreLawOfLever = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreLawOfLeverIndividual;
-            float scoreNNTopFront = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreNNFrontTopIndividual;
-            float scoreMobileNet = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreMobileNetIndividual;
+            // decided not to use this bit since make no sense to have the score of the AI .. in training. (score 0.5 ??? no sense)
 
-            sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, scoreLawOfLever, scoreNNTopFront, scoreMobileNet); //
+            //float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scorePixelsBalanceIndividual;
+            //float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisualIndividual;
+            //float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalanceIndividual;
+            //float scoreLawOfLever = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreLawOfLeverIndividual;
+            //float scoreNNTopFront = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreNNFrontTopIndividual;
+            //float scoreMobileNet = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreMobileNetIndividual;
 
-            for (int i = 0; i < populationToDelete.Count; i++)
-            {
-                Destroy(populationToDelete[i]);
-            }
+            //sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, scoreLawOfLever, scoreNNTopFront, scoreMobileNet); //
+
+            DESTROYPopulationOBJECTinSCENE();
+
             sortNewGeneration = true;
-            population = new List<GameObject>();
-            populationToDelete = new List<GameObject>();
-            sortedList = new List<GameObject>();
 
             yield return new WaitForSeconds(secondToWaitForPopGeneration);
 
@@ -227,7 +223,16 @@ public class PopulationManager : MonoBehaviour {
             gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
             inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
             inferenceCompositionML.CallTOCalculateMobileNetScore();
+        }
+    }
 
+    private void DESTROYPopulationOBJECTinSCENE()
+    {
+        BrainGA[] individualsInScene = FindObjectsOfType<BrainGA>();
+
+        for (int i = 0; i < individualsInScene.Length; i++)
+        {
+            Destroy(individualsInScene[i].gameObject);
         }
     }
 }

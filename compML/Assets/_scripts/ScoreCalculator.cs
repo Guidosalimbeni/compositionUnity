@@ -68,8 +68,6 @@ public class ScoreCalculator : MonoBehaviour
         visualScoreBalancePixelsCount = scoreOnpixelscountbalance;
     }
 
-    
-
     private void OnDisable()
     {
         openCvManager.OnPixelsCountBalanceChanged -= HandleOnPixelsCountBalanceChanged;

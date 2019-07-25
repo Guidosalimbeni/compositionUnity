@@ -92,7 +92,7 @@ public class SendToDatabase : MonoBehaviour
 
     }
 
-    public void PostDataFromAI(float scorePixelsBalancefromAI, 
+    public void PostDataFromAI(float scorePixelsBalancefromAI,  // choosed not to use (if want to re use need to train in python the simple NN and not using ANN in unity)
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
                                 float scoreLawOfLeverFromAI,

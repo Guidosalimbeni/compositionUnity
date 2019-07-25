@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
 public class OpenCVManager : MonoBehaviour
 {
     public RenderTexture camRenderTexture;
+    public int ScaleFactorScreenBalance = 4;
     public event Action<float> OnPixelsCountBalanceChanged;
 
 
@@ -18,7 +19,7 @@ public class OpenCVManager : MonoBehaviour
     // also called from the AGENTCompAi to update the reward on decision on demand..
     public void CallForOpenCVCalculationUpdates()  /// call from EVENT
     {
-        CallTOCalculateVisualScoreBalancePixelsCount();
+        CallTOCalculateVisualScoreBalancePixelsCount(); // need to be called SCREEN so it makes more sense for the paper
 
 
 
@@ -48,7 +49,7 @@ public class OpenCVManager : MonoBehaviour
         Utils.texture2DToMat(srcTexture, imgMat);
         Imgproc.threshold(imgMat, imgMat, 1, 255, Imgproc.THRESH_BINARY);
 
-        Size sz = new Size((int) (srcTexture.height / 10), (int)(srcTexture.width / 10));
+        Size sz = new Size((int) (srcTexture.height / ScaleFactorScreenBalance), (int)(srcTexture.width / ScaleFactorScreenBalance));
         Imgproc.resize(imgMat, imgMat, sz);
 
         int rows = imgMat.rows(); //Calculates number of rows

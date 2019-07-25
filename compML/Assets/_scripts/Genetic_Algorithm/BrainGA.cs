@@ -53,7 +53,7 @@ public class BrainGA : MonoBehaviour
         foreach (var elementComp in gamePopulationController.ElementsCompositions)
         {
             elementComp.transform.position = new Vector3(dna.GetGene(genePos), 0, dna.GetGene(genePos + 1));
-            genePos = genePos + NumberOfgenes;
+            genePos = genePos + NumberOfgenes; // need to add rotation   
         }
 
         genes.Clear();

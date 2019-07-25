@@ -43,9 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b421e5df16fb59e468f86848b70b7e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elemComp_a: {fileID: 0}
-  elemComp_b: {fileID: 0}
-  elemComp_c: {fileID: 0}
-  sendtodatabase: {fileID: 0}
-  DNALength: 6
+  NumberOfgenes: 2
   TotalScore: 0
+  genes: []

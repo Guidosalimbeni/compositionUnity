@@ -1393,6 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camRenderTexture: {fileID: 8400000, guid: af893e9fe75eaeb42a6f037b8cbfdc54, type: 2}
+  ScaleFactorScreenBalance: 4
 --- !u!114 &881400880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1634,8 +1635,8 @@ MonoBehaviour:
   triggerAI: 0
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
-  populationSize: 40
-  NumberOfGeneration: 10
+  populationSize: 8
+  NumberOfGeneration: 2
   secondToWaitForPopGeneration: 0.1
   bestScore: 0
   sortedList: []
