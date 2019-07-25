@@ -66,6 +66,7 @@
     <Compile Include="Assets\_scripts\ANN\BrainNN_CompML.cs" />
     <Compile Include="Assets\_scripts\ANN\LayerNN.cs" />
     <Compile Include="Assets\_scripts\ANN\Neuron.cs" />
+    <Compile Include="Assets\_scripts\ANN\Perceptron.cs" />
     <Compile Include="Assets\_scripts\Classification\ClassfierCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\ClassifierNNDATABASE.cs" />
     <Compile Include="Assets\_scripts\Classification\DetectorCompositionML.cs" />
@@ -82,7 +83,7 @@
     <Compile Include="Assets\_scripts\Genetic_Algorithm\PopulationManager.cs" />
     <Compile Include="Assets\_scripts\Interaction\TagMeElementOfComposition.cs" />
     <Compile Include="Assets\_scripts\Interfaces\IElementOfComposition.cs" />
-    <Compile Include="Assets\_scripts\NeuralNetwork\MobileNetModel.cs" />
+    <Compile Include="Assets\_scripts\NeuralNetworBARRACUDA\MobileNetModel.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\CollectCompositionImage.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\CollectDataRenderTexture.cs" />
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVManager.cs" />

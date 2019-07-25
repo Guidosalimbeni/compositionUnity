@@ -41,7 +41,7 @@ public class BrainNN_CompML : MonoBehaviour
 
             string weigths = ann.PrintWeights();
 
-            Debug.Log(weigths);
+            //Debug.Log(weigths);
         }
         
     }

@@ -11,7 +11,7 @@ public class PopulationManager : MonoBehaviour {
     public int NumberOfGeneration = 4;
     public float secondToWaitForPopGeneration = 0.1f;
     public float bestScore; // for debugging only
-    public List<float> debugingList; // for debugging only
+    
 
     private int generation = 0;
     private int counterForPopulation = 0;
@@ -21,7 +21,7 @@ public class PopulationManager : MonoBehaviour {
     private List<GameObject> population = new List<GameObject>();
     private GameObject offspring;
 
-    private List<GameObject> sortedList;
+    public List<GameObject> sortedList;
     private List<GameObject> populationToDelete = new List<GameObject>();
     private bool sortNewGeneration = true;
     private SendToDatabase sendtodatabase;
@@ -135,6 +135,7 @@ public class PopulationManager : MonoBehaviour {
 
     private IEnumerator Breed()
     {
+
        int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
        int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
        GameObject parent1 = sortedList[InternalIndex_parent1];
