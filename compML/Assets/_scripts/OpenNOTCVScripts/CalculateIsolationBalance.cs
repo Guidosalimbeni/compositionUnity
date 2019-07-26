@@ -6,7 +6,6 @@ using System;
 
 public class CalculateIsolationBalance : MonoBehaviour
 {
-
     /// <summary>
     ///  this is for calculate the balance as a perceived weight semantic of the object apporximated from the volume
     ///  the isolation is a factor that increases the perceived weight of ab object 
@@ -16,13 +15,9 @@ public class CalculateIsolationBalance : MonoBehaviour
 
     public float ScoreIsolationBalance { get; set; }
 
-    //private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
     private List<GameObject> ElementsOnTheRight;
     private List<GameObject> ElementsOnTheLeft;
-
     private List<float> Distances; 
-    
-
     private GamePopulationController gamePopulationController;
 
     private void Awake()
@@ -36,7 +31,6 @@ public class CalculateIsolationBalance : MonoBehaviour
         ElementsOnTheLeft = new List<GameObject>();
         Distances = new List<float>();
     }
-
 
     public float CalculateScoreIsolationBalance()
     {
@@ -106,12 +100,10 @@ public class CalculateIsolationBalance : MonoBehaviour
             ScoreIsolationBalance = 1.0f - (float)ratio;
         }
 
-        Debug.Log(ScoreIsolationBalance);
-
         ElementsOnTheLeft.Clear();
         ElementsOnTheRight.Clear();
         Distances.Clear();
         
-        return 0.0f; // to implement
+        return ScoreIsolationBalance; 
     }
 }

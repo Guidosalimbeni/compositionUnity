@@ -114,6 +114,7 @@
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\AIDebugText.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\ColorGradientIsolationBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientLawOfLever.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientMobileNet.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientNNFrontTop.cs" />

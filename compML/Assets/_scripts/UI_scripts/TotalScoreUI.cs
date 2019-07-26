@@ -17,6 +17,7 @@ public class TotalScoreUI : MonoBehaviour
     float d;
     float e;
     float f;
+    float g;
 
     private void Awake()
     {
@@ -30,11 +31,18 @@ public class TotalScoreUI : MonoBehaviour
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;
         gameManagerNotOpenCV.OnScoreUnityVisualChanged += Handle_OnScoreUnityVisualChanged;
         gameManagerNotOpenCV.OnScoreLawOfLeverChanged += Handlex_OnScoreLawOfLeverChanged;
+        gameManagerNotOpenCV.OnScoreIsolationBalanceChanged += Handle_OnScoreIsolationBalanceChanged;
+
         inferenceCompositionML.OnScorescoreMobileNetChanged += Handle_OnScorescoreMobileNetChanged;
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged += Handle_OnScorescoreNNFrontTopChanged;
 
 
 
+    }
+
+    private void Handle_OnScoreIsolationBalanceChanged(float obj)
+    {
+        g = obj;
     }
 
     private void Handle_OnScorescoreNNFrontTopChanged(float obj)
@@ -54,7 +62,7 @@ public class TotalScoreUI : MonoBehaviour
 
     private void Update()
     {
-        TOTALSCOREDebugging = a + b + c + d + e + f;
+        TOTALSCOREDebugging = a + b + c + d + e + f + g;
     }
 
     private void Handle_OnScoreUnityVisualChanged(float obj)
@@ -78,6 +86,8 @@ public class TotalScoreUI : MonoBehaviour
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged -= Handle_OnScoreBoundsBalanceChanged;
         gameManagerNotOpenCV.OnScoreUnityVisualChanged -= Handle_OnScoreUnityVisualChanged;
         gameManagerNotOpenCV.OnScoreLawOfLeverChanged -= Handlex_OnScoreLawOfLeverChanged;
+        gameManagerNotOpenCV.OnScoreIsolationBalanceChanged -= Handle_OnScoreIsolationBalanceChanged;
+
         inferenceCompositionML.OnScorescoreMobileNetChanged -= Handle_OnScorescoreMobileNetChanged;
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged -= Handle_OnScorescoreNNFrontTopChanged;
     }

@@ -10,6 +10,7 @@ public class ScoreCalculator : MonoBehaviour
     public float scoreBoundsBalance { private set; get; } //
     public float scoreUnityVisual { private set; get; } //
     public float scoreLawOfLever { private set; get; } //
+    public float scoreIsolationBalance { private set; get; } //
     public float scoreNNFrontTop { private set; get; } //
     public float scoreMobileNet { private set; get; } //
 
@@ -31,6 +32,7 @@ public class ScoreCalculator : MonoBehaviour
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;
         gameManagerNotOpenCV.OnScoreUnityVisualChanged += Handle_OnScoreUnityVisualChanged;
         gameManagerNotOpenCV.OnScoreLawOfLeverChanged += Handle_OnScoreLawOfLeverChanged;
+        gameManagerNotOpenCV.OnScoreIsolationBalanceChanged += Handle_OnScoreIsolationBalanceChanged;
 
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged += Handle_OnScorescoreNNFrontTopChanged;
         inferenceCompositionML.OnScorescoreMobileNetChanged += Handle_OnScorescoreMobileNetFrontTopChanged;
@@ -51,6 +53,11 @@ public class ScoreCalculator : MonoBehaviour
     private void Handle_OnScoreLawOfLeverChanged(float scoreLawOfLeverPassed)
     {
         scoreLawOfLever = scoreLawOfLeverPassed;
+    }
+
+    private void Handle_OnScoreIsolationBalanceChanged(float scoreIsolationBalancePassed)
+    {
+        scoreIsolationBalance = scoreIsolationBalancePassed;
     }
 
     private void Handle_OnScoreUnityVisualChanged(float ScoreUnityVisualPassed)
@@ -74,7 +81,10 @@ public class ScoreCalculator : MonoBehaviour
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged -= Handle_OnScoreBoundsBalanceChanged;
         gameManagerNotOpenCV.OnScoreUnityVisualChanged -= Handle_OnScoreUnityVisualChanged;
         gameManagerNotOpenCV.OnScoreLawOfLeverChanged -= Handle_OnScoreLawOfLeverChanged;
+        gameManagerNotOpenCV.OnScoreIsolationBalanceChanged -= Handle_OnScoreIsolationBalanceChanged;
+
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged -= Handle_OnScorescoreNNFrontTopChanged;
+        inferenceCompositionML.OnScorescoreMobileNetChanged -= Handle_OnScorescoreMobileNetFrontTopChanged;
     }
 
 }

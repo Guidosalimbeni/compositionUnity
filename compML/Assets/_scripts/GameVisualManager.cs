@@ -22,6 +22,7 @@ public class GameVisualManager : MonoBehaviour
     public event Action<float> OnScoreBoundsBalanceChanged; // not used
     public event Action<float> OnScoreUnityVisualChanged;
     public event Action<float> OnScoreLawOfLeverChanged;
+    public event Action<float> OnScoreIsolationBalanceChanged;
 
     private void Awake()
     {
@@ -57,11 +58,15 @@ public class GameVisualManager : MonoBehaviour
         }
     }
 
-
     private void UpdateScoreIsolationBalance()
     {
         float ScoreIsolationBalance = calculateIsolationBalance.CalculateScoreIsolationBalance();
-        // need to add EVENT here...
+        
+        if (OnScoreIsolationBalanceChanged != null)
+        {
+            OnScoreIsolationBalanceChanged(ScoreIsolationBalance);
+        }
+
     }
 
     private void UpdateScoreUnityVisual()

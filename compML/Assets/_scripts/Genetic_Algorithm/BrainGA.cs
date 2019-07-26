@@ -17,6 +17,9 @@ public class BrainGA : MonoBehaviour
     public float scoreUnityVisualIndividual { get; set; }
     public float scoreBoundsBalanceIndividual { get; set; }
     public float scoreLawOfLeverIndividual { get; set; }
+    public float scoreIsolationBalanceIndividual { get; set; }
+
+
     public float scoreNNFrontTopIndividual { get; set; }
     public float scoreMobileNetIndividual { get; set; }
 
@@ -71,22 +74,21 @@ public class BrainGA : MonoBehaviour
             //openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
             //gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
 
-
-            // TODO change this so that it takes the images and calculate the DNN inside unity
-            // this is important and avoid me to use genes !!!!!!!!!!!!
-
-
+            // change it soon to one score from ANN...or another TF model from external... which might be better to produce graphs.. 
             
             scorePixelsBalanceIndividual = scoreCalculator.visualScoreBalancePixelsCount; 
-            scoreBoundsBalanceIndividual = scoreCalculator.scoreBoundsBalance;
+            scoreBoundsBalanceIndividual = scoreCalculator.scoreBoundsBalance; // not used
             scoreUnityVisualIndividual = scoreCalculator.scoreUnityVisual;
             scoreLawOfLeverIndividual = scoreCalculator.scoreLawOfLever;
+            scoreIsolationBalanceIndividual = scoreCalculator.scoreIsolationBalance;
+
             scoreNNFrontTopIndividual = scoreCalculator.scoreNNFrontTop;
             scoreMobileNetIndividual = scoreCalculator.scoreMobileNet;
             
 
             TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual + scoreBoundsBalanceIndividual
-                         + scoreLawOfLeverIndividual + scoreNNFrontTopIndividual + scoreMobileNetIndividual;
+                         + scoreLawOfLeverIndividual + scoreIsolationBalanceIndividual
+                         + scoreNNFrontTopIndividual + scoreMobileNetIndividual;
 
             // when I add a new score I need to update the last generation in population manager so that the score has sent to the database
             

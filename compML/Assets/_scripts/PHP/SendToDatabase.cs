@@ -27,6 +27,7 @@ public class SendToDatabase : MonoBehaviour
     private int numberOfItems;
     private string sequence;
     private float scoreLawOfLever;
+    private float scoreIsolationBalance;
     private float scoreNNFrontTop;
     private float scoreMobileNet;
 
@@ -62,6 +63,7 @@ public class SendToDatabase : MonoBehaviour
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
+        scoreIsolationBalance = scoreCalculator.scoreIsolationBalance;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
         scoreMobileNet = scoreCalculator.scoreMobileNet;
 
@@ -80,6 +82,7 @@ public class SendToDatabase : MonoBehaviour
         scoreUnityVisual = scoreCalculator.scoreUnityVisual;
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
+        scoreIsolationBalance = scoreCalculator.scoreIsolationBalance;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
         scoreMobileNet = scoreCalculator.scoreMobileNet;
 
@@ -96,6 +99,7 @@ public class SendToDatabase : MonoBehaviour
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
                                 float scoreLawOfLeverFromAI,
+                                float scoreIsolationBalanceFromAI,
                                 float scoreNNFrontTopFromAI,
                                 float scoreMobileNetFromAI)
     {
@@ -105,6 +109,7 @@ public class SendToDatabase : MonoBehaviour
         scoreUnityVisual = scoreUnityVisualFromAI;
         scoreBoundsBalance = scoreBoundsBalancefromAI;
         scoreLawOfLever = scoreLawOfLeverFromAI;
+        scoreIsolationBalance = scoreIsolationBalanceFromAI;
         scoreNNFrontTop = scoreNNFrontTopFromAI;
         scoreMobileNet = scoreMobileNetFromAI;
 
@@ -145,6 +150,8 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("scorePixelsBalance", scorePixelsBalance.ToString());
         form.AddField("scoreUnityVisual", scoreUnityVisual.ToString());
         form.AddField("scoreLawOfLever", scoreLawOfLever.ToString());
+        form.AddField("scoreIsolationBalance", scoreIsolationBalance.ToString());
+
         form.AddField("scoreNNFrontTop", scoreNNFrontTop.ToString());
         form.AddField("scoreMobileNet", scoreMobileNet.ToString());
 
