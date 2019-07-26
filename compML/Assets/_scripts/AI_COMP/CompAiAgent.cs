@@ -34,6 +34,7 @@ public class CompAiAgent : Agent
     private ScoreCalculator scoreCalculator;
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
     private InferenceCompositionML inferenceCompositionML;
+    private InferenceScoreFeatures inferenceScoreFeatures;
 
     float distanceToCenter = 0.0f;
     Vector3 CenterOfScene = Vector3.zero;
@@ -55,7 +56,7 @@ public class CompAiAgent : Agent
         scoreCalculator = FindObjectOfType<ScoreCalculator>();
         inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
-
+        inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
 
     }
 
@@ -133,6 +134,9 @@ public class CompAiAgent : Agent
         // call here so that both for wait decision and for inference will update the UI and the scores
         openCVManager.CallForOpenCVCalculationUpdates();
         gameVisualManager.CallTOCalculateNOTOpenCVScores();
+
+        inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
+
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
 
         // ADD THE CALL TO MOBILE NET HERE... need to wait here???

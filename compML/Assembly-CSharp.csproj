@@ -69,9 +69,11 @@
     <Compile Include="Assets\_scripts\ANN\Perceptron.cs" />
     <Compile Include="Assets\_scripts\Classification\ClassfierCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\ClassifierNNDATABASE.cs" />
+    <Compile Include="Assets\_scripts\Classification\ClassifierScoreFeatures.cs" />
     <Compile Include="Assets\_scripts\Classification\DetectorCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceNNfomDATABASE.cs" />
+    <Compile Include="Assets\_scripts\Classification\InferenceScoreFeatures.cs" />
     <Compile Include="Assets\_scripts\Classification\UtilsCompositionML.cs" />
     <Compile Include="Assets\_scripts\ColliderBounds.cs" />
     <Compile Include="Assets\_scripts\GameManagerCompML.cs" />

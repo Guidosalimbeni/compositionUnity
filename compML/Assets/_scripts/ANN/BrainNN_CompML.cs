@@ -6,9 +6,9 @@ public class BrainNN_CompML : MonoBehaviour
 {
 
     [SerializeField]
-    private DataForNeuralNetwork_CompML dataNN;
+    private DataForNeuralNetwork_CompML dataNN; // this is for loading the data but now i am using offline training ..
     [SerializeField]
-    private DataScores nnScore;
+    private DataScores nnScore; // not used
 
     ANN ann;
     double sumSquareError = 0;
@@ -27,6 +27,12 @@ public class BrainNN_CompML : MonoBehaviour
                 double i1 = dataNN.ScoreUnityVisual[j];
                 double i2 = dataNN.ScoreLawOfLever[j];
                 double i3 = dataNN.ScoreIsolationBalance[j];
+
+                // insert the scoreFromfeatureScore here ... cosi' only 3 score.... not need perceptiron any more.. since 
+                // qui stavo sbagliando dovevo fare solo 4 e poi tre in perceptron...
+                // devo cambiare anche total score calculation
+                // parte difficile e fare regression in tensorflowsharp... speriamo bbbenneee..
+
                 double i4 = dataNN.ScoreNNFrontTop[j];
                 double i5 = dataNN.ScoreMobileNet[j];
 
@@ -62,7 +68,7 @@ public class BrainNN_CompML : MonoBehaviour
     }
 
 
-    public float PredictFromNN(double i0, double i1, double i2, double i3, double i4, double i5, double output = 0)
+    public float PredictFromNN(double i0, double i1, double i2, double i3, double i4, double i5, double output = 0) // not used
     {
         List<double> result;
         float ScoreNN = 0;

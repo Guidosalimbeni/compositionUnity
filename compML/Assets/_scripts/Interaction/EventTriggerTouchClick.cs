@@ -10,6 +10,7 @@ namespace Lean.Touch
         private GameVisualManager gameManagerNotOpenCV;
         private InferenceNNfomDATABASE inferenceNNfomDATABASE;
         private InferenceCompositionML inferenceCompositionML;
+        private InferenceScoreFeatures inferenceScoreFeatures;
 
 
         protected virtual void OnEnable()
@@ -27,6 +28,7 @@ namespace Lean.Touch
         {
             openCVManager = FindObjectOfType<OpenCVManager>();
             gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
+            inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
             inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
             inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
         }
@@ -52,6 +54,8 @@ namespace Lean.Touch
         {
             openCVManager.CallForOpenCVCalculationUpdates();
             gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+            inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
+
             inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
             inferenceCompositionML.CallTOCalculateMobileNetScore();
 

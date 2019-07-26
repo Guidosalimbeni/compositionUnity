@@ -1192,11 +1192,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottle_grp
       objectReference: {fileID: 0}
-    - target: {fileID: 3358845019314140019, guid: 79935e0cbd47a574da479d97758997b0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3358845019314140018, guid: 79935e0cbd47a574da479d97758997b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1251,16 +1246,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3358845019005252729, guid: 79935e0cbd47a574da479d97758997b0,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.0000011920931
-      objectReference: {fileID: 0}
-    - target: {fileID: 3358845019005252729, guid: 79935e0cbd47a574da479d97758997b0,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.1368684e-13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79935e0cbd47a574da479d97758997b0, type: 3}
@@ -1478,11 +1463,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: box_grp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7719399981264397584, guid: f748e1920ae966e4494b1be6b52b446f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7719399981264397583, guid: f748e1920ae966e4494b1be6b52b446f,
         type: 3}
@@ -3915,7 +3895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1470166474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3933,7 +3913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 76, y: 179.1}
+  m_AnchoredPosition: {x: 66, y: 179.1}
   m_SizeDelta: {x: 102, y: 102}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1470166475
@@ -4647,6 +4627,7 @@ GameObject:
   - component: {fileID: 1610376823}
   - component: {fileID: 1610376822}
   - component: {fileID: 1610376825}
+  - component: {fileID: 1610376824}
   m_Layer: 0
   m_Name: '[Neural Network] FOR WEIGHTS'
   m_TagString: Untagged
@@ -4682,6 +4663,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1610376824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610376821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2019137104dc76a42ad0e573ad5c4553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 4900000, guid: 85ab8e75035b10844bfb391d43faf00d, type: 3}
 --- !u!114 &1610376825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4691,136 +4685,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1610376821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c55b74250f516f4bbea3ec6b9dfb12f, type: 3}
+  m_Script: {fileID: 11500000, guid: e9e597a2b4b4b5d468c2087485626634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataNN: {fileID: 11400000, guid: 7cd99f02c1392a64d96866ac8987f611, type: 2}
-  ts:
-  - input:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  - input: []
-    output: 0
-  weights:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
 --- !u!1 &1638438045
 GameObject:
   m_ObjectHideFlags: 0
@@ -6582,11 +6449,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cup_grp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8465226299762030692, guid: 1e16dacea503684408d3c8287facde6c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8465226299762030693, guid: 1e16dacea503684408d3c8287facde6c,
         type: 3}

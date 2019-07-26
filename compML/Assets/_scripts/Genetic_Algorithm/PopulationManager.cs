@@ -32,6 +32,7 @@ public class PopulationManager : MonoBehaviour {
     private GameVisualManager gameManagerNotOpenCV;
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
     private InferenceCompositionML inferenceCompositionML;
+    private InferenceScoreFeatures inferenceScoreFeatures;
 
     private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
 
@@ -47,6 +48,7 @@ public class PopulationManager : MonoBehaviour {
         calculateCollisionDistanceVisualUnity = FindObjectOfType<CalculateCollisionDistanceVisualUnity>();
         inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
+        inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
     }
 
     public void TriggerAIfromButton()
@@ -97,6 +99,9 @@ public class PopulationManager : MonoBehaviour {
 
         openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
         gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+
+        inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
+
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
         inferenceCompositionML.CallTOCalculateMobileNetScore();
 
@@ -165,6 +170,7 @@ public class PopulationManager : MonoBehaviour {
 
         openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
         gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+        inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
         inferenceCompositionML.CallTOCalculateMobileNetScore();
 
@@ -224,6 +230,7 @@ public class PopulationManager : MonoBehaviour {
 
             openCVmanager.CallForOpenCVCalculationUpdates(); // to update the score pixels balance of opencv..
             gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
+            inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
             inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
             inferenceCompositionML.CallTOCalculateMobileNetScore();
         }
