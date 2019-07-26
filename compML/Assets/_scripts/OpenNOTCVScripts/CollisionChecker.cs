@@ -20,9 +20,17 @@ public class CollisionChecker : MonoBehaviour
     {
         if (other.transform.GetComponent<TagMeElementOfComposition>() != null)
         {
-            calculateCollisionDistanceVisualUnity.FoundCollisionOfCompositionalElements();
-            CollisionWithOtherItemFoundForAIReward = true;
+            calculateCollisionDistanceVisualUnity.FoundCollisionOfCompositionalElements(); 
+            CollisionWithOtherItemFoundForAIReward = true; // check what this is doing
         }
+
+        if (other.transform.GetComponent<TagMeFrameBounds>() != null)
+        {
+            calculateCollisionDistanceVisualUnity.FoundCollisionOfElementsINCompositionWithFrameBounds(); 
+            CollisionWithOtherItemFoundForAIReward = true; // check what this is doing
+        }
+
+
     }
 
     private void OnTriggerExit (Collider other)
@@ -30,7 +38,7 @@ public class CollisionChecker : MonoBehaviour
         if (other.transform.GetComponent<TagMeElementOfComposition>() != null)
         {
             
-            CollisionWithOtherItemFoundForAIReward = false;
+            CollisionWithOtherItemFoundForAIReward = false; // check what this is doing
         }
     }
 

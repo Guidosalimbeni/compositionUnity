@@ -208,7 +208,7 @@ public class CompAiAgent : Agent
 
         if (collisionChecker.CollisionWithOtherItemFoundForAIReward == true)
         {
-            Debug.Log(" collision no penalties to implement...");
+            Debug.Log(" collision no penalties to implement... eventually to implement .. also with bounds frame");
             //SetReward(-1.0f);
             //Done();
         }

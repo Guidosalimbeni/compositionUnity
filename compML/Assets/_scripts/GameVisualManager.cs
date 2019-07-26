@@ -18,7 +18,7 @@ public class GameVisualManager : MonoBehaviour
     private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
     private CalculateLawOfLever calculateLawOfLever;
 
-    public event Action<float> OnScoreBoundsBalanceChanged;
+    public event Action<float> OnScoreBoundsBalanceChanged; // not used
     public event Action<float> OnScoreUnityVisualChanged;
     public event Action<float> OnScoreLawOfLeverChanged;
 

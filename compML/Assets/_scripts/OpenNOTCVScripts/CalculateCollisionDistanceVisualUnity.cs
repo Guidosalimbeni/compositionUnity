@@ -126,4 +126,9 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
     {
         OverlappingColliders = true;
     }
+
+    public void FoundCollisionOfElementsINCompositionWithFrameBounds()
+    {
+        OverlappingColliders = true;
+    }
 }
