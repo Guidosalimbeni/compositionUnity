@@ -6,7 +6,7 @@ public class ScoreCalculator : MonoBehaviour
 {
     // this holds the score... woud be better to have the UI gradient to look at this values instead of subscribe to the events again...TODO
 
-    public float visualScoreBalancePixelsCount { private set; get; } //
+    public float visualScoreBalancePixelsCount { private set; get; } // this is going to be called screen space score to justify being inside the unity side of features extr scores
     public float scoreBoundsBalance { private set; get; } //
     public float scoreUnityVisual { private set; get; } //
     public float scoreLawOfLever { private set; get; } //

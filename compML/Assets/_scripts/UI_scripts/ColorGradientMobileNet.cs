@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ColorGradientMobileNet : MonoBehaviour
 {
     public RawImage MobileNetScore_RawImage;
+    public Text text;
     private Color lerpedColor = Color.white;
 
     private InferenceCompositionML inferenceCompositionML;
@@ -20,6 +21,8 @@ public class ColorGradientMobileNet : MonoBehaviour
     private void Handle_OnScorescoreMobileNetChanged(float scoreMobileNetPassed)
     {
         UpdateMobileScoreUI(scoreMobileNetPassed);
+        if (text != null)
+            text.text = scoreMobileNetPassed.ToString();
     }
 
     public void UpdateMobileScoreUI(float score)

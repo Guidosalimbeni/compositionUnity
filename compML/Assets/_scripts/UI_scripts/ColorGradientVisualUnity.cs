@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ColorGradientVisualUnity : MonoBehaviour
 {
     public RawImage VisualUnityUI;
+    public Text text;
     private Color lerpedColor = Color.white;
     private float VisualUnityScore;
     private GameVisualManager gamemanagerNotOpenCV;
@@ -20,7 +21,8 @@ public class ColorGradientVisualUnity : MonoBehaviour
 
     private void Handle_OnScoreUnityVisualChanged(float VisualUnityScore)
     {
-        UpdateBalancePixelsUI(VisualUnityScore); ;
+        UpdateBalancePixelsUI(VisualUnityScore);
+        text.text = VisualUnityScore.ToString();
     }
 
     public void UpdateBalancePixelsUI(float score)

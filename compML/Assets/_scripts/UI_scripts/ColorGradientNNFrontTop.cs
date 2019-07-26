@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class ColorGradientNNFrontTop : MonoBehaviour
 {
+    
     public RawImage NN_front_top_score_RawImage;
+    public Text text;
     private Color lerpedColor = Color.white;
 
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
@@ -20,6 +22,8 @@ public class ColorGradientNNFrontTop : MonoBehaviour
     private void Handle_OnScorescoreNNFrontTopChanged(float scoreNNFrontTop)
     {
         UpdateLawOfLeverPixelsUI(scoreNNFrontTop);
+        if (text != null)
+            text.text = scoreNNFrontTop.ToString();
     }
 
     public void UpdateLawOfLeverPixelsUI(float score)

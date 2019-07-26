@@ -72,21 +72,19 @@ public class CalculateLawOfLever : MonoBehaviour
 
         // since the fulcrum is at 0.0
 
-        Debug.Log(meanLeftX + "       left x");
-        Debug.Log(meanRightX + "       meanRightX x");
         float distL = Mathf.Abs(meanLeftX);
         float distR = Mathf.Abs(meanRightX);
         float difference;
         double Force;
         float error;
-        float k = 1.0f;
+
 
         // https://en.wikipedia.org/wiki/Sigmoid_function#/media/File:Gjl-t(x).svg
         if (distL > 0.0f && distR > 0.0f)
         {
             difference = (TotalVolumeRight * distR) / distL;
             Force = Mathf.Abs(TotalVolumeLeft - difference);
-            double cost = Math.Tanh(Force);
+            double cost = Math.Tanh( Force);
 
             error = (float)cost;
         }
