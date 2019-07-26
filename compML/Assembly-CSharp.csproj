@@ -91,6 +91,7 @@
     <Compile Include="Assets\_scripts\OpenCVScripts\OpenCVSceneUtils.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateBalanceAreaBounds.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateCollisionDistanceVisualUnity.cs" />
+    <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateIsolationBalance.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateLawOfLever.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CalculateVolumeOfElementComp.cs" />
     <Compile Include="Assets\_scripts\OpenNOTCVScripts\CollisionChecker.cs" />

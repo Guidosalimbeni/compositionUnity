@@ -23,7 +23,7 @@ If you can live with an approximation, you can take corners of the bounds of the
 public class CompScreenAreaCalculation : MonoBehaviour
 {
 
-    public float percentageScreenOccupiedByItem { get; set; } // used by ml-agents
+    public float percentageScreenOccupiedByItem { get; set; } // used by ml-agents NOT USED
 
     public TypeOfScreenData CalcScreenPercentage()
     {

@@ -23,7 +23,7 @@ public class CalculateBalanceAreaBounds : MonoBehaviour
         areasObjects = new AreasObjects();
     }
 
-    public AreasObjects CalculateBondsAreas()
+    public AreasObjects CalculateBondsAreas() // not used
     {
         foreach (var compObj in compositionObjects) 
         {

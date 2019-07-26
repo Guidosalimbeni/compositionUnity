@@ -145,8 +145,6 @@ public class PopulationManager : MonoBehaviour {
         parent1 = sortedList[InternalIndex_parent1];
         parent2 = sortedList[InternalIndex_parent2];
 
-        
-
         GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
 
         BrainGA b = offspring.GetComponent<BrainGA>();

@@ -17,6 +17,7 @@ public class GameVisualManager : MonoBehaviour
     private CalculateBalanceAreaBounds calculateBalanceAreaBounds;
     private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
     private CalculateLawOfLever calculateLawOfLever;
+    private CalculateIsolationBalance calculateIsolationBalance;
 
     public event Action<float> OnScoreBoundsBalanceChanged; // not used
     public event Action<float> OnScoreUnityVisualChanged;
@@ -27,6 +28,7 @@ public class GameVisualManager : MonoBehaviour
         calculateBalanceAreaBounds = GetComponent<CalculateBalanceAreaBounds>();
         calculateCollisionDistanceVisualUnity = GetComponent<CalculateCollisionDistanceVisualUnity>();
         calculateLawOfLever = GetComponent<CalculateLawOfLever>();
+        calculateIsolationBalance = GetComponent<CalculateIsolationBalance>();
     }
 
     // call from leantouch and population manager one during breeding and one for last move
@@ -40,7 +42,7 @@ public class GameVisualManager : MonoBehaviour
         
         UpdateScoreUnityVisual();
         UpdateLawOfLeverScore();
-
+        UpdateScoreIsolationBalance();
 
 
 
@@ -53,6 +55,13 @@ public class GameVisualManager : MonoBehaviour
         {
             OnScoreLawOfLeverChanged(ScoreLawOfLever);
         }
+    }
+
+
+    private void UpdateScoreIsolationBalance()
+    {
+        float ScoreIsolationBalance = calculateIsolationBalance.CalculateScoreIsolationBalance();
+        // need to add EVENT here...
     }
 
     private void UpdateScoreUnityVisual()
