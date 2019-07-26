@@ -5,7 +5,7 @@ using System;
 
 public class GetFromDatabase : MonoBehaviour
 {
-    public bool triggerGetData = true;
+    public bool triggerGetData = true; // triggered from somewhere here...
     private string DataFromMysql = "http://www.guidosalimbeni.it/UnityComp/GetFromDatabase.php";
 
     private BrainNN_CompML brainNN_compML;
@@ -19,7 +19,7 @@ public class GetFromDatabase : MonoBehaviour
         {
             brainNN_compML = FindObjectOfType<BrainNN_CompML>();
             StartCoroutine(GetDataFromDatabase());
-            //triggerGetData = false;
+            
         }
     }
 
@@ -42,12 +42,14 @@ public class GetFromDatabase : MonoBehaviour
             List<Double> ScorePixelsBalance = new List<Double>();
             List<Double> ScoreUnityVisual = new List<Double>();
             List<Double> ScoreLawOfLever = new List<Double>();
+            List<Double> ScoreIsolationBalance = new List<Double>();
+
             List<Double> ScoreNNFrontTop = new List<Double>();
             List<Double> ScoreMobileNet = new List<Double>();
             
             List<Double> judge = new List<Double>();
 
-            int totalNumberOfDataCollected = 7;
+            int totalNumberOfDataCollected = 8;
 
             for (int i = 0; i < textlist.Length; i += totalNumberOfDataCollected)
             {
@@ -55,9 +57,11 @@ public class GetFromDatabase : MonoBehaviour
                 ScorePixelsBalance.Add(Double.Parse(textlist[i + 1]));
                 ScoreUnityVisual.Add(Double.Parse(textlist[i + 2]));
                 ScoreLawOfLever.Add(Double.Parse(textlist[i + 3]));
-                ScoreNNFrontTop.Add(Double.Parse(textlist[i + 4]));
-                ScoreMobileNet.Add(Double.Parse(textlist[i + 5]));
-                judge.Add(Double.Parse(textlist[i + 6]));
+                ScoreIsolationBalance.Add(Double.Parse(textlist[i + 4]));
+
+                ScoreNNFrontTop.Add(Double.Parse(textlist[i + 5]));
+                ScoreMobileNet.Add(Double.Parse(textlist[i + 6]));
+                judge.Add(Double.Parse(textlist[i + 7]));
             }
 
             // store the data into the scriptable variable
@@ -65,6 +69,8 @@ public class GetFromDatabase : MonoBehaviour
             dataNN.ScorePixelsBalance = ScorePixelsBalance;
             dataNN.ScoreUnityVisual = ScoreUnityVisual;
             dataNN.ScoreLawOfLever = ScoreLawOfLever;
+            dataNN.ScoreIsolationBalance = ScoreIsolationBalance;
+
             dataNN.ScoreNNFrontTop = ScoreNNFrontTop;
             dataNN.ScoreMobileNet = ScoreMobileNet;
 

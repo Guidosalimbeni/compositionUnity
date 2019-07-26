@@ -16,7 +16,7 @@ public class Perceptron : MonoBehaviour {
 
 
     public TrainingSet[] ts;
-    public double[] weights = { 0, 0,0,0,0 };
+    public double[] weights = { 0, 0,0,0,0,0 };
     double bias = 0;
     double totalError = 0;
 
@@ -30,12 +30,13 @@ public class Perceptron : MonoBehaviour {
 
         for (int i = 0; i < dataNN.Names.Count; i++)
         {
-            ts[i].input = new double[5];
+            ts[i].input = new double[6];
             ts[i].input[0] = dataNN.ScorePixelsBalance[i];
             ts[i].input[1] = dataNN.ScoreUnityVisual[i];
             ts[i].input[2] = dataNN.ScoreLawOfLever[i];
-            ts[i].input[3] = dataNN.ScoreNNFrontTop[i];
-            ts[i].input[4] = dataNN.ScoreMobileNet[i];
+            ts[i].input[3] = dataNN.ScoreIsolationBalance[i];
+            ts[i].input[4] = dataNN.ScoreNNFrontTop[i];
+            ts[i].input[5] = dataNN.ScoreMobileNet[i];
             ts[i].output = dataNN.JUDGE[i];
         }
 
