@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class BrainGA : MonoBehaviour
 {
-    public int NumberOfgenes = 2; // still need to hard code the genes anyway..
+    public int NumberOfgenes = 2; // still need to hard code the genes anyway.. nned to change the brain move and the dna mutation...
 	public float TotalScore;  // THIS IS IMPORTANT SINCE LINKS TO THE SORTED POPULATION INDIVIDUAL BRAIN
 	public DNA dna;
 
@@ -56,7 +56,7 @@ public class BrainGA : MonoBehaviour
         foreach (var elementComp in gamePopulationController.ElementsCompositions)
         {
             elementComp.transform.position = new Vector3(dna.GetGene(genePos), 0, dna.GetGene(genePos + 1));
-            genePos = genePos + NumberOfgenes; // need to add rotation   
+            genePos = genePos + NumberOfgenes; // need to add rotation   // which also need to change the code in the mutation DNA..to account of this..
         }
 
         genes.Clear();

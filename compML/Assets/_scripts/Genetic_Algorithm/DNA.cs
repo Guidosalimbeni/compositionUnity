@@ -35,18 +35,49 @@ public class DNA {
 
 	public void Combine(DNA d1, DNA d2)
 	{
-		for(int i = 0; i < DnaLength; i++)
+        bool Mother = true;
+        bool Father = false;
+		for(int i = 0; i < DnaLength; i = i + 2)
 		{
-			if(i < DnaLength/2.0)
-			{
-				float c = d1.genes[i];
-				genes[i] = c;
-			}
-			else
-			{
-				float c = d2.genes[i]; 
-				genes[i] = c;
-			}
+            if (Mother)
+            {
+                float x = d1.genes[i];
+                genes[i] = x;
+                float z = d1.genes[i + 1];
+                genes[i + 1] = z;
+            }
+
+            if (Father)
+            {
+                float x = d2.genes[i];
+                genes[i] = x;
+                float z = d2.genes[i + 1];
+                genes[i + 1] = z;
+            }
+
+            if (Mother)
+            {
+                Mother = false;
+                Father = true;
+            }
+            else
+            {
+                Mother = true;
+                Father = false;
+            }
+
+
+            // this not good for my case
+   //         if (i < DnaLength/2.0)
+			//{
+			//	float c = d1.genes[i];
+			//	genes[i] = c;
+			//}
+			//else
+			//{
+			//	float c = d2.genes[i]; 
+			//	genes[i] = c;
+			//}
 		}
 	}
 
