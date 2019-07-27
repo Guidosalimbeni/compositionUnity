@@ -50,13 +50,7 @@ public class SendToDatabase : MonoBehaviour
         }
     }
 
-    public void SendNegativeJudge()
-    {
-        Debug.Log("button pressed");
-        PostDataFromAFromNegativeJudge();
-    }
-
-    public void PostDataFromAFromNegativeJudge()
+    public void PostDataNegativeJudge()
     {
         UpdateActualListOfInfoForDatabase();
 
@@ -97,32 +91,21 @@ public class SendToDatabase : MonoBehaviour
         StartCoroutine(PostData(LoadSceneInputUsername.username)); //TO FIX
 
     }
-
-    // reframe this... with extra 2 button
-    public void PostDataFromAI(float scorePixelsBalancefromAI,  // choosed not to use (if want to re use need to train in python the simple NN and not using ANN in unity)
-                                float scoreUnityVisualFromAI, 
-                                float scoreBoundsBalancefromAI,
-                                float scoreLawOfLeverFromAI,
-                                float scoreIsolationBalanceFromAI,
-                                float scoreNNFrontTopFromAI,
-                                float scoreMobileNetFromAI)
+    
+    public void PostDataFromSnapShot(float scoreFromButton)
     {
         UpdateActualListOfInfoForDatabase();
 
-        scorePixelsBalance = scorePixelsBalancefromAI;
-        scoreUnityVisual = scoreUnityVisualFromAI;
-        scoreBoundsBalance = scoreBoundsBalancefromAI;
-        scoreLawOfLever = scoreLawOfLeverFromAI;
-        scoreIsolationBalance = scoreIsolationBalanceFromAI;
+        scoreBoundsBalance = scoreCalculator.scoreBoundsBalance;
+        scoreUnityVisual = scoreCalculator.scoreUnityVisual;
+        scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
+        scoreLawOfLever = scoreCalculator.scoreLawOfLever;
+        scoreIsolationBalance = scoreCalculator.scoreIsolationBalance;
+        scoreAllscorefeatures = scoreCalculator.scoreAllscorefeatures;
+        scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
+        scoreMobileNet = scoreCalculator.scoreMobileNet;
 
-        //scoreAllscorefeatures = scoreCalculator.scoreAllscorefeatures; // do the same with the other.. here
-
-        scoreNNFrontTop = scoreNNFrontTopFromAI;
-        scoreMobileNet = scoreMobileNetFromAI;
-
-
-        judge = 0.0f;
-        judge = 1.0f; ////////////////////// TODO I can then validate or penalise with my vote...
+        judge = scoreFromButton;
 
         ListOfInfoForDatabase.Clear();
 

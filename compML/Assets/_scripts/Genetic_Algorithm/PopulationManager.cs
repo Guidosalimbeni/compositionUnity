@@ -210,18 +210,6 @@ public class PopulationManager : MonoBehaviour {
             CounterOffsprings = 0;
             counterForPopulation = 0;
 
-            // decided not to use this bit since make no sense to have the score of the AI .. in training. (score 0.5 ??? no sense)
-            // fix isolation to database in case...
-            //float scorePixelsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scorePixelsBalanceIndividual;
-            //float scoreUnityVisual = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreUnityVisualIndividual;
-            //float scoreBoundsBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreBoundsBalanceIndividual;
-            //float scoreLawOfLever = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreLawOfLeverIndividual;
-            // float scoreIsolationBalance = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreIsolationBalanceIndividual;
-            //float scoreNNTopFront = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreNNFrontTopIndividual;
-            //float scoreMobileNet = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().scoreMobileNetIndividual;
-            
-            //sendtodatabase.PostDataFromAI(scorePixelsBalance, scoreUnityVisual, scoreBoundsBalance, scoreLawOfLever,scoreIsolationBalance, scoreNNTopFront, scoreMobileNet); //
-
             DESTROYPopulationOBJECTinSCENE();
 
             sortNewGeneration = true;

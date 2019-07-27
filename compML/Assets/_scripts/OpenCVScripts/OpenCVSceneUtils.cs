@@ -14,6 +14,7 @@ public class OpenCVSceneUtils : MonoBehaviour
     public GameObject VisualisationSurface;
     public bool DrawContourBool = false;
     public bool calcThreshold = false;
+    public bool saveSnapShotLocally = false; // if true called from snapshot button 
 
     private Mat ImageMatrixOpenCV;
     private Texture2D textureContours;
@@ -42,12 +43,14 @@ public class OpenCVSceneUtils : MonoBehaviour
 
     public void SaveTexturePNG(RenderTexture rTex)
     {
-        Texture2D tex = ToTexture2D(rTex);
-        byte[] bytes = tex.EncodeToPNG(); // Encode texture into PNG
-        UnityEngine.Object.Destroy(tex);
-        File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", bytes);
+        if ( saveSnapShotLocally)
+        {
+            Texture2D tex = ToTexture2D(rTex);
+            byte[] bytes = tex.EncodeToPNG(); // Encode texture into PNG
+            UnityEngine.Object.Destroy(tex);
+            File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", bytes);
+        }
     }
-
 
     private Texture2D ToTexture2D(RenderTexture rTex) ///
     {
@@ -78,7 +81,6 @@ public class OpenCVSceneUtils : MonoBehaviour
         }
     }
 
-
     public void DrawContours(Texture2D srcTexture) //
     {
         Mat srcMat = new Mat(srcTexture.height, srcTexture.width, CvType.CV_8UC1);
@@ -108,8 +110,5 @@ public class OpenCVSceneUtils : MonoBehaviour
             VisualisationSurface.SetActive(true);
             VisualisationSurface.GetComponent<Renderer>().material.mainTexture = textureDestinationContours;
         }
-
     }
-
-
 }
