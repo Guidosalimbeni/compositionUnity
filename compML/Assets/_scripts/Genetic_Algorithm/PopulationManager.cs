@@ -33,6 +33,7 @@ public class PopulationManager : MonoBehaviour {
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
     private InferenceCompositionML inferenceCompositionML;
     private InferenceScoreFeatures inferenceScoreFeatures;
+    private InferenceFinalOut inferenceFinalOut;
 
     private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
 
@@ -49,6 +50,7 @@ public class PopulationManager : MonoBehaviour {
         inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
         inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
+        inferenceFinalOut = FindObjectOfType<InferenceFinalOut>();
     }
 
     public void TriggerAIfromButton()
@@ -103,6 +105,7 @@ public class PopulationManager : MonoBehaviour {
         inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
         inferenceCompositionML.CallTOCalculateMobileNetScore();
+        inferenceFinalOut.CallTOCalculateFinalOutScore();
 
         IndividualCompositionSet.GetComponent<BrainGA>().CalculateTotalScore(); /// this is where the score is updated
         population.Add(IndividualCompositionSet);
@@ -172,6 +175,7 @@ public class PopulationManager : MonoBehaviour {
         inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
         inferenceCompositionML.CallTOCalculateMobileNetScore();
+        inferenceFinalOut.CallTOCalculateFinalOutScore();
 
         offspring.GetComponent<BrainGA>().CalculateTotalScore(); // are updated and score
 
@@ -220,6 +224,7 @@ public class PopulationManager : MonoBehaviour {
             inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
             inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
             inferenceCompositionML.CallTOCalculateMobileNetScore();
+            inferenceFinalOut.CallTOCalculateFinalOutScore();
         }
     }
 

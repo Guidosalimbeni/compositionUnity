@@ -62,16 +62,18 @@
   <ItemGroup>
     <Compile Include="Assets\_scripts\AI_COMP\CompAiAcademy.cs" />
     <Compile Include="Assets\_scripts\AI_COMP\CompAiAgent.cs" />
-    <Compile Include="Assets\_scripts\ANN\ANN.cs" />
-    <Compile Include="Assets\_scripts\ANN\BrainNN_CompML.cs" />
-    <Compile Include="Assets\_scripts\ANN\LayerNN.cs" />
-    <Compile Include="Assets\_scripts\ANN\Neuron.cs" />
-    <Compile Include="Assets\_scripts\ANN\Perceptron.cs" />
+    <Compile Include="Assets\_scripts\ANN_not_used\ANN.cs" />
+    <Compile Include="Assets\_scripts\ANN_not_used\BrainNN_CompML.cs" />
+    <Compile Include="Assets\_scripts\ANN_not_used\LayerNN.cs" />
+    <Compile Include="Assets\_scripts\ANN_not_used\Neuron.cs" />
+    <Compile Include="Assets\_scripts\ANN_not_used\Perceptron.cs" />
     <Compile Include="Assets\_scripts\Classification\ClassfierCompositionML.cs" />
+    <Compile Include="Assets\_scripts\Classification\ClassificationFinalOut.cs" />
     <Compile Include="Assets\_scripts\Classification\ClassifierNNDATABASE.cs" />
     <Compile Include="Assets\_scripts\Classification\ClassifierScoreFeatures.cs" />
     <Compile Include="Assets\_scripts\Classification\DetectorCompositionML.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceCompositionML.cs" />
+    <Compile Include="Assets\_scripts\Classification\InferenceFinalOut.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceNNfomDATABASE.cs" />
     <Compile Include="Assets\_scripts\Classification\InferenceScoreFeatures.cs" />
     <Compile Include="Assets\_scripts\Classification\UtilsCompositionML.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Assets\_scripts\UI_scripts\AIDebugText.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientAllFeatureScoresScore.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\ColorGradientFinalOut.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientIsolationBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientLawOfLever.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientMobileNet.cs" />

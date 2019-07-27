@@ -9,9 +9,11 @@ public class TotalScoreUI : MonoBehaviour
     private InferenceCompositionML inferenceCompositionML;
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
     private InferenceScoreFeatures inferenceScoreFeatures;
+    private InferenceFinalOut inferenceFinalOut;
 
     public bool SeparatedTotalSum = false;
-    public bool TotalOfthe3Net = true;
+    public bool TotalOfthe3Net = false;
+    public bool tot = true;
     public float TOTALSCOREDebugging;
 
     float a;
@@ -22,6 +24,7 @@ public class TotalScoreUI : MonoBehaviour
     float f;
     float g;
     float h;
+    float i;
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class TotalScoreUI : MonoBehaviour
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
         inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
         inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
+        inferenceFinalOut = FindObjectOfType<InferenceFinalOut>();
 
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;
@@ -41,8 +45,14 @@ public class TotalScoreUI : MonoBehaviour
         inferenceCompositionML.OnScorescoreMobileNetChanged += Handle_OnScorescoreMobileNetChanged;
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged += Handle_OnScorescoreNNFrontTopChanged;
         inferenceScoreFeatures.OnScoreAllscoresfeatures += Handle_OnScoreAllscoresfeatures;
+        inferenceFinalOut.OnScoreFinalOutChanged += Handle_OnScoreFinalOutChanged;
 
 
+    }
+
+    private void Handle_OnScoreFinalOutChanged(float obj)
+    {
+        i = obj;
     }
 
     private void Handle_OnScoreAllscoresfeatures(float obj)
@@ -77,11 +87,15 @@ public class TotalScoreUI : MonoBehaviour
             TOTALSCOREDebugging = a + b + c + d + e + f + g;
         }
 
-        else if (TotalOfthe3Net)
+        if (TotalOfthe3Net)
         {
             TOTALSCOREDebugging = e + f + h;
         }
 
+        if (tot)
+        {
+            TOTALSCOREDebugging = i;
+        }
         
     }
 
@@ -111,6 +125,7 @@ public class TotalScoreUI : MonoBehaviour
         inferenceCompositionML.OnScorescoreMobileNetChanged -= Handle_OnScorescoreMobileNetChanged;
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged -= Handle_OnScorescoreNNFrontTopChanged;
         inferenceScoreFeatures.OnScoreAllscoresfeatures -= Handle_OnScoreAllscoresfeatures;
+        inferenceFinalOut.OnScoreFinalOutChanged -= Handle_OnScoreFinalOutChanged;
     }
 
 }

@@ -35,6 +35,7 @@ public class CompAiAgent : Agent
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
     private InferenceCompositionML inferenceCompositionML;
     private InferenceScoreFeatures inferenceScoreFeatures;
+    private InferenceFinalOut inferenceFinalOut;
 
     float distanceToCenter = 0.0f;
     Vector3 CenterOfScene = Vector3.zero;
@@ -57,7 +58,7 @@ public class CompAiAgent : Agent
         inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
         inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
-
+        inferenceFinalOut = FindObjectOfType<InferenceFinalOut>();
     }
 
     
@@ -145,9 +146,9 @@ public class CompAiAgent : Agent
         // add call for contour render / edges render / hog renderes...
 
         // plus nn ? or nn only for reward ?? see above comment per solution..
+        inferenceFinalOut.CallTOCalculateFinalOutScore();
 
-
-        CalculateRewards();
+        CalculateRewards(); // there more sure all the score to be added again...
 
 
         // all the action wait for the decisions rules below

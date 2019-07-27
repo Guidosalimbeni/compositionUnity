@@ -22,6 +22,7 @@ public class BrainGA : MonoBehaviour
     public float scoreAllscorefeaturesIndividual { set; get; } 
     public float scoreNNFrontTopIndividual { get; set; }
     public float scoreMobileNetIndividual { get; set; }
+    public float scoreFinalOutIndividual { get; set; }
 
     public List<float> genes = new List<float>();
 
@@ -75,8 +76,8 @@ public class BrainGA : MonoBehaviour
             //gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
 
             // change it soon to one score from ANN...or another TF model from external... which might be better to produce graphs.. 
-            
-            
+
+
             //scoreBoundsBalanceIndividual = scoreCalculator.scoreBoundsBalance; // not used
 
             //scorePixelsBalanceIndividual = scoreCalculator.visualScoreBalancePixelsCount; 
@@ -84,18 +85,22 @@ public class BrainGA : MonoBehaviour
             //scoreLawOfLeverIndividual = scoreCalculator.scoreLawOfLever;
             //scoreIsolationBalanceIndividual = scoreCalculator.scoreIsolationBalance;
 
-            scoreNNFrontTopIndividual = scoreCalculator.scoreNNFrontTop;
-            scoreMobileNetIndividual = scoreCalculator.scoreMobileNet;
-            scoreAllscorefeaturesIndividual = scoreCalculator.scoreAllscorefeatures;
+            //scoreNNFrontTopIndividual = scoreCalculator.scoreNNFrontTop;
+            //scoreMobileNetIndividual = scoreCalculator.scoreMobileNet;
+            //scoreAllscorefeaturesIndividual = scoreCalculator.scoreAllscorefeatures;
 
-            TotalScore = scoreAllscorefeaturesIndividual + scoreNNFrontTopIndividual + scoreMobileNetIndividual;
+            //TotalScore = scoreAllscorefeaturesIndividual + scoreNNFrontTopIndividual + scoreMobileNetIndividual;
+
+            scoreFinalOutIndividual = scoreCalculator.scoreFinalOut;
+
+            TotalScore = scoreFinalOutIndividual;
 
             //TotalScore = scorePixelsBalanceIndividual + scoreUnityVisualIndividual 
             //             + scoreLawOfLeverIndividual + scoreIsolationBalanceIndividual
             //             + scoreNNFrontTopIndividual + scoreMobileNetIndividual;
 
             // when I add a new score I need to update the last generation in population manager so that the score has sent to the database
-            
+
         }
     }
 

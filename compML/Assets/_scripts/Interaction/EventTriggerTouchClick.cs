@@ -11,6 +11,7 @@ namespace Lean.Touch
         private InferenceNNfomDATABASE inferenceNNfomDATABASE;
         private InferenceCompositionML inferenceCompositionML;
         private InferenceScoreFeatures inferenceScoreFeatures;
+        private InferenceFinalOut inferenceFinalOut;
 
 
         protected virtual void OnEnable()
@@ -31,6 +32,7 @@ namespace Lean.Touch
             inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
             inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
             inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
+            inferenceFinalOut = FindObjectOfType<InferenceFinalOut>();
         }
 
         protected virtual void OnDisable()
@@ -58,6 +60,7 @@ namespace Lean.Touch
 
             inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
             inferenceCompositionML.CallTOCalculateMobileNetScore();
+            inferenceFinalOut.CallTOCalculateFinalOutScore();
 
             //Debug.Log("Finger " + finger.Index + " is still touching the screen");
         }

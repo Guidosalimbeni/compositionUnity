@@ -31,6 +31,7 @@ public class SendToDatabase : MonoBehaviour
     private float scoreAllscorefeatures;
     private float scoreNNFrontTop;
     private float scoreMobileNet;
+    private float scoreFinalOut;
 
     private void Awake()
     {
@@ -62,6 +63,7 @@ public class SendToDatabase : MonoBehaviour
         scoreAllscorefeatures = scoreCalculator.scoreAllscorefeatures;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
         scoreMobileNet = scoreCalculator.scoreMobileNet;
+        scoreFinalOut = scoreCalculator.scoreFinalOut;
 
         judge = 0;               
 
@@ -82,7 +84,7 @@ public class SendToDatabase : MonoBehaviour
         scoreAllscorefeatures = scoreCalculator.scoreAllscorefeatures;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
         scoreMobileNet = scoreCalculator.scoreMobileNet;
-
+        scoreFinalOut = scoreCalculator.scoreFinalOut;
 
         judge = 1;               
 
@@ -104,10 +106,9 @@ public class SendToDatabase : MonoBehaviour
         scoreAllscorefeatures = scoreCalculator.scoreAllscorefeatures;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
         scoreMobileNet = scoreCalculator.scoreMobileNet;
+        scoreFinalOut = scoreCalculator.scoreFinalOut;
 
         judge = scoreFromButton;
-
-        Debug.Log(scoreFromButton);
 
         ListOfInfoForDatabase.Clear();
 
@@ -153,6 +154,7 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("NNFrontView", imagePixelsValues.ImageNNFrontView.ToString()); // not need anymore // sending empty string
         form.AddField("ImagePixelsList", imagePixelsValues.ImagePixelsListMainPaintView.ToString()); // not need anymore // sending empty string
 
+        form.AddField("scoreFinalOut", scoreFinalOut.ToString());
         form.AddField("judge", judge.ToString());
 
         //form.AddBinaryData("image", bytes, "screenShot.png", "image/png");

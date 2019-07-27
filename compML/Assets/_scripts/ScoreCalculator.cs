@@ -15,12 +15,14 @@ public class ScoreCalculator : MonoBehaviour
     public float scoreMobileNet { private set; get; } //
     public float scoreNNFrontTop { private set; get; } //
     public float scoreAllscorefeatures { private set; get; } //
+    public float scoreFinalOut { private set; get; } //
 
     private OpenCVManager openCvManager;
     private GameVisualManager gameManagerNotOpenCV;
     private InferenceNNfomDATABASE inferenceNNfomDATABASE;
     private InferenceCompositionML inferenceCompositionML;
     private InferenceScoreFeatures inferenceScoreFeatures;
+    private InferenceFinalOut inferenceFinalOut;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class ScoreCalculator : MonoBehaviour
 
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
         inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
+        inferenceFinalOut = FindObjectOfType<InferenceFinalOut>();
 
         openCvManager.OnPixelsCountBalanceChanged += HandleOnPixelsCountBalanceChanged;
         gameManagerNotOpenCV.OnScoreBoundsBalanceChanged += Handle_OnScoreBoundsBalanceChanged;
@@ -42,7 +45,13 @@ public class ScoreCalculator : MonoBehaviour
         inferenceCompositionML.OnScorescoreMobileNetChanged += Handle_OnScorescoreMobileNetFrontTopChanged;
 
         inferenceScoreFeatures.OnScoreAllscoresfeatures += Handle_OnScoreAllscoresfeatures;
+        inferenceFinalOut.OnScoreFinalOutChanged += Handle_OnScoreFinalOutChanged;
 
+    }
+
+    private void Handle_OnScoreFinalOutChanged(float scoreFinalOutPassed)
+    {
+        scoreFinalOut = scoreFinalOutPassed;
     }
 
     private void Handle_OnScoreAllscoresfeatures(float scoreAllscorefeaturesPassed)
@@ -96,6 +105,7 @@ public class ScoreCalculator : MonoBehaviour
         inferenceNNfomDATABASE.OnScorescoreNNFrontTopChanged -= Handle_OnScorescoreNNFrontTopChanged;
         inferenceCompositionML.OnScorescoreMobileNetChanged -= Handle_OnScorescoreMobileNetFrontTopChanged;
         inferenceScoreFeatures.OnScoreAllscoresfeatures -= Handle_OnScoreAllscoresfeatures;
+        inferenceFinalOut.OnScoreFinalOutChanged -= Handle_OnScoreFinalOutChanged;
     }
 
 }
