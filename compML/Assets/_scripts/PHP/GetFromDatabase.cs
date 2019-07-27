@@ -5,7 +5,7 @@ using System;
 
 public class GetFromDatabase : MonoBehaviour
 {
-    public bool triggerGetData = true; // triggered from somewhere here...
+    public bool EnableLoadDataFromDataBase = true; // NOT USED SINCE IS BETTER TO TRAIN OFFLINE ... leave the code here in case to implement .. but need to check that is getting what we want..
     private string DataFromMysql = "http://www.guidosalimbeni.it/UnityComp/GetFromDatabase.php";
 
     private BrainNN_CompML brainNN_compML;
@@ -15,7 +15,7 @@ public class GetFromDatabase : MonoBehaviour
 
     private void Start() 
     {
-        if (triggerGetData == true)
+        if (EnableLoadDataFromDataBase == true)
         {
             brainNN_compML = FindObjectOfType<BrainNN_CompML>();
             StartCoroutine(GetDataFromDatabase());

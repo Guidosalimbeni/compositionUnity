@@ -14,11 +14,8 @@ public class InferenceScoreFeatures : MonoBehaviour
 
     [SerializeField]
     TextAsset model;
-
  
-
-    ClassifierScoreFeatures classifierScoreFeatures;
-
+    private ClassifierScoreFeatures classifierScoreFeatures;
     private float scoreAllscorefeatures;
     private ScoreCalculator scoreCalculator;
 

@@ -14,6 +14,7 @@ public class Perceptron : MonoBehaviour {
     [SerializeField]
     private DataForNeuralNetwork_CompML dataNN;
 
+    public bool TrainPerceptron = false; // not used but kept the code in case for other project all training better to be offline with Keras and then TFsharp import so I can see the evaluation in python
 
     public TrainingSet[] ts;
     public double[] weights = { 0, 0,0,0,0,0 };
@@ -24,45 +25,34 @@ public class Perceptron : MonoBehaviour {
     void Start() // to call from the getFromDatabase script
     {
 
-        //ts[0].input = new double[5];
-
-        ts = new TrainingSet[dataNN.Names.Count];
-
-        for (int i = 0; i < dataNN.Names.Count; i++)
+        if (TrainPerceptron)
         {
-            ts[i].input = new double[6];
-            ts[i].input[0] = dataNN.ScorePixelsBalance[i];
-            ts[i].input[1] = dataNN.ScoreUnityVisual[i];
-            ts[i].input[2] = dataNN.ScoreLawOfLever[i];
-            ts[i].input[3] = dataNN.ScoreIsolationBalance[i];
-            ts[i].input[4] = dataNN.ScoreNNFrontTop[i];
-            ts[i].input[5] = dataNN.ScoreMobileNet[i];
-            ts[i].output = dataNN.JUDGE[i];
-        }
+            //ts[0].input = new double[5];
 
+            ts = new TrainingSet[dataNN.Names.Count];
 
-        Train(100);   // to uncomment
-
-        //Debug.Log("Test 0 0: " + CalcOutput(0, 0));
-        //Debug.Log("Test 0 1: " + CalcOutput(0, 1));
-        //Debug.Log("Test 1 0: " + CalcOutput(1, 0));
-        //Debug.Log("Test 1 1: " + CalcOutput(1, 1));
-
-
-        //the follow code will create an array that contains 20 arrays, each of those arrays are of size 10, and each of them will have the value set to 0;
-
-        int[][] myarrays = new int[20][];
-
-        //careful on this for statement, it is less than not less than or equal too, this has to do with size starting to count from 1 and x starting to count from 0. You must start from 0 because the first index in an array is 0.
-
-        for (int x = 0; x < myarrays.Length; x++)
-        {
-            myarrays[x] = new int[10];
-            for (int y = 0; y < myarrays[x].Length; y++)
+            for (int i = 0; i < dataNN.Names.Count; i++)
             {
-                myarrays[x][y] = 0;
+                ts[i].input = new double[6];
+                ts[i].input[0] = dataNN.ScorePixelsBalance[i];
+                ts[i].input[1] = dataNN.ScoreUnityVisual[i];
+                ts[i].input[2] = dataNN.ScoreLawOfLever[i];
+                ts[i].input[3] = dataNN.ScoreIsolationBalance[i];
+                ts[i].input[4] = dataNN.ScoreNNFrontTop[i];
+                ts[i].input[5] = dataNN.ScoreMobileNet[i];
+                ts[i].output = dataNN.JUDGE[i];
             }
+
+
+            Train(100);   // to uncomment
+
+            //Debug.Log("Test 0 0: " + CalcOutput(0, 0));
+            //Debug.Log("Test 0 1: " + CalcOutput(0, 1));
+            //Debug.Log("Test 1 0: " + CalcOutput(1, 0));
+            //Debug.Log("Test 1 1: " + CalcOutput(1, 1));
+
         }
+
     }
 
 	double DotProductBias(double[] v1, double[] v2) 

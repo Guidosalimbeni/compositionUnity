@@ -115,6 +115,7 @@
     <Compile Include="Assets\_scripts\SelectionScene\UpdateCountUIonSelectionItem.cs" />
     <Compile Include="Assets\_scripts\Structs\TypeOfScreenData.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\AIDebugText.cs" />
+    <Compile Include="Assets\_scripts\UI_scripts\ColorGradientAllFeatureScoresScore.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientBoundShapeBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientIsolationBalance.cs" />
     <Compile Include="Assets\_scripts\UI_scripts\ColorGradientLawOfLever.cs" />

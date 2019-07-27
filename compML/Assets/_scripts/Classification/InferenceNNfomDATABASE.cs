@@ -48,9 +48,6 @@ public class InferenceNNfomDATABASE : MonoBehaviour
     public void CallTOCalculateNNFrontTopcore()
     {
         MakePrecitionNNDatabase();
-
-
-
     }
 
     public void MakePrecitionNNDatabase()
@@ -79,7 +76,6 @@ public class InferenceNNfomDATABASE : MonoBehaviour
 
     public void InitTF()
     {
-        
            classifierNNDatabase = new ClassifierNNDATABASE(model, labels, 
                                                            input: "conv2d_1_input_1", output: "dense_3_1/Softmax", 
                                                            height: 20, 
@@ -89,8 +85,6 @@ public class InferenceNNfomDATABASE : MonoBehaviour
     public void CloseTF()
     {
         classifierNNDatabase.Close();
-
-
         if (detector != null)
             detector.Close();
     }

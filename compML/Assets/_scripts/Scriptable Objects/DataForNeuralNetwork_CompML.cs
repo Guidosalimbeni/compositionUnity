@@ -8,6 +8,8 @@ using UnityEngine;
 public class DataForNeuralNetwork_CompML : ScriptableObject
 {
 
+    // eventually change this to get the only 3 scores summary for training.. but better not to train in unity and train offline ... NOT USED
+
     [SerializeField]
     private List<string> names;
     [SerializeField]

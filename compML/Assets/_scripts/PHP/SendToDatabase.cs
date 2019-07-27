@@ -28,6 +28,7 @@ public class SendToDatabase : MonoBehaviour
     private string sequence;
     private float scoreLawOfLever;
     private float scoreIsolationBalance;
+    public float scoreAllscorefeatures;
     private float scoreNNFrontTop;
     private float scoreMobileNet;
 
@@ -64,6 +65,7 @@ public class SendToDatabase : MonoBehaviour
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
         scoreIsolationBalance = scoreCalculator.scoreIsolationBalance;
+        scoreAllscorefeatures = scoreCalculator.scoreAllscorefeatures;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
         scoreMobileNet = scoreCalculator.scoreMobileNet;
 
@@ -83,6 +85,7 @@ public class SendToDatabase : MonoBehaviour
         scorePixelsBalance = scoreCalculator.visualScoreBalancePixelsCount;
         scoreLawOfLever = scoreCalculator.scoreLawOfLever;
         scoreIsolationBalance = scoreCalculator.scoreIsolationBalance;
+        scoreAllscorefeatures = scoreCalculator.scoreAllscorefeatures;
         scoreNNFrontTop = scoreCalculator.scoreNNFrontTop;
         scoreMobileNet = scoreCalculator.scoreMobileNet;
 
@@ -95,6 +98,7 @@ public class SendToDatabase : MonoBehaviour
 
     }
 
+    // reframe this... with extra 2 button
     public void PostDataFromAI(float scorePixelsBalancefromAI,  // choosed not to use (if want to re use need to train in python the simple NN and not using ANN in unity)
                                 float scoreUnityVisualFromAI, 
                                 float scoreBoundsBalancefromAI,
@@ -110,11 +114,15 @@ public class SendToDatabase : MonoBehaviour
         scoreBoundsBalance = scoreBoundsBalancefromAI;
         scoreLawOfLever = scoreLawOfLeverFromAI;
         scoreIsolationBalance = scoreIsolationBalanceFromAI;
+
+        //scoreAllscorefeatures = scoreCalculator.scoreAllscorefeatures; // do the same with the other.. here
+
         scoreNNFrontTop = scoreNNFrontTopFromAI;
         scoreMobileNet = scoreMobileNetFromAI;
 
 
-        judge = 0.5f;                  ////////////////////// TODO I can then validate or penalise with my vote...
+        judge = 0.0f;
+        judge = 1.0f; ////////////////////// TODO I can then validate or penalise with my vote...
 
         ListOfInfoForDatabase.Clear();
 
@@ -152,6 +160,7 @@ public class SendToDatabase : MonoBehaviour
         form.AddField("scoreLawOfLever", scoreLawOfLever.ToString());
         form.AddField("scoreIsolationBalance", scoreIsolationBalance.ToString());
 
+        form.AddField("scoreAllscorefeatures", scoreAllscorefeatures.ToString());
         form.AddField("scoreNNFrontTop", scoreNNFrontTop.ToString());
         form.AddField("scoreMobileNet", scoreMobileNet.ToString());
 
