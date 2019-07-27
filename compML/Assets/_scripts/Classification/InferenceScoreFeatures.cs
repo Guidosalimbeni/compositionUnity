@@ -51,24 +51,21 @@ public class InferenceScoreFeatures : MonoBehaviour
 
         MakePredictionScoreFeatures(scores);
 
-
     }
 
     private void MakePredictionScoreFeatures(float[] scores)
     {
-         //////////
-
+        
         scoreAllscorefeatures = classifierScoreFeatures.PredictScoreFeatures(scores);
 
         if (OnScoreAllscoresfeatures != null)
         {
-            OnScoreAllscoresfeatures(scoreAllscorefeatures); // need to implement all the events registrations..
+            OnScoreAllscoresfeatures(scoreAllscorefeatures); 
         }
     }
 
     public void InitTF()
     {
-
         classifierScoreFeatures = new ClassifierScoreFeatures(model,
                                                         input: "dense_1_input", output: "dense_3/Sigmoid");
                                                         
@@ -77,7 +74,5 @@ public class InferenceScoreFeatures : MonoBehaviour
     public void CloseTF()
     {
         classifierScoreFeatures.Close();
-
-
     }
 }

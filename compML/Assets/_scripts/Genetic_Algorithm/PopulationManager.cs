@@ -12,8 +12,8 @@ public class PopulationManager : MonoBehaviour {
     public float secondToWaitForPopGeneration = 0.1f;
     public float bestScore; // for debugging only
 
-    public GameObject parent1; // for debugging only
-    public GameObject parent2;
+    private GameObject parent1; 
+    private GameObject parent2;
 
     private int generation = 0;
     private int counterForPopulation = 0;
@@ -24,7 +24,7 @@ public class PopulationManager : MonoBehaviour {
     private List<GameObject> population;
     private GameObject offspring;
 
-    public List<GameObject> sortedList; // public for debugging
+    private List<GameObject> sortedList; // public for debugging
 
     private bool sortNewGeneration = true;
     //private SendToDatabase sendtodatabase;
@@ -101,7 +101,6 @@ public class PopulationManager : MonoBehaviour {
         gameManagerNotOpenCV.CallTOCalculateNOTOpenCVScores();
 
         inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
-
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
         inferenceCompositionML.CallTOCalculateMobileNetScore();
 
@@ -132,7 +131,7 @@ public class PopulationManager : MonoBehaviour {
             if (population.Count == populationSize)
             {
                 bestScore = sortedList[sortedList.Count - 1].GetComponent<BrainGA>().TotalScore; // for debugging only
-                
+                //Debug.Log(bestScore);
                 population.Clear(); // this is the list that contains all the prefabs individual in the scene
 
             }
@@ -144,16 +143,16 @@ public class PopulationManager : MonoBehaviour {
 
     private IEnumerator Breed()
     {
-
-        int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
-        int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 2), sortedList.Count );
+        // it can happen that father is equal to mother,,, too bad...
+        int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 1.6), sortedList.Count);
+        int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 1.6), sortedList.Count);
         parent1 = sortedList[InternalIndex_parent1];
         parent2 = sortedList[InternalIndex_parent2];
 
         GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
 
         BrainGA b = offspring.GetComponent<BrainGA>();
-        if (Random.Range(0, 10) == 1) //mutate 1 in 10
+        if (Random.Range(0, 2) == 1) //mutate 1 in 2
         {
             b.InitForBreed();
             b.dna.Mutate();
@@ -237,8 +236,6 @@ public class PopulationManager : MonoBehaviour {
 
     private void DestroyPopulationStack()
     {
-        Debug.Log(sortedList.Count);
-
         for (int i = 0; i < sortedList.Count; i++)
         {
             Destroy(sortedList[i].gameObject);

@@ -28,7 +28,7 @@ public class SendToDatabase : MonoBehaviour
     private string sequence;
     private float scoreLawOfLever;
     private float scoreIsolationBalance;
-    public float scoreAllscorefeatures;
+    private float scoreAllscorefeatures;
     private float scoreNNFrontTop;
     private float scoreMobileNet;
 
@@ -92,7 +92,7 @@ public class SendToDatabase : MonoBehaviour
 
     }
     
-    public void PostDataFromSnapShot(float scoreFromButton)
+    public void PostDataFromSnapShot(int scoreFromButton)
     {
         UpdateActualListOfInfoForDatabase();
 
@@ -106,6 +106,8 @@ public class SendToDatabase : MonoBehaviour
         scoreMobileNet = scoreCalculator.scoreMobileNet;
 
         judge = scoreFromButton;
+
+        Debug.Log(scoreFromButton);
 
         ListOfInfoForDatabase.Clear();
 

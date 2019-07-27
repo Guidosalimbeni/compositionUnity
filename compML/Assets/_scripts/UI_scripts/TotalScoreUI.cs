@@ -11,7 +11,7 @@ public class TotalScoreUI : MonoBehaviour
     private InferenceScoreFeatures inferenceScoreFeatures;
 
     public bool SeparatedTotalSum = false;
-    public bool TotalOfthe3Net = false;
+    public bool TotalOfthe3Net = true;
     public float TOTALSCOREDebugging;
 
     float a;

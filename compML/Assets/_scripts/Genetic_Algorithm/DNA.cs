@@ -13,8 +13,8 @@ public class DNA {
 	public DNA(int lenght, float Maxv, float MinV)
 	{
 		DnaLength = lenght;
-		MaxValues = Maxv;  // +2
-        MinValue = MinV;  // -2
+		MaxValues = Maxv;  // + 1.5
+        MinValue = MinV;  // - 1.5
         // TODO define for each axis
         SetRandom();
 	}
@@ -35,55 +35,43 @@ public class DNA {
 
 	public void Combine(DNA d1, DNA d2)
 	{
-        bool Mother = true;
-        bool Father = false;
-		for(int i = 0; i < DnaLength; i = i + 2)
+        //string genseSeq = "";
+        //foreach (float g in d1.genes)
+        //{
+        //    genseSeq += g + "  M  ";
+        //}
+
+        //foreach (float g in d2.genes)
+        //{
+        //    genseSeq += g + "  F  ";
+        //}
+
+        for (int i = 0; i < DnaLength; i++)
 		{
-            if (Mother)
-            {
-                float x = d1.genes[i];
-                genes[i] = x;
-                float z = d1.genes[i + 1];
-                genes[i + 1] = z;
-            }
 
-            if (Father)
+            if (i <= DnaLength / 2.0) // hard coded <= since but to check if I will introduce rotation in the process ... so that one object is not mixed with rotation positoin etc..
             {
-                float x = d2.genes[i];
-                genes[i] = x;
-                float z = d2.genes[i + 1];
-                genes[i + 1] = z;
-            }
-
-            if (Mother)
-            {
-                Mother = false;
-                Father = true;
+                float c = d1.genes[i];
+                genes[i] = c;
             }
             else
             {
-                Mother = true;
-                Father = false;
+                float c = d2.genes[i];
+                genes[i] = c;
             }
 
+        }
 
-            // this not good for my case
-   //         if (i < DnaLength/2.0)
-			//{
-			//	float c = d1.genes[i];
-			//	genes[i] = c;
-			//}
-			//else
-			//{
-			//	float c = d2.genes[i]; 
-			//	genes[i] = c;
-			//}
-		}
-	}
+        //foreach (float g in genes)
+        //{
+        //    genseSeq += g + "  Of  ";
+        //}
+        //Debug.Log(genseSeq);
+    }
 
-	public void Mutate()
+    public void Mutate() // mutation of a single genes...
 	{
-		genes[Random.Range(0,DnaLength)] = Random.Range(0, MaxValues);
+        genes[Random.Range(0,DnaLength)] = Random.Range(MinValue, MaxValues);
 	}
 
 	public float GetGene(int pos)

@@ -5,8 +5,8 @@ using UnityEngine;
 public class GamePopulationController : MonoBehaviour
 {
     
-    public float MaxValues_x = 2.0f;
-    public float MinValues_z = -2.0f;
+    public float MaxValues_x = 1.5f;
+    public float MinValues_z = -1.5f;
     public Transform parent;
     public List<GameObject> ElementsCompositions { get; set; } 
 
