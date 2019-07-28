@@ -10,10 +10,12 @@ public class AIDebugText : MonoBehaviour
     public TextMeshProUGUI ScoreText;
     private CompAiAgent[] agents;
     private float totalRewardNow;
-    private float scoreUnityVisual;
+    
     private ScoreCalculator scoreCalculator;
     [SerializeField]
     private List<float> cumulativeRewards; // for see in the inspector
+    
+    private float TotalScoreOUT; 
 
     private void Start()
     {
@@ -43,8 +45,8 @@ public class AIDebugText : MonoBehaviour
                 totalRewardNow = totalRewardNow / agents.Length;
             }
 
-            scoreUnityVisual = scoreCalculator.scoreUnityVisual;
-            UpdateAIDebugText(totalRewardNow, scoreUnityVisual);
+            TotalScoreOUT = scoreCalculator.scoreFinalOut;
+            UpdateAIDebugText(totalRewardNow, TotalScoreOUT);
         }
     }
 

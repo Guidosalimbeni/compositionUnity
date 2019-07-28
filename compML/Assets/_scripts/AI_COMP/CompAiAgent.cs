@@ -80,6 +80,8 @@ public class CompAiAgent : Agent
         AddVectorObs(AngleRotY);
         AddVectorObs(VolumeOfTheItem);
 
+        Debug.Log(SizeColliderBounds);
+
         // 1 + 1 + 1 + 1 + 3 + 3 + 1 + 1 = 12
 
         
@@ -135,12 +137,8 @@ public class CompAiAgent : Agent
         // call here so that both for wait decision and for inference will update the UI and the scores
         openCVManager.CallForOpenCVCalculationUpdates();
         gameVisualManager.CallTOCalculateNOTOpenCVScores();
-
         inferenceScoreFeatures.CallTOCalculateFeaturesAllScores();
-
         inferenceNNfomDATABASE.CallTOCalculateNNFrontTopcore();
-
-        // ADD THE CALL TO MOBILE NET HERE... need to wait here???
         inferenceCompositionML.CallTOCalculateMobileNetScore();
 
         // add call for contour render / edges render / hog renderes...
@@ -148,7 +146,7 @@ public class CompAiAgent : Agent
         // plus nn ? or nn only for reward ?? see above comment per solution..
         inferenceFinalOut.CallTOCalculateFinalOutScore();
 
-        CalculateRewards(); // there more sure all the score to be added again...
+        CalculateRewards(); 
 
 
         // all the action wait for the decisions rules below
@@ -165,74 +163,24 @@ public class CompAiAgent : Agent
 
     private void CalculateRewards()
     {
-
-
-        
-
-
         // REMEMBER TO ADD PENALTIES FOT COLLISION TO OTHER OBJECTS
         // PENALTY FOR COLLISION WITH THE OUT OF FRAME
 
-        float visualScoreBalancePixelsCount = scoreCalculator.visualScoreBalancePixelsCount;
-        float scoreBoundsBalance = scoreCalculator.visualScoreBalancePixelsCount;
-        float scoreUnityVisual = scoreCalculator.scoreUnityVisual;
+        float TotalOutScore = scoreCalculator.scoreFinalOut;
 
-        float visualTotalReward = (visualScoreBalancePixelsCount + scoreBoundsBalance + scoreUnityVisual) / 3;
-
-        //if (visualScoreBalancePixelsCount > 0.5f)
-        //{
-
-        //    AddReward(visualScoreBalancePixelsCount);
-        //}
-
-        //if (scoreBoundsBalance > 0.5f)
-        //{
-
-        //    AddReward(scoreBoundsBalance);
-        //}
-
-        if (scoreUnityVisual > 0.5f)
+        if (TotalOutScore > 0.8f)
         {
-
-            AddReward(1.0f);
+            Done();
+            SetReward(1.0f);
         }
 
-        //if (visualTotalReward > 0.8f)
-        //{
-        //    AddReward(visualTotalReward);
-        //    Debug.Log("got it");
-        //}
 
-        //AddReward(-0.1f);
-
-        //if (distanceToCenter > 0.5f)
-        //{
-        //    SetReward(-1.0f);
-        //}
-
-
+        // collision with other object and frames bounds
         if (collisionChecker.CollisionWithOtherItemFoundForAIReward == true)
         {
-            Debug.Log(" collision no penalties to implement... eventually to implement .. also with bounds frame");
-            //SetReward(-1.0f);
-            //Done();
-        }
-
-        if (gameObject.transform.position.x < -1.5f || gameObject.transform.position.x > 1.5f)
-        {
-            Debug.Log(" out of X");
-            SetReward(-1.0f);
             Done();
-        }
-
-        if (gameObject.transform.position.z < -1.5f || gameObject.transform.position.z > 1.5f)
-        {
-            Debug.Log(" out of Z");
             SetReward(-1.0f);
-            Done();
         }
-
-        
 
         // REALLY NEED TO PASS TOP CAMERA VIEW TO OF SINGLE ATTACHED CAMERA AND 20 x 20 or 40 x 40 to vector non visual observation !!!
         // also add HOGS 
