@@ -943,7 +943,7 @@ PrefabInstance:
     - target: {fileID: 6122406353790318771, guid: 077b41ef9247ec1439e7f8d312dfcf76,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6122406353790318764, guid: 077b41ef9247ec1439e7f8d312dfcf76,
         type: 3}
@@ -2283,8 +2283,8 @@ MonoBehaviour:
   Individual: {fileID: 1884520563143677480, guid: cc65766a291f89643a3b2386db6b52af,
     type: 3}
   populationSize: 40
-  NumberOfGeneration: 10
-  secondToWaitForPopGeneration: 0.1
+  NumberOfGeneration: 40
+  secondToWaitForPopGeneration: 0.05
   bestScore: 0
 --- !u!114 &936761973
 MonoBehaviour:
