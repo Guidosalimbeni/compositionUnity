@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b421e5df16fb59e468f86848b70b7e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfgenes: 2
+  NumberOfgenes: 3
   TotalScore: 0
   genes: []

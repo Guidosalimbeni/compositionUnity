@@ -9,8 +9,9 @@ public class DNA {
 	private int DnaLength = 0;
 	private float MaxValues = 0;
     private float MinValue = 0;
+    private int NUMMBEROFGENESMUTATED = 2;
 
-	public DNA(int lenght, float Maxv, float MinV)
+    public DNA(int lenght, float Maxv, float MinV)
 	{
 		DnaLength = lenght;
 		MaxValues = Maxv;  // + 1.5
@@ -21,10 +22,21 @@ public class DNA {
 
 	public void SetRandom()
 	{
+        // dna lenght is 4 eleme / x 3 genes = 12 for example
 		genes.Clear();
 		for(int i = 0; i < DnaLength; i++)
 		{
-			genes.Add(Random.Range(MinValue, MaxValues));
+            if ((i + 1)%3 == 0)
+            {
+
+                Debug.Log("got here");
+                genes.Add(Random.Range(0, 360));
+            }
+            else
+            {
+                genes.Add(Random.Range(MinValue, MaxValues));
+            }
+			
 		}
 	}
 
@@ -71,7 +83,21 @@ public class DNA {
 
     public void Mutate() // mutation of a single genes...
 	{
-        genes[Random.Range(0,DnaLength)] = Random.Range(MinValue, MaxValues);
+        for (int i = 0; i < NUMMBEROFGENESMUTATED; i++)
+        {
+            int mutationIndx = Random.Range(0, DnaLength);
+            if ((mutationIndx + 1) % 3 == 0)
+            {
+                genes[mutationIndx] = Random.Range(0, 360);
+            }
+            else
+            {
+                genes[Random.Range(0, DnaLength)] = Random.Range(MinValue, MaxValues);
+            }
+        }
+
+        
+            
 	}
 
 	public float GetGene(int pos)

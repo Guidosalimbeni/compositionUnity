@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class BrainGA : MonoBehaviour
 {
-    public int NumberOfgenes = 2; // still need to hard code the genes anyway.. nned to change the brain move and the dna mutation...
+    private int NumberOfgenes = 3; // still need to hard code the genes anyway.. nned to change the brain move and the dna mutation...
 	public float TotalScore;  // THIS IS IMPORTANT SINCE LINKS TO THE SORTED POPULATION INDIVIDUAL BRAIN
 	public DNA dna;
 
@@ -57,17 +57,36 @@ public class BrainGA : MonoBehaviour
         foreach (var elementComp in gamePopulationController.ElementsCompositions)
         {
             elementComp.transform.position = new Vector3(dna.GetGene(genePos), 0, dna.GetGene(genePos + 1));
+
+            if (NumberOfgenes == 3)
+            {
+                elementComp.transform.eulerAngles = new Vector3(elementComp.transform.eulerAngles.x, dna.GetGene(genePos + 2), elementComp.transform.eulerAngles.z);
+            }
             genePos = genePos + NumberOfgenes; // need to add rotation   // which also need to change the code in the mutation DNA..to account of this..
         }
-
         genes.Clear();
         genes = dna.GetGenesList();
+    }
 
+    public void MoveCompositionOfBestFitAfterAIfinishedIsTurn(List<float> genes)
+    {
+        int genePos = 0;
+        foreach (var elementComp in gamePopulationController.ElementsCompositions)
+        {
+            elementComp.transform.position = new Vector3(genes[genePos], 0, genes[genePos + 1]);
+            if (NumberOfgenes == 3)
+            {
+                Debug.Log(" got here in brain");
+                elementComp.transform.eulerAngles = new Vector3(elementComp.transform.eulerAngles.x, genes[genePos + 2], elementComp.transform.eulerAngles.z);
+                
+            }
+            genePos = genePos + NumberOfgenes;
+        }
     }
 
     public void CalculateTotalScore()
     {
-        if (scoreCalculator != null && brainNN_compML != null) 
+        if (scoreCalculator != null && brainNN_compML != null)
         {
 
             // call to trigger the events
@@ -101,16 +120,6 @@ public class BrainGA : MonoBehaviour
 
             // when I add a new score I need to update the last generation in population manager so that the score has sent to the database
 
-        }
-    }
-
-    public void MoveCompositionOfBestFitAfterAIfinishedIsTurn(List<float> genes)
-    {
-        int genePos = 0;
-        foreach (var elementComp in gamePopulationController.ElementsCompositions)
-        {
-            elementComp.transform.position = new Vector3(genes[genePos], 0, genes[genePos + 1]);
-            genePos = genePos + NumberOfgenes;
         }
     }
 }
