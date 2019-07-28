@@ -22,7 +22,7 @@ public class ColorGradientAllFeatureScoresScore : MonoBehaviour
     {
         UpdateLawOfLeverPixelsUI(scoreAllFeaturesScore);
         if (text != null)
-            text.text = scoreAllFeaturesScore.ToString();
+            text.text = scoreAllFeaturesScore.ToString("F2");
     }
 
 
