@@ -2091,6 +2091,8 @@ GameObject:
   - component: {fileID: 471146985}
   - component: {fileID: 471146984}
   - component: {fileID: 471146983}
+  - component: {fileID: 471146989}
+  - component: {fileID: 471146988}
   m_Layer: 0
   m_Name: '[GameVisualManager]'
   m_TagString: Untagged
@@ -2122,7 +2124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcd095c7de6b6043b09cc113b45d725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawRenderedLinesDebug: 1
+  drawRenderedLinesDebug: 0
   weight: 0.36
 --- !u!114 &471146985
 MonoBehaviour:
@@ -2163,6 +2165,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &471146988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471146982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caab7515f22a88948a36c60471cd9d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &471146989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471146982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d066c68d311ced42b7713e1a311a65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &476849533
 GameObject:
   m_ObjectHideFlags: 0
@@ -7706,7 +7732,7 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 11e6ec6da372b6647a3abb3ae0cf3628, type: 2}
     - {fileID: 8400000, guid: 110639d7fafbd1b408a1dcd9692cb1e7, type: 2}
-    maxStep: 500
+    maxStep: 100
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
@@ -8181,7 +8207,7 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 11e6ec6da372b6647a3abb3ae0cf3628, type: 2}
     - {fileID: 8400000, guid: 110639d7fafbd1b408a1dcd9692cb1e7, type: 2}
-    maxStep: 500
+    maxStep: 100
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
@@ -8470,7 +8496,7 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 11e6ec6da372b6647a3abb3ae0cf3628, type: 2}
     - {fileID: 8400000, guid: 110639d7fafbd1b408a1dcd9692cb1e7, type: 2}
-    maxStep: 500
+    maxStep: 100
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
@@ -9023,7 +9049,7 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 11e6ec6da372b6647a3abb3ae0cf3628, type: 2}
     - {fileID: 8400000, guid: 110639d7fafbd1b408a1dcd9692cb1e7, type: 2}
-    maxStep: 500
+    maxStep: 100
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1

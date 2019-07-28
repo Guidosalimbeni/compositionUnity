@@ -76,11 +76,9 @@ public class CompAiAgent : Agent
         
         AddVectorObs(distanceToCenter);
         AddVectorObs(CenterOfMass);
-        AddVectorObs(SizeColliderBounds / 2);
+        AddVectorObs(SizeColliderBounds);
         AddVectorObs(AngleRotY);
         AddVectorObs(VolumeOfTheItem);
-
-        Debug.Log(SizeColliderBounds);
 
         // 1 + 1 + 1 + 1 + 3 + 3 + 1 + 1 = 12
 
@@ -132,8 +130,6 @@ public class CompAiAgent : Agent
         // I could use WITHOUT RIGID BODY
         transform.Translate(dirToGo * Time.deltaTime * moveSpeed, Space.World);
 
-        
-
         // call here so that both for wait decision and for inference will update the UI and the scores
         openCVManager.CallForOpenCVCalculationUpdates();
         gameVisualManager.CallTOCalculateNOTOpenCVScores();
@@ -170,16 +166,21 @@ public class CompAiAgent : Agent
 
         if (TotalOutScore > 0.8f)
         {
-            Done();
+            //Done();
             SetReward(1.0f);
         }
 
+        // collision with other object and frames bounds
+        if (collisionChecker.CollisionWithOtherBoundsFrames == true)
+        {
+            Done();
+            SetReward(-1.0f);
+        }
 
         // collision with other object and frames bounds
         if (collisionChecker.CollisionWithOtherItemFoundForAIReward == true)
         {
-            Done();
-            SetReward(-1.0f);
+            SetReward(-0.1f);
         }
 
         // REALLY NEED TO PASS TOP CAMERA VIEW TO OF SINGLE ATTACHED CAMERA AND 20 x 20 or 40 x 40 to vector non visual observation !!!

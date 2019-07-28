@@ -38,7 +38,7 @@ public class GameVisualManager : MonoBehaviour
     {
         if(CalculateAreaBounds == true)
         {
-            UpdateBalanceAreaBoundsShapes();
+            UpdateBalanceAreaBoundsShapes(); // not
         }
         
         UpdateScoreUnityVisual();

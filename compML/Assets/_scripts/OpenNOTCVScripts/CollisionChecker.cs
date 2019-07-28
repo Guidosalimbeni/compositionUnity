@@ -6,6 +6,7 @@ public class CollisionChecker : MonoBehaviour
 {
 
     public bool CollisionWithOtherItemFoundForAIReward { get; set; }
+    public bool CollisionWithOtherBoundsFrames { get; set; }
 
     private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
 
@@ -21,13 +22,13 @@ public class CollisionChecker : MonoBehaviour
         if (other.transform.GetComponent<TagMeElementOfComposition>() != null)
         {
             calculateCollisionDistanceVisualUnity.FoundCollisionOfCompositionalElements(); 
-            CollisionWithOtherItemFoundForAIReward = true; // check what this is doing
+            CollisionWithOtherItemFoundForAIReward = true; 
         }
 
         if (other.transform.GetComponent<TagMeFrameBounds>() != null)
         {
             calculateCollisionDistanceVisualUnity.FoundCollisionOfElementsINCompositionWithFrameBounds(); 
-            CollisionWithOtherItemFoundForAIReward = true; // check what this is doing
+            CollisionWithOtherBoundsFrames= true; 
         }
 
 
@@ -38,7 +39,8 @@ public class CollisionChecker : MonoBehaviour
         if (other.transform.GetComponent<TagMeElementOfComposition>() != null)
         {
             
-            CollisionWithOtherItemFoundForAIReward = false; // check what this is doing
+            CollisionWithOtherItemFoundForAIReward = false;
+            CollisionWithOtherBoundsFrames = false;
         }
     }
 
