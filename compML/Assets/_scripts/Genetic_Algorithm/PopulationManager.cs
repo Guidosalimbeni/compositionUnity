@@ -11,7 +11,10 @@ public class PopulationManager : MonoBehaviour {
     public int NumberOfGeneration = 4;
     public float secondToWaitForPopGeneration = 0.1f;
     public float bestScore; // for debugging only
-
+    [Tooltip("How much of best to select 1 to 2. 1.1 select only the top 2 from half of sorted list")]
+    public float From1To2 = 1.6f;
+    [Tooltip("mutate one in number of prob so 10 10percent 5 20 percent")]
+    public int OneIn2to10 = 5;
     private GameObject parent1; 
     private GameObject parent2;
 
@@ -23,7 +26,6 @@ public class PopulationManager : MonoBehaviour {
 
     private List<GameObject> population;
     private GameObject offspring;
-
     private List<GameObject> sortedList; // public for debugging
 
     private bool sortNewGeneration = true;
@@ -35,8 +37,6 @@ public class PopulationManager : MonoBehaviour {
     private InferenceScoreFeatures inferenceScoreFeatures;
     private InferenceFinalOut inferenceFinalOut;
 
-    private CalculateCollisionDistanceVisualUnity calculateCollisionDistanceVisualUnity;
-
     private void Awake()
     {
         //sendtodatabase = FindObjectOfType<SendToDatabase>();
@@ -46,7 +46,6 @@ public class PopulationManager : MonoBehaviour {
     {
         openCVmanager = FindObjectOfType<OpenCVManager>();
         gameManagerNotOpenCV = FindObjectOfType<GameVisualManager>();
-        calculateCollisionDistanceVisualUnity = FindObjectOfType<CalculateCollisionDistanceVisualUnity>();
         inferenceNNfomDATABASE = FindObjectOfType<InferenceNNfomDATABASE>();
         inferenceCompositionML = FindObjectOfType<InferenceCompositionML>();
         inferenceScoreFeatures = FindObjectOfType<InferenceScoreFeatures>();
@@ -56,7 +55,6 @@ public class PopulationManager : MonoBehaviour {
     public void TriggerAIfromButton()
     {
         triggerAI = true;
-        calculateCollisionDistanceVisualUnity.drawRenderedLinesDebug = false;
         sortedList = new List<GameObject>();
         population = new List<GameObject>();
     }
@@ -91,7 +89,7 @@ public class PopulationManager : MonoBehaviour {
         AICreatesInitialPopulationTurn = false;
         GameObject IndividualCompositionSet = Instantiate(Individual, this.transform.position, this.transform.rotation);
 
-        IndividualCompositionSet.GetComponent<BrainGA>().Init(); // init initial 
+        IndividualCompositionSet.GetComponent<BrainGA>().Init(); 
         BrainGA b = IndividualCompositionSet.GetComponent<BrainGA>();
         b.MoveComposition();
 
@@ -147,15 +145,15 @@ public class PopulationManager : MonoBehaviour {
     private IEnumerator Breed()
     {
         // it can happen that father is equal to mother,,, too bad...
-        int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / 1.6), sortedList.Count);
-        int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / 1.6), sortedList.Count);
+        int InternalIndex_parent1 = Random.Range((int)(sortedList.Count / From1To2), sortedList.Count);
+        int InternalIndex_parent2 = Random.Range((int)(sortedList.Count / From1To2), sortedList.Count);
         parent1 = sortedList[InternalIndex_parent1];
         parent2 = sortedList[InternalIndex_parent2];
 
         GameObject offspring = Instantiate(Individual, this.transform.position, this.transform.rotation);
 
         BrainGA b = offspring.GetComponent<BrainGA>();
-        if (Random.Range(0, 2) == 1) //mutate 1 in 2
+        if (Random.Range(0, OneIn2to10) == 1) //mutate 1 in 5
         {
             b.InitForBreed();
             b.dna.Mutate();
@@ -197,7 +195,7 @@ public class PopulationManager : MonoBehaviour {
         {
             GenerateNewPopulatoinOffsprings_trigger = false;
             triggerAI = false;
-            calculateCollisionDistanceVisualUnity.drawRenderedLinesDebug = true;  //////
+            
             AICreatesInitialPopulationTurn = true;
 
 

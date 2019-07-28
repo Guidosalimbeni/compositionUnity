@@ -9,28 +9,26 @@ public class DNA {
 	private int DnaLength = 0;
 	private float MaxValues = 0;
     private float MinValue = 0;
-    private int NUMMBEROFGENESMUTATED = 2;
+    private float MaxRot = 360;
+    private int NUMMBEROFGENESMUTATED = 1; // 2 is too much
 
-    public DNA(int lenght, float Maxv, float MinV)
+    public DNA(int lenght, float Maxv, float MinV) // if want to start from user ... need to pass the genes here from population manager..
 	{
 		DnaLength = lenght;
 		MaxValues = Maxv;  // + 1.5
         MinValue = MinV;  // - 1.5
-        // TODO define for each axis
+        
         SetRandom();
 	}
 
 	public void SetRandom()
 	{
-        // dna lenght is 4 eleme / x 3 genes = 12 for example
 		genes.Clear();
 		for(int i = 0; i < DnaLength; i++)
 		{
             if ((i + 1)%3 == 0)
             {
-
-                Debug.Log("got here");
-                genes.Add(Random.Range(0, 360));
+                genes.Add(Random.Range(0, MaxRot));
             }
             else
             {
@@ -71,7 +69,6 @@ public class DNA {
                 float c = d2.genes[i];
                 genes[i] = c;
             }
-
         }
 
         //foreach (float g in genes)
@@ -88,16 +85,13 @@ public class DNA {
             int mutationIndx = Random.Range(0, DnaLength);
             if ((mutationIndx + 1) % 3 == 0)
             {
-                genes[mutationIndx] = Random.Range(0, 360);
+                genes[mutationIndx] = Random.Range(0, MaxRot);
             }
             else
             {
                 genes[Random.Range(0, DnaLength)] = Random.Range(MinValue, MaxValues);
             }
         }
-
-        
-            
 	}
 
 	public float GetGene(int pos)

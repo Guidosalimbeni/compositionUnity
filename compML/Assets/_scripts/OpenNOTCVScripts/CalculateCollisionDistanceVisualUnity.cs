@@ -27,18 +27,24 @@ public class CalculateCollisionDistanceVisualUnity : MonoBehaviour
 
     private void Start()
     {
-        LineRendererObjectsList = new List<GameObject>();
+       
 
         PairwaiseElementsOfComposition = PairwaiseOperation(gamePopulationController.ElementsCompositions);
-        for (int i = 0; i < PairwaiseElementsOfComposition.Count; i++)
-        {
-            GameObject ObjectForLineRenderer = new GameObject("GameObject_LineRenderer_" + i.ToString());
-            LineRenderer lineRenderer = ObjectForLineRenderer.AddComponent<LineRenderer>();
-            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-            lineRenderer.widthMultiplier = 0.02f;
 
-            LineRendererObjectsList.Add(ObjectForLineRenderer);
+        if (drawRenderedLinesDebug == true)
+        {
+            LineRendererObjectsList = new List<GameObject>();
+            for (int i = 0; i < PairwaiseElementsOfComposition.Count; i++)
+            {
+                GameObject ObjectForLineRenderer = new GameObject("GameObject_LineRenderer_" + i.ToString());
+                lineRenderer = ObjectForLineRenderer.AddComponent<LineRenderer>();
+                lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+                lineRenderer.widthMultiplier = 0.02f;
+
+                LineRendererObjectsList.Add(ObjectForLineRenderer);
+            }
         }
+        
     }
     
     public float CalculateUnityVisualScoreAndDrawLine()

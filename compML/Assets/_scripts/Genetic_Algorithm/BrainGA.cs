@@ -76,9 +76,7 @@ public class BrainGA : MonoBehaviour
             elementComp.transform.position = new Vector3(genes[genePos], 0, genes[genePos + 1]);
             if (NumberOfgenes == 3)
             {
-                Debug.Log(" got here in brain");
                 elementComp.transform.eulerAngles = new Vector3(elementComp.transform.eulerAngles.x, genes[genePos + 2], elementComp.transform.eulerAngles.z);
-                
             }
             genePos = genePos + NumberOfgenes;
         }
