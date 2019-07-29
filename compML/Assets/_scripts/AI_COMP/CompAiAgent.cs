@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
 
+
+// to run the train need to go into AAA folder of ML- agents
+// activate ML agent and run the code in it
+// enable tensor flow in unity
+// the score calculation in tensor flow are only for the reward so once trained i can use barracuda in unity..
+// uncheck control and go..
+
 public class CompAiAgent : Agent
 {
     // https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Design-Agents.md
@@ -17,6 +24,8 @@ public class CompAiAgent : Agent
              "RenderTexture as observations.")]
     public Camera CameraTopView;
     public Camera CameraFrontView;
+
+    public bool MyTurn { get; set; } // set in academy for turn
 
     // Speed of agent rotation.
     public float turnSpeed = 300;
@@ -81,9 +90,6 @@ public class CompAiAgent : Agent
         AddVectorObs(VolumeOfTheItem);
 
         // 1 + 1 + 1 + 1 + 3 + 3 + 1 + 1 = 12
-
-        
-
     }
 
     // if I use one brain for all the item I will need to set a lot of action here.. for each ??? not sure..
@@ -164,7 +170,27 @@ public class CompAiAgent : Agent
 
         float TotalOutScore = scoreCalculator.scoreFinalOut;
 
-        if (TotalOutScore > 0.8f)
+        //if (TotalOutScore < 0.05f)
+        //{
+        //    //Done();
+        //    SetReward(-0.05f);
+        //}
+        //if (TotalOutScore > 0.1f)
+        //{
+        //    //Done();
+        //    SetReward(0.1f);
+        //}
+        //if (TotalOutScore > 0.2f)
+        //{
+        //    //Done();
+        //    SetReward(0.2f);
+        //}
+        if (TotalOutScore > 0.2f)
+        {
+            //Done();
+            SetReward(0.5f);
+        }
+        if (TotalOutScore > 0.5f)
         {
             //Done();
             SetReward(1.0f);
@@ -178,10 +204,10 @@ public class CompAiAgent : Agent
         }
 
         // collision with other object and frames bounds
-        if (collisionChecker.CollisionWithOtherItemFoundForAIReward == true)
-        {
-            SetReward(-0.1f);
-        }
+        //if (collisionChecker.CollisionWithOtherItemFoundForAIReward == true)
+        //{
+        //    SetReward(-0.1f);
+        //}
 
         // REALLY NEED TO PASS TOP CAMERA VIEW TO OF SINGLE ATTACHED CAMERA AND 20 x 20 or 40 x 40 to vector non visual observation !!!
         // also add HOGS 
@@ -196,52 +222,59 @@ public class CompAiAgent : Agent
 
     // changed so it is only for decision one after the other
 
-    //public void FixedUpdate() 
-    //{
-    //    WaitTimeInference();
-    //}
+    public void FixedUpdate()
+    {
+        //if (MyTurn == true)
+        //{
+        //    Debug.Log(MyTurn + "   " + gameObject.name);
+            
+        //    MyTurn = false;
 
-    //private void WaitTimeInference() // this is mainly for having the time for the MobileNet to make prediction and the NN, opencv..etc
-    //{
-    //    if (CameraTopView != null && CameraFrontView != null)
-    //    {
-    //        CameraTopView.Render(); // might not need this call
-    //        CameraFrontView.Render(); // might not need this call
+        //}
+
+        WaitTimeInference();
+
+    }
+
+    private void WaitTimeInference() // this is mainly for having the time for the MobileNet to make prediction and the NN, opencv..etc
+    {
+        if (CameraTopView != null && CameraFrontView != null)
+        {
+            CameraTopView.Render(); // might not need this call
+            CameraFrontView.Render(); // might not need this call
 
 
 
-    //    }
+        }
 
-    //    else { Debug.Log("check that cameras are attached to game object AI agents scripts !!!!!!!!!!!!!!!!!"); }
+        else { Debug.Log("check that cameras are attached to game object AI agents scripts !!!!!!!!!!!!!!!!!"); }
 
-    //    if (!academy.GetIsInference())  // so if get inference is true this is false and the agent makes decision normally otherwise uses this decision call
-    //    {
-    //        RequestDecision(); // eventually set a rule to wait other to make their action ... but maybe soved bt stacked .. or try to use recurrent..
-    //    }
-    //    else
-    //    {
-    //        if (timeSinceDecision >= timeBetweenDecisionsAtInference)
-    //        {
-    //            timeSinceDecision = 0f;
-    //            RequestDecision();
-    //        }
-    //        else
-    //        {
-    //            timeSinceDecision += Time.fixedDeltaTime;
-    //        }
-    //    }
-    //}
+        if (!academy.GetIsInference())  // so if get inference is true this is false and the agent makes decision normally otherwise uses this decision call
+        {
+            RequestDecision(); // eventually set a rule to wait other to make their action ... but maybe soved bt stacked .. or try to use recurrent..
+        }
+        else
+        {
+
+            if (timeSinceDecision >= timeBetweenDecisionsAtInference) // now is set in the academy
+            {
+                timeSinceDecision = 0f;
+                RequestDecision();
+            }
+            else
+            {
+                timeSinceDecision += Time.fixedDeltaTime;
+            }
+        }
+    }
 
     public override void AgentReset()
     {
-        Debug.Log("has been called the reset");
-
         float X = Random.Range(-1.0f, 1.0f);
         float Z = Random.Range(-1.0f, 1.0f);
 
         gameObject.transform.position = new Vector3(X, 0.0f, Z);
         // reset position if the item goes behond the fram boundary...
-
 
     }
 }

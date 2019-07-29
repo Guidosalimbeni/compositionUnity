@@ -53,6 +53,6 @@ public class AIDebugText : MonoBehaviour
     public void UpdateAIDebugText(float reward, float score)
     {
         RewardText.text = reward.ToString();
-        ScoreText.text = score.ToString();
+        //ScoreText.text = score.ToString();
     }
 }

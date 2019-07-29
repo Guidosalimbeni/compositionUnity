@@ -167,17 +167,18 @@ MonoBehaviour:
   trainingConfiguration:
     width: 60
     height: 45
-    qualityLevel: 1
+    qualityLevel: 0
     timeScale: 1
-    targetFrameRate: -1
+    targetFrameRate: 12
   inferenceConfiguration:
     width: 1200
     height: 900
-    qualityLevel: 5
+    qualityLevel: 2
     timeScale: 1
     targetFrameRate: 60
   resetParameters:
     resetParameters: []
+  StepToWait: 20
 --- !u!1 &9072470
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,7 +4064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1014709700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7641,7 +7642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3358845019740874653}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000029249468, y: -0.00000011920929, z: -0.97367287}
+  m_LocalPosition: {x: 0, y: -1.1368684e-13, z: -0.0000011920931}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3358845018437844150}
@@ -7732,9 +7733,9 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 11e6ec6da372b6647a3abb3ae0cf3628, type: 2}
     - {fileID: 8400000, guid: 110639d7fafbd1b408a1dcd9692cb1e7, type: 2}
-    maxStep: 100
+    maxStep: 0
     resetOnDone: 1
-    onDemandDecision: 0
+    onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
   timeBetweenDecisionsAtInference: 0.15
   CameraTopView: {fileID: 1450909345}
@@ -7946,7 +7947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &6122406354238898834
 GameObject:
   m_ObjectHideFlags: 0
@@ -8207,9 +8208,9 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 11e6ec6da372b6647a3abb3ae0cf3628, type: 2}
     - {fileID: 8400000, guid: 110639d7fafbd1b408a1dcd9692cb1e7, type: 2}
-    maxStep: 100
+    maxStep: 0
     resetOnDone: 1
-    onDemandDecision: 0
+    onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
   timeBetweenDecisionsAtInference: 0.15
   CameraTopView: {fileID: 1450909345}
@@ -8496,9 +8497,9 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 11e6ec6da372b6647a3abb3ae0cf3628, type: 2}
     - {fileID: 8400000, guid: 110639d7fafbd1b408a1dcd9692cb1e7, type: 2}
-    maxStep: 100
+    maxStep: 0
     resetOnDone: 1
-    onDemandDecision: 0
+    onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
   timeBetweenDecisionsAtInference: 0.15
   CameraTopView: {fileID: 1450909345}
@@ -9049,9 +9050,9 @@ MonoBehaviour:
     agentRenderTextures:
     - {fileID: 8400000, guid: 11e6ec6da372b6647a3abb3ae0cf3628, type: 2}
     - {fileID: 8400000, guid: 110639d7fafbd1b408a1dcd9692cb1e7, type: 2}
-    maxStep: 100
+    maxStep: 0
     resetOnDone: 1
-    onDemandDecision: 0
+    onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
   timeBetweenDecisionsAtInference: 0.15
   CameraTopView: {fileID: 1450909345}
